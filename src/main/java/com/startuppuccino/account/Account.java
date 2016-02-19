@@ -1,72 +1,96 @@
 package com.startuppuccino.account;
 
-import java.time.ZonedDateTime;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.time.Instant;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@SuppressWarnings("serial")
+
 @Entity
 @Table(name = "account")
-public class Account implements java.io.Serializable {
+public class Account
+{
+    @Id
+    @GeneratedValue
+    private Long id;
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Email
+    @NotEmpty
+    @Column(unique = true)
+    private String email;
 
-	@Column(unique = true)
-	private String email;
-	
-	@JsonIgnore
-	private String password;
+    @NotEmpty
+    private String password;
 
-	private String role = "ROLE_USER";
+    @Column(nullable = false)
+    private String role = "ROLE_USER";
 
-	private Instant created;
+    @Column(nullable = false)
+    private Instant created;
 
-    protected Account() {
 
-	}
-	
-	public Account(String email, String password, String role) {
-		this.email = email;
-		this.password = password;
-		this.role = role;
-		this.created = Instant.now();
-	}
+    protected Account()
+    {
 
-	public Long getId() {
-		return id;
-	}
+    }
 
-    public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Account(String email, String password, String role)
+    {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.created = Instant.now();
+    }
 
-	public String getPassword() {
-		return password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public Long getId()
+    {
+        return id;
+    }
 
-	public String getRole() {
-		return role;
-	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public String getEmail()
+    {
+        return email;
+    }
 
-	public Instant getCreated() {
-		return created;
-	}
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+
+    public String getRole()
+    {
+        return role;
+    }
+
+
+    public void setRole(String role)
+    {
+        this.role = role;
+    }
+
+
+    public Instant getCreated()
+    {
+        return created;
+    }
 }

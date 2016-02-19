@@ -12,57 +12,83 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 
+
+
 @Service
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class AccountService implements UserDetailsService {
-	
-	@Autowired
-	private AccountRepository accountRepository;
+public class AccountService implements UserDetailsService
+{
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AccountRepository accountRepository;
 
-	@PostConstruct	
-	protected void initialize() {
-		save(new Account("user", "demo", "ROLE_USER"));
-		save(new Account("admin", "admin", "ROLE_ADMIN"));
-	}
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-	@Transactional
-	public Account save(Account account) {
-		account.setPassword(passwordEncoder.encode(account.getPassword()));
-		accountRepository.save(account);
-		return account;
-	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Account account = accountRepository.findOneByEmail(username);
-		if(account == null) {
-			throw new UsernameNotFoundException("user not found");
-		}
-		return createUser(account);
-	}
-	
-	public void signin(Account account) {
-		SecurityContextHolder.getContext().setAuthentication(authenticate(account));
-	}
-	
-	private Authentication authenticate(Account account) {
-		return new UsernamePasswordAuthenticationToken(createUser(account), null, Collections.singleton(createAuthority(account)));		
-	}
-	
-	private User createUser(Account account) {
-		return new User(account.getEmail(), account.getPassword(), Collections.singleton(createAuthority(account)));
-	}
+    public AccountService()
+    {
+        System.out.println("UA CREATED");
+    }
 
-	private GrantedAuthority createAuthority(Account account) {
-		return new SimpleGrantedAuthority(account.getRole());
-	}
+
+    @Override
+    protected void finalize() throws Throwable
+    {
+        System.out.println("UA UN-CREATED");
+        super.finalize();
+    }
+
+
+    @Transactional
+    public Account save(Account account)
+    {
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
+        accountRepository.save(account);
+        return account;
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
+    {
+        Account account = accountRepository.findOneByEmail(s);
+        if (account == null)
+        {
+            throw new UsernameNotFoundException("user not found");
+        }
+        return createUser(account);
+    }
+
+
+    public void signin(Account account)
+    {
+        SecurityContextHolder.getContext().setAuthentication(authenticate(account));
+    }
+
+
+    private Authentication authenticate(Account account)
+    {
+        return new UsernamePasswordAuthenticationToken(createUser(account), null, Collections.singleton
+                (createAuthority(account)));
+    }
+
+
+    private User createUser(Account account)
+    {
+        return new User(account.getEmail(), account.getPassword(), Collections.singleton(createAuthority(account)));
+    }
+
+
+    private GrantedAuthority createAuthority(Account account)
+    {
+        return new SimpleGrantedAuthority(account.getRole());
+    }
 
 }

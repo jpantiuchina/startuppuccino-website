@@ -1,3 +1,7 @@
 package com.startuppuccino;
 
-public interface Application {}
+public interface Application
+{
+
+}
+
