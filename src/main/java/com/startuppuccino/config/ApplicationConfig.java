@@ -8,15 +8,17 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import com.startuppuccino.Application;
 
+
+
 @Configuration
 @PropertySource("classpath:persistence.properties")
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackageClasses = Application.class)
-class ApplicationConfig {
-
+class ApplicationConfig
+{
     @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer()
+    {
         return new PropertySourcesPlaceholderConfigurer();
     }
-
 }

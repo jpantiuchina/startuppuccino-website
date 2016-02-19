@@ -1,8 +1,7 @@
-<project
-        xmlns="http://maven.apache.org/POM/4.0.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
-        >
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.startuppuccino</groupId>
     <artifactId>website</artifactId>
@@ -21,7 +20,7 @@
         <groupId>io.spring.platform</groupId>
         <artifactId>platform-bom</artifactId>
         <version>2.0.1.RELEASE</version>
-        <relativePath />
+        <relativePath/>
     </parent>
     <dependencies>
         <!-- Spring -->
@@ -71,11 +70,13 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <!-- Avoid issue #72 Could not initialize class org.thymeleaf.templateresolver.ServletContextTemplateResolver due to 'validation is not supported' -->
+            <!-- Avoid issue #72 Could not initialize class
+            org.thymeleaf.templateresolver.ServletContextTemplateResolver due to
+            'validation is not supported' -->
             <exclusions>
                 <exclusion>
-            		<artifactId>pull-parser</artifactId>
-            		<groupId>pull-parser</groupId>
+                    <artifactId>pull-parser</artifactId>
+                    <groupId>pull-parser</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

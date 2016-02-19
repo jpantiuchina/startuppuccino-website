@@ -16,34 +16,44 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 
 import com.startuppuccino.account.AccountService;
 
+
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+class SecurityConfig extends WebSecurityConfigurerAdapter
+{
     @Autowired
     private AccountService accountService;
 
+
     @Bean
-    public TokenBasedRememberMeServices rememberMeServices() {
+    public TokenBasedRememberMeServices rememberMeServices()
+    {
         return new TokenBasedRememberMeServices("remember-me-key", accountService);
     }
 
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder()
+    {
         return new StandardPasswordEncoder();
-	}
+    }
+
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
         auth
             .eraseCredentials(true)
             .userDetailsService(accountService)
             .passwordEncoder(passwordEncoder());
     }
 
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception
+    {
         http
             .authorizeRequests()
                 .antMatchers("/", "/favicon.ico", "/resources/**", "/signup").permitAll()
@@ -63,11 +73,14 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
             .rememberMe()
                 .rememberMeServices(rememberMeServices())
                 .key("remember-me-key");
+
     }
+
 
     @Bean(name = "authenticationManager")
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception
+    {
         return super.authenticationManagerBean();
     }
 }

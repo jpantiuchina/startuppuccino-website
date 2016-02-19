@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,10 +23,13 @@ import org.springframework.util.ClassUtils;
 
 import com.startuppuccino.Application;
 
+
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackageClasses = Application.class)
-class JpaConfig {
+class JpaConfig
+{
 
     @Value("${dataSource.driverClassName}")
     private String driver;
@@ -40,8 +44,10 @@ class JpaConfig {
     @Value("${hibernate.hbm2ddl.auto}")
     private String hbm2ddlAuto;
 
+
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource()
+    {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(driver);
         config.setJdbcUrl(url);
@@ -55,8 +61,10 @@ class JpaConfig {
         return new HikariDataSource(config);
     }
 
+
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
+    {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
 
@@ -67,15 +75,17 @@ class JpaConfig {
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put(org.hibernate.cfg.Environment.DIALECT, dialect);
-        jpaProperties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, hbm2ddlAuto);
+        jpaProperties.setProperty(AvailableSettings.DIALECT, dialect);
+        jpaProperties.setProperty(AvailableSettings.HBM2DDL_AUTO, hbm2ddlAuto);
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
         return entityManagerFactoryBean;
     }
 
+
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory)
+    {
         return new JpaTransactionManager(entityManagerFactory);
     }
 }
