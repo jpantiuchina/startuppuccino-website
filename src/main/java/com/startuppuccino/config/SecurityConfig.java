@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 import com.startuppuccino.account.AccountService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 
@@ -60,12 +61,13 @@ class SecurityConfig extends WebSecurityConfigurerAdapter
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 .permitAll()
 //                .failureUrl("/signin?error=1")
 //                .loginProcessingUrl("/authenticate")
                 .and()
             .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // allow GET method
 //                .logoutUrl("/logout")
                 .permitAll()
 //                .logoutSuccessUrl("/signin?logout")

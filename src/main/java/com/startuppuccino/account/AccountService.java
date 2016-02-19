@@ -2,8 +2,6 @@ package com.startuppuccino.account;
 
 import java.util.Collections;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.*;
@@ -12,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.Scope;
@@ -32,18 +29,6 @@ public class AccountService implements UserDetailsService
     private PasswordEncoder passwordEncoder;
 
 
-    public AccountService()
-    {
-        System.out.println("UA CREATED");
-    }
-
-
-    @Override
-    protected void finalize() throws Throwable
-    {
-        System.out.println("UA UN-CREATED");
-        super.finalize();
-    }
 
 
     @Transactional
@@ -56,9 +41,9 @@ public class AccountService implements UserDetailsService
 
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        Account account = accountRepository.findOneByEmail(s);
+        Account account = accountRepository.findOneByEmail(username);
         if (account == null)
         {
             throw new UsernameNotFoundException("user not found");
@@ -67,7 +52,7 @@ public class AccountService implements UserDetailsService
     }
 
 
-    public void signin(Account account)
+    public void login(Account account)
     {
         SecurityContextHolder.getContext().setAuthentication(authenticate(account));
     }

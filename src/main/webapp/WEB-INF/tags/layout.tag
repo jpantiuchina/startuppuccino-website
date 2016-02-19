@@ -1,5 +1,7 @@
 <%@ tag pageEncoding="utf-8" trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ attribute name="title" required="true" %>
 <%@ attribute name="activeMenuItem" required="false" %>
 <!DOCTYPE html>
@@ -32,7 +34,14 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="${activeMenuItem == 'home'         ? 'active' : ''}"><a href="/">Home</a></li>
-                <li class="${activeMenuItem == 'registration' ? 'active' : ''}"><a href="/registration/">Registration</a></li>
+
+                <sec:authorize access="isAnonymous()">
+                    <li class="${activeMenuItem == 'login'        ? 'active' : ''}"><a href="/login">Login</a></li>
+                    <li class="${activeMenuItem == 'registration' ? 'active' : ''}"><a href="/registration">Registration</a></li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <li class="${activeMenuItem == 'logout'       ? 'active' : ''}"><a href="/logout">Logout</a></li>
+                </sec:authorize>
             </ul>
         </div>
     </div>

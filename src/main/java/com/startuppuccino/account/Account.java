@@ -38,14 +38,6 @@ public class Account
     }
 
 
-    public Account(String email, String password, String role)
-    {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.created = Instant.now();
-    }
-
 
     public Long getId()
     {
@@ -92,5 +84,11 @@ public class Account
     public Instant getCreated()
     {
         return created;
+    }
+
+
+    public void setCreated(Instant created)
+    {
+        this.created = created;
     }
 }

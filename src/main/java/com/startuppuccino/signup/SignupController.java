@@ -27,22 +27,22 @@ public class SignupController
     @RequestMapping(value = "signup")
     public String signup(Model model)
     {
-        model.addAttribute(new AccountController.SignupForm());
+//        model.addAttribute(new AccountController.SignupForm());
         return SIGNUP_VIEW_NAME;
     }
 
 
-    @RequestMapping(value = "signup", method = RequestMethod.POST)
-    public String signup(@Valid @ModelAttribute AccountController.SignupForm signupForm, Errors errors, RedirectAttributes ra)
-    {
-        if (errors.hasErrors())
-        {
-            return SIGNUP_VIEW_NAME;
-        }
-        Account account = accountService.save(signupForm.createAccount());
-        accountService.signin(account);
-        // see /WEB-INF/i18n/messages.properties and /WEB-INF/views/homeSignedIn.html
-        MessageHelper.addSuccessAttribute(ra, "signup.success");
-        return "redirect:/";
-    }
+//    @RequestMapping(value = "signup", method = RequestMethod.POST)
+//    public String signup(@Valid @ModelAttribute AccountController.SignupForm signupForm, Errors errors, RedirectAttributes ra)
+//    {
+//        if (errors.hasErrors())
+//        {
+//            return SIGNUP_VIEW_NAME;
+//        }
+//        Account account = accountService.save(signupForm.createAccount());
+//        accountService.signin(account);
+//        // see /WEB-INF/i18n/messages.properties and /WEB-INF/views/homeSignedIn.html
+//        MessageHelper.addSuccessAttribute(ra, "signup.success");
+//        return "redirect:/";
+//    }
 }

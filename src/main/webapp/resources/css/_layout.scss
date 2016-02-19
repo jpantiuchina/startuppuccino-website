@@ -1,0 +1,87 @@
+@import "common";
+
+
+.navbar {
+    .navbar-brand img { margin-top: -4px }
+}
+
+
+//.navbar-inverse {
+//    background-color: black;
+//
+//    .navbar-nav>.active>a:hover
+//    .navbar-nav > li > a:hover,
+//    .navbar-brand:focus {
+//        color: red
+//    }
+//}
+
+.navbar-inverse {
+    background-color: black;
+//    border-color: $second-color;
+
+    .navbar-nav > li > a,
+    .navbar-nav > li > a:hover,
+    .navbar-nav > li > a:focus,
+    .navbar-brand,
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        color: white
+    }
+
+    .navbar-nav > li > a:hover,
+    .navbar-nav > li > a:focus {
+        text-decoration: underline;
+    }
+
+    .navbar-nav > .active > a,
+    .navbar-nav > .active > a:hover,
+    .navbar-nav > .active > a:focus {
+        background-color: saddlebrown;
+    }
+}
+
+//.nav-pills > li.active > a,
+//.nav-pills > li.active > a:focus,
+//.nav-pills > li.active > a:hover {
+//    background-color: $main-color;
+//}
+
+
+
+// Footer
+
+
+html {
+    position: relative;
+    min-height: 100%
+}
+
+$footerHeight: 44px;
+
+body {
+    margin-bottom: $footerHeight + 30px;
+}
+
+
+
+footer {
+    width: 100%;
+    background: $jumbotron-background;
+    border-top: solid 1px $dark-grey-color;
+    position: absolute;
+    bottom: 0;
+    height: $footerHeight;
+
+
+    color: $darkest-color;
+    a { color: inherit; text-decoration: underline }
+
+    font-size: 12px;
+
+    img { vertical-align: middle }
+
+    .my-row {  line-height: 24px; height: 24px; padding-top: 10px }
+    //.pull-left, .pull-right { padding: 10px 0; }
+
+}
