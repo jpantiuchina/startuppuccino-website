@@ -53,12 +53,16 @@ public class AccountController
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@Valid @ModelAttribute Account account,
-                               BindingResult bindingResult)
+                               BindingResult bindingResult,
+                               @RequestParam MultipartFile avatar) throws IOException
     {
         account.setCreated(Instant.now());
 
         if (account.getRole() != Account.Role.ROLE_USER && account.getRole() != Account.Role.ROLE_MENTOR)
             account.setRole(Account.Role.ROLE_USER);
+
+        if (!avatar.isEmpty())
+            account.setAvatar(avatar.getBytes());
 
         if (bindingResult.hasErrors())
         {
