@@ -1,5 +1,5 @@
 <%@ include file="common.jsp" %>
-<t:layout-with-header title="Our Publications" activeMenuItem="publications">
+<t:page-with-header title="Our Publications" activeMenuItem="publications">
 
     <div class="list-group">
         <a class="list-group-item" href="/resources/XP2015_paper_1.pdf">Giardino, C., S. Bajwa, X.Wang and P. Abrahamsson (2015): <b>Key Challenges in Early-Stage Software Startups</b>,
@@ -10,5 +10,5 @@
     </div>
 
 
-</t:layout-with-header>
+</t:page-with-header>
 

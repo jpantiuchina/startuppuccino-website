@@ -1,22 +1,10 @@
 <%@ include file="../common.jsp" %>
-<t:layout-with-header title="Registration" activeMenuItem="registration">
+<t:page-with-header title="Registration" activeMenuItem="registration">
 
+    <jsp:include page="__account.jsp">
+        <jsp:param name="submitButtonLabel" value="Register"/>
+        <jsp:param name="showEmailAndPassword" value="true"/>
 
+    </jsp:include>
 
-    <t:form modelAttribute="account" submitButtonLabel="Register">
-
-        <t:input path="email"    label="Email"                   />
-        <t:input path="password" label="Password" type="password"/>
-
-
-
-    </t:form>
-
-
-
-
-
-
-
-</t:layout-with-header>
-
+</t:page-with-header>

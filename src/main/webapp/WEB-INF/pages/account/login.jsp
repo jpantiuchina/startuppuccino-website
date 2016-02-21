@@ -1,5 +1,5 @@
 <%@ include file="../common.jsp" %>
-<t:layout-with-header title="Login" activeMenuItem="login">
+<t:page-with-header title="Login" activeMenuItem="login">
 
 
     <form:form action="/login" method="post" cssClass="form-horizontal">
@@ -49,5 +49,5 @@
     </form:form>
 
 
-</t:layout-with-header>
+</t:page-with-header>
 

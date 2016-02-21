@@ -3,7 +3,7 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ attribute name="modelAttribute" required="true" type="java.lang.String"  %>
 <%@ attribute name="submitButtonLabel" required="false" type="java.lang.String"  %>
-<form:form modelAttribute="${modelAttribute}" cssClass="form-horizontal">
+<form:form modelAttribute="${modelAttribute}" cssClass="form-horizontal" enctype="multipart/form-data">
 
     <jsp:doBody/>
 

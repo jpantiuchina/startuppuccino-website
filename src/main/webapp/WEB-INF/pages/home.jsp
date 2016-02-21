@@ -1,5 +1,5 @@
 <%@ include file="common.jsp" %>
-<t:layout title="Official Website" activeMenuItem="home">
+<t:page title="Official Website" activeMenuItem="home">
 
     <div class="my-home-page">
 
@@ -62,5 +62,5 @@
 
 
 
-</t:layout>
+</t:page>
 

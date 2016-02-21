@@ -1,63 +1,39 @@
 package com.startuppuccino.config;
 
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.Validator;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 
-//@Configuration
-//@EnableWebMvc
-//class WebMvcConfig extends WebMvcConfigurerAdapter
 @Configuration
-class WebMvcConfig extends WebMvcConfigurationSupport
+@EnableWebMvc
+class WebMvcConfig extends WebMvcConfigurerAdapter
 {
-
-
     @Override
-    public RequestMappingHandlerMapping requestMappingHandlerMapping()
+    public void configureViewResolvers(ViewResolverRegistry registry)
     {
-        RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
-        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
-        requestMappingHandlerMapping.setUseTrailingSlashMatch(false);
-        return requestMappingHandlerMapping;
+        registry.jsp("/WEB-INF/pages/", ".jsp");
     }
 
 
-    @Bean(name = "messageSource")
-    public MessageSource messageSource()
+    @Bean(name = "filterMultipartResolver")
+    public MultipartResolver filterMultipartResolver()
     {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("/WEB-INF/i18n/messages");
-        messageSource.setCacheSeconds(5);
-        return messageSource;
+        return new StandardServletMultipartResolver();
     }
 
 
-    @Bean
-    public InternalResourceViewResolver configureViewResolver()
-    {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/pages/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
-
-    @Override
-    public Validator getValidator()
-    {
-        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource());
-        return validator;
-    }
 
 
     @Override
@@ -74,9 +50,9 @@ class WebMvcConfig extends WebMvcConfigurationSupport
     }
 
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
-    {
-        configurer.enable();
-    }
+//    @Override
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
+//    {
+//        configurer.enable();
+//    }
 }

@@ -20,14 +20,24 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected Class<?>[] getRootConfigClasses()
     {
-        return new Class<?>[]{ApplicationConfig.class};
+        return new Class<?>[] {
+                ApplicationConfig.class,
+//                JpaConfig.class,
+//                SecurityConfig.class,
+                WebMvcConfig.class,
+        };
     }
 
 
     @Override
     protected Class<?>[] getServletConfigClasses()
     {
-        return null;
+        // Here I do not know what works and what does not, but this configuration seem to be
+        // OK for both IDEA (shows views and controllers) and Tomcat.
+        return new Class<?>[] {
+                ApplicationConfig.class,
+                WebMvcConfig.class,
+        };
     }
 
 
@@ -47,7 +57,16 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration)
     {
-        registration.setInitParameter("defaultHtmlEscape", "true");
-        registration.setInitParameter("spring.profiles.active", "default");
+        int size = 10 * 1024 * 1024;
+        registration.setMultipartConfig(
+                new MultipartConfigElement("/tmp", (long) size, (long) size, size));
     }
+
+
+//    @Override
+//    protected void customizeRegistration(ServletRegistration.Dynamic registration)
+//    {
+//        registration.setInitParameter("defaultHtmlEscape", "true");
+//        registration.setInitParameter("spring.profiles.active", "default");
+//    }
 }

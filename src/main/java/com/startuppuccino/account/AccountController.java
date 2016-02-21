@@ -2,20 +2,27 @@ package com.startuppuccino.account;
 
 import javax.validation.Valid;
 
+import java.io.IOException;
 import java.security.Principal;
-
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -29,29 +36,35 @@ public class AccountController
     private AccountService accountService;
 
 
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    private String login()
+    public String login()
     {
         return "account/login";
     }
 
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    private String registration(@ModelAttribute Account account)
+    public String registration(Model model)
     {
+        model.addAttribute(new Account());
         return "account/registration";
     }
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    private String registration(@Valid @ModelAttribute Account account,
-                                BindingResult bindingResult)
+    public String registration(@Valid @ModelAttribute Account account,
+                               BindingResult bindingResult)
     {
-        account.setRole("ROLE_USER");
         account.setCreated(Instant.now());
 
+        if (account.getRole() != Account.Role.ROLE_USER && account.getRole() != Account.Role.ROLE_MENTOR)
+            account.setRole(Account.Role.ROLE_USER);
+
         if (bindingResult.hasErrors())
+        {
+            account.setPassword(null);
             return "account/registration";
+        }
 
         accountService.save(account);
 
@@ -61,27 +74,105 @@ public class AccountController
     }
 
 
-
-
-
-    @RequestMapping(value = "account/current", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-//    @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    public Account currentAccount(Principal principal)
+    private Account getCurrentAccount(Principal principal)
     {
-        Assert.notNull(principal);
         return accountRepository.findOneByEmail(principal.getName());
     }
 
 
-    @RequestMapping(value = "account/{id}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-//    @Secured("ROLE_ADMIN")
-    public Account account(@PathVariable("id") Long id)
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
+    public String account(Model model, Principal principal)
     {
-        return accountRepository.findOne(id);
+        Account account = getCurrentAccount(principal);
+        account.setPassword("hidden");
+        model.addAttribute(account);
+        return "account/account";
     }
+
+
+    @Autowired
+    private Validator validator;
+
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder)
+    {
+        binder.setDisallowedFields("avatar");
+    }
+
+    @RequestMapping(value = "/account", method = RequestMethod.POST)
+    @PreAuthorize("isAuthenticated()")
+    public String account(@ModelAttribute Account account,
+                          BindingResult bindingResult,
+                          @RequestParam MultipartFile avatar,
+                          Principal principal,
+                          Model model) throws IOException
+    {
+        if (account.getRole() != Account.Role.ROLE_USER && account.getRole() != Account.Role.ROLE_MENTOR)
+            account.setRole(Account.Role.ROLE_USER);
+
+
+
+
+
+        // Updating only specific fields of actual account
+        Account currentAccount = getCurrentAccount(principal);
+        currentAccount.setFirstName (account.getFirstName ());
+        currentAccount.setLastName  (account.getLastName  ());
+        currentAccount.setRole      (account.getRole      ());
+        currentAccount.setBackground(account.getBackground());
+
+        if (!avatar.isEmpty())
+        {
+            currentAccount.setAvatar(avatar.getBytes());
+        }
+
+        validator.validate(currentAccount, bindingResult);
+
+        account.setId(currentAccount.getId()); // Needed to show avatar picture
+        account.setEmail(currentAccount.getEmail()); // Needed to show page title
+
+        System.out.println(Arrays.toString(bindingResult.getAllErrors().toArray()));
+
+        if (!bindingResult.hasErrors())
+        {
+            accountRepository.save(currentAccount);
+
+            model.addAttribute("showSavedSuccessfullyMessage", "true");
+        }
+        return "account/account";
+    }
+
+
+
+
+    @RequestMapping(value = "/people", method = RequestMethod.GET)
+    public String people(Model model)
+    {
+        model.addAttribute("accounts", accountRepository.findAll());
+        return "account/people";
+    }
+
+    @RequestMapping(value = "/people/{id}", method = RequestMethod.GET)
+    public String people(@PathVariable("id") Integer id, Model model)
+    {
+        model.addAttribute(accountRepository.findOne(id));
+        return "account/person";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/people/{id}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] avatar(@PathVariable("id") Integer id)
+    {
+        Account account = accountRepository.findOne(id);
+        if (account != null)
+            return account.getAvatar();
+        else
+            return null;
+    }
+
+
 
 }

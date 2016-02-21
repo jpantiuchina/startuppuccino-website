@@ -11,6 +11,7 @@
 <%@ attribute name="required" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="rows"     required="false" type="java.lang.Integer" %>
 <%@ attribute name="cols"     required="false" type="java.lang.Integer" %>
+<%@ attribute name="hint"     required="false" %>
 <c:if test="${empty type}">
     <c:set var="type" value="text" />
 </c:if>
@@ -30,10 +31,10 @@
             <c:otherwise>
                 <c:choose>
                     <c:when test="${status.error}">
-                        <form:input path="${path}" cssClass="form-control" type="${type}" autofocus="autofocus"/>
+                        <form:input path="${path}" placeholder="${hint}" cssClass="form-control" type="${type}" autofocus="autofocus"/>
                     </c:when>
                     <c:otherwise>
-                        <form:input path="${path}" cssClass="form-control" type="${type}"/>
+                        <form:input path="${path}" placeholder="${hint}" cssClass="form-control" type="${type}"/>
                     </c:otherwise>
                 </c:choose>
             </c:otherwise>

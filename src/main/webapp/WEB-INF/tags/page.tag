@@ -34,13 +34,23 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="${activeMenuItem == 'home'         ? 'active' : ''}"><a href="/">Home</a></li>
+                <li class="${activeMenuItem == 'people'       ? 'active' : ''}"><a href="/people">People</a></li>
 
                 <sec:authorize access="isAnonymous()">
                     <li class="${activeMenuItem == 'login'        ? 'active' : ''}"><a href="/login">Login</a></li>
                     <li class="${activeMenuItem == 'registration' ? 'active' : ''}"><a href="/registration">Registration</a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <li class="${activeMenuItem == 'logout'       ? 'active' : ''}"><a href="/logout">Logout</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <sec:authentication property="principal.username"/> <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="${activeMenuItem == 'account' ? 'active' : ''}"><a href="/account">My Account</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
                 </sec:authorize>
             </ul>
         </div>

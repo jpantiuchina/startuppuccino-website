@@ -73,7 +73,7 @@ public class AccountService implements UserDetailsService
 
     private GrantedAuthority createAuthority(Account account)
     {
-        return new SimpleGrantedAuthority(account.getRole());
+        return new SimpleGrantedAuthority(account.getRole().name());
     }
 
 }

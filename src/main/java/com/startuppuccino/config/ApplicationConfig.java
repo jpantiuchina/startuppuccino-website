@@ -7,15 +7,21 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import com.startuppuccino.Application;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 
 
 @Configuration
 @PropertySource("classpath:persistence.properties")
-@PropertySource("classpath:application.properties")
 @ComponentScan(basePackageClasses = Application.class)
 class ApplicationConfig
 {
+    /**
+     * Enable @Value annotation support
+     *
+     * http://stackoverflow.com/questions/13728000/
+     */
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer()
     {

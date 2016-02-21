@@ -1,6 +1,6 @@
 <%@ include file="common.jsp" %>
 <%--@elvariable id="tool" type="com.minetoolz.website.models.Tool"--%>
-<t:layout-with-header title="${tool.name}" activeMenuItem="tools">
+<t:page-with-header title="${tool.name}" activeMenuItem="tools">
 
     <div class="row">
 
@@ -78,5 +78,5 @@
 
 
 
-</t:layout-with-header>
+</t:page-with-header>
 

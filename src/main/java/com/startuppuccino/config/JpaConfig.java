@@ -30,7 +30,6 @@ import com.startuppuccino.Application;
 @EnableJpaRepositories(basePackageClasses = Application.class)
 class JpaConfig
 {
-
     @Value("${dataSource.driverClassName}")
     private String driver;
     @Value("${dataSource.url}")

@@ -1,5 +1,5 @@
 <%@ include file="common.jsp" %>
-<t:layout-with-header title="News Subscription">
+<t:page-with-header title="News Subscription">
 
 
 
@@ -14,5 +14,5 @@
 
 
 
-</t:layout-with-header>
+</t:page-with-header>
 

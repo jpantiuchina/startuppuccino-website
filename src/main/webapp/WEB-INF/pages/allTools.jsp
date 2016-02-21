@@ -1,5 +1,5 @@
 <%@ include file="common.jsp" %>
-<t:layout-with-header title="Recommended Tools for Your Startup" activeMenuItem="allTools">
+<t:page-with-header title="Recommended Tools for Your Startup" activeMenuItem="allTools">
 
     <div class="container">
         <div class="allTools">
@@ -12,5 +12,5 @@
         </div>
     </div>
 
-</t:layout-with-header>
+</t:page-with-header>
 

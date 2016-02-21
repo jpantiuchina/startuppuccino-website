@@ -1,5 +1,5 @@
 <%@ include file="common.jsp" %>
-<t:layout-with-header title="Contacts" activeMenuItem="contacts">
+<t:page-with-header title="Contacts" activeMenuItem="contacts">
 
     <div class="well pull-left">
         <p><b>Minetoolz Team</b><br>
@@ -17,5 +17,5 @@
     <p class=""><a href="mailto:info@minetoolz.com">info@minetoolz.com</a></p>
 
 
-</t:layout-with-header>
+</t:page-with-header>
 
