@@ -27,11 +27,11 @@ class WebMvcConfig extends WebMvcConfigurerAdapter
     }
 
 
-    @Bean(name = "filterMultipartResolver")
-    public MultipartResolver filterMultipartResolver()
-    {
-        return new StandardServletMultipartResolver();
-    }
+//    @Bean(name = "filterMultipartResolver")
+//    public MultipartResolver filterMultipartResolver()
+//    {
+//        return new StandardServletMultipartResolver();
+//    }
 
 
 

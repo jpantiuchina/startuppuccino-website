@@ -21,10 +21,10 @@
             <c:when test="${type == 'textarea'}">
                 <c:choose>
                     <c:when test="${status.error}">
-                        <form:textarea path="${path}" cssClass="form-control" rows="${rows}" cols="${cols}" autofocus="autofocus"/>
+                        <form:textarea path="${path}" placeholder="${hint}" cssClass="form-control" rows="${rows}" cols="${cols}" autofocus="autofocus"/>
                     </c:when>
                     <c:otherwise>
-                        <form:textarea path="${path}" cssClass="form-control" rows="${rows}" cols="${cols}"/>
+                        <form:textarea path="${path}" placeholder="${hint}" cssClass="form-control" rows="${rows}" cols="${cols}"/>
                     </c:otherwise>
                 </c:choose>
             </c:when>

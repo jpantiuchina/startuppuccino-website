@@ -48,6 +48,7 @@ class JpaConfig
     public DataSource dataSource()
     {
         HikariConfig config = new HikariConfig();
+        config.setMaximumPoolSize(12);
         config.setDriverClassName(driver);
         config.setJdbcUrl(url);
         config.setUsername(username);

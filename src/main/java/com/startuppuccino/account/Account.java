@@ -1,7 +1,6 @@
 package com.startuppuccino.account;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import java.time.Instant;
 import org.hibernate.validator.constraints.Email;
@@ -27,7 +26,7 @@ public class Account
     }
 
 
-    public enum Role {ROLE_USER, ROLE_MENTOR, ROLE_ADMIN};
+    public enum Role {ROLE_USER, ROLE_MENTOR, ROLE_ADMIN}
 
 //    public static final String ROLE_USER   = "ROLE_USER";
 //    public static final String ROLE_MENTOR = "ROLE_MENTOR";
@@ -65,9 +64,11 @@ public class Account
     @Length(max = 255)
     private String background;
 
-
     @Lob
     private byte[] avatar;
+
+    @Lob
+    private String about;
 
 
 
@@ -177,15 +178,25 @@ public class Account
         return getRole() == Role.ROLE_USER;
     }
 
-
     public byte[] getAvatar()
     {
         return avatar;
     }
 
-
     public void setAvatar(byte[] avatar)
     {
         this.avatar = avatar;
+    }
+
+
+    public String getAbout()
+    {
+        return about;
+    }
+
+
+    public void setAbout(String about)
+    {
+        this.about = about;
     }
 }

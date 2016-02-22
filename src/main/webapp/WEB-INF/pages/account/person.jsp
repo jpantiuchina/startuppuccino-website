@@ -23,9 +23,13 @@
                         <div><span class="label label-warning">Admin</span></div>
                     </c:when>
                 </c:choose>
-                <div>
+                <p>
                     <c:out value="${account.background}"/>
-                </div>
+                </p>
+
+
+
+                <p style="white-space: pre-line"><c:out value="${account.about}"/></p>
 
 
             </div>

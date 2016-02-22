@@ -13,6 +13,8 @@
             <t:input path="lastName"   label="Last name"                />
             <t:input path="background" label="Background" hint="e.g. IT, design, law, economics, management" />
 
+            <t:input path="about" label="About me (optional)" hint="More info about me, about my startup idea, etc." type="textarea" cols="60" rows="10" />
+
 
 
 

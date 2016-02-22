@@ -126,6 +126,7 @@ public class AccountController
         currentAccount.setLastName  (account.getLastName  ());
         currentAccount.setRole      (account.getRole      ());
         currentAccount.setBackground(account.getBackground());
+        currentAccount.setAbout     (account.getAbout     ());
 
         if (!avatar.isEmpty())
         {
@@ -134,6 +135,7 @@ public class AccountController
 
         validator.validate(currentAccount, bindingResult);
 
+        account.setAvatar(currentAccount.getAvatar()); // Needed to show avatar picture
         account.setId(currentAccount.getId()); // Needed to show avatar picture
         account.setEmail(currentAccount.getEmail()); // Needed to show page title
 
