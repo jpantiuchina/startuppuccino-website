@@ -2,61 +2,77 @@
 <t:page title="Official Website" activeMenuItem="home">
 
     <div class="my-home-page">
-
-        <div class="home-page-main-picture">
-
-
-            <div class="container">
-                <%--<img src="/resources/images/toolbox.png" class="my-toolbox">--%>
-
-                    <%--<img src="/resources/images/background.jpg" style="width: 100%; height: 100%;" >--%>
-
-                <h1><a class="slogan" href="/registration/">We Mentor Your Startup</a></h1>
-
-                <%--<p>Do you have your <b style="color: green">Startup</b> idea?</p>--%>
-                <%--<p>No time, no knowledge, no money? No problem!</p>--%>
-                <%--<p>You are at the <b>right</b> place!</p>--%>
-                <%--<p>We provide you the best <b>free <span style="color: green">Startup tools</span></b>!</p>--%>
-                <%--<p>Start your <b style="color: green">Startup</b> with <b style="color: green">Startup tools!</b></p>--%>
-
-                <%--<p><a class="btn btn-primary btn-lg" href="" role="button">Watch Video--%>
-                <%--</a>--%>
-
-                <%--<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_embed wistia_async_b2m0g6d14j popover=true popoverContent=link" style="display:inline"><a class="btn btn-primary btn-lg" href="#" role="button">Watch Video</a></div>--%>
+        <div class="container">
 
 
-                <%--<a class="btn btn-success btn-lg" href="https://docs.google.com/forms/d/1ZZBF-AJL_TSyl47rhoV-8puwfeESgJif_PjtuZW2Whs/viewform?usp=send_form" role="button">Questionnaire--%>
-                <%--</a>--%>
 
-            </div>
+
+            <header class="custom-padding">
+
+                <div class="top_header">
+
+                    <nav><a href="/registration">CLAB Register</a></nav>
+
+                </div>
+                <div class="bottom_header">
+
+                    <img class="logo" alt="Startuppuccino" src="/resources/images/giovanni/startuppuccino_logo.svg" />
+                    <h3>
+                        <span class="span-line span-line-white"></span>
+                        Where startups<br>meet mentors
+                    </h3>
+
+                </div>
+
+            </header>
+
+            <main>
+
+                <section class="mobile-menu custom-padding">
+
+                    <nav><a href="#partners" title="Partners">PARTNERS</a></nav>
+                    <nav><a href="./login/" title="CLab Trento">CLAB - TN</a></nav>
+
+                </section>
+
+                <section class="split-view">
+
+                    <div class="box-view custom-padding">
+                        <h3>
+                            <span class="span-line span-line-orange"></span>
+                            INTRODUCTION
+                        </h3>
+                        <p>Startuppuccino is a project whose vision is to provide startups the guidance they may need in their early steps.</p>
+                        <p>On the portal, startuppers and enterpreneurs can find every direct guidance through the help of our mentors team, specialized personal ready to direct people into the correct direction, as well as a selection of useful web tools they can use to improve their working experience.</p>
+                        <p>Startuppuccino is a free service, born during the Lean Startup course and sponsored by Unibz.</p>
+                    </div>
+
+                    <div class="box-view custom-padding" id="vision">
+                        <h3>
+                            <span class="span-line span-line-black"></span>
+                            VIDEO
+                        </h3>
+                        <iframe src="https://player.vimeo.com/video/151849090" width="300" height="180" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    </div>
+
+
+                </section>
+
+                <section class="full-view custom-padding" id="partners">
+
+                    <h3>
+                        <span class="span-line span-line-white"></span>
+                        PARTNERS
+                    </h3>
+                    <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
+                    <a href="http://unibz.it" target="_blank"><img src="/resources/images/giovanni/unibz_logo.jpg" /></a>
+                    <a href="http://international.unitn.it/mim/clab-trento" target="_blank"><img src="/resources/images/giovanni/CLab_logo.jpg" /></a>
+                    <a href="#"><img src="/resources/images/giovanni//minetoolz.jpg" /></a>
+
+                </section>
+
+            </main>
         </div>
-
-        <%--<div class="container">--%>
-            <%--<h2>Start developing your idea with these Startup tools</h2>--%>
-            <%--<div class="row">--%>
-                <%--<t:small-tool-box toolNumber="1" toolTitle="Xtensio" urlName="xtensio"--%>
-                                  <%--toolFooter="Personas, Startup One Page Builder, Lean Canvas"/>--%>
-                <%--<t:small-tool-box toolNumber="2" toolTitle="Logogarden" urlName="logogarden"--%>
-                                  <%--toolFooter="Start with an amazing logo. It's free!"/>--%>
-                <%--<t:small-tool-box toolNumber="3" toolTitle="wevideo " urlName="wevideo"--%>
-                                  <%--toolFooter="Easily create outstanding videos"/>--%>
-                <%--<t:small-tool-box toolNumber="4" toolTitle="Wistia" urlName="wistia"--%>
-                                  <%--toolFooter="Host and optimize marketing prospect of your video"/>--%>
-                <%--<t:small-tool-box toolNumber="5" toolTitle="Pitch" urlName="pitch"--%>
-                                  <%--toolFooter="Pitch Training Preparation--%>
-                                <%--"/>--%>
-
-            <%--</div>--%>
-
-            <%--<div class="planes">--%>
-                <%--<img src="/resources/images/planes.png" style="width: 100%">--%>
-            <%--</div>--%>
-
-        <%--</div>--%>
-
-
-
-
 
     </div>
 

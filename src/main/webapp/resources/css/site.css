@@ -41,8 +41,10 @@ a:focus, a:hover {
     background: yellow; }
   to {
     background: white; } }
-.navbar .navbar-brand img {
-  margin-top: -4px; }
+.navbar {
+  margin-bottom: 0; }
+  .navbar .navbar-brand img {
+    margin-top: -4px; }
 
 .navbar-inverse {
   background-color: black; }
@@ -102,16 +104,145 @@ footer {
   font-size: 12px;
   line-height: 1.5; }
 
-.home-page-main-picture {
-  background-image: url("../images/background.jpg");
-  background-size: 100% 100%;
-  height: 56vw;
-  margin-top: -20px; }
-  .home-page-main-picture h1 {
-    margin-top: 0;
-    padding-top: 40vw; }
-    .home-page-main-picture h1 .slogan {
-      color: white; }
+.my-home-page {
+  /* temp */
+  /* end temp */
+  /* custom span-line */
+  /* header */
+  /* main contents */
+  /* temp */
+  /* end temp */ }
+  .my-home-page h3 {
+    text-transform: uppercase; }
+  .my-home-page .center {
+    max-width: 900px;
+    margin: auto;
+    text-align: center; }
+  .my-home-page li {
+    list-style: none; }
+  .my-home-page header {
+    height: 250px; }
+  .my-home-page .top_header {
+    text-align: left; }
+  .my-home-page .top_header .logo {
+    margin-left: 15px;
+    width: 100px;
+    height: 100px; }
+  .my-home-page .bottom_header {
+    margin: auto; }
+  .my-home-page .bottom_header .logo {
+    width: 100%;
+    margin: auto;
+    max-width: 300px; }
+  .my-home-page main {
+    min-height: calc(100% - 280px);
+    height: auto;
+    overflow: hidden; }
+  .my-home-page footer {
+    height: 30px;
+    line-height: 30px;
+    color: #555; }
+  .my-home-page footer p {
+    margin: 0px; }
+  .my-home-page footer a {
+    color: #555; }
+  .my-home-page h2, .my-home-page h3, .my-home-page nav {
+    font-family: "BEBAS", "Lato", "Arial", sans-serif;
+    font-size: 220%; }
+  .my-home-page p {
+    font-size: 14px; }
+  .my-home-page .custom-padding {
+    padding: 5%; }
+  .my-home-page .span-line {
+    display: block;
+    height: 5px;
+    width: 70px;
+    margin: 10px 0px; }
+  .my-home-page .span-line-white {
+    background-color: #FBFCF0; }
+  .my-home-page .span-line-black {
+    background-color: #1D1E1C; }
+  .my-home-page .span-line-orange {
+    background-color: #CC6714; }
+  .my-home-page header {
+    height: auto;
+    min-height: 150px;
+    overflow: hidden;
+    background-image: url("/resources/images/giovanni/Coffee Scene 3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    color: #FBFCF0;
+    text-shadow: 0px 0px 20px #1D1E1C; }
+  .my-home-page header nav {
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: right; }
+  .my-home-page header nav a {
+    text-decoration: none;
+    color: #FBFCF0; }
+  .my-home-page header nav a:hover {
+    border-bottom: 2px solid #fefefe; }
+  .my-home-page .bottom_header .logo {
+    position: relative;
+    margin-top: -24px; }
+  .my-home-page .mobile-menu {
+    display: none;
+    font-size: 50% !important;
+    line-height: 400%;
+    background-color: #1D1E1C; }
+  .my-home-page .mobile-menu a {
+    color: #64350D; }
+  .my-home-page .split-view {
+    font-size: 0px; }
+  .my-home-page .box-view {
+    font-size: 16px;
+    display: inline-block;
+    width: 50%;
+    /* don't mind the padding */
+    min-width: 200px;
+    vertical-align: top; }
+  .my-home-page .split-view:nth-child(2) .box-view:nth-child(1) {
+    background-color: #000;
+    color: #FBFCF0; }
+  .my-home-page .split-view:nth-child(2) .box-view:nth-child(1) h3,
+  .my-home-page .split-view:nth-child(2) .box-view:nth-child(2) h3:nth-child(2) {
+    color: #CC6714; }
+  .my-home-page .box-view iframe {
+    display: block;
+    margin: auto; }
+  .my-home-page #partners {
+    background-color: #3A2514;
+    color: #FBFCF0; }
+  .my-home-page #partners img {
+    height: 150px;
+    margin: 10px auto; }
+  .my-home-page .bottom_header .logo {
+    width: 200px;
+    height: 200px;
+    background: #000; }
+  .my-home-page #partners img {
+    width: auto;
+    max-width: 100%; }
+  @media all and (max-width: 768px) {
+    .my-home-page .box-view {
+      display: block;
+      width: auto; } }
+  @media all and (max-width: 500px) {
+    .my-home-page .bottom_header .logo {
+      width: 100px;
+      height: 100px;
+      margin-top: 0px;
+      margin-right: 10px;
+      vertical-align: top; }
+    .my-home-page .bottom_header h3 {
+      display: inline-block;
+      margin: 0px; }
+    .my-home-page header nav {
+      display: none; }
+    .my-home-page .mobile-menu {
+      display: block; } }
 
 .login-form {
   max-width: 30em;
