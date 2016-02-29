@@ -11,7 +11,7 @@
 
                 <div class="top_header">
 
-                    <nav><a href="/registration">CLAB Register</a></nav>
+                    <nav><a href="/registration">CLab Registration</a></nav>
 
                 </div>
                 <div class="bottom_header">

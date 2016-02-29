@@ -36,17 +36,18 @@ class WebMvcConfig extends WebMvcConfigurerAdapter
 
 
 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
         registry.addResourceHandler("/favicon.ico").
-                addResourceLocations("/resources/");
+                addResourceLocations("/resources/").setCachePeriod(300);
         registry.addResourceHandler("/resources/bootstrap/**").
-                addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/");
+                addResourceLocations("classpath:/META-INF/resources/webjars/bootstrap/").setCachePeriod(9999);
         registry.addResourceHandler("/resources/jquery/**").
-                addResourceLocations("classpath:/META-INF/resources/webjars/jquery/");
+                addResourceLocations("classpath:/META-INF/resources/webjars/jquery/").setCachePeriod(9999);
         registry.addResourceHandler("/resources/**").
-                addResourceLocations("/resources/");
+                addResourceLocations("/resources/").setCachePeriod(300);
     }
 
 

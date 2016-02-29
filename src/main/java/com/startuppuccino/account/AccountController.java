@@ -1,5 +1,7 @@
 package com.startuppuccino.account;
 
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.security.Principal;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -89,6 +92,8 @@ public class AccountController
     public String account(Model model, Principal principal)
     {
         Account account = getCurrentAccount(principal);
+        if (account.isHasAvatar())
+            account.setAvatar(new byte[1]);
         account.setPassword("hidden");
         model.addAttribute(account);
         return "account/account";
@@ -170,8 +175,12 @@ public class AccountController
 
     @ResponseBody
     @RequestMapping(value = "/people/{id}/avatar", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] avatar(@PathVariable("id") Integer id)
+    public byte[] avatar(@PathVariable("id") Integer id, HttpServletResponse response)
     {
+        response.setHeader("Cache-Control", "max-age: 300");
+        response.setHeader("Pragma", "cache");
+        response.setDateHeader("Expires", new Date().getTime() + 300 * 1000);
+
         Account account = accountRepository.findOne(id);
         if (account != null)
             return account.getAvatar();

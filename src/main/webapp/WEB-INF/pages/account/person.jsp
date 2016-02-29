@@ -4,7 +4,8 @@
 
 
     <div class="container">
-        <p><a href="/people">&larr; People</a></p>
+
+        <p style="margin-top: 30px; margin-bottom: -20px"><a href="/people">&larr; People</a></p>
 
 
         <h1><c:out value="${account.firstName} ${account.lastName}"/></h1>
@@ -14,18 +15,25 @@
             <div class="col-sm-6">
                 <c:choose>
                     <c:when test="${account.isMentor}">
-                        <div><span class="label label-primary">Mentor</span></div>
+                        <p><span class="label label-primary">Mentor</span></p>
                     </c:when>
                     <c:when test="${account.isUser}">
-                        <div><span class="label label-info">User</span></div>
+                        <p><span class="label label-info">User</span></p>
                     </c:when>
                     <c:when test="${account.isMentor}">
-                        <div><span class="label label-warning">Admin</span></div>
+                        <p><span class="label label-warning">Admin</span></p>
                     </c:when>
                 </c:choose>
-                <p>
+
+                <p style="font-weight: bold">
                     <c:out value="${account.background}"/>
                 </p>
+
+                <sec:authorize access="isAuthenticated()">
+                    <p><a href="mailto:<c:out value="${account.email}"/>"><c:out value="${account.email}"/></a></p>
+                </sec:authorize>
+
+
 
 
 

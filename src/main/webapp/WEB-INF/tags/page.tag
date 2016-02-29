@@ -34,11 +34,11 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="${activeMenuItem == 'home'         ? 'active' : ''}"><a href="/">Home</a></li>
-                <li class="${activeMenuItem == 'people'       ? 'active' : ''}"><a href="/people">CLab People</a></li>
+                <li class="${activeMenuItem == 'people'       ? 'active' : ''}"><a href="/people">People</a></li>
 
                 <sec:authorize access="isAnonymous()">
                     <li class="${activeMenuItem == 'login'        ? 'active' : ''}"><a href="/login">Login</a></li>
-                    <li class="${activeMenuItem == 'registration' ? 'active' : ''}"><a href="/registration">CLab Registration</a></li>
+                    <li class="${activeMenuItem == 'registration' ? 'active' : ''}"><a href="/registration">Registration</a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="dropdown">
