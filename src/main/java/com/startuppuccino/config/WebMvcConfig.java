@@ -1,18 +1,11 @@
 package com.startuppuccino.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 
@@ -25,16 +18,6 @@ class WebMvcConfig extends WebMvcConfigurerAdapter
     {
         registry.jsp("/WEB-INF/pages/", ".jsp");
     }
-
-
-//    @Bean(name = "filterMultipartResolver")
-//    public MultipartResolver filterMultipartResolver()
-//    {
-//        return new StandardServletMultipartResolver();
-//    }
-
-
-
 
 
     @Override
@@ -51,6 +34,15 @@ class WebMvcConfig extends WebMvcConfigurerAdapter
     }
 
 
+
+//    @Override
+//    public RequestMappingHandlerMapping requestMappingHandlerMapping()
+//    {
+//        RequestMappingHandlerMapping requestMappingHandlerMapping = super.requestMappingHandlerMapping();
+//        requestMappingHandlerMapping.setUseSuffixPatternMatch(false);
+//        requestMappingHandlerMapping.setUseTrailingSlashMatch(false);
+//        return requestMappingHandlerMapping;
+//    }
 //    @Override
 //    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer)
 //    {

@@ -1,5 +1,5 @@
 <%@ include file="../common.jsp" %>
-<%--@elvariable id="accounts" type="java.util.List<com.startuppuccino.account.Account>"--%>
+<%--@elvariable id="accounts" type="java.util.List<com.startuppuccino.accounts.Account>"--%>
 <t:page-with-header title="People" activeMenuItem="people">
 
     <div class="row" style="margin-top: 30px">

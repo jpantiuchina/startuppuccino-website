@@ -1,5 +1,6 @@
-package com.startuppuccino.account;
+package com.startuppuccino.accounts;
 
+import java.security.Principal;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,4 +77,9 @@ public class AccountService implements UserDetailsService
         return new SimpleGrantedAuthority(account.getRole().name());
     }
 
+
+    public Account getCurrentAccount(Principal principal)
+    {
+        return accountRepository.findOneByEmail(principal.getName());
+    }
 }

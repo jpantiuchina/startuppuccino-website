@@ -1,6 +1,5 @@
-package com.startuppuccino.account;
+package com.startuppuccino.accounts;
 
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -42,7 +40,7 @@ public class AccountController
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login()
     {
-        return "account/login";
+        return "accounts/login";
     }
 
 
@@ -50,7 +48,7 @@ public class AccountController
     public String registration(Model model)
     {
         model.addAttribute(new Account());
-        return "account/registration";
+        return "accounts/registration";
     }
 
 
@@ -70,7 +68,7 @@ public class AccountController
         if (bindingResult.hasErrors())
         {
             account.setPassword(null);
-            return "account/registration";
+            return "accounts/registration";
         }
 
         accountService.save(account);
@@ -81,22 +79,16 @@ public class AccountController
     }
 
 
-    private Account getCurrentAccount(Principal principal)
-    {
-        return accountRepository.findOneByEmail(principal.getName());
-    }
-
-
     @RequestMapping(value = "/account", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     public String account(Model model, Principal principal)
     {
-        Account account = getCurrentAccount(principal);
+        Account account = accountService.getCurrentAccount(principal);
         if (account.isHasAvatar())
             account.setAvatar(new byte[1]);
         account.setPassword("hidden");
         model.addAttribute(account);
-        return "account/account";
+        return "accounts/account";
     }
 
 
@@ -126,7 +118,7 @@ public class AccountController
 
 
         // Updating only specific fields of actual account
-        Account currentAccount = getCurrentAccount(principal);
+        Account currentAccount = accountService.getCurrentAccount(principal);
         currentAccount.setFirstName (account.getFirstName ());
         currentAccount.setLastName  (account.getLastName  ());
         currentAccount.setRole      (account.getRole      ());
@@ -152,7 +144,7 @@ public class AccountController
 
             model.addAttribute("showSavedSuccessfullyMessage", "true");
         }
-        return "account/account";
+        return "accounts/account";
     }
 
 
@@ -162,14 +154,14 @@ public class AccountController
     public String people(Model model)
     {
         model.addAttribute("accounts", accountRepository.findAll());
-        return "account/people";
+        return "accounts/people";
     }
 
     @RequestMapping(value = "/people/{id}", method = RequestMethod.GET)
     public String people(@PathVariable("id") Integer id, Model model)
     {
         model.addAttribute(accountRepository.findOne(id));
-        return "account/person";
+        return "accounts/person";
     }
 
 

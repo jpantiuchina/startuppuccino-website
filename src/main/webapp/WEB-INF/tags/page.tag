@@ -35,6 +35,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="${activeMenuItem == 'home'         ? 'active' : ''}"><a href="/">Home</a></li>
                 <li class="${activeMenuItem == 'people'       ? 'active' : ''}"><a href="/people">People</a></li>
+                <li class="${activeMenuItem == 'projects'     ? 'active' : ''}"><a href="/projects">Projects</a></li>
 
                 <sec:authorize access="isAnonymous()">
                     <li class="${activeMenuItem == 'login'        ? 'active' : ''}"><a href="/login">Login</a></li>

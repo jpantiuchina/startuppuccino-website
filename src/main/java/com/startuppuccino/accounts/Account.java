@@ -1,8 +1,10 @@
-package com.startuppuccino.account;
+package com.startuppuccino.accounts;
 
 import javax.persistence.*;
 
+import com.startuppuccino.projects.ProjectAccount;
 import java.time.Instant;
+import java.util.List;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,8 +12,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
-@Table(name = "account",
-        uniqueConstraints = @UniqueConstraint(name = "account_email", columnNames = "email"))
 public class Account
 {
     public void setId(int id)
@@ -38,7 +38,7 @@ public class Account
 
     @Email
     @NotEmpty
-    @Column(length = 63)
+    @Column(length = 63, unique = true)
     private String email;
 
     @NotEmpty
@@ -69,6 +69,10 @@ public class Account
 
     @Lob
     private String about;
+
+
+    @OneToMany(mappedBy = "account")
+    private List<ProjectAccount> accounts;
 
 
 

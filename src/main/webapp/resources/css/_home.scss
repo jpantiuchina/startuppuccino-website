@@ -3,6 +3,11 @@
 .my-home-page {
 
 
+    background: #2f2f2f;
+    margin-bottom: -30px;
+
+    &>.container>main { background: white }
+
 
     h3 { text-transform: uppercase }
 
@@ -115,10 +120,8 @@
         height: auto;
         min-height: 150px;
         overflow: hidden;
-        background-image: url('/resources/images/giovanni/Coffee Scene 3.jpg');
         background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 0px 0px;
+        background: #826457 url('/resources/images/giovanni/Coffee Scene 3.jpg') no-repeat 0 0;
         color: #FBFCF0;
         text-shadow: 0px 0px 20px #1D1E1C;
     }

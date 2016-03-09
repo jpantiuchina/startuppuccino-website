@@ -1,5 +1,5 @@
 <%@ include file="../common.jsp" %>
-<%--@elvariable id="account" type="com.startuppuccino.account.Account"--%>
+<%--@elvariable id="account" type="com.startuppuccino.accounts.Account"--%>
 <t:page title="${account.firstName} ${account.lastName}" activeMenuItem="people">
 
 

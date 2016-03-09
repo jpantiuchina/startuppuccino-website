@@ -12,10 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
-import com.startuppuccino.account.AccountService;
+import com.startuppuccino.accounts.AccountService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
