@@ -23,6 +23,7 @@ public class Project
     private String description;
 
     @OneToMany(mappedBy = "project")
+    @OrderBy
     private List<ProjectAccount> accounts;
 
 
@@ -55,5 +56,17 @@ public class Project
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+
+    public List<ProjectAccount> getAccounts()
+    {
+        return accounts;
+    }
+
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 }

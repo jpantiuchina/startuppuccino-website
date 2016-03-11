@@ -2,6 +2,13 @@
 <%--@elvariable id="projectList" type="java.util.List<com.startuppuccino.accounts.Account>"--%>
 <t:page-with-header title="Projects" activeMenuItem="projects">
 
+    <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_MENTOR', 'ROLE_ADMIN')">
+        <div class="pull-right" style="margin-top: -55px">
+            <a href="/projects/add" class="btn btn-primary" role="button">Add Project</a>
+        </div>
+    </sec:authorize>
+
+
     <div class="row" style="margin-top: 30px">
         <%--@elvariable id="project" type="com.startuppuccino.projects.Project"--%>
         <c:forEach var="project" items="${projectList}">

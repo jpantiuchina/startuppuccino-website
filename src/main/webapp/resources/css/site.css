@@ -9,15 +9,11 @@ h1 {
 h1, h2 {
   margin-bottom: 20px; }
 
-a {
-  color: #3b9ca6;
+a:not(.btn) {
   text-decoration: underline; }
 
 .nav a, .navbar a, .btn, a.list-group-item, a.slogan {
   text-decoration: none; }
-
-a:focus, a:hover {
-  color: #0f5865; }
 
 :target {
   -webkit-animation: from-yellow-to-white 5s;
