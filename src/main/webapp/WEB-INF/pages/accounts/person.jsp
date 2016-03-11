@@ -1,11 +1,10 @@
 <%@ include file="../common.jsp" %>
-<%--@elvariable id="account" type="com.startuppuccino.accounts.Account"--%>
+<%--@elvariable id="account" type="com.startuppuccino.account.Account"--%>
 <t:page title="${account.firstName} ${account.lastName}" activeMenuItem="people">
 
 
     <div class="container">
-
-        <p style="margin-top: 30px; margin-bottom: -20px"><a href="/people">&larr; People</a></p>
+        <p><a href="/people">&larr; People</a></p>
 
 
         <h1><c:out value="${account.firstName} ${account.lastName}"/></h1>
@@ -15,25 +14,18 @@
             <div class="col-sm-6">
                 <c:choose>
                     <c:when test="${account.isMentor}">
-                        <p><span class="label label-primary">Mentor</span></p>
+                        <div><span class="label label-primary">Mentor</span></div>
                     </c:when>
                     <c:when test="${account.isUser}">
-                        <p><span class="label label-info">User</span></p>
+                        <div><span class="label label-info">User</span></div>
                     </c:when>
                     <c:when test="${account.isMentor}">
-                        <p><span class="label label-warning">Admin</span></p>
+                        <div><span class="label label-warning">Admin</span></div>
                     </c:when>
                 </c:choose>
-
-                <p style="font-weight: bold">
+                <p>
                     <c:out value="${account.background}"/>
                 </p>
-
-                <sec:authorize access="isAuthenticated()">
-                    <p><a href="mailto:<c:out value="${account.email}"/>"><c:out value="${account.email}"/></a></p>
-                </sec:authorize>
-
-
 
 
 
