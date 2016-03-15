@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="startuppuccino-website:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="website-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="startuppuccino-website:war exploded" />
-    </root>
-  </artifact>
-</component>
