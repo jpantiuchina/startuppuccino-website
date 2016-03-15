@@ -18,10 +18,59 @@
 				// Hash password
 				$password = md5($_POST['password']);
 				// Save email on variable to doublechek if it exsits (see below)
-				$account_email = $_POST['mail'];
+				$account_email = $_POST['email'];
 
 				// Connect to db
 				include '../assets/php/db_connect.php';
+
+				// Validate required field (server check to avoid client injections)
+
+				if ($_POST['password'] != ""){
+
+					if ($_POST['email'] != ""){
+
+						if($_POST['firstname'] != ""){
+
+							if ($_POST['lastname'] != ""){
+
+								if($_POST['background'] != ""){
+
+									if($_POST['role'] == ""){
+
+										echo "Role field cannot be empty";
+
+									}
+
+								} else {
+
+									echo "Background field cannot be empty";
+
+								}
+
+							} else {
+
+								echo "Email field cannot be empty";
+							
+							}
+
+
+						} else {
+
+							echo "Firstname field cannot be empty";
+						
+						}
+
+					} else {
+
+						echo "Email field cannot be empty";
+					
+					}
+
+				} else {
+					
+					echo "Passowrd field cannot be empty";
+				
+				}
 
 				$sql = "INSERT INTO Account (background, email, firstname, lastname, password, role, created, avatar, about )
 						VALUES ('" . $_POST['background'] . "',
@@ -30,7 +79,7 @@
 								'" . $_POST['lastname'] . "',
 								'" . $password . "',
 								'" . $_POST['role'] . "',
-								'" . date() . "',
+								'" . date("Y-m-d H:i:s") . "',
 								'" . $avatar . "',
 								'" . $_POST['about'] . "' )";
 
@@ -48,6 +97,10 @@
 				    $new_account_password = $password; 
 
 				    include '../login/login.php';
+
+				    // javascript (client) redirect to home page once the user is logged
+				    if ($loginOk)
+			    		echo "<script>window.location='../'</script>";
 
 				} else {
 //				    echo "Error: " . $sql . "<br>" . mysqli_error($dbconn);

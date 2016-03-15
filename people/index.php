@@ -10,7 +10,7 @@
 <html>
 	<head>
 
-		<title><?php print $user; ?> - Startuppuccino</title>
+		<title><?php print $_SESSION['firstname']." ".$_SESSION['lastname']; ?> - Startuppuccino</title>
 	
 	</head>
 	<body>
@@ -23,7 +23,7 @@
 			 then the user details are diplayed instead of the list of users and mentors */
 		?>
 
-		<?php if(isset($_GET['user_id']){ ?>
+		<?php if (isset($_GET['user_id'])){ ?>
 
 			<!-- User profile details -->
 
@@ -62,6 +62,8 @@
 				<li>Mentors</li>
 			</nav>
 
+			<br><br>
+
 			<div class="list_view">
 
 				<?php
@@ -86,6 +88,8 @@
 						        	</div>
 
 								</div>
+
+								<hr>
 
 					        <?php
 

@@ -8,17 +8,23 @@
 		include 'db_connect.php';
 	}
 
-	$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM Account WHERE email='" . $account_email . "'");
+	if($account_email != ""){
 
-	// Check if email already exists
-	if ($check_mail_query){
+		$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM Account WHERE email='" . $account_email . "'");
 
-		if (mysqli_num_rows($check_mail_query) > 0) {
-			echo "Email already exists";
-		} else {
-			echo "Ok";
+		// Check if email already exists
+		if ($check_mail_query){
+
+			if (mysqli_num_rows($check_mail_query) > 0) {
+				echo "Email already exists";
+			} else {
+				echo "Ok";
+			}
+
 		}
 
+	} else {
+//		echo "mail = ".$account_email;
 	}
 
 ?>

@@ -18,6 +18,12 @@
 
 			<?php include 'login.php'; ?>
 
+			<?php
+		    	// javascript (client) redirect to home page once the user is logged
+		    	if ($loginOk)
+			    	echo "<script>window.location='../'</script>";
+		    ?>
+
 		<?php } else { ?>
 
 			<form action="" method="post">
