@@ -133,17 +133,16 @@
 				<input type="text" name="background" placeholder="e.g. IT, design, law, economics, management" required/>
 
 				<label>About me (optional)</label>
-				<textarea name="about" placeholder="More info about me, about my startup idea, etc.">
-				</textarea>
+				<textarea name="about" placeholder="More info about me, about my startup idea, etc."></textarea>
 
 				<label>Role</label>
 				<label><input type="radio" name="role" value="user" required/>User (I'm here to learn)</label>
 				<label><input type="radio" name="role" value="mentor" required/>Mentor (I'm here to help)</label>
 
-				<!--
-				<label>Photo (optional)</label>
-				<input type="file" name="photo" />
-				-->
+				<?php 
+					// I suggest not to let user upload the picture here 
+					// but only once already signed up from their account page.
+				?>
 
 				<input type="submit" value="Register" name="submit">
 

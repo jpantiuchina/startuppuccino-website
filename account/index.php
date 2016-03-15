@@ -12,64 +12,148 @@
 <html>
 	<head>
 
-		<title><?php print $user; ?> - Startuppuccino</title>
+		<title>Account - Startuppuccino</title>
 	
 	</head>
 	<body>
 		
 		<?php include '../assets/php/header.php'; ?>
 
-		<!-- Account details -->
+		<?php 
 
-		<?php $profile_view = mysqli_query($dbconn, "SELECT about, avatar, background, email, firstname, lastname, role FROM Account WHERE id='" . $_SESSION['id'] . "' "); ?>
+			if (isset($_POST['update_account_info'])){
 
-		<?php
+				// if submit of account info is set evaluate it and update the account info
 
-			if (mysqli_num_rows($profile_view) == 1) {
+				// Check if there is some required field with empty value
+				if ( $_POST['email'] == "" ||
+					 $_POST['firstname'] == "" ||
+					 $_POST['lastname'] == "" ||
+					 $_POST['background'] == "" ||
+					 $_POST['role'] == "" ){
 
-			    while($row = mysqli_fetch_assoc($profile_view)) {
+					echo "You are trying to save a required field with empty value... why?!<br><br>Just go <a href=''>back</a> please :|";
 
-			    	?>
+				} else {
 
-					<form action="" method="post" onsubmit="return checkForm();">
+					$update_query = mysqli_query($dbconn, "UPDATE Account SET
+															email='".$_POST['email']."',
+															firstname='".$_POST['firstname']."',
+															lastname='".$_POST['lastname']."',
+															background='".$_POST['background']."',
+															role='".$_POST['role']."',
+															about='".$_POST['about']."' 
+															WHERE id='".$_SESSION['id']."'");
 
-						<label>Email</label>
-						<input type="email" name="email" placeholder="hello@startuppucino.com" required/>
+					if ($update_query){
+						echo "Account info successfully updated<br><br><a href=''>Back to account settings</a>";
+					} else {
+						echo "Something went wrong<br><br><a href=''>Reload the page</a>";
+					}
 
-						<label>Password</label>
-						<input type="password" name="password" required/>
+				}
 
-						<label>Repeat Password</label>
-						<input type="password" name="password1" required/>
 
-						<label>Firstname</label>
-						<input type="text" name="firstname" required/>
+			} else if (isset($_POST['update_password'])){
 
-						<label>Lastname</label>
-						<input type="text" name="lastname" required/>
+				// if submit of password is set evaluate it and save the new password
 
-						<label>Background</label>
-						<input type="text" name="background" placeholder="e.g. IT, design, law, economics, management" required/>
+				// check if the password are the not the same
+				if ($_POST['old_password'] == $_POST['new_password']){
 
-						<label>About me (optional)</label>
-						<textarea name="about" placeholder="More info about me, about my startup idea, etc."></textarea>
+					echo "Old and new password are the same :o";
 
-						<label>Role</label>
-						<label><input type="radio" name="role" value="user" required/>User (I'm here to learn)</label>
-						<label><input type="radio" name="role" value="mentor" required/>Mentor (I'm here to help)</label>
+				} else if ($_POST['new_password'] == ""){
 
-						<!--
-						<label>Photo (optional)</label>
-						<input type="file" name="photo" />
-						-->
-						
-					</form>
+					echo "Come on! A password must have at least one char";
 
-			        <?php
-			    }
+				} else {
+
+					$update_query = mysqli_query($dbconn, "UPDATE Account SET password='".md5($_POST['new_password'])."' WHERE id='".$_SESSION['id']."' AND password='".md5($_POST['old_password'])."'");
+
+					if ($update_query){
+						echo "Password successfully updated<br><br><a href=''>Back to account settings</a>";
+					} else {
+						echo "Something went wrong<br><br><a href=''>Reload the page</a>";
+					}
+				
+				}
 
 			} else {
-			    echo "Nobody is here!";
+
+				// No submit is set, so the form to update the account info is shown
+
+				$profile_view = mysqli_query($dbconn, "SELECT about, avatar, background, email, firstname, lastname, role FROM Account WHERE id='" . $_SESSION['id'] . "' ");
+
+
+				if (mysqli_num_rows($profile_view) == 1) {
+
+				    while($account = mysqli_fetch_assoc($profile_view)) {
+
+				    	?>
+
+						<form action="" method="post">
+
+							<label>Email</label>
+							<input type="email" name="email" value="<?php print $account['email']; ?>" required/>
+
+							<label>Firstname</label>
+							<input type="text" name="firstname" value="<?php print $account['firstname'];?>" required/>
+
+							<label>Lastname</label>
+							<input type="text" name="lastname" value="<?php print $account['lastname'];?>" required/>
+
+							<label>Background</label>
+							<input type="text" name="background" placeholder="e.g. IT, design, law, economics, management" value="<?php print $account['background'];?>" required/>
+
+							<label>About me (optional)</label>
+							<textarea name="about" placeholder="More info about me, about my startup idea, etc."><?php print $account['about'];?></textarea>
+
+							<label>Role</label>
+							<label>
+								<input type="radio" name="role" value="student" <?php if ($account['role'] == "student") print "checked=\"checked\"";?> required/>User (I'm here to learn)
+							</label>
+							<label>
+								<input type="radio" name="role" value="mentor" <?php if ($account['role'] == "mentor") print "checked=\"checked\"";?> required/>Mentor (I'm here to help)
+							</label>
+
+							<input type="submit" name="update_account_info" value="SAVE" />
+							
+						</form>
+
+						<hr>
+
+						<form action="" method="post">
+
+							<h4>Change Password</h4>
+							
+							<label>Old Password</label>
+							<input type="password" name="old_password" required/>
+							
+							<label>New Password</label>
+							<input type="password" name="new_password" required/>
+							
+							<input type="submit" name="update_password" value="SAVE" />
+
+							<!-- TODO -> add javascript check on submit to verify that the two password are not equals -->
+
+						</form>
+
+						<!-- 
+							TODO -> Add form to upload profile picture
+							hint: use the iframe and with a javascript callback
+								  in order to make the upload async
+						-->
+
+				        <?php
+				    }
+
+				} else {
+
+				    echo "Something went wrong.. please <a hreg='../logout/'>logout</a> and login again.";
+				
+				}
+
 			}
 
 			mysqli_close($dbconn);
