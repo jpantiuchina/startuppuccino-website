@@ -23,7 +23,7 @@
 
 	           			<?php if ($userLogged){ ?>
 
-							<h1>Hello <?php print $_SESSION['firstname']; ?>!</h1>
+							<a>Hello <?php print $_SESSION['firstname']; ?>!</a>
 
 							<a href="./account/">My account</a>
 
@@ -57,9 +57,35 @@
 	            
 	            <section class="mobile-menu custom-padding">
 	                
+	                <!--
 	                <nav><a href="#partners" title="Partners">PARTNERS</a></nav>
 	                <nav><a href="./login/" title="CLab Trento">CLAB - TN</a></nav>
-	                
+					-->
+
+	                <!-- Bad habits copy/paste code -> TO BE IMPROVED -->
+	                <nav>
+
+	                	<a href="./people/">People</a>
+
+	           			<?php if ($userLogged){ ?>
+
+							<a>Hello <?php print $_SESSION['firstname']; ?>!</a>
+
+							<a href="./account/">My account</a>
+
+							<a href="./logout/">Logout</a>
+
+						<?php } else { ?>
+
+							<!-- change this into a login form (external ajax login form script -> include) -->
+							<a href="./login/">Login</a>
+
+							<a href="./signup/">Sign up</a>
+
+						<?php } // endif userlogged ?>
+
+	                </nav>
+
 	            </section>
 	            
 	            <section class="split-view">

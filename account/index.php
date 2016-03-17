@@ -46,9 +46,20 @@
 															WHERE id='".$_SESSION['id']."'");
 
 					if ($update_query){
+
+						// Update session data
+						$_SESSION['email'] = $_POST['email'];
+						$_SESSION['firstname'] = $_POST['firstname'];
+						$_SESSION['lastname'] = $_POST['lastname'];
+						$_SESSION['background'] = $_POST['background'];
+						$_SESSION['role'] = $_POST['role'];
+
 						echo "Account info successfully updated<br><br><a href=''>Back to account settings</a>";
+
 					} else {
+						
 						echo "Something went wrong<br><br><a href=''>Reload the page</a>";
+					
 					}
 
 				}
@@ -72,9 +83,13 @@
 					$update_query = mysqli_query($dbconn, "UPDATE Account SET password='".md5($_POST['new_password'])."' WHERE id='".$_SESSION['id']."' AND password='".md5($_POST['old_password'])."'");
 
 					if ($update_query){
+
 						echo "Password successfully updated<br><br><a href=''>Back to account settings</a>";
+					
 					} else {
+					
 						echo "Something went wrong<br><br><a href=''>Reload the page</a>";
+					
 					}
 				
 				}

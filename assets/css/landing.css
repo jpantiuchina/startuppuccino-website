@@ -1,0 +1,211 @@
+@font-face {
+    font-family: 'BASKERVILLE';
+    src: url('../fonts/baskerville/BaskervilleMTStd-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'BEBAS';
+    src: url('../fonts/bebas/BebasNeue Regular.ttf') format('truetype'),
+         url('../fonts/bebas/BebasNeue Regular.otf') format('opentype');
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0px;
+    background: #1D1E1C;
+    font-family: "BASKERVILLE", "Arial", sans-serif;
+}
+
+h2, h3, nav {
+    font-family: "BEBAS", "Lato", "Arial", sans-serif;
+    font-size: 220%;
+}
+
+p {
+    font-size: 14px;
+}
+
+.custom-padding {
+    padding: 5%;
+}
+
+#wrapper {
+    background: #FBFCF0;
+    min-width: 320px;
+    /* max-width: 900px; */
+    margin: auto;
+}
+
+/* custom span-line */
+.span-line {
+    display: block;
+    height: 5px;
+    width: 70px;
+    margin: 10px 0px;
+}
+
+.span-line-white {
+    background-color: #FBFCF0;
+}
+
+.span-line-black {
+    background-color: #1D1E1C;
+}
+
+.span-line-orange {
+    background-color: #CC6714;
+}
+
+/* header */
+
+header {
+    height: auto;
+    min-height: 150px;
+    overflow: hidden;
+    background-image: url('../pics/Coffee Scene 3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    color: #FBFCF0;
+    text-shadow: 0px 0px 20px #1D1E1C;
+}
+
+header nav {
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    text-align: right;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #FBFCF0;
+    padding: 0px 10px;
+}
+
+header nav a:hover {
+    border-bottom: 2px solid #fefefe;
+}
+
+.bottom_header .logo {
+    position: relative;
+    margin-top: -24px;
+}
+
+.mobile-menu {
+    display: none;
+    font-size: 50% !important;
+    line-height: 400%;
+    background-color: #1D1E1C;
+}
+
+.mobile-menu a {
+	display: block;
+    color: #64350D;
+}
+
+/* main contents */
+
+.split-view {
+    font-size: 0px;
+}
+
+.box-view {
+    font-size: 16px;
+    display: inline-block;
+    width: 40%; /* mind the padding */
+    min-width: 200px;
+    vertical-align: top;
+}
+
+.split-view:nth-child(2) {
+	background-color: #000
+}
+
+.split-view:nth-child(2) .box-view:nth-child(1) {
+    background-color: #000;
+    color: #FBFCF0;
+}
+
+.split-view:nth-child(2) .box-view:nth-child(2) {
+    background-color: #FBFCF0;
+    color: #000;
+}
+
+.split-view:nth-child(2) .box-view:nth-child(1) h3,
+.split-view:nth-child(2) .box-view:nth-child(2) h3:nth-child(2) {
+    color: #CC6714;
+}
+
+.box-view iframe {
+    display: block;
+    margin: auto;
+}
+
+#partners {
+    background-color: #3A2514;
+    color: #FBFCF0;
+}
+
+#partners img {
+    height: 150px;
+    margin: 10px auto;
+}
+
+/* temp */
+
+.bottom_header .logo {
+    width: 200px;
+    height: 200px;
+    background: #000;
+}
+
+#partners img {
+    width: auto;
+    max-width: 100%;
+}
+
+/* end temp */
+
+@media all and (max-width: 768px) {
+    .box-view {
+        display: block;
+        width: auto;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .bottom_header .logo {
+        width: 100px;
+        height: 100px;
+        margin-top: 0px;
+        margin-right: 10px;
+        vertical-align: top;
+    }
+    
+    .bottom_header h3 {
+        display: inline-block;
+        margin: 0px;
+    }
+    
+    header nav {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+}
+
+
+
+
+
+
+
+
+
+
