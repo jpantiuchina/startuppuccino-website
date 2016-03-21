@@ -10,7 +10,9 @@
 <html>
 	<head>
 
-		<title><?php print $_SESSION['firstname']." ".$_SESSION['lastname']; ?> - Startuppuccino</title>
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<title><?php print $_SESSION['firstname']." ".$_SESSION['lastname']." "; ?>Startuppuccino</title>
 	
 	</head>
 	<body>
@@ -79,12 +81,14 @@
 						        	<!-- card content -->
 						        	<div class="user_card__pic" style="background-image:url('../assets/pics/<?php print $person['avatar']; ?>')"></div>
 						        	<div class="user_card__details">
+						        		<a href="./?user_id=<?php print $person['id']; ?>">
 						        		<span class="user_card__name">
 						        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
 						        		</span>
 						        		<span>
 						        			<?php print $person['background']; ?>
 						        		</span>
+						        		</a>
 						        	</div>
 
 								</div>

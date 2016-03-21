@@ -1,5 +1,5 @@
 .form_custom {
-    max-width: 500px;
+    max-width: 900px;
     margin: 20px auto;
     width: 100%;
     background-color: #fefefe;
@@ -10,9 +10,18 @@
     text-align: center;
 }
 
-.form_box_item {
-    display: block;
-    padding: 5px 20px;
+.form_custom--slim {
+    max-width: 500px
+}
+
+.form_box_item {    
+    display: inline-block;
+    padding: 5px 10px;
+    min-width: 300px;
+}
+
+.form_box_item--full {
+    width: 100%
 }
 
 .form_box_item label {
@@ -30,6 +39,12 @@
     line-height: 25px;
     background-color: #f2f2f2;
     padding-left: 2px;
+}
+
+textarea.form_pretty_general_input {
+    height: auto;
+    transition: none;
+    -webkit-transition: none;
 }
 
 .form_pretty_button_input {

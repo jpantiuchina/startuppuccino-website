@@ -12,6 +12,8 @@
 <html>
 	<head>
 
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<title>Account - Startuppuccino</title>
 	
 	</head>

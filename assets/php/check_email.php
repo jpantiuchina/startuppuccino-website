@@ -1,14 +1,16 @@
 <?php
 	
+	$emailAvailable = false;
+
 	if(isset($_GET['email'])){
 		$account_email = $_GET['email'];
 	}
 
-	if(!$dbconn){
-		include 'db_connect.php';
-	}
-
 	if($account_email != ""){
+
+		if(!$dbconn){
+			include 'db_connect.php';
+		}
 
 		$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM Account WHERE email='" . $account_email . "'");
 
@@ -16,15 +18,23 @@
 		if ($check_mail_query){
 
 			if (mysqli_num_rows($check_mail_query) > 0) {
-				echo "Email already exists";
+			
+				$error_message = "Email already exists";
+			
 			} else {
-				echo "Ok";
+				
+				// Ok.. the email is available
+				$emailAvailable = true;
+			
 			}
 
 		}
 
 	} else {
-//		echo "mail = ".$account_email;
+
+		// prevent to access the database if no email is set
+		echo ":)";
+
 	}
 
 ?>

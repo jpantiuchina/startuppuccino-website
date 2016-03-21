@@ -1,8 +1,8 @@
-<form class="form_custom" action="" method="post">
+<form class="form_custom form_custom--slim" action="" method="post">
 
 	<?php if(!$loginOk){ ?>
 
-		<li class="form_box_item">
+		<li class="form_box_item form_box_item--full">
 			<p>Account not found, check the inputs data</p>
 		</li>
 
@@ -23,7 +23,7 @@
 		<span><a class="form_input--forgot_password form_pretty_button_input" href="../resetpassword/" target="_blank">Forgot Password</a></span>
 	</li>
 	
-	<li>
+	<li class="form_box_item form_box_item--full">
         <p>New user? <a class="form_pretty_button_link" href="../signup/">Sign up</a></p>
     </li>
 
