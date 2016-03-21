@@ -1,26 +1,30 @@
 @font-face {
-    font-family: 'BASKERVILLE';
-    src: url('../fonts/baskerville/BaskervilleMTStd-Regular.otf') format('opentype');
+    font-family: 'FuturaLT';
+    src: url('../fonts/FuturaLT.tff') format('truetype');
 }
 
 @font-face {
-    font-family: 'BEBAS';
-    src: url('../fonts/bebas/BebasNeue Regular.ttf') format('truetype'),
-         url('../fonts/bebas/BebasNeue Regular.otf') format('opentype');
+    font-family: 'LetterGothicMTStd';
+    src: url('../fonts/LetterGothicMTStd.otf') format('opentype');
 }
 
-html {
+* {
+	transition: all 300ms;
+	-webkit-transition: all 300ms;
+}
+
+html, body, #wrapper {
     height: 100%;
 }
 
 body {
     margin: 0px;
     background: #1D1E1C;
-    font-family: "BASKERVILLE", "Arial", sans-serif;
+    font-family: "LetterGothicMTStd", "Arial", sans-serif;
 }
 
 h2, h3, nav {
-    font-family: "BEBAS", "Lato", "Arial", sans-serif;
+    font-family: "FuturaLT", "Lato", "Arial", sans-serif;
     font-size: 220%;
 }
 
@@ -28,8 +32,12 @@ p {
     font-size: 14px;
 }
 
-.custom-padding {
+.custom_padding {
     padding: 5%;
+}
+
+.custom_padding__header {
+	padding: 0px 5%;
 }
 
 #wrapper {
@@ -63,38 +71,133 @@ p {
 
 header {
     height: auto;
-    min-height: 150px;
+    min-height: 75%;
     overflow: hidden;
-    background-image: url('../pics/Coffee Scene 3.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
     color: #FBFCF0;
     text-shadow: 0px 0px 20px #1D1E1C;
 }
 
-header nav {
-    height: 24px;
-    font-size: 24px;
-    line-height: 24px;
-    text-align: right;
+header, .top_header, .bottom_header {
+	position: relative;
 }
 
-header nav a {
+.header__background {
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url('../pics/background-high.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 55%;
+    -webkit-filter: blur(7px);
+	filter: blur(7px);
+}
+
+.top_header {
+	background-color: #3A2514;
+	overflow: hidden;
+	height: 70px;
+	text-align: right;
+}
+
+.top_header .logo {
+	height: 90px;
+	vertical-align: top;
+	top: -7px;
+	position: relative;
+	float: left;
+}
+
+.bottom_header span {
+	display: inline-block;
+	width: 120px;
+	height: 30px;
+	line-height: 35px;
+	text-align: center;
+	border: 1px solid #FBFCF0;
+	border-radius: 20px;
+}
+
+.bottom_header a {
+	color: #FBFCF0;
+	display: block;
+	height: 100%;
+	text-decoration: none;
+}
+
+.bottom_header span:hover {
+	background: #FBFCF0;
+}
+
+.bottom_header span:hover a {
+	color: #CC6714;
+}
+
+#main_menu {
+	font-size: 14px;
+	text-align: right;
+	height: 70px;
+	line-height: 70px;
+	text-shadow: none;
+}
+
+#main_menu a {
     text-decoration: none;
     color: #FBFCF0;
     padding: 0px 10px;
+    font-weight: 900;
+    display: inline-block;
+    height: 100%;
+    width: 80px;
+    text-align: center;
 }
 
-header nav a:hover {
-    border-bottom: 2px solid #fefefe;
+#main_menu a:hover {
+    text-decoration: underline;
+    background-color: #CC6714
 }
 
-.bottom_header .logo {
-    position: relative;
-    margin-top: -24px;
+.main_menu--visible {
+	display: block !important;
 }
 
+.mobile_menu__button {
+	display: none;
+	width: 50px;
+	height: 50px;
+	padding: 10px 0px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.mobile_menu__button div {
+	width: 100%;
+	height: 8%;
+	margin: 13% auto;
+	background: #FBFCF0;
+	border-radius: 10%;
+	-webkit-border-radius: 10%;
+}
+
+.mobile_menu__button--active div:nth-child(2){
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	margin-top: 25%;
+}
+
+.mobile_menu__button--active div:nth-child(3){
+	transform: rotate(315deg);
+	-webkit-transform: rotate(315deg);
+	margin-top: -17%;
+}
+
+.mobile_menu__button--active div:nth-child(1),
+.mobile_menu__button--active div:nth-child(4) {
+	background: #3A2514;
+}
+
+/*
 .mobile-menu {
     display: none;
     font-size: 50% !important;
@@ -106,14 +209,15 @@ header nav a:hover {
 	display: block;
     color: #64350D;
 }
+*/
 
 /* main contents */
 
-.split-view {
+.split_view {
     font-size: 0px;
 }
 
-.box-view {
+.box_view {
     font-size: 16px;
     display: inline-block;
     width: 40%; /* mind the padding */
@@ -121,26 +225,35 @@ header nav a:hover {
     vertical-align: top;
 }
 
-.split-view:nth-child(2) {
-	background-color: #000
+.box_view--tagline h3 {
+	margin: 0;
+	margin-top: 70px;
 }
 
-.split-view:nth-child(2) .box-view:nth-child(1) {
+.box_view--tagline p {
+	margin: 30px auto;
+}
+
+.split_view--info {
+	background-color: #3A2514
+}
+
+.split_view--info .box_view:nth-child(1) {
     background-color: #000;
     color: #FBFCF0;
 }
 
-.split-view:nth-child(2) .box-view:nth-child(2) {
+.split_view--info .box_view:nth-child(2) {
     background-color: #FBFCF0;
     color: #000;
 }
 
-.split-view:nth-child(2) .box-view:nth-child(1) h3,
-.split-view:nth-child(2) .box-view:nth-child(2) h3:nth-child(2) {
+.split_view--info .box_view:nth-child(1) h3,
+.split_view--info .box_view:nth-child(2) h3:nth-child(2) {
     color: #CC6714;
 }
 
-.box-view iframe {
+.box_view iframe {
     display: block;
     margin: auto;
 }
@@ -153,59 +266,42 @@ header nav a:hover {
 #partners img {
     height: 150px;
     margin: 10px auto;
-}
-
-/* temp */
-
-.bottom_header .logo {
-    width: 200px;
-    height: 200px;
-    background: #000;
-}
-
-#partners img {
     width: auto;
     max-width: 100%;
 }
 
-/* end temp */
+.force--hidden {
+	display: none !important;
+}
 
 @media all and (max-width: 768px) {
-    .box-view {
+    .box_view {
         display: block;
         width: auto;
     }
-}
 
-@media all and (max-width: 500px) {
-    .bottom_header .logo {
-        width: 100px;
-        height: 100px;
-        margin-top: 0px;
-        margin-right: 10px;
-        vertical-align: top;
-    }
-    
-    .bottom_header h3 {
-        display: inline-block;
-        margin: 0px;
-    }
-    
-    header nav {
+	.mobile_menu__button {
+		display: inline-block;
+	}
+
+    #main_menu {
         display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        top:70px;
+        height: calc(100% - 70px);
+	    background-color: #1D1E1C;
+	    z-index: 1;
     }
-    
-    .mobile-menu {
-        display: block;
+
+    #main_menu a {
+    	height: auto;
+    	width: 100%;
+    	display: block;
+	    color: #64350D;
     }
 }
-
-
-
-
-
-
-
 
 
 

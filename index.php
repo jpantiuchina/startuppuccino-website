@@ -8,89 +8,83 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Startuppuccino</title>
 
+		<script>
+    		function toggleMobileMenu(e){
+    			e.classList.toggle("mobile_menu__button--active");
+    			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+    			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+    			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+    		}
+    	</script>
+
 	</head>
 	<body>
 
 		<div id="wrapper" class="center">
 	        
-	        <header class="custom-padding">
-	            
-	            <div class="top_header">
-	                
-	                <nav>
+	        <header>
 
-	                	<a href="./people/">People</a>
+	            <div class="header__background"></div>
+
+	            <section class="top_header custom_padding__header">
+	                
+	            	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+	            		<div></div>
+	            		<div></div>
+	            		<div></div>
+	            		<div></div>
+	            	</div>
+
+                	<img class="logo" alt="Startuppuccino" src="assets/pics/startuppuccino_logo-white.svg" />
+
+	                <nav id="main_menu">
+
+	                	<a href="./people/">PEOPLE</a>
 
 	           			<?php if ($userLogged){ ?>
 
-							<a>Hello <?php print $_SESSION['firstname']; ?>!</a>
+							<a>Hi <?php print $_SESSION['firstname']; ?>!</a>
 
-							<a href="./account/">My account</a>
+							<a href="./account/">ACCOUNT</a>
 
-							<a href="./logout/">Logout</a>
+							<a href="./logout/">LOGOUT</a>
 
 						<?php } else { ?>
 
 							<!-- change this into a login form (external ajax login form script -> include) -->
-							<a href="./login/">Login</a>
+							<a href="./login/">LOGIN</a>
 
-							<a href="./signup/">Sign up</a>
+							<a href="./signup/">SIGN UP</a>
 
 						<?php } // endif userlogged ?>
 
 	                </nav>
 	                
-	            </div>
-	            <div class="bottom_header">
+	            </section>
+
+	            <section class="bottom_header split_view">
 	                
-	                <img class="logo" alt="Startuppuccino" src="assets/pics/startuppuccino_logo.svg" />
-	                <h3>
-	                    <span class="span-line span-line-white"></span>
-	                    WE MENTOR<br/>YOUR STARTUP
-	                </h3>
-	                
-	            </div>
-	            
+            		<div class="box_view custom_padding">
+            			<h3></h3>
+            			<p></p>
+            		</div>
+            		<div class="box_view box_view--tagline custom_padding">
+            			
+            			<h3>Meet Startuppuccino</h3>
+		                <p>Startuppuccino is a project whose vision is to provide startups the guidance they need at their early steps</p>
+		                <span><a href="#">JOIN US</a></span>
+
+            		</div>
+
+	            </section>
+
 	        </header>
 	        
 	        <main>
 	            
-	            <section class="mobile-menu custom-padding">
+	            <section class="split_view split_view--info">
 	                
-	                <!--
-	                <nav><a href="#partners" title="Partners">PARTNERS</a></nav>
-	                <nav><a href="./login/" title="CLab Trento">CLAB - TN</a></nav>
-					-->
-
-	                <!-- Bad habits copy/paste code -> TO BE IMPROVED -->
-	                <nav>
-
-	                	<a href="./people/">People</a>
-
-	           			<?php if ($userLogged){ ?>
-
-							<a>Hello <?php print $_SESSION['firstname']; ?>!</a>
-
-							<a href="./account/">My account</a>
-
-							<a href="./logout/">Logout</a>
-
-						<?php } else { ?>
-
-							<!-- change this into a login form (external ajax login form script -> include) -->
-							<a href="./login/">Login</a>
-
-							<a href="./signup/">Sign up</a>
-
-						<?php } // endif userlogged ?>
-
-	                </nav>
-
-	            </section>
-	            
-	            <section class="split-view">
-	                
-	                <div class="box-view custom-padding">
+	                <div class="box_view custom_padding">
 	                    <h3>
 	                        <span class="span-line span-line-orange"></span>
 	                        INTRODUCTION
@@ -100,7 +94,7 @@
 	                    <p>Startuppuccino is a free service, born during the Lean Startup course and sponsored by Unibz.</p>
 	                </div>
 	                
-	                <div class="box-view custom-padding" id="vision">
+	                <div class="box_view custom_padding" id="vision">
 	                    <h3>
 	                        <span class="span-line span-line-black"></span>
 	                        VIDEO
@@ -110,7 +104,7 @@
 	                
 	            </section>
 	            
-	            <section class="full-view custom-padding" id="partners">
+	            <section class="full-view custom_padding" id="partners">
 	                
 	                <h3>
 	                    <span class="span-line span-line-white"></span>
