@@ -39,22 +39,23 @@
 
 	                <nav id="main_menu">
 
-	                	<a href="./people/">PEOPLE</a>
+	                	<a class="menu_link" href="./people/">PEOPLE</a>
 
 	           			<?php if ($userLogged){ ?>
 
-							<a>Hi <?php print $_SESSION['firstname']; ?>!</a>
+							<div class="menu_link menu_link--controller" >
+								<span class="menu_link menu_link--placeholder">Hi <?php print $_SESSION['firstname']; ?>!</span>
+								<a class="menu_link menu_link--submenu" href="./account/">ACCOUNT</a>
+							</div>
 
-							<a href="./account/">ACCOUNT</a>
-
-							<a href="./logout/">LOGOUT</a>
+							<a class="menu_link" href="./logout/">LOGOUT</a>
 
 						<?php } else { ?>
 
 							<!-- change this into a login form (external ajax login form script -> include) -->
-							<a href="./login/">LOGIN</a>
+							<a class="menu_link" href="./login/">LOGIN</a>
 
-							<a href="./signup/">SIGN UP</a>
+							<a class="menu_link" href="./signup/">SIGN UP</a>
 
 						<?php } // endif userlogged ?>
 
