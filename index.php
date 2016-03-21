@@ -4,7 +4,7 @@
 <html>
 	<head>
 		
-		<link href="assets/css/landing.css" rel="stylesheet" media="all" type="text/css" />
+		<link href="assets/css/general.css" rel="stylesheet" media="all" type="text/css" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Startuppuccino</title>
 
@@ -22,7 +22,7 @@
 
 		<div id="wrapper" class="center">
 	        
-	        <header>
+	        <header class="header--home">
 
 	            <div class="header__background"></div>
 

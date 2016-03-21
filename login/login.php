@@ -3,11 +3,11 @@
 	include '../assets/php/session.php';
 
 	// default global variable to switch and redirect if login is successful
-	$loginOk = false;
+	$loginOk = true;
 
 	if( !$userLogged
 		&& ( ($new_account_email != "" && $new_account_password != "") 
-		||   (isset($_POST['login'])) ) ) {
+			  || (isset($_POST['login'])) ) ) {
 
 		include '../assets/php/db_connect.php';
 
@@ -36,8 +36,6 @@
 		        }
 		    }
 
-		    $loginOk = true;
-
 		    // if isset the POST parameter 'redirect'
 		    if (isset($_POST['redirect'])){
 		    	// javascript (client) redirect to home page
@@ -46,7 +44,8 @@
 
 		} else {
 		    
-		    echo "Account not found";
+		    // Account not found
+			$loginOk = false;
 
 		}
 
@@ -56,6 +55,8 @@
 
 		// prevent to execute the script if no data are detected
 		echo ":)";
+
+		$loginOk = false;
 	
 	}
 
