@@ -10,6 +10,9 @@ Startuppuccino is a free service, born during the Lean Startup course and sponso
 
 Our website: www.startuppuccino.com';
 
+$amIAMember = false;
+$amILoggedIn = true;
+
 
 ?>
 <!DOCTYPE html>
@@ -37,6 +40,20 @@ Our website: www.startuppuccino.com';
 			<li><a href="/people/4">Marco Mondini</a></li>
 			<li><a href="/people/3">Dron Khanna</a></li>
 		</ol>
+
+
+		<?php if ($amILoggedIn) { ?>
+			<?php if ($amIAMember) { ?>
+				<form action="/projects/${project.id}/leave">
+					<button type="submit" class="btn btn-danger">Leave</button>
+	            </form>
+			<?php } else { ?>
+				<form action="/projects/${project.id}/join">
+	                <button type="submit" class="btn btn-success">Join</button>
+	            </form>
+			<?php } ?>
+		<?php } ?>
+
 
 		<?php include '../assets/php/footer.php'; ?>
 
