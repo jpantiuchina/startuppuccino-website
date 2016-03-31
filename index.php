@@ -73,7 +73,7 @@
             			
             			<h3>Meet Startuppuccino</h3>
 		                <p>Startuppuccino is a project whose vision is to provide startups the guidance they need at their early steps</p>
-		                <span><a href="#">JOIN US</a></span>
+		                <span><a href="#">DISCOVER</a></span>
 
             		</div>
 
