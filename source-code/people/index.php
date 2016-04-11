@@ -12,8 +12,9 @@
 
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<title><?php print $_SESSION['firstname']." ".$_SESSION['lastname']." "; ?>Startuppuccino</title>
-	
+		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<title><?php print $_SESSION['firstname'] . " " . $_SESSION['lastname']." "; ?>Startuppuccino</title>
+
 	</head>
 	<body>
 		
@@ -36,7 +37,7 @@
 				if (mysqli_num_rows($profile_view) == 1) {
 
 				    while($row = mysqli_fetch_assoc($profile_view)) {
-				        echo $row["firstname"] . " " . $row["lastname"] . "<br>";
+					    echo $row["firstname"] . " " . $row["lastname"] . "<br>";
 				        echo $row["role"] . "<br>";
 				        echo "<img src='../assets/pics/" . $row["avatar"] . "' />";
 				        echo $row["email"] . "<br>";
@@ -59,10 +60,10 @@
 			<?php $people = mysqli_query($dbconn, "SELECT id, firstname, lastname, avatar, background, role FROM Account"); ?>
 
 			<!-- Display filter for only students|mentors -->
-			<nav>
-				<li>Students</li>
-				<li>Mentors</li>
-			</nav>
+			<div class="filter_menu filter_menu--people">
+				<li class="filter_menu__button" id="filter_button--STUDENT" onclick="filterResults('STUDENT',this)">Students</li>
+				<li class="filter_menu__button" id="filter_button--MENTOR" onclick="filterResults('MENTOR',this)">Mentors</li>
+			</div>
 
 			<br><br>
 
@@ -70,30 +71,49 @@
 
 				<?php
 
-					if (mysqli_num_rows($people) > 0) {
+					if (mysqli_num_rows($people) > 0){
 
-					    while($person = mysqli_fetch_assoc($people)) {
-					        
+						//echo mysqli_num_rows($people);
+
+						foreach ($people as $person){
+						
 					        ?>
 
-						        <div class="user_card user_card--<?php print $person['role']; ?>">
+						        <div class="user_card user_card--<?php print strtoupper($person['role']); ?>">
 
 						        	<!-- card content -->
-						        	<div class="user_card__pic" style="background-image:url('../assets/pics/<?php print $person['avatar']; ?>')"></div>
 						        	<div class="user_card__details">
 						        		<a href="./?user_id=<?php print $person['id']; ?>">
-						        		<span class="user_card__name">
-						        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
-						        		</span>
-						        		<span>
-						        			<?php print $person['background']; ?>
-						        		</span>
+							        		<span class="user_card__details_name">
+							        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
+							        		</span>
+							        		<span class="user_card__details_role">
+							        			<?php print strtoupper($person['role']); ?>
+							        		</span>
+							        		<span class="user_card__details_background">
+							        			<?php print $person['background']; ?>
+							        		</span>
 						        		</a>
 						        	</div>
+						        	<div class="user_card__details_pic" 
+
+						        		<?php
+						        			
+						        			$pic_name = "../assets/pics/".$person['avatar'];
+
+						        			if(trim($person['avatar'])!="" && file_exists($pic_name)){
+							        			// set the user picture
+							        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
+						        			} else {
+						        				// set the default picture
+							        			echo 'style="background-image:url(\'../assets/pics/default/people.png\');background-size:190px 190px"';
+							        		}
+
+						        		?>
+
+						        	></div>
 
 								</div>
-
-								<hr>
 
 					        <?php
 
@@ -112,6 +132,9 @@
 		<?php } // endif switch all users list or single user details ?>
 
 		<?php include '../assets/php/footer.php'; ?>
+
+
+		<script src="../assets/js/people.js"></script>
 
 	</body>
 </html>
