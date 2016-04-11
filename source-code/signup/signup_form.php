@@ -45,7 +45,7 @@
 
 	<li class="form_box_item">
 		<label>Role</label>
-		<label><input type="radio" name="role" value="user" <?php if($_POST['role']=="user") print 'checked="checked"' ?> required/>User (I'm here to learn)</label>
+		<label><input type="radio" name="role" value="student" <?php if($_POST['role']=="student") print 'checked="checked"' ?> required/>Student (I'm here to learn)</label>
 		<label><input type="radio" name="role" value="mentor"  <?php if($_POST['role']=="mentor") print 'checked="checked"' ?> required/>Mentor (I'm here to help)</label>
 	</li>
 
