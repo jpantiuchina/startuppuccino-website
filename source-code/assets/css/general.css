@@ -192,6 +192,10 @@ header, .top_header, .bottom_header {
 	position: relative;
 }
 
+.menu_link--controller:hover .menu_link--placeholder {
+    color: #999 !important;
+}
+
 .main_menu--visible {
 	display: block !important;
 }
