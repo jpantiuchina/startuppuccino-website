@@ -1,2 +1,10 @@
 ErrorDocument 404 /startuppuccino/red-index.html
 ErrorDocument 403 /startuppuccino/red-index.html
+
+RewriteEngine On
+ 
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^people/(\d+)*$ ./people/?user_id=$1
+RewriteRule ^projects/(\d+)*$ ./projects/?p_id=$1

@@ -12,7 +12,7 @@
 
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
 		<title><?php print $_SESSION['firstname'] . " " . $_SESSION['lastname']." "; ?>Startuppuccino</title>
 
 	</head>
@@ -21,7 +21,7 @@
 		<?php include '../assets/php/header.php'; ?>
 
 		<?php
-			 /* If isset the get parameter 'user' ( ../people.php?user_id=xxxx )
+			 /* If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
 			 links like ../people/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
 			 then the user details are diplayed instead of the list of users and mentors */
 		?>
@@ -79,23 +79,23 @@
 						
 					        ?>
 
-						        <div class="user_card user_card--<?php print strtoupper($person['role']); ?>">
+						        <div class="card card--<?php print strtoupper($person['role']); ?>">
 
 						        	<!-- card content -->
-						        	<div class="user_card__details">
+						        	<div class="card__details">
 						        		<a href="./?user_id=<?php print $person['id']; ?>">
-							        		<span class="user_card__details_name">
+							        		<span class="card__details_name">
 							        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
 							        		</span>
-							        		<span class="user_card__details_role">
+							        		<span class="card__details_role">
 							        			<?php print strtoupper($person['role']); ?>
 							        		</span>
-							        		<span class="user_card__details_background">
+							        		<span class="card__details_background">
 							        			<?php print $person['background']; ?>
 							        		</span>
 						        		</a>
 						        	</div>
-						        	<div class="user_card__details_pic" 
+						        	<div class="card__details_pic" 
 
 						        		<?php
 						        			

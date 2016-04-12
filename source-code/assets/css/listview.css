@@ -32,63 +32,72 @@
 
 /* Cards view */
 
-.user_card {
+.card {
 	display: inline-block;
 	position: relative;
 	vertical-align: top;
 	width: 200px;
-	height: 272px;
+	height: auto;
+	overflow: hidden;
 	background: #fbfbfb;
 	text-align: left;
 	margin: 10px 20px;
 	box-shadow: 0px 0px 7px #123
 }
 
-.user_card--hidden {
+.card--hidden {
 	display: none;
 }
 
-.user_card--MENTOR {
+.card--MENTOR {
 	background-color: #77f
 }
 
-.user_card__details {
+.card__details {
 	background-color: #3A2514;
 }
 
-.user_card__details:hover {
+.card__details:hover {
 	background-color: #CC6714
 }
 
-.user_card a {
+.card__details--project {
+	background-color: #77f
+}
+
+.card__details--project:hover {
+	background-color: #99a
+}
+
+.card a {
 	text-decoration: none !important;
 	color: #fbfbfb;
 }
 
-.user_card__details span {
+.card__details span {
 	display: block;
 	padding: 1px 10px;
 	line-height: 20px;
 	font-size: 15px;
 }
 
-.user_card__details span:first-child {
+.card__details span:first-child {
 	padding-top: 7px;
 }
 
-.user_card__details_name {
+.card__details_name {
 	font-weight: 900
 }
 
-.user_card__details_role {
+.card__details_role {
 	color: #555
 }
 
-.user_card__details_background {
+.card__details_background {
 	color: #557dff;
 }
 
-.user_card__details_pic {
+.card__details_pic {
 	width: 200px;
 	height: 200px;
 	background-position: center;

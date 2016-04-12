@@ -33,18 +33,18 @@ function filterResults(target, button){
 
 function renderUserCards(target){
 	// toggle cards visibility
-	cards = document.getElementsByClassName("user_card");
+	cards = document.getElementsByClassName("card");
 	for (var i = cards.length - 1; i >= 0; i--) {
-		if (cards[i].classList.contains("user_card--"+target))
-			cards[i].classList.remove("user_card--hidden");
+		if (cards[i].classList.contains("card--"+target))
+			cards[i].classList.remove("card--hidden");
 		else
-			cards[i].classList.add("user_card--hidden");
+			cards[i].classList.add("card--hidden");
 	}
 }
 
 function renderAllUserCards(){
-	cards = document.getElementsByClassName("user_card");
+	cards = document.getElementsByClassName("card");
 	for (var i = cards.length - 1; i >= 0; i--) {
-		cards[i].classList.remove("user_card--hidden");
+		cards[i].classList.remove("card--hidden");
 	}
 }
