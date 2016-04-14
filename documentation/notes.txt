@@ -1,0 +1,14 @@
+GENERAL NOTES
+
+14/04/2016
+	with the commit of today "added 'vision' field to projects", I also added a new columns "vision" at the db table Project:
+	the table now looks like:
+	+-------------+-------------+------+-----+---------+----------------+
+	| Field       | Type        | Null | Key | Default | Extra          |
+	+-------------+-------------+------+-----+---------+----------------+
+	| id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| description | longtext    | YES  |     | NULL    |                |
+	| title       | varchar(63) | NO   |     | NULL    |                |
+	| vision      | longtext    | YES  |     | NULL    |                |
+	+-------------+-------------+------+-----+---------+----------------+
+	Mysql: ALTER TABLE Project ADD vision LONGTEXT;
