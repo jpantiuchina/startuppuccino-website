@@ -41,6 +41,8 @@
 
        				<a class="menu_link" href="../projects/">PROJECTS</a>
 
+       				<a class="menu_link" href="../teams/">TEAMS</a>
+
 					<div class="menu_link menu_link--controller" >
 						<span class="menu_link menu_link--placeholder"><?php print strtoupper($_SESSION['firstname']); ?></span>
 						<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>

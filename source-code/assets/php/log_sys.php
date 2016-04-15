@@ -39,7 +39,7 @@ class LogSys
 			case 'account':
 				$this->table = "LogAccount";
 				break;
-
+				
 		}
 
 	}

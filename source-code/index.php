@@ -20,7 +20,7 @@
 	</head>
 	<body>
 
-		<div id="wrapper" class="center">
+		<div id="wrapper">
 	        
 	        <header class="header--home">
 
@@ -44,6 +44,8 @@
 	           			<?php if ($userLogged){ ?>
 
 	           				<a class="menu_link" href="./projects/">PROJECTS</a>
+
+		       				<a class="menu_link" href="./teams/">TEAMS</a>
 
 							<div class="menu_link menu_link--controller" >
 								<span class="menu_link menu_link--placeholder"><?php print strtoupper($_SESSION['firstname']); ?></span>

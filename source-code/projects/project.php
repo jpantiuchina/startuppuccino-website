@@ -3,7 +3,7 @@
 	if($projectID){
 
 
-		$projects = mysqli_query($dbconn, "SELECT * FROM Project WHERE id='" . $projectID . "' ");
+		$projects = mysqli_query($dbconn, "SELECT * FROM Project WHERE id='" . $projectID . "' OR title='" . $projectID . "'");
 
 		if (mysqli_num_rows($projects) == 1) {
 
@@ -20,9 +20,13 @@
 			    		<h5>VISION</h5>
 
 			    		<?php if(trim($project['vision']) != ""){ ?>
-				    		<p><?php print trim($project['vision']); ?></p>
+
+				    		<p><?php print $project['vision']; ?></p>
+				    	
 				    	<?php } else { ?>
+				    	
 				    		<p>This team needs more time to understand the vision</p>
+				    	
 				    	<?php } ?>
 
 			    		<h5>DESCRIPTION</h5>

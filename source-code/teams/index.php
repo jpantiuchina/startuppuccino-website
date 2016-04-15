@@ -14,28 +14,29 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
-		<title>Startuppuccino - Projects</title>
+		<title>Startuppuccino - Teams</title>
 
 	</head>
 	<body>
 		
 		<?php include '../assets/php/header.php'; ?>
-		
+
+
 		<?php
-			 /* If isset the get parameter 'p_id' ( ../index.php?p_id=xxxx )
+			 /* If isset the get parameter 'team_id' ( ../index.php?team_id=xxxx )
 			 links like ../projects/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
 			 then the project details are diplayed instead of the list of projects */
 		?>
 
-		<?php if (isset($_GET['p_id'])){ ?>
+		<?php if (isset($_GET['team_id'])){ ?>
 
 			<!-- Project details -->
 
 			<?php
 
-				$projectID = $_GET['p_id'];
+				$teamID = $_GET['team_id'];
 
-				include 'project.php';
+				include 'team.php';
 
 			?>
 
@@ -43,7 +44,7 @@
 
 			<!-- Projects list -->
 
-			<?php $projects = mysqli_query($dbconn, "SELECT * FROM Project"); ?>
+			<?php $teams = mysqli_query($dbconn, "SELECT * FROM Teams"); ?>
 
 			<br><br>
 
@@ -51,24 +52,21 @@
 
 				<?php
 
-					if (mysqli_num_rows($projects) > 0){
+					if (mysqli_num_rows($teams) > 0){
 
-						//echo mysqli_num_rows($projects);
+						//echo mysqli_num_rows($teams);
 
-						foreach ($projects as $project){
+						foreach ($teams as $team){
 						
 					        ?>
 
 					        	<div class="card">
 
 					        		<div class="card__details card__details--project">
-						        		<a href="./?p_id=<?php print $project['id']; ?>">
+						        		<a href="./?team_id=<?php print $team['id']; ?>">
 							        		
 							        		<span class="card__details_name">
-							        			<?php print $project['title']; ?>
-							        		</span>
-							        		<span class="card__details_description">
-							        			<?php print $project['description']; ?>
+							        			<?php print $team['name']; ?>
 							        		</span>
 						        		
 						        		</a>
@@ -81,7 +79,7 @@
 					    }
 
 					} else {
-					    echo "No projects here!";
+					    echo "No Teams here!";
 					}
 
 					mysqli_close($dbconn);

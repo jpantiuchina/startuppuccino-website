@@ -32,12 +32,47 @@ p {
     font-size: 14px;
 }
 
+.hidden_element {
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    display: none;
+}
+
 .custom_padding {
     padding: 5%;
 }
 
+.custom_padding--20 {
+    padding: 20px
+}
+
 .custom_padding__header {
 	padding: 0px 5%;
+}
+
+.center {
+    text-align: center;
+}
+
+.full_screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.close {
+    width: 50px;
+    height: 50px;
+    background-color: #d70;
+    cursor: pointer;
+}
+
+.close--topright {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 #wrapper {
@@ -65,6 +100,20 @@ p {
 
 .span-line-orange {
     background-color: #CC6714;
+}
+
+/* Buttons */
+
+.button {
+    background-color: #fbfbfb;
+    box-shadow: 0px 0px 5px #777;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.button--big {
+    display: inline-block;
+    min-width: 120px;
 }
 
 /* header */
