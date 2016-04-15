@@ -12,3 +12,47 @@ GENERAL NOTES
 	| vision      | longtext    | YES  |     | NULL    |                |
 	+-------------+-------------+------+-----+---------+----------------+
 	Mysql: ALTER TABLE Project ADD vision LONGTEXT;
+
+15/04/2016
+	
+	Modify Project table, changed the title column attribute to unique.
+	Project table now:
+	+-------------+-------------+------+-----+---------+----------------+
+	| Field       | Type        | Null | Key | Default | Extra          |
+	+-------------+-------------+------+-----+---------+----------------+
+	| id          | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| description | longtext    | YES  |     | NULL    |                |
+	| title       | varchar(63) | NO   | UNI | NULL    |                |
+	| vision      | longtext    | YES  |     | NULL    |                |
+	+-------------+-------------+------+-----+---------+----------------+
+	Mysql: ALTER TABLE Project MODIFY COLUMN title varchar(63) NOT NULL UNIQUE;
+
+
+	Added tables for teams architecture:
+
+	Mysql:
+
+	CREATE TABLE Teams
+	(
+		id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		name VARCHAR(63) NOT NULL UNIQUE,
+		mentor_id INT(11) 
+	);
+
+	CREATE TABLE TeamProject
+	(
+		id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		team_id INT(11) NOT NULL,
+		project_id INT(11) NOT NULL,
+		date DATE
+	);
+
+	CREATE TABLE TeamAccount
+	(
+		id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		team_id INT(11) NOT NULL,
+		account_id INT(11) NOT NULL,
+		date DATE
+	);
+
+	With this architecture we can drop the ProjectAccount table.

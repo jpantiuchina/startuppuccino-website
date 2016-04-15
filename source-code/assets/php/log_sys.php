@@ -71,7 +71,6 @@ class LogSys
 
 }
 
-
 // DB Tables
 /*
 

@@ -20,6 +20,35 @@
 		
 		<?php include '../assets/php/header.php'; ?>
 
+
+		<?php 
+			/* 
+				Here we have the section visible only if the user is logged. 
+				This section contains the buttons to manage and create the projects.
+			*/
+		?>
+
+		<?php if ($userLogged){ ?>
+
+			<section>
+				<span class="button button--big" onclick="showSection('my_projects')">My Projects</span>
+				<span class="button button--big" onclick="showSection('new_project')">New Project</span>
+			</section>
+
+			<section id="my_projects">
+				<ul>
+				</ul>
+			</section>
+
+			<section id="new_project">
+				
+				<?php include 'project_form.php'; ?>
+
+			</section>
+
+		<?php } // end if user is logged ?>
+
+
 		<?php
 			 /* If isset the get parameter 'p_id' ( ../index.php?p_id=xxxx )
 			 links like ../projects/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
@@ -46,7 +75,7 @@
 
 			<br><br>
 
-			<div class="list_view">
+			<section class="list_view">
 
 				<?php
 
@@ -85,7 +114,7 @@
 
 				?>
 
-			</div>
+			</section>
 
 		<?php } // endif switch all users list or single user details ?>
 

@@ -11,9 +11,25 @@
 			    
 		    	?>
 
-		    		<h3><?php print $project['title']; ?></h3>
+		    		<!-- Temp html layout -->
 
-		    		<p><?php print $project['description']; ?></p>
+		    		<div style="text-align: center;">
+
+			    		<h3><?php print $project['title']; ?></h3>
+
+			    		<h5>VISION</h5>
+
+			    		<?php if(trim($project['vision']) != ""){ ?>
+				    		<p><?php print trim($project['vision']); ?></p>
+				    	<?php } else { ?>
+				    		<p>This team needs more time to understand the vision</p>
+				    	<?php } ?>
+
+			    		<h5>DESCRIPTION</h5>
+
+			    		<p><?php print $project['description']; ?></p>
+
+			    	</div>
 
 		    	<?php
 
