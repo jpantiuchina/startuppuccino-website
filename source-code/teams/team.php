@@ -42,6 +42,8 @@
 			    					  	 	 AND t.id = ta.team_id))
 			    					  	 AND ta.account_id = a.id";
 
+			    			echo $query;
+
 				    		$members = mysqli_query($dbconn, $query);
 
 				    		foreach ($members as $member) {
@@ -65,6 +67,45 @@
 
 				    	?>
 
+
+
+
+
+				    	<h5>PROJECT</h5>
+
+
+			    		<?php // project details
+
+			    			$query = "SELECT * FROM Project WHERE team_id = " . $team['id'];
+
+				    		$projects = mysqli_query($dbconn, $query);
+
+				    		if (mysqli_num_rows($projects) == 1) {
+
+					    		foreach ($projects as $project) {
+					    			
+					    			?>
+
+					    				<h5><?php print $project['title']; ?></h5>
+					    				<p><?php print $project['description']; ?></p>
+					    				<h6><?php print $project['vision']; ?></h6>
+					    				<p>Last Pivot: <?php print $project['updated_date']; ?></p>
+
+					    			<?php
+
+					    		}
+
+							} else {
+
+								print "How did you make more projects????";
+
+							}
+
+				    	?>
+
+
+
+
 			    	</div>
 
 		    	<?php
@@ -79,12 +120,12 @@
 			if ($isMyTeam){	?>
 
 				<section class="center custom_padding--20">
-					<span class="button button--big" onclick="showSection('new_project')">New Project</span>
+					<span class="button button--big" onclick="showSection('edit_project')">Edit Project</span>
 				</section>
 
-				<section id="new_project" class="hidden_element full_screen">
+				<section id="edit_project" class="hidden_element full_screen">
 				
-					<div class="close close--topright" onclick="hideSection('new_project');"></div>
+					<div class="close close--topright" onclick="hideSection('edit_project');"></div>
 					<?php include 'project_form.php'; ?>
 
 				</section>

@@ -41,9 +41,16 @@
 
 		<?php } else { ?>
 
-			<!-- Projects list -->
+			<!-- Ideas list -->
 
-			<?php $ideas = mysqli_query($dbconn, "SELECT * FROM Ideas"); ?>
+			<?php $ideas = mysqli_query($dbconn, "SELECT i.title,
+														 i.description,
+														 i.team_size,
+														 i.date,
+														 i.background_pref,
+														 a.firstName, 
+														 a.lastName
+												  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
 
 			<br><br>
 
@@ -53,8 +60,6 @@
 
 					if (mysqli_num_rows($ideas) > 0){
 
-						//echo mysqli_num_rows($projects);
-
 						foreach ($ideas as $idea){
 						
 					        ?>
@@ -62,15 +67,25 @@
 					        	<div class="card">
 
 					        		<div class="card__details card__details--idea">
-						        		<a href="./?idea_id=<?php print $idea['id']; ?>">
-							        		
-							        		<span class="card__details_name">
+					        			<a>
+						        			<span class="card__details_name">
 							        			<?php print $idea['title']; ?>
 							        		</span>
 							        		<span class="card__details_description">
 							        			<?php print $idea['description']; ?>
 							        		</span>
-						        		
+							        		<span>
+							        			<?php print $idea['firstName']." ".$idea['lastName']; ?>
+							        		</span>
+							        		<span>
+							        			<?php print $idea['team_size']; ?>
+							        		</span>
+							        		<span>
+							        			<?php print $idea['date']; ?>
+							        		</span>
+							        		<span>
+							        			<?php print $idea['background_pref']; ?>
+							        		</span>
 						        		</a>
 						        	</div>
 
