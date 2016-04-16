@@ -1,6 +1,7 @@
 GENERAL NOTES
 
 14/04/2016
+
 	with the commit of today "added 'vision' field to projects", I also added a new columns "vision" at the db table Project:
 	the table now looks like:
 	+-------------+-------------+------+-----+---------+----------------+
@@ -55,4 +56,41 @@ GENERAL NOTES
 		date DATE
 	);
 
-	With this architecture we can drop the ProjectAccount table.
+	With this architecture we can DROP the ProjectAccount table.
+
+16/04/2016
+	
+	Added Ideas table to store ideas data.
+	Mysql:
+
+	CREATE TABLE Ideas 
+	(
+		id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		title VARCHAR(63) NOT NULL UNIQUE,
+		description VARCHAR(144),
+		owner_id INT(11) NOT NULL,
+		date DATE
+	);
+
+	Added IdeaAccount table to store members that joins ideas.
+
+	CREATE TABLE IdeaAccount
+	(
+		id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		idea_id INT(11) NOT NULL,
+		account_id INT(11) NOT NULL,
+		date DATE
+	);
+
+	Current tables:
+		+--------------------------+
+		| Tables_in_startuppuccino |
+		+--------------------------+
+		| Account                  |
+		| IdeaAccount              |
+		| Ideas                    |
+		| Project                  |
+		| TeamAccount              |
+		| TeamProject              |
+		| Teams                    |
+		+--------------------------+
