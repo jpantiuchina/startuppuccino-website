@@ -39,7 +39,7 @@
 
        			<?php if ($userLogged){ ?>
 
-       				<a class="menu_link" href="../projects/">PROJECTS</a>
+       				<a class="menu_link" href="../ideas/">IDEAS</a>
 
        				<a class="menu_link" href="../teams/">TEAMS</a>
 

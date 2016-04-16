@@ -14,7 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
-		<title>Startuppuccino - Projects</title>
+		<title>Ideas - Startuppuccino</title>
 
 	</head>
 	<body>
@@ -22,20 +22,20 @@
 		<?php include '../assets/php/header.php'; ?>
 		
 		<?php
-			 /* If isset the get parameter 'p_id' ( ../index.php?p_id=xxxx )
-			 links like ../projects/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
-			 then the project details are diplayed instead of the list of projects */
+			 /* If isset the get parameter 'idea_id' ( ../index.php?idea_id=xxxx )
+			 links like ../ideas/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
+			 then the idea details are diplayed instead of the list of ideas */
 		?>
 
-		<?php if (isset($_GET['p_id'])){ ?>
+		<?php if (isset($_GET['idea_id'])){ ?>
 
 			<!-- Project details -->
 
 			<?php
 
-				$projectID = $_GET['p_id'];
+				$ideaID = $_GET['idea_id'];
 
-				include 'project.php';
+				include 'idea.php';
 
 			?>
 
@@ -43,7 +43,7 @@
 
 			<!-- Projects list -->
 
-			<?php $projects = mysqli_query($dbconn, "SELECT * FROM Project"); ?>
+			<?php $ideas = mysqli_query($dbconn, "SELECT * FROM Ideas"); ?>
 
 			<br><br>
 
@@ -51,24 +51,24 @@
 
 				<?php
 
-					if (mysqli_num_rows($projects) > 0){
+					if (mysqli_num_rows($ideas) > 0){
 
 						//echo mysqli_num_rows($projects);
 
-						foreach ($projects as $project){
+						foreach ($ideas as $idea){
 						
 					        ?>
 
 					        	<div class="card">
 
-					        		<div class="card__details card__details--project">
-						        		<a href="./?p_id=<?php print $project['id']; ?>">
+					        		<div class="card__details card__details--idea">
+						        		<a href="./?idea_id=<?php print $idea['id']; ?>">
 							        		
 							        		<span class="card__details_name">
-							        			<?php print $project['title']; ?>
+							        			<?php print $idea['title']; ?>
 							        		</span>
 							        		<span class="card__details_description">
-							        			<?php print $project['description']; ?>
+							        			<?php print $idea['description']; ?>
 							        		</span>
 						        		
 						        		</a>
@@ -81,7 +81,7 @@
 					    }
 
 					} else {
-					    echo "No projects here!";
+					    echo "Nothing to list here!";
 					}
 
 					mysqli_close($dbconn);
@@ -93,26 +93,6 @@
 		<?php } // endif switch all users list or single user details ?>
 
 		<?php include '../assets/php/footer.php'; ?>
-
-		<script type="text/javascript">
-
-			function showSection(target){
-				
-				elem = document.getElementById(target);
-
-				elem.classList.remove("hidden_element");
-
-			}
-
-			function hideSection(target){
-
-				elem = document.getElementById(target);
-
-				elem.classList.add("hidden_element");
-
-			}
-
-		</script>
 
 	</body>
 </html>
