@@ -4,6 +4,9 @@
 
 	include '../assets/php/db_connect.php';
 
+	// Redirect to home if user is not logged
+	if(!$userLogged) header("Location: ../");
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
-		<title><?php print $_SESSION['firstname'] . " " . $_SESSION['lastname']." "; ?>Startuppuccino</title>
+		<title>People - Startuppuccino</title>
 
 	</head>
 	<body>
@@ -82,7 +85,7 @@
 						        <div class="card card--<?php print strtoupper($person['role']); ?>">
 
 						        	<!-- card content -->
-						        	<div class="card__details">
+						        	<div class="card__details--brown">
 						        		<a href="./?user_id=<?php print $person['id']; ?>">
 							        		<span class="card__details_name">
 							        			<?php print $person['firstname'] . " " . $person['lastname']; ?>

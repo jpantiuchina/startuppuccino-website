@@ -3,7 +3,7 @@
 	if($ideaID){
 
 
-		$ideas = mysqli_query($dbconn, "SELECT * FROM Project WHERE id='" . $ideaID . "' OR title='" . $ideaID . "'");
+		$ideas = mysqli_query($dbconn, "SELECT * FROM Ideas WHERE id='" . $ideaID . "' OR title='" . $ideaID . "'");
 
 		if (mysqli_num_rows($ideas) == 1) {
 
@@ -17,18 +17,6 @@
 
 			    		<h3><?php print $idea['title']; ?></h3>
 
-			    		<h5>VISION</h5>
-
-			    		<?php if(trim($idea['vision']) != ""){ ?>
-
-				    		<p><?php print $idea['vision']; ?></p>
-				    	
-				    	<?php } else { ?>
-				    	
-				    		<p>This team needs more time to understand the vision</p>
-				    	
-				    	<?php } ?>
-
 			    		<h5>DESCRIPTION</h5>
 
 			    		<p><?php print $idea['description']; ?></p>
@@ -37,9 +25,6 @@
 
 		    	<?php
 
-
-		    	// here add the query to AccountProject table and get project members
-		    	// ...
 
 			}
 

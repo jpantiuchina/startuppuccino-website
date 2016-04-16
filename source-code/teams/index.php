@@ -4,6 +4,9 @@
 
 	include '../assets/php/db_connect.php';
 
+	// Redirect to home if user is not logged
+	if(!$userLogged) header("Location: ../");
+
 ?>
 
 <!DOCTYPE html>

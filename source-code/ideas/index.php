@@ -21,91 +21,100 @@
 		
 		<?php include '../assets/php/header.php'; ?>
 		
-		<?php
-			 /* If isset the get parameter 'idea_id' ( ../index.php?idea_id=xxxx )
-			 links like ../ideas/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
-			 then the idea details are diplayed instead of the list of ideas */
-		?>
-
-		<?php if (isset($_GET['idea_id'])){ ?>
-
-			<!-- Project details -->
+		<main>
 
 			<?php
-
-				$ideaID = $_GET['idea_id'];
-
-				include 'idea.php';
-
+				 /* If isset the get parameter 'idea_id' ( ../index.php?idea_id=xxxx )
+				 links like ../ideas/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
+				 then the idea details are diplayed instead of the list of ideas */
 			?>
 
-		<?php } else { ?>
+			<?php if (isset($_GET['idea_id'])){ ?>
 
-			<!-- Ideas list -->
-
-			<?php $ideas = mysqli_query($dbconn, "SELECT i.title,
-														 i.description,
-														 i.team_size,
-														 i.date,
-														 i.background_pref,
-														 a.firstName, 
-														 a.lastName
-												  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
-
-			<br><br>
-
-			<section class="list_view">
+				<!-- Project details -->
 
 				<?php
 
-					if (mysqli_num_rows($ideas) > 0){
+					$ideaID = $_GET['idea_id'];
 
-						foreach ($ideas as $idea){
-						
-					        ?>
-
-					        	<div class="card">
-
-					        		<div class="card__details card__details--idea">
-					        			<a>
-						        			<span class="card__details_name">
-							        			<?php print $idea['title']; ?>
-							        		</span>
-							        		<span class="card__details_description">
-							        			<?php print $idea['description']; ?>
-							        		</span>
-							        		<span>
-							        			<?php print $idea['firstName']." ".$idea['lastName']; ?>
-							        		</span>
-							        		<span>
-							        			<?php print $idea['team_size']; ?>
-							        		</span>
-							        		<span>
-							        			<?php print $idea['date']; ?>
-							        		</span>
-							        		<span>
-							        			<?php print $idea['background_pref']; ?>
-							        		</span>
-						        		</a>
-						        	</div>
-
-					        	</div>
-
-					        <?php
-
-					    }
-
-					} else {
-					    echo "Nothing to list here!";
-					}
-
-					mysqli_close($dbconn);
+					include 'idea.php';
 
 				?>
 
-			</section>
+			<?php } else { ?>
 
-		<?php } // endif switch all users list or single user details ?>
+				<!-- Ideas list -->
+
+				<?php $ideas = mysqli_query($dbconn, "SELECT i.title,
+															 i.description,
+															 i.team_size,
+															 i.date,
+															 i.background_pref,
+															 a.firstName, 
+															 a.lastName
+													  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
+
+				<section class="list_view">
+
+					<?php
+
+						if (mysqli_num_rows($ideas) > 0){
+
+							foreach ($ideas as $idea){
+							
+						        ?>
+
+						        	<div class="card card--idea">
+
+						        		<div class="card__details">
+
+						        			<h5 class="card__details_title">
+						        				<?php print $idea['title']; ?>
+						        			</h5>
+
+						        			<p class="card__details_description">
+							        			<?php print $idea['description']; ?>
+							        		</p>
+
+								        	<div class="card__details_extra">
+
+								        		<span>
+								        			Owner: <?php print $idea['firstName']." ".$idea['lastName']; ?>
+													- <?php print $idea['date']; ?>
+								        		</span>
+								        		<span>
+								        			Team size: <?php print $idea['team_size']; ?>
+								        		</span>
+								        		
+								        		<?php if (trim($idea['background_pref'])!=""){ ?>
+									        		<span>
+									        			<?php print $idea['background_pref']; ?>
+									        		</span>
+							        			<?php } ?>
+
+							        		</div>
+
+							        	</div>
+
+						        	</div>
+
+						        <?php
+
+						    }
+
+						} else {
+						    echo "Nothing to list here!";
+						}
+
+						mysqli_close($dbconn);
+
+					?>
+
+				</section>
+
+			<?php } // endif switch all users list or single user details ?>
+
+		</main>
 
 		<?php include '../assets/php/footer.php'; ?>
 

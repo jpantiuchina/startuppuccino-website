@@ -35,14 +35,10 @@
 
 			    			$query = "SELECT a.firstName, a.lastName, a.background, a.id 
 			    					  FROM TeamAccount ta, Account a, Teams t
-			    					  WHERE 
-			    					  	(   ta.team_id = '". $teamID ."' 
-			    					  	 OR
-			    					  	 	(	 t.name = '". $teamID ."'
-			    					  	 	 AND t.id = ta.team_id))
-			    					  	 AND ta.account_id = a.id";
-
-			    			echo $query;
+			    					  WHERE ((ta.team_id = '". $teamID ."' AND t.id = ta.team_id)
+			    					  		 OR
+			    					  	 	 (t.name = '". $teamID ."' AND t.id = ta.team_id))
+			    					  	 	AND ta.account_id = a.id";
 
 				    		$members = mysqli_query($dbconn, $query);
 

@@ -41,7 +41,8 @@
 	background: #fbfbfb;
 	text-align: left;
 	margin: 10px 20px;
-	box-shadow: 0px 0px 7px #123
+	box-shadow: 0px 0px 7px #123;
+	padding: 5px;
 }
 
 .card--hidden {
@@ -52,12 +53,8 @@
 	background-color: #77f
 }
 
-.card__details {
-	background-color: #3A2514;
-}
-
-.card__details:hover {
-	background-color: #CC6714
+.card--STUDENT {
+	background-color: #7f7
 }
 
 .card__details--project {
@@ -102,4 +99,15 @@
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+/* cards ideas */
+
+.card--idea {
+	background: #789;
+	color: #f2f2f2
+}
+
+.card__details_extra {
+	border-top: 2px solid #678;
 }
