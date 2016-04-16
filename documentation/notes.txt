@@ -69,6 +69,8 @@ GENERAL NOTES
 		title VARCHAR(63) NOT NULL UNIQUE,
 		description VARCHAR(144),
 		owner_id INT(11) NOT NULL,
+		team_size INT(2) NOT NULL DEFAULT '2',
+		background_pref LONGTEXT,
 		date DATE
 	);
 
