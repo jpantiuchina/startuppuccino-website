@@ -11,7 +11,7 @@
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/team.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
 		<title>Startuppuccino - Teams</title>

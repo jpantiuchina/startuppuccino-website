@@ -39,13 +39,13 @@
 
 	                <nav id="main_menu">
 
-	                	<a class="menu_link" href="./people/">PEOPLE</a>
+           				<a class="menu_link" href="./ideas/">IDEAS</a>
 
 	           			<?php if ($userLogged){ ?>
 
-	           				<a class="menu_link" href="./ideas/">IDEAS</a>
-
 		       				<a class="menu_link" href="./teams/">TEAMS</a>
+
+	           				<a class="menu_link" href="./people/">PEOPLE</a>
 
 							<div class="menu_link menu_link--controller" >
 								<span class="menu_link menu_link--placeholder"><?php print strtoupper($_SESSION['firstname']); ?></span>
