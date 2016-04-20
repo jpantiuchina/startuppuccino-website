@@ -108,9 +108,9 @@
 						        			<div class="card__footer center">
 						        				
 						        				<?php if(!in_array($idea['id'],$user_ideas)){ ?>
-							        				<span class="card__button card__button--full" onclick="joinIdea('<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+							        				<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
 							        			<?php } else { ?>
-							        				<span class="card__button card__button--full" onclick="leaveIdea('<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
+							        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
 							        			<?php } ?>
 
 						        			</div>

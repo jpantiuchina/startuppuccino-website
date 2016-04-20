@@ -2,18 +2,29 @@
 var button_selected;
 var ideaID;
 
-function joinIdea(idea_id, dom_element){
-
+function ideaHelper(action, idea_id, dom_element){
+	
 	// show the loading
 	showLoadingScreen();
 
 	// send data to server to be
 	url = "./manage_ideas.php";
-	parameters = "key=join_idea&idea_id="+idea_id;
-	callback = "join_idea";
+
+	if(action == "join"){
+
+		parameters = "key=join_idea&idea_id="+idea_id;
+		callback = "join_idea";
+
+	} else if(action == "leave"){
+
+		parameters = "key=leave_idea&idea_id="+idea_id;
+		callback = "leave_idea";
+
+	}	
+	
 	connectPOST(url,parameters,callback);
 
-	// save the 'pointer' to the button selected
+	// save temporary the button and idea selected
 	button_selected = dom_element;
 	ideaID = idea_id;
 
@@ -27,7 +38,7 @@ function joinIdeaCallback(response){
 		button_selected.innerHTML = "LEAVE IDEA";
 
 		// Update click listener from the button
-		button_selected.setAttribute("onclick","leaveIdea('"+ideaID+"',this);");
+		button_selected.setAttribute("onclick","ideaHelper('leave','"+ideaID+"',this);");
 	
 	} else {
 
@@ -43,23 +54,6 @@ function joinIdeaCallback(response){
 
 }
 
-function leaveIdea(idea_id, dom_element){
-
-	// show the loading
-	showLoadingScreen();
-
-	// send data to server to be
-	url = "./manage_ideas.php";
-	parameters = "key=leave_idea&idea_id="+idea_id;
-	callback = "leave_idea";
-	connectPOST(url,parameters,callback);
-
-	// save the 'pointer' to the button selected
-	button_selected = dom_element;
-	ideaID = idea_id;
-
-}
-
 function leaveIdeaCallback(response){
 
 	if(response == "ok"){
@@ -68,7 +62,7 @@ function leaveIdeaCallback(response){
 		button_selected.innerHTML = "JOIN IDEA";
 		
 		// Update click listener from the button
-		button_selected.setAttribute("onclick","joinIdea('"+ideaID+"',this);");
+		button_selected.setAttribute("onclick","ideaHelper('join','"+ideaID+"',this);");
 	
 	} else {
 
