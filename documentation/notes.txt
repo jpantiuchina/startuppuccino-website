@@ -118,3 +118,9 @@ GENERAL NOTES
 		| TeamAccount              |
 		| Teams                    |
 		+--------------------------+
+
+18/04/2016
+	
+	Edit table IdeaAccount to not have redundant entries
+	Mysql: ALTER TABLE `IdeaAccount` ADD UNIQUE (`idea_id`, `account_id`);
+

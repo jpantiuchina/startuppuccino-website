@@ -104,10 +104,30 @@
 /* cards ideas */
 
 .card--idea {
-	background: #789;
-	color: #f2f2f2
+	background: #0080FF;
+	color: #fff
 }
 
 .card__details_extra {
 	border-top: 2px solid #678;
+}
+
+.card__button {
+	cursor: pointer;
+	line-height: 32px
+}
+
+.card__button--full {
+	display: block;
+	background: #86FF9D;
+	color: #123;
+}
+
+.card__button--full:hover {
+	background: #fb8;
+}
+
+.card__button--nobackground {
+	background: transparent !important;
+	cursor: default;
 }

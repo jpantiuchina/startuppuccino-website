@@ -51,7 +51,8 @@
 															 i.date,
 															 i.background_pref,
 															 a.firstName, 
-															 a.lastName
+															 a.lastName,
+															 i.id
 													  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
 
 				<section class="list_view">
@@ -96,6 +97,16 @@
 
 							        	</div>
 
+						        		<?php if ($userLogged){ ?>
+
+						        		<?php //TODO: add check if this user already join the idea ?>
+
+						        			<div class="card__footer center">
+						        				<span class="card__button card__button--full" onclick="joinIdea('<?php print $idea['id']; ?>',this)">JOIN THE IDEA</span>
+						        			</div>
+
+						        		<?php } ?>
+							        
 						        	</div>
 
 						        <?php
@@ -117,6 +128,8 @@
 		</main>
 
 		<?php include '../assets/php/footer.php'; ?>
+
+		<script src="../assets/js/ideas.js"></script>
 
 	</body>
 </html>

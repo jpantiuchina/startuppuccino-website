@@ -2,7 +2,18 @@
 
 	/* General header - menu used in all project pages (except for home/landing page) */
 
-?>
+?>	
+
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
 
 	<script>
 		// Javascript script to manage the mobile menu view
