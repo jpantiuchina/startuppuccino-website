@@ -1,5 +1,6 @@
 
 var button_selected;
+var ideaID;
 
 function joinIdea(idea_id, dom_element){
 
@@ -14,6 +15,7 @@ function joinIdea(idea_id, dom_element){
 
 	// save the 'pointer' to the button selected
 	button_selected = dom_element;
+	ideaID = idea_id;
 
 }
 
@@ -22,11 +24,51 @@ function joinIdeaCallback(response){
 	if(response == "ok"){
 
 		// Change style to the button
-		button_selected.innerHTML = "Joined";
-		button_selected.classList.add("card__button--nobackground");
+		button_selected.innerHTML = "LEAVE IDEA";
 
-		// Remove click listener from the button
-		button_selected.removeAttribute("onclick");
+		// Update click listener from the button
+		button_selected.setAttribute("onclick","leaveIdea('"+ideaID+"',this);");
+	
+	} else {
+
+		alert(response);
+
+	}
+
+	// hide loading screen
+	hideLoadingScreen();
+
+	// Reset variable button_selected;
+	button_selected = null;
+
+}
+
+function leaveIdea(idea_id, dom_element){
+
+	// show the loading
+	showLoadingScreen();
+
+	// send data to server to be
+	url = "./manage_ideas.php";
+	parameters = "key=leave_idea&idea_id="+idea_id;
+	callback = "leave_idea";
+	connectPOST(url,parameters,callback);
+
+	// save the 'pointer' to the button selected
+	button_selected = dom_element;
+	ideaID = idea_id;
+
+}
+
+function leaveIdeaCallback(response){
+
+	if(response == "ok"){
+
+		// Change style to the button
+		button_selected.innerHTML = "JOIN IDEA";
+		
+		// Update click listener from the button
+		button_selected.setAttribute("onclick","joinIdea('"+ideaID+"',this);");
 	
 	} else {
 

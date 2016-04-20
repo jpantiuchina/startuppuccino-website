@@ -55,6 +55,12 @@
 															 i.id
 													  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
 
+				<?php if ($userLogged){ ?>
+
+	        		<?php $user_ideas = mysqli_fetch_assoc(mysqli_query($dbconn,"SELECT idea_id FROM IdeaAccount WHERE account_id='".$_SESSION['id']."'")); ?>
+
+	        	<?php } ?>
+
 				<section class="list_view">
 
 					<?php
@@ -99,10 +105,14 @@
 
 						        		<?php if ($userLogged){ ?>
 
-						        		<?php //TODO: add check if this user already join the idea ?>
-
 						        			<div class="card__footer center">
-						        				<span class="card__button card__button--full" onclick="joinIdea('<?php print $idea['id']; ?>',this)">JOIN THE IDEA</span>
+						        				
+						        				<?php if(!in_array($idea['id'],$user_ideas)){ ?>
+							        				<span class="card__button card__button--full" onclick="joinIdea('<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+							        			<?php } else { ?>
+							        				<span class="card__button card__button--full" onclick="leaveIdea('<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
+							        			<?php } ?>
+
 						        			</div>
 
 						        		<?php } ?>

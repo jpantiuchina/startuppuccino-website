@@ -56,6 +56,9 @@ function switchCallback(callback, value){
         case "new_idea":
             publishIdeaCallback(value);
             break;
+        case "leave_idea":
+            leaveIdeaCallback(value);
+            break;    
 		case "join_idea":
 			joinIdeaCallback(value);
 			break;

@@ -13,6 +13,9 @@
 			case 'join_idea':
 				$query = "INSERT INTO IdeaAccount (idea_id,account_id,date) VALUE ('".$_POST['idea_id']."','".$_SESSION['id']."',NOW());";
 				break;
+			case 'leave_idea':
+				$query = "DELETE FROM IdeaAccount WHERE idea_id='".$_POST['idea_id']."' AND account_id='".$_SESSION['id']."';";
+				break;
 			case 'new_idea':
 				// TODO: add check for only positive integer values for team_size
 				if(isset($_POST['team_size'])) $team_size = $_POST['team_size'];
