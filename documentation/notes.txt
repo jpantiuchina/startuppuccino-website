@@ -124,3 +124,7 @@ GENERAL NOTES
 	Edit table IdeaAccount to not have redundant entries
 	Mysql: ALTER TABLE `IdeaAccount` ADD UNIQUE (`idea_id`, `account_id`);
 
+21/04/2016
+	
+	Edit table Ideas, added a column current_team_size, to store the current number of members the joined the idea (In order to have less queries).
+	Mysql: ALTER TABLE Ideas ADD COLUMN current_team_size INT(2) NOT NULL DEFAULT '1';

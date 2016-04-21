@@ -2,6 +2,8 @@
 var button_selected;
 var ideaID;
 
+
+// TODO : add check and update on team size when join/leave actions
 function ideaHelper(action, idea_id, dom_element){
 	
 	// show the loading

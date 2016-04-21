@@ -48,6 +48,7 @@
 				<?php $ideas = mysqli_query($dbconn, "SELECT i.title,
 															 i.description,
 															 i.team_size,
+															 i.current_team_size,
 															 i.date,
 															 i.background_pref,
 															 a.firstName, 
@@ -89,16 +90,31 @@
 								        			Owner: <?php print $idea['firstName']." ".$idea['lastName']; ?>
 													- <?php print $idea['date']; ?>
 								        		</span>
-								        		<span>
-								        			Team size: <?php print $idea['team_size']; ?>
-								        		</span>
-								        		
-								        		<?php if (trim($idea['background_pref'])!=""){ ?>
-									        		<span>
-									        			<?php print $idea['background_pref']; ?>
-									        		</span>
-							        			<?php } ?>
 
+								        		<?php if (intval($idea['current_team_size']) < intval($idea['team_size'])){ ?>
+	
+									        		<span>
+									        			Team size: <?php print $idea['current_team_size']."/".$idea['team_size']; ?>
+									        		</span>
+
+									        		<?php if (trim($idea['background_pref'])!=""){ ?>
+										        		<span>
+										        			<?php print $idea['background_pref']; ?>
+										        		</span>
+							        				<?php } ?>
+
+							        				<?php $teamCompleted = false; ?>
+
+								        		<?php } else { ?>
+
+								        			<span>
+								        				Team Completed. Ready to rock!
+								        			</span>
+
+								        			<?php $teamCompleted = true; ?>
+
+								        		<?php } ?>
+								        	
 							        		</div>
 
 							        	</div>
@@ -107,9 +123,9 @@
 
 						        			<div class="card__footer center">
 						        				
-						        				<?php if(!in_array($idea['id'],$user_ideas)){ ?>
+						        				<?php if(!$teamCompleted && !in_array($idea['id'],$user_ideas)){ ?>
 							        				<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
-							        			<?php } else { ?>
+							        			<?php } else if(in_array($idea['id'],$user_ideas)){ ?>
 							        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
 							        			<?php } ?>
 
