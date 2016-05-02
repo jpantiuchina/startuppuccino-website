@@ -2,7 +2,6 @@
 
 	if($ideaID){
 
-
 		$ideas = mysqli_query($dbconn, "SELECT * FROM Ideas WHERE id='" . $ideaID . "' OR title='" . $ideaID . "'");
 
 		if (mysqli_num_rows($ideas) == 1) {
@@ -24,7 +23,6 @@
 			    	</div>
 
 		    	<?php
-
 
 			}
 

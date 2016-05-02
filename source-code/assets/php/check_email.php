@@ -9,7 +9,7 @@
 	if($account_email != ""){
 
 		if(!$dbconn){
-			include 'db_connect.php';
+			require 'db_connect.php';
 		}
 
 		$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM Account WHERE email='" . $account_email . "'");

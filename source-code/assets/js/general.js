@@ -57,10 +57,13 @@ function switchCallback(callback, value){
             publishIdeaCallback(value);
             break;
         case "leave_idea":
-            leaveIdeaCallback(value);
+            ideaHelperCallback("leave", value);
             break;    
 		case "join_idea":
-			joinIdeaCallback(value);
+			ideaHelperCallback("join", value);
 			break;
+        case "idea_teamsize":
+            teamsizeCallback(value);
+            break;
 	}
 }

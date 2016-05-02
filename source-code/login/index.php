@@ -1,6 +1,6 @@
 <?php 
 
-	include '../assets/php/session.php'; 
+	require '../assets/php/session.php'; 
 
 	if ($userLogged) header('Location: ../');
 

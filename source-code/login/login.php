@@ -1,6 +1,6 @@
 <?php
 	
-	include '../assets/php/session.php';
+	require '../assets/php/session.php';
 
 	// default global variable to switch and redirect if login is successful
 	$loginOk = true;
@@ -9,7 +9,7 @@
 		&& ( ($new_account_email != "" && $new_account_password != "") 
 			  || (isset($_POST['login'])) ) ) {
 
-		include '../assets/php/db_connect.php';
+		require '../assets/php/db_connect.php';
 
 
 		// Set the right value to check

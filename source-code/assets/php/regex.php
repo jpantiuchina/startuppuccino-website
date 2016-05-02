@@ -32,14 +32,6 @@
 			return false;
 	}
 
-	function checkmail($input)
-	{
-		if(preg_match("/^[a-zA-Z0-9]+@{1}[a-zA-Z0-9]+\.{1}[a-zA-z]+$/",$input))
-			return true;
-		else
-			return false;
-	}
-
 	function checksearch($input)
 	{
 		if(preg_match("/^[a-zA-Z0-9]*$/",$input))

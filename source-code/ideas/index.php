@@ -1,8 +1,8 @@
 <?php
 
-	include '../assets/php/session.php';
+	require '../assets/php/session.php';
 
-	include '../assets/php/db_connect.php';
+	require '../assets/php/db_connect.php';
 
 ?>
 
@@ -11,7 +11,7 @@
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/ideas.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
 		<title>Ideas - Startuppuccino</title>
@@ -37,15 +37,15 @@
 
 					$ideaID = $_GET['idea_id'];
 
-					include 'idea.php';
+					require 'idea.php';
 
 				?>
 
-			<?php } else { ?>
+			<?php } else {
 
-				<!-- Ideas list -->
+				// Ideas list
 
-				<?php $ideas = mysqli_query($dbconn, "SELECT i.title,
+				$ideas = mysqli_query($dbconn, "SELECT i.title,
 															 i.description,
 															 i.team_size,
 															 i.current_team_size,
@@ -53,14 +53,27 @@
 															 i.background_pref,
 															 a.firstName, 
 															 a.lastName,
-															 i.id
-													  FROM Ideas i, Account a WHERE i.owner_id = a.id"); ?>
+															 i.id,
+															 i.owner_id
+													  FROM Ideas i, Account a WHERE i.owner_id = a.id");
 
-				<?php if ($userLogged){ ?>
+				if ($userLogged){
 
-	        		<?php $user_ideas = mysqli_fetch_assoc(mysqli_query($dbconn,"SELECT idea_id FROM IdeaAccount WHERE account_id='".$_SESSION['id']."'")); ?>
+					// Get the current user ideas ids
+	        		$user_ideas = mysqli_fetch_assoc(mysqli_query($dbconn,"SELECT idea_id FROM IdeaAccount WHERE account_id='".$_SESSION['id']."'"));
 
-	        	<?php } ?>
+	        		// Show the form to create a new Idea
+	        		?>
+	        			<span id="new_idea__button" class="button" onclick="document.getElementById('new_idea__section').style.display='block'">
+	        				NEW IDEA
+	        		  	</span>
+	        		  	<section id="new_idea__section">
+	        		  		<div class="close close--topright" onclick="this.parentNode.style.display='none'"></div>
+	        		  		<?php include 'idea_form.php'; ?>
+	        		  	</section>
+	        		<?php
+
+	        	} ?>
 
 				<section class="list_view">
 
@@ -93,7 +106,7 @@
 
 								        		<?php if (intval($idea['current_team_size']) < intval($idea['team_size'])){ ?>
 	
-									        		<span>
+									        		<span id="team_<?php print $idea['id'];?>" maxteamsize="<?php print $idea['team_size'];?>">
 									        			Team size: <?php print $idea['current_team_size']."/".$idea['team_size']; ?>
 									        		</span>
 
@@ -123,10 +136,22 @@
 
 						        			<div class="card__footer center">
 						        				
-						        				<?php if(!$teamCompleted && !in_array($idea['id'],$user_ideas)){ ?>
+						        				<?php // Case: Idea owner ?>
+						        				<?php if($_SESSION['id'] == $idea['owner_id']){ ?>
+
+						        					<span  class="card__button card__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span>
+						        					<span  class="card__button card__button--full" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
+
+						        				<?php // Case: User not join this idea ?>
+						        				<?php } else if(!$teamCompleted && !in_array($idea['id'],$user_ideas)){ ?>
+
 							        				<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+
+						        				<?php // Case: User not join this idea ?>
 							        			<?php } else if(in_array($idea['id'],$user_ideas)){ ?>
+							        				
 							        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
+							        			
 							        			<?php } ?>
 
 						        			</div>

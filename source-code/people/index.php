@@ -1,8 +1,8 @@
 <?php
 
-	include '../assets/php/session.php';
+	require '../assets/php/session.php';
 
-	include '../assets/php/db_connect.php';
+	require '../assets/php/db_connect.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged) header("Location: ../");

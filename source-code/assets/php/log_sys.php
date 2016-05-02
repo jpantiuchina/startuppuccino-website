@@ -119,42 +119,4 @@ class LogSys
 
 */
 
-
-/* SCRIPT NOT OBJECT ORIENTED STYLE
-
-	// Check if the db connection is working
-	if (!$dbconn){
-		include 'db_connect.php';
-	}
-
-	// Switch between different log targets
-	// to select the right log table
-	switch ($log_target){
-		
-		case 'team':
-			$table = "LogTeam";
-			$values = "";
-			break;
-
-		case 'project':
-			$table = "LogProject";
-			$values = "";
-			break;
-		
-		case 'account':
-			$table = "LogAccount";
-			$values = "";
-			break;
-	
-	}
-
-	$query = "INSERT INTO " . $table . " " . $columns . " VALUES " . $values;
-
-	if (!mysqli_query($dbconn, $query)){
-		// Print log error on browser console
-		echo "<script>console.log('Error: " . $query . " - " . mysqli_error($dbconn) . "');</script>";
-	}
-
-*/
-
 ?>

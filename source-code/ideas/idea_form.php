@@ -1,4 +1,4 @@
-<form class="form_custom form_custom--slim" onsubmit="return publishIdea();">
+<form class="form_custom form_custom--slim" action="#" onsubmit="return publishIdea();">
 
 	<li class="form_box_item">
 		<label for="title">Idea Title</label>

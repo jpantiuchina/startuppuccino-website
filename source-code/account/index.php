@@ -1,8 +1,8 @@
 <?php
 
-	include '../assets/php/session.php';
+	require '../assets/php/session.php';
 
-	include '../assets/php/db_connect.php';
+	require '../assets/php/db_connect.php';
 
 	if(!$userLogged) die("What are you doning here? :(");
 

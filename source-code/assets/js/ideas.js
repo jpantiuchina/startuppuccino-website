@@ -2,8 +2,10 @@
 var button_selected;
 var ideaID;
 
+var team_size_node;
 
-// TODO : add check and update on team size when join/leave actions
+// TODO: Refactor --> use OO for general js and management of callbacks
+
 function ideaHelper(action, idea_id, dom_element){
 	
 	// show the loading
@@ -29,18 +31,39 @@ function ideaHelper(action, idea_id, dom_element){
 	// save temporary the button and idea selected
 	button_selected = dom_element;
 	ideaID = idea_id;
+	team_size_node = document.getElementById("team_"+idea_id);
 
 }
 
-function joinIdeaCallback(response){
+function ideaHelperCallback(action, response){
 
 	if(response == "ok"){
 
-		// Change style to the button
-		button_selected.innerHTML = "LEAVE IDEA";
 
-		// Update click listener from the button
-		button_selected.setAttribute("onclick","ideaHelper('leave','"+ideaID+"',this);");
+		if(action == "join"){
+
+			// Change style to the button
+			button_selected.innerHTML = "LEAVE IDEA";
+
+			// Update click listener from the button
+			button_selected.setAttribute("onclick","ideaHelper('leave','"+ideaID+"',this);");
+
+		} else if (action == "leave"){
+
+			// Change style to the button
+			button_selected.innerHTML = "JOIN IDEA";
+			
+			// Update click listener from the button
+			button_selected.setAttribute("onclick","ideaHelper('join','"+ideaID+"',this);");
+	
+		} else {
+
+			alert("Error js: action not set. "+action);
+
+		}
+
+		// Async update team size
+		connectPOST("./manage_ideas.php","key=teamsize&idea_id="+ideaID,"idea_teamsize");
 	
 	} else {
 
@@ -56,43 +79,27 @@ function joinIdeaCallback(response){
 
 }
 
-function leaveIdeaCallback(response){
+function teamsizeCallback(response){
 
-	if(response == "ok"){
+	max_team_size = team_size_node.getAttribute("maxteamsize");
 
-		// Change style to the button
-		button_selected.innerHTML = "JOIN IDEA";
-		
-		// Update click listener from the button
-		button_selected.setAttribute("onclick","ideaHelper('join','"+ideaID+"',this);");
-	
-	} else {
-
-		alert(response);
-
-	}
-
-	// hide loading screen
-	hideLoadingScreen();
-
-	// Reset variable button_selected;
-	button_selected = null;
+	team_size_node.innerHTML = "Team size: " + (parseInt(response)+1) + "/" + max_team_size; // +1 is the idea owner
 
 }
 
 function publishIdea() {
-	
+
 	// Set parameters
 	title = document.getElementById("idea_form_title").value;
 	team_size = document.getElementById("idea_form_team_size").value;
-	description = document.getElementById("idea_form_description").innerHTML;
+	description = document.getElementById("idea_form_description").value;
 	background_pref = document.getElementById("idea_form_background_pref").value;
 
 	parameters = "key=new_idea";
-	parameters += "title=" + title;
+	parameters += "&title=" + title;
 	parameters += "&team_size=" + team_size;
-	parameters += "&description" + description;
-	parameters += "&background_pref" + background_pref;
+	parameters += "&description=" + description;
+	parameters += "&background_pref=" + background_pref;
 
 	url = "./manage_ideas.php";
 	callback = "new_idea";
@@ -103,6 +110,9 @@ function publishIdea() {
 	// Send post request
 	connectPOST(url,parameters,callback);
 
+	// Prevent the form to reload the page
+	return false;
+
 }
 
 function publishIdeaCallback(response) {
@@ -111,6 +121,8 @@ function publishIdeaCallback(response) {
 		// Hide loader
 		alert("Congrats!");
 		hideLoadingScreen();
+		// Refresh the page
+		location.reload(); 
 	} else {
 		alert(response);
 	}
