@@ -60,7 +60,11 @@
 				if ($userLogged){
 
 					// Get the current user ideas ids
-	        		$user_ideas = mysqli_fetch_assoc(mysqli_query($dbconn,"SELECT idea_id FROM IdeaAccount WHERE account_id='".$_SESSION['id']."'"));
+	        		$user_ideas = [];
+	        		$user_ideas_x = mysqli_query($dbconn,"SELECT idea_id FROM IdeaAccount WHERE account_id='".$_SESSION['id']."';");
+	        		while($i = mysqli_fetch_assoc($user_ideas_x)){
+	        			$user_ideas[] = $i['idea_id'];
+	        		}
 
 	        		// Show the form to create a new Idea
 	        		?>
@@ -104,19 +108,19 @@
 													- <?php print $idea['date']; ?>
 								        		</span>
 
+								        		<span id="team_<?php print $idea['id'];?>" maxteamsize="<?php print $idea['team_size'];?>">
+								        			Team size: <?php print $idea['current_team_size']."/".$idea['team_size']; ?>
+								        		</span>
+
+								        		<?php if (trim($idea['background_pref'])!=""){ ?>
+									        		<span>
+									        			<?php print $idea['background_pref']; ?>
+									        		</span>
+						        				<?php } ?>
+
 								        		<?php if (intval($idea['current_team_size']) < intval($idea['team_size'])){ ?>
 	
-									        		<span id="team_<?php print $idea['id'];?>" maxteamsize="<?php print $idea['team_size'];?>">
-									        			Team size: <?php print $idea['current_team_size']."/".$idea['team_size']; ?>
-									        		</span>
-
-									        		<?php if (trim($idea['background_pref'])!=""){ ?>
-										        		<span>
-										        			<?php print $idea['background_pref']; ?>
-										        		</span>
-							        				<?php } ?>
-
-							        				<?php $teamCompleted = false; ?>
+									        		<?php $teamCompleted = false; ?>
 
 								        		<?php } else { ?>
 
@@ -143,16 +147,19 @@
 						        					<span  class="card__button card__button--full" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
 
 						        				<?php // Case: User not join this idea ?>
-						        				<?php } else if(!$teamCompleted && !in_array($idea['id'],$user_ideas)){ ?>
+						        				<?php // FIX THIS!!!!! WRONG IF ELSE CONDITION ?>
+						        				<?php } else { ?>
 
-							        				<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+						        					<?php if(!in_array($idea['id'],$user_ideas) && !$teamCompleted){ ?>
 
-						        				<?php // Case: User not join this idea ?>
-							        			<?php } else if(in_array($idea['id'],$user_ideas)){ ?>
-							        				
-							        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
-							        			
-							        			<?php } ?>
+							        					<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+
+							        				<?php // Case: User not join this idea ?>
+								        			<?php } else if(in_array($idea['id'],$user_ideas)){ ?>
+								        				
+								        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
+
+							        			<?php } } ?>
 
 						        			</div>
 
