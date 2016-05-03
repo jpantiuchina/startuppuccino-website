@@ -131,3 +131,43 @@
 	background: transparent !important;
 	cursor: default;
 }
+
+/* Listview with horizontal elements */
+
+.line_element {
+	margin: 7px 20px;
+	color: #333;
+	background-color: #fbfbfb;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-size: 0px;
+}
+
+.line_element--header {
+	background-color: #234;
+	color: #fff;
+}
+
+.line_element--fluo {
+	background-color: #ff7;
+}
+
+.line_element__cell {
+	padding: 5px 1%;
+	font-size: 16px;
+	display: inline-block;
+	min-width: 100px;
+	width: 23%;
+	text-align: left;
+}
+
+.line_element__cell--button {
+	cursor: pointer;
+	background-color: #22aa22;
+	color: #fff;
+	text-align: center;
+}
+
+.line_element__cell--button:hover {
+	background-color: #227722;
+}

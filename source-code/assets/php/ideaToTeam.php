@@ -2,6 +2,8 @@
 
 	// TODO: improve the script in order to automatically fix not executed queries and database errors
 
+	require '../../../assets/php/session.php';
+
 	// Check if the current user is an "educator"
 	if($_SESSION['role'] == "educator"){
 
@@ -10,7 +12,7 @@
 			$idea_id = $_POST['idea_id'];
 
 			// connect db
-			require 'db_connect.php';
+			require '../../../assets/php/db_connect.php';
 
 			if($idea_data = mysqli_query($dbconn,"SELECT * FROM Ideas WHERE id='".$idea_id."';")){
 
