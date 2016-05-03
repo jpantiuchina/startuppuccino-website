@@ -147,7 +147,6 @@
 						        					<span  class="card__button card__button--full" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
 
 						        				<?php // Case: User not join this idea ?>
-						        				<?php // FIX THIS!!!!! WRONG IF ELSE CONDITION ?>
 						        				<?php } else { ?>
 
 						        					<?php if(!in_array($idea['id'],$user_ideas) && !$teamCompleted){ ?>
