@@ -65,5 +65,8 @@ function switchCallback(callback, value){
         case "idea_teamsize":
             teamsizeCallback(value);
             break;
+        case "delete_idea":
+            deleteIdeaCallback(value);
+            break;
 	}
 }

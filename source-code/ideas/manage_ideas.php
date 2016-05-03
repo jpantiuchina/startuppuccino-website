@@ -56,6 +56,33 @@
 
 				break;
 			
+			case 'delete_idea':
+				
+				// First check if the current user is truly the idea owner	
+				$owner_check = mysqli_query($dbconn,"SELECT owner_id FROM Ideas WHERE id='".$_POST['idea_id']."';");
+
+				if($owner_check && mysqli_num_rows($owner_check)==1){
+
+					$owner_check_id = mysqli_fetch_assoc($owner_check)['owner_id'];
+					if($owner_check_id == $_SESSION['id']){
+						// The current user is the owner of the idea so we can go on and delete the idea
+						$query = "DELETE FROM Ideas WHERE id='".$_POST['idea_id']."' AND owner_id='".$_SESSION['id']."';";
+						$query .= "DELETE FROM IdeaAccount WHERE idea_id='".$_POST['idea_id']."';";
+
+						if(mysqli_multi_query($dbconn,$query)) $response = "ok";
+						else $response = "Error while deleting the idea ";
+
+					} else {
+						$response = "You are not the idea owner!";
+						// Here add an alert to tell educators someone was trying to break the platform
+					}
+
+				} else {
+					$response = "Something went wrong... are you the owner of this idea?";
+				}
+
+				break;
+
 			default:
 				die("Error, no key match");
 

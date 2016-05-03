@@ -87,6 +87,34 @@ function teamsizeCallback(response){
 
 }
 
+function deleteIdea(idea_id) {
+
+	confirmMessage = "!!! Attention !!!\nAre you sure you want to delete this idea?";
+
+	if (confirm(confirmMessage)){
+		url = "./manage_ideas.php";
+		parameters = "key=delete_idea&idea_id="+idea_id;
+		callback = "delete_idea";
+		connectPOST(url,parameters,callback);
+	}
+
+}
+
+function deleteIdeaCallback(response) {
+	if(response == "ok") {
+		alert("Your idea has been deleted");
+		location.reload();
+	} else {
+		alert(response);
+	}
+}
+
+function updateIdea() {
+
+	
+	
+}
+
 function publishIdea() {
 
 	// Set parameters
