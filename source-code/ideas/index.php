@@ -68,11 +68,11 @@
 
 	        		// Show the form to create a new Idea
 	        		?>
-	        			<span id="new_idea__button" class="button" onclick="document.getElementById('new_idea__section').style.display='block'">
+	        			<span id="new_idea__button" class="button" onclick="showIdeaForm()">
 	        				NEW IDEA
 	        		  	</span>
 	        		  	<section id="new_idea__section">
-	        		  		<div class="close close--topright" onclick="this.parentNode.style.display='none'"></div>
+	        		  		<div class="close close--topright" onclick="hideIdeaForm()"></div>
 	        		  		<?php include 'idea_form.php'; ?>
 	        		  	</section>
 	        		<?php
@@ -143,7 +143,7 @@
 						        				<?php // Case: Idea owner ?>
 						        				<?php if($_SESSION['id'] == $idea['owner_id']){ ?>
 
-						        					<span  class="card__button card__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span>
+						        					<!--<span  class="card__button card__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span> -->
 						        					<span  class="card__button card__button--full" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
 
 						        				<?php // Case: User not join this idea ?>

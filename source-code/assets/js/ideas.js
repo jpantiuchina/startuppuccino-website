@@ -6,6 +6,14 @@ var team_size_node;
 
 // TODO: Refactor --> use OO for general js and management of callbacks
 
+function showIdeaForm(){
+	document.getElementById("new_idea__section").style.display = "block";
+}
+
+function hideIdeaForm(){
+	document.getElementById("new_idea__section").style.display = "none";
+}
+
 function ideaHelper(action, idea_id, dom_element){
 	
 	// show the loading
@@ -110,9 +118,16 @@ function deleteIdeaCallback(response) {
 }
 
 function updateIdea() {
+	// ... still to  implement
+}
 
-	
-	
+function updateIdeaCallback(response){
+	if(response == "ok") {
+		alert("Your idea has been updated");
+		location.reload();
+	} else {
+		alert(response);
+	}	
 }
 
 function publishIdea() {

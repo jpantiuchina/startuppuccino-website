@@ -68,5 +68,8 @@ function switchCallback(callback, value){
         case "delete_idea":
             deleteIdeaCallback(value);
             break;
+        case "update_idea":
+            updateIdeaCallback(value);
+            break;
 	}
 }
