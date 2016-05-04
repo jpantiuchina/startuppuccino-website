@@ -24,7 +24,7 @@
 
 		<?php 
 
-			// TODO: improve security!!! Check if the user is 
+			// TODO: improve security!!!
 
 			// Check if post data have been submited to be store
 			if(isset($_POST['submit_project'])){
@@ -71,6 +71,10 @@
 									<a href="./?team_id=<?php echo $_POST['team_id']; ?>">Back to your team</a>
 
 								<?php
+
+							} else if(mysqli_affected_rows($dbconn)<1){
+
+								echo "Something went wrong, please try again.";
 
 							} else {
 

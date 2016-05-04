@@ -121,6 +121,10 @@
 					<span class="button button--big"><a href="./edit_project.php?project_id=<?php echo $project_id;?>">Edit Project</a></span>
 				</section>
 
+				<section class="center custom_padding--20">
+					<span class="button button--big"><a href="./edit_team.php?team_id=<?php echo $teamID;?>">Edit Team</a></span>
+				</section>
+
 			<?php } // endif isMyTeam
 
 		} else {
