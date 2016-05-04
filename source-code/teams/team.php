@@ -5,7 +5,6 @@
 		// default variable
 		$isMyTeam = false;
 
-
 		$teams = mysqli_query($dbconn, "SELECT * FROM Teams WHERE id='" . $teamID . "' OR name='" . $teamID . "'");
 
 		if (mysqli_num_rows($teams) == 1) {
@@ -16,19 +15,23 @@
 
 		    		<!-- Temp html layout -->
 
-		    		<div style="text-align: center;">
+		    		<div style="max-width: 550px;margin: auto">
 
-			    		<h3><?php print $team['name']; ?></h3>
+			    		<h2><?php print $team['name']; ?></h2>
 
+			    		<?php 
+			    			// Team mentor not yet implemented 
+			    			// Add mentor field in Teams database
+			    		?>
 			    		<?php if(trim($team['mentor']) != ""){ ?>
 
-			    			<h5>MENTOR</h5>
+			    			<h4>MENTOR</h4>
 
 				    		<p><?php print $team['mentor']; ?></p>
 				    	
 				    	<?php } ?>
 
-			    		<h5>MEMBERS</h5>
+			    		<h4>MEMBERS</h4>
 
 
 			    		<?php // list all the members
@@ -46,12 +49,10 @@
 				    			
 				    			?>
 
-				    				<li>
-				    					<a href="../people/?user_id=<?php print $member['id']; ?>">
-				    						<?php print $member['firstName'] . " " . $member['lastName']; ?>
-				    					</a>
-				    					<p><?php print $member['background']; ?></p>
-				    				</li>
+				    				<div>
+				    					<a href="../people/?user_id=<?php print $member['id']; ?>"><?php print $member['firstName'] . " " . $member['lastName']; ?></a>
+				    					<span> <?php print $member['background']; ?></span>
+				    				</div>
 
 				    			<?php
 
@@ -67,7 +68,7 @@
 
 
 
-				    	<h5>PROJECT</h5>
+				    	<h4>PROJECT</h4>
 
 
 			    		<?php // project details
@@ -84,10 +85,10 @@
 					    			
 					    			?>
 
-					    				<h5><?php print $project['title']; ?></h5>
-					    				<p><?php print $project['description']; ?></p>
-					    				<h6><?php print $project['vision']; ?></h6>
-					    				<p>Last Pivot: <?php print $project['updated_date']; ?></p>
+					    				<div>Title: <?php print $project['title']; ?></div>
+					    				<div>Description: <?php print $project['description']; ?></div>
+					    				<div>Vision: <?php print $project['vision']; ?></div>
+					    				<div>Last Pivot: <?php print $project['updated_date']; ?></div>
 
 					    			<?php
 
