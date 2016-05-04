@@ -95,25 +95,5 @@
 
 		<?php include '../assets/php/footer.php'; ?>
 
-		<script type="text/javascript">
-
-			function showSection(target){
-				
-				elem = document.getElementById(target);
-
-				elem.classList.remove("hidden_element");
-
-			}
-
-			function hideSection(target){
-
-				elem = document.getElementById(target);
-
-				elem.classList.add("hidden_element");
-
-			}
-
-		</script>
-
 	</body>
 </html>

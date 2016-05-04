@@ -1,3 +1,7 @@
 #edit_project {
-	background-color: #567
+	background-color: #567;
+}
+
+.card__details--project {
+	padding: 7px;
 }

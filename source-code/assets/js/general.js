@@ -76,3 +76,14 @@ function switchCallback(callback, value){
             break;
 	}
 }
+
+
+// Helpers to easily hide or show sections
+function showSection(target){
+    elem = document.getElementById(target);
+    elem.classList.remove("hidden_element");
+}
+function hideSection(target){
+    elem = document.getElementById(target);
+    elem.classList.add("hidden_element");
+}

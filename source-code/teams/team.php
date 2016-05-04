@@ -79,6 +79,8 @@
 				    		if (mysqli_num_rows($projects) == 1) {
 
 					    		foreach ($projects as $project) {
+
+					    			$project_id = $project['id'];
 					    			
 					    			?>
 
@@ -112,18 +114,11 @@
 
 			}
 
-			
+			// Boolean set in the member listing above
 			if ($isMyTeam){	?>
 
 				<section class="center custom_padding--20">
-					<span class="button button--big" onclick="showSection('edit_project')">Edit Project</span>
-				</section>
-
-				<section id="edit_project" class="hidden_element full_screen">
-				
-					<div class="close close--topright" onclick="hideSection('edit_project');"></div>
-					<?php include 'project_form.php'; ?>
-
+					<span class="button button--big"><a href="./edit_project.php?project_id=<?php echo $project_id;?>">Edit Project</a></span>
 				</section>
 
 			<?php } // endif isMyTeam
