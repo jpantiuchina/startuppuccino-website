@@ -31,16 +31,19 @@
 
 				// Check if there are all the required parameters before continue
 				if(isset($_POST['submit_team'])){
-					$name = ""; $team_id = "";
+					$name = "";
 					if(isset($_POST['name'])) $name = $_POST['name'];
-					if(isset($_POST['team_id'])) $team_id = $_POST['team_id'];
-					if($name == "" || $team_id == "") die("Some parameters were missing.");
+					if($name == "") die("Some parameters were missing.");
 				}
+				$team_id = "";
+				if(isset($_POST['team_id'])) $team_id = $_POST['team_id'];
+				if($team_id == "") die("Some parameters were missing.");
 
 				// Check if the the user is a member of the selected team
 				$query = "SELECT team.id, team.name
 						  FROM TeamAccount ta, Teams team
 						  WHERE ta.account_id='".$_SESSION['id']."'
+						  AND ta.team_id='".$team_id."'
 						  AND ta.team_id=team.id";
 
 				if($result = mysqli_query($dbconn,$query)){
@@ -147,6 +150,7 @@
 					$query = "SELECT team.id, team.name
 							  FROM TeamAccount ta, Teams team
 							  WHERE ta.account_id='".$_SESSION['id']."'
+							  AND ta.team_id='".$_GET['team_id']."'
 							  AND ta.team_id=team.id";
 
 					if($result = mysqli_query($dbconn,$query)){
