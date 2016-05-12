@@ -128,3 +128,16 @@ GENERAL NOTES
 	
 	Edit table Ideas, added a column current_team_size, to store the current number of members the joined the idea (In order to have less queries).
 	Mysql: ALTER TABLE Ideas ADD COLUMN current_team_size INT(2) NOT NULL DEFAULT '1';
+
+12/05/2016
+	
+	Create a table to store the projects milestones/goals
+	CREATE TABLE ProjectMilestones
+	(
+		project_id INT(11) NOT NULL PRIMARY KEY,
+		goal1 DATE,
+		goal2 DATE,
+		goal3 DATE,
+		goal4 DATE,
+		goal5 DATE
+	);

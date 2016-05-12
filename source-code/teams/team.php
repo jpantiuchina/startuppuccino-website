@@ -85,10 +85,10 @@
 					    			
 					    			?>
 
-					    				<div>Title: <?php print $project['title']; ?></div>
-					    				<div>Description: <?php print $project['description']; ?></div>
-					    				<div>Vision: <?php print $project['vision']; ?></div>
-					    				<div>Last Pivot: <?php print $project['updated_date']; ?></div>
+					    				<div><b>Title: </b><?php print $project['title']; ?></div>
+					    				<div><b>Description: </b><?php print $project['description']; ?></div>
+					    				<div><b>Vision: </b><?php print $project['vision']; ?></div>
+					    				<div><b>Last Pivot: </b><?php print $project['updated_date']; ?></div>
 
 					    			<?php
 
@@ -102,16 +102,13 @@
 
 				    	?>
 
+				    	<h4>PROJECT STATUS</h4>
 
-
+				    	<?php include 'project_status.php'; ?>				    	
 
 			    	</div>
 
 		    	<?php
-
-
-		    	// here add the query to AccountProject table and get project members
-		    	// ...
 
 			}
 
