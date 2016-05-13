@@ -102,9 +102,12 @@
 
 				    	?>
 
-				    	<h4>PROJECT STATUS</h4>
+					    <?php 
 
-				    	<?php include 'project_status.php'; ?>				    	
+					    	// PROJECT STATUS
+					    	include 'project_status.php'; 
+
+					    ?>				    	
 
 			    	</div>
 

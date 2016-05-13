@@ -12,6 +12,7 @@
 | TeamAccount              |
 | Teams                    |
 | ProjectMilestones        |
+| Milestones               |
 +--------------------------+
 
 Account
@@ -86,13 +87,18 @@ Teams
 +-------+-------------+------+-----+---------+----------------+
 
 ProjectMilestones
-+------------+---------+------+-----+---------+-------+
-| Field      | Type    | Null | Key | Default | Extra |
-+------------+---------+------+-----+---------+-------+
-| project_id | int(11) | NO   | PRI | NULL    |       |
-| goal1      | date    | YES  |     | NULL    |       |
-| goal2      | date    | YES  |     | NULL    |       |
-| goal3      | date    | YES  |     | NULL    |       |
-| goal4      | date    | YES  |     | NULL    |       |
-| goal5      | date    | YES  |     | NULL    |       |
-+------------+---------+------+-----+---------+-------+
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| project_id   | int(11) | NO   | PRI | NULL    |       |
+| milestone_id | int(11) | NO   | PRI | NULL    |       |
+| update_date  | date    | NO   |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+
+Milestones
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(63) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+

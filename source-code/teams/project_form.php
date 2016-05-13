@@ -22,6 +22,24 @@ if(count($project_data)>1){
 				<textarea class="form_pretty_general_input" name="description" /><?php echo $project_data['description'];?></textarea>
 			</li>
 
+			<?php // Project Status ?>
+
+			<?php if(count($milestones_data)>0){ ?>
+
+			<li class="form_box_item">
+
+				<label>Project Milestones</label>
+
+				<?php foreach($milestones_data as $id => $milestone){ ?>
+
+				<label><input type="checkbox" name="milestones[]" <?php if($milestone['date']!="")echo "disabled='disabled' checked='checked'";?> value="<?php echo $id?>"><?php echo $milestone['name']." ".$milestone['date']; ?></label>
+
+				<?php } ?>
+
+			</li>
+
+			<?php } // End project status ?>
+
 			<input type="hidden" name="project_id" value="<?php echo $project_data['id'];?>" />
 			<input type="hidden" name="team_id" value="<?php echo $project_data['team_id'];?>" />
 

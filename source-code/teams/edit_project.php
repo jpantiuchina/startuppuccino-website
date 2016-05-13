@@ -20,80 +20,76 @@
 	</head>
 	<body>
 		
+		<?php 
+
+			// Define the project selected
+			$project_id = "";
+			if(isset($_POST['project_id']))	$project_id = $_POST['project_id'];
+			else if (isset($_GET['project_id'])) $project_id = $_GET['project_id'];
+
+			// Include the project functions
+			require_once '../assets/php/Project_Functions.php';
+			$project_func = new Project_Functions($_SESSION['id'],$project_id);
+
+		?>
+
+
 		<?php include '../assets/php/header.php'; ?>
 
 		<?php 
 
-			// TODO: improve security!!!
-
 			// Check if post data have been submited to be store
 			if(isset($_POST['submit_project'])){
 
-				// Project form have been submited
+				// Project form have been submitted
 				
-				$title = ""; $description = ""; $vision = "";
+				// Collect all the inputs
+				$title = ""; $description = ""; $vision = ""; $milestones = [];
 				if(isset($_POST['title'])) $title = $_POST['title'];
 				if(isset($_POST['description'])) $description = $_POST['description'];
 				if(isset($_POST['vision'])) $vision = $_POST['vision'];
-				if(isset($_POST['project_id'])) $project_id = $_POST['project_id'];
+				if(isset($_POST['milestones'])) $milestones = $_POST['milestones'];
 
-				// Check if the project_id is set and user is has the rights to edit it
-				// TODO: Improve --> same code copied below
-				$query = "SELECT p.id 
-							  FROM TeamAccount ta, Project p, Teams team
-							  WHERE ta.account_id='".$_SESSION['id']."'
-							  AND p.id='".$project_id."'
-							  AND ta.team_id=team.id
-							  AND p.team_id=team.id";
+				// Check if title is empty (The project title cannot be empty)
+				if(trim($title)=="") die("The project title cannot be empty!");
 
-				if($result = mysqli_query($dbconn,$query)){
+				// Check if the user has the rights to edit the project
+				if($project_data = $project_func->userProjectRights()) {
 
-					if(mysqli_num_rows($result)==1){
+					if($project_data_updated = $project_func->updateProject($title,$description,$vision)) {
 
-						// Check if title is empty (The project title cannot be empty)
-						if(trim($title)=="") die("The project title cannot be empty!");
+						$project_data = $project_data_updated;
 
-						// Update data in the database				
-						$query = "UPDATE Project 
-								  SET updated_date=NOW(),
-								  	  title='".$title."',
-								  	  description='".$description."',
-								  	  vision='".$vision."'
-								  WHERE id='".$project_id."'";
+						?>
 
-						if($result = mysqli_query($dbconn,$query)){
+							<h5>Project Updated</h5>
+							<a href="./?team_id=<?php echo $_POST['team_id']; ?>">Back to your team</a>
 
-							if(mysqli_affected_rows($dbconn)==1){
-
-								?>
-
-									<h5>Project Updated</h5>
-									<a href="./?team_id=<?php echo $_POST['team_id']; ?>">Back to your team</a>
-
-								<?php
-
-							} else if(mysqli_affected_rows($dbconn)<1){
-
-								echo "Something went wrong, please try again.";
-
-							} else {
-
-								echo "These data are equals to the current data, you do not needed to do this ;)";
-								?> <a href="./?team_id=<?php echo $_POST['team_id']; ?>">Back to your team</a> <?php
-
-							}
-
-						} else {
-
-							echo "Something went wrong.";
-
-						}
+						<?php
 
 					} else {
 
-						echo "This is not your team project, you cannot edit it.";
+						echo "Something went wrong, project details have not been updated.<br>";
 
 					}
+
+					if($milestones_data = $project_func->addMilestones($milestones)) {
+
+						?>
+
+							<h5>Milestones Updated</h5>
+							<a href="./?team_id=<?php echo $_POST['team_id']; ?>">Back to your team</a>
+
+						<?php
+
+					} else {
+
+						echo "Something went wrong, milestones have not been updated.<br>";
+
+					}
+
+					// Now show the project form
+					require 'project_form.php';
 
 				} else {
 
@@ -107,35 +103,24 @@
 				// Check if a project was selected
 				if(isset($_GET['project_id'])){
 
-					// Check if the the user is a member of the selected project
-					$query = "SELECT p.id, p.title, p.description, p.vision, p.team_id
-							  FROM TeamAccount ta, Project p, Teams team
-							  WHERE ta.account_id='".$_SESSION['id']."'
-							  AND p.id='".$_GET['project_id']."'
-							  AND ta.team_id=team.id
-							  AND p.team_id=team.id";
+					// Check if the user has the rights to edit the project
+					if($project_data = $project_func->userProjectRights()){
 
-					if($result = mysqli_query($dbconn,$query)){
+						// Get current project milestones
+						if(!$milestones_data = $project_func->currentProjectMilestones()){
 
-						if(mysqli_num_rows($result)==1){
-
-							$project_data = mysqli_fetch_assoc($result);
-
-							// Now show the project form
-							require 'project_form.php';
-
-						} else {
-
-							echo "This is not your team project, you cannot edit it.";
+							echo "Error while reading the current milestones.";
 
 						}
+
+						// Now show the project form
+						require 'project_form.php';
 
 					} else {
 
 						echo "Something went wrong, maybe this is the wrong project!";
 
 					}
-
 
 				} else {
 
