@@ -39,7 +39,7 @@ class People_Functions {
 
       // There must be only one row result
       if ($result->num_rows == 1) {
-          
+
           return $result->fetch_assoc();
       
       } else {
@@ -47,6 +47,13 @@ class People_Functions {
           return NULL;
       }
 
+    }
+
+    /**
+     * Check if the person is the logged user
+     */
+    public function isMyProfile() {
+      return $this->account_id == $this->person_id;
     }
 
     /**

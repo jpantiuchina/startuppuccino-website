@@ -47,7 +47,12 @@
 		        echo "<img src='../assets/pics/" . $person["avatar"] . "' />";
 		        echo $person["email"] . "<br>";
 		        echo $person["about"] . "<br>";
-			
+				
+				// Check if we are looking at our profile
+		        if($people_func->isMyProfile()) {
+		        	echo "<div class='button button--big'><a href='./account/'>Edit Profile</a></div>";
+		        }
+
 			} else {
 			    echo "Nobody is here!";
 			}
