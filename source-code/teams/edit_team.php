@@ -2,8 +2,6 @@
 
 	require '../assets/php/session.php';
 
-	require '../assets/php/db_connect.php';
-
 	// Redirect to home if user is not logged
 	if(!$userLogged) header("Location: ../");
 

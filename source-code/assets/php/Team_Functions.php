@@ -22,6 +22,34 @@ class Team_Functions {
  
 
     /**
+     * Get all teams
+     */
+    public function getAllTeams() {
+      
+      $query = "SELECT * FROM Teams;";
+
+      $result = $this->conn->query($query);
+
+      if ($result->num_rows > 0){
+
+        // Store all teams in an array
+        while ($team = $result->fetch_assoc()){
+          $teams[] = $team;
+        }
+
+        // Return all the teams info
+        return $teams;
+
+      } else {
+
+        // No teams found
+        return NULL;
+
+      }
+
+    }
+
+    /**
      * Get the info of the specific team
      */
     public function getTeamInfo() {

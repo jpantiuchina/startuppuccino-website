@@ -2,10 +2,12 @@
 
 	require '../assets/php/session.php';
 
-	require '../assets/php/db_connect.php';
-
 	// Redirect to home if user is not logged
 	if(!$userLogged) header("Location: ../");
+
+	// Include and Initialize People Functions
+	require_once '../assets/php/People_Functions.php';
+	$people_func = new People_Functions($_SESSION['id']);
 
 ?>
 
@@ -24,43 +26,37 @@
 		<?php include '../assets/php/header.php'; ?>
 
 		<?php
-			 /* If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
-			 links like ../people/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
-			 then the user details are diplayed instead of the list of users and mentors */
-		?>
+			
+			/* If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
+			links like ../people/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
+			then the user details are diplayed instead of the list of users and mentors */
+		
 
-		<?php if (isset($_GET['user_id'])){ ?>
+		if (isset($_GET['user_id'])){
 
-			<!-- User profile details -->
+			// User profile details
 
-			<?php $profile_view = mysqli_query($dbconn, "SELECT about, avatar, background, email, firstname, lastname, role FROM Account WHERE id='" . $_GET['user_id'] . "' "); ?>
+			// Set the account_id of the person to show
+			$people_func->setPerson($_GET['user_id']);
 
-			<?php
+			// Get the person info
+			if ($person = $people_func->getPersonInfo()) {
 
-				if (mysqli_num_rows($profile_view) == 1) {
+		        echo $person["firstname"] . " " . $person["lastname"] . "<br>";
+		        echo $person["role"] . "<br>";
+		        echo "<img src='../assets/pics/" . $person["avatar"] . "' />";
+		        echo $person["email"] . "<br>";
+		        echo $person["about"] . "<br>";
+			
+			} else {
+			    echo "Nobody is here!";
+			}
 
-				    while($row = mysqli_fetch_assoc($profile_view)) {
-					    echo $row["firstname"] . " " . $row["lastname"] . "<br>";
-				        echo $row["role"] . "<br>";
-				        echo "<img src='../assets/pics/" . $row["avatar"] . "' />";
-				        echo $row["email"] . "<br>";
-				        echo $row["about"] . "<br>";
-				    }
+		} else {
 
-				} else {
-				    echo "Nobody is here!";
-				}
-
-				mysqli_close($dbconn);
+			// People list
 
 			?>
-
-
-		<?php } else { ?>
-
-			<!-- People list -->
-
-			<?php $people = mysqli_query($dbconn, "SELECT id, firstname, lastname, avatar, background, role FROM Account"); ?>
 
 			<!-- Display filter for only students|mentors -->
 			<div class="filter_menu filter_menu--people">
@@ -74,9 +70,7 @@
 
 				<?php
 
-					if (mysqli_num_rows($people) > 0){
-
-						//echo mysqli_num_rows($people);
+					if ($people = $people_func->getAllPeople()){
 
 						foreach ($people as $person){
 						
@@ -125,8 +119,6 @@
 					} else {
 					    echo "Nobody is here!";
 					}
-
-					mysqli_close($dbconn);
 
 				?>
 

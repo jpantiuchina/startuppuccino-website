@@ -37,4 +37,3 @@ Found a bug or a mistake? Please tell me: Jevgenija.Pantiuchina@unibz.it.';
 
 	</body>
 </html>
-

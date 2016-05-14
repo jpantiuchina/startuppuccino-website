@@ -2,8 +2,6 @@
 
 	include '../assets/php/session.php';
 
-	include '../assets/php/db_connect.php';
-
 	// Redirect to home if user is not logged
 	if(!$userLogged) header("Location: ../");
 
@@ -29,6 +27,7 @@
 
 
 		<?php
+
 			/* If isset the get parameter 'team_id' ( ../index.php?team_id=xxxx )
 			links like ../teams/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
 			then the team details are diplayed instead of the list of teams */
@@ -47,51 +46,49 @@
 				// Instantiate the Team Functions (without addressing any specific team)
 				$team_func = new Team_Functions($_SESSION['id'],NULL);
 
-				$teams = mysqli_query($dbconn, "SELECT * FROM Teams");
+			?>
 
-		?>
+				<section class="list_view">
 
-			<section class="list_view">
+					<?php
 
-				<?php
+						if ($teams = $team_func->getAllTeams()){
 
-					if (mysqli_num_rows($teams) > 0){
+							foreach ($teams as $team){
+							
+						        ?>
 
-						//echo mysqli_num_rows($teams);
+						        	<div class="card">
 
-						foreach ($teams as $team){
-						
-					        ?>
-
-					        	<div class="card">
-
-					        		<div class="card__details card__details--project">
-						        		<a href="./?team_id=<?php print $team['id']; ?>">
+						        		<div class="card__details card__details--project">
+							        		<a href="./?team_id=<?php print $team['id']; ?>">
+								        		
+								        		<span class="card__details_name">
+								        			<?php print $team['name']; ?>
+								        		</span>
 							        		
-							        		<span class="card__details_name">
-							        			<?php print $team['name']; ?>
-							        		</span>
-						        		
-						        		</a>
+							        		</a>
+							        	</div>
+
 						        	</div>
 
-					        	</div>
+						        <?php
 
-					        <?php
+						    }
 
-					    }
+						} else {
+						    echo "No Teams here!";
+						}
 
-					} else {
-					    echo "No Teams here!";
-					}
+					?>
 
-					mysqli_close($dbconn);
+				</section>
 
-				?>
+			<?php
 
-			</section>
+			} // endif switch all users list or single user details
 
-		<?php } // endif switch all users list or single user details ?>
+			?>
 
 		<?php include '../assets/php/footer.php'; ?>
 
