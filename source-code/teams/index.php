@@ -7,6 +7,9 @@
 	// Redirect to home if user is not logged
 	if(!$userLogged) header("Location: ../");
 
+	// Include the Team Functions
+	require_once '../assets/php/Team_Functions.php';			
+
 ?>
 
 <!DOCTYPE html>
@@ -26,30 +29,27 @@
 
 
 		<?php
-			 /* If isset the get parameter 'team_id' ( ../index.php?team_id=xxxx )
-			 links like ../projects/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
-			 then the project details are diplayed instead of the list of projects */
+			/* If isset the get parameter 'team_id' ( ../index.php?team_id=xxxx )
+			links like ../teams/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
+			then the team details are diplayed instead of the list of teams */
+
+			if(isset($_GET['team_id'])){
+
+				// Show one team details
+
+				$team_id = $_GET['team_id'];
+				require 'team.php';
+
+			} else {
+
+				// Show all teams
+
+				// Instantiate the Team Functions (without addressing any specific team)
+				$team_func = new Team_Functions($_SESSION['id'],NULL);
+
+				$teams = mysqli_query($dbconn, "SELECT * FROM Teams");
+
 		?>
-
-		<?php if (isset($_GET['team_id'])){ ?>
-
-			<!-- Project details -->
-
-			<?php
-
-				$teamID = $_GET['team_id'];
-
-				include 'team.php';
-
-			?>
-
-		<?php } else { ?>
-
-			<!-- Projects list -->
-
-			<?php $teams = mysqli_query($dbconn, "SELECT * FROM Teams"); ?>
-
-			<br><br>
 
 			<section class="list_view">
 
