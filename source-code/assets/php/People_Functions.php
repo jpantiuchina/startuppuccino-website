@@ -84,6 +84,61 @@ class People_Functions {
 
     }
 
+    /**
+     * Update Account Data
+     */
+    public function updateAccount($email,$firstname,$lastname,$background,$role,$about) {
+      
+      // Should be better here to doublecheck if some parameters is empty (not required now)
+
+      $query = "UPDATE Account SET
+                      email='".$email."',
+                      firstname='".$firstname."',
+                      lastname='".$lastname."',
+                      background='".$background."',
+                      role='".$role."',
+                      about='".$about."' 
+                      WHERE id='".$this->account_id."';";
+
+      $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+
+        return true;
+
+      } else {
+
+        return false;
+
+      }
+
+    }
+
+
+
+    /**
+     * Update User Password
+     */
+    public function updatePassword($old_password,$new_password) {
+        
+      if ($old_password != $new_password || $new_password != "") {
+
+        $query = "UPDATE Account SET password='".md5($new_password)."' WHERE id='".$this->account_id."' AND password='".md5($old_password)."';";
+
+        $this->conn->query($query);
+
+        if ($this->conn->affected_rows == 1) {
+
+          return true;
+
+        }
+      
+      }
+
+      return false;
+
+    }
+
 }
 
 ?>
