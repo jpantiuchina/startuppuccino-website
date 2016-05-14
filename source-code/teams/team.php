@@ -15,7 +15,7 @@
 
 		    		<!-- Temp html layout -->
 
-		    		<div style="max-width: 550px;margin: auto">
+		    		<div style="max-width: 600px;margin: auto">
 
 			    		<h2><?php print $team['name']; ?></h2>
 

@@ -2,75 +2,55 @@
 
 	if($project_id != ""){
 
-		$chart_data = [];
+		// Initialize Project Functions
+		// Include the project functions
+		require_once '../assets/php/Project_Functions.php';
+		$project_func = new Project_Functions($_SESSION['id'],$project_id);
 
-		// Store all the milestones in the array
-		$query = "SELECT name FROM Milestones";
-		$result = mysqli_query($dbconn,$query);
-		while($row = mysqli_fetch_assoc($result)){
-			$chart_data[$row['name']] = "";
-		}
+		$chart_data = $project_func->currentProjectMilestones();
 
-		$query = "SELECT m.name, pm.update_date
-				  FROM ProjectMilestones pm, Milestones m
-				  WHERE pm.project_id='".$project_id."'
-				  AND m.id = pm.milestone_id";
-		
-		if($result = mysqli_query($dbconn,$query)){
+		if($chart_data && count($chart_data)>1){
 
-			// Insert into data[] all the milestones reached
-			while($row = mysqli_fetch_assoc($result)){
-				$chart_data[$row['name']] = $row['update_date'];
-			}
+			// Print out the milestones project chart
+			?>
 
-			if(count($chart_data)>1){
+				<h4>PROJECT STATUS</h4>
 
-				// Print out the chart with reached milestones all the milestones
-				?>
+				<div class="project_chart">
 
-					<h4>PROJECT STATUS</h4>
+					<div class="milestone_wrapper">
 
-					<div class="project_chart">
+					<?php foreach($chart_data as $milestone_id => $milestone){ ?>
 
-						<div class="milestone_wrapper">
+						<div class="milestone">
+								
+							<span class="milestone__label"><?php echo $milestone['name']; ?></span>
+							<span class="milestone__date"><?php echo $milestone['date']; ?></span>
 
-						<?php foreach($chart_data as $milestone => $date){ ?>
+							<?php if($milestone['date'] != null){ ?>
 
-							<div class="milestone">
-									
-								<span class="milestone__label"><?php echo $milestone; ?></span>
-								<span class="milestone__date"><?php echo $date; ?></span>
+							<div class="milestone__dot"></div>
 
-								<?php if($date != null){ ?>
-
-								<div class="milestone__dot"></div>
-
-								<?php } ?>
-
-							</div>
-
-						<?php } ?>
+							<?php } ?>
 
 						</div>
 
-						<div class="project_chart__line">
-							<hr />
-							<div class="project_chart__line__arrow"></div>
-						</div>
+					<?php } ?>
 
 					</div>
 
-				<?
+					<div class="project_chart__line">
+						<hr />
+						<div class="project_chart__line__arrow"></div>
+					</div>
 
-			} else {
+				</div>
 
-				// We do not have the right data so we do not print out the chart
-
-			}
+			<?
 
 		} else {
 
-			echo "No result from query";
+			// We do not have the right data so we do not print out the chart
 
 		}
 
