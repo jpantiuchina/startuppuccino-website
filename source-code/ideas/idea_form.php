@@ -7,13 +7,12 @@
 
 	<li class="form_box_item">
 		<label for="team_size">Team Size</label>
-		<input class="form_pretty_general_input" id="idea_form_team_size" type="number" min="2" step="1" name="team_size" />
+		<input class="form_pretty_general_input" id="idea_form_team_size" type="number" min="2" step="1" name="team_size" required/>
 	</li>
 	
 	<li class="form_box_item">
 		<label for="description">Description</label>
-		<textarea class="form_pretty_general_input" id="idea_form_description" name="description" />
-		</textarea>
+		<textarea class="form_pretty_general_input" id="idea_form_description" maxlength="140" name="description" required/></textarea>
 	</li>
 	
 	<li class="form_box_item">

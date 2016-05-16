@@ -39,12 +39,10 @@ class Ideas_Functions {
         // Return the array
         return $ideas;
 
-      } else {
-
-        // No people found
-        return NULL;
-
       }
+      
+      // No people found
+      return NULL;
 
     }
 
@@ -97,12 +95,10 @@ class Ideas_Functions {
         // Return all ideas
         return $ideas;
 
-      } else {
-
-        // No ideas found
-        return NULL;
-
       }
+      
+      // No ideas found
+      return NULL;
 
     }
 
@@ -114,6 +110,191 @@ class Ideas_Functions {
       // Should be better here to doublecheck if some parameters is empty (not required now)
 
       // ...
+
+    }
+
+    /**
+     * Join Idea
+     */
+    public function joinIdea() {
+      
+      $query = "INSERT INTO IdeaAccount (idea_id,account_id,date) VALUE ('".$this->idea_id."','".$this->account_id."',NOW());";
+      $query .= "UPDATE Ideas SET current_team_size = current_team_size + 1 WHERE id=".$this->idea_id.";";
+
+      if($this->conn->multi_query($query)){
+
+        // Count the number of affected rows
+        $i = 0;
+        do {
+            $i += $this->conn->affected_rows;
+        } while($this->conn->next_result());
+        
+        if($i == 2) return "ok";
+        else return "Error, not all the query have been executed $i";
+
+      }
+      
+      return "Error";
+
+    }
+
+    /**
+     * Leave Idea
+     */
+    public function leaveIdea() {
+      
+      // The idea owner cannot leave the idea
+      if($this->account_id == $this->ideaOwnerID()) {
+        return "You are the owner! You cannot leave the idea.";
+      }
+
+      $query = "DELETE FROM IdeaAccount WHERE idea_id='".$this->idea_id."' AND account_id='".$this->account_id."';";
+      $query .= "UPDATE Ideas SET current_team_size = current_team_size - 1 WHERE id=".$this->idea_id.";";
+
+      if($this->conn->multi_query($query)){
+
+        // Count the number of affected rows
+        $i = 0;
+        do {
+            $i += $this->conn->affected_rows;
+        } while($this->conn->next_result());
+        
+        if($i == 2) return "ok";
+        else return "Error, not all the query have been executed $i";
+
+      }
+
+      return "Error";
+
+    }
+
+    /**
+     * Get the selected idea owner
+     */
+    private function ideaOwnerID() {
+      
+      $query = "SELECT owner_id FROM Ideas WHERE id='".$this->idea_id."';";
+        
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0){
+
+        return $result->fetch_assoc()['owner_id'];
+
+      }
+
+      return NULL;
+
+    }
+
+    /**
+     * Get team size
+     */
+    public function getTeamsize() {
+      
+      $query = "SELECT id FROM IdeaAccount WHERE idea_id='".$_POST['idea_id']."'";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0) {
+
+        return $result->num_rows;
+
+      } else {
+
+        return "Error, nothing found";
+
+      }
+
+    }
+
+    /**
+     * Create a new Idea
+     */
+    public function newIdea($title,$team_size,$description,$background_pref) {
+
+      // Clean inputs
+      $title = trim($title);
+      $team_size = intval($team_size);
+      $description = trim($description);
+
+      // Validate inputs
+      if($title != "") {
+
+        if($description != "") {
+
+          if(strlen($description) < 141){
+            
+            if($team_size > 1) {
+
+              $query = "INSERT INTO Ideas (title,owner_id,team_size,description,date,background_pref)
+                        VALUES ('".$title."','".$this->account_id."','".$team_size."','".$description."',NOW(),'".$background_pref."');";
+
+              $result = $this->conn->query($query);
+
+              if($this->conn->affected_rows == 1) return "ok";
+
+              return "Error, please try again.";
+
+            } else {
+
+              return "Team size cannot be less than 2.";
+
+            }
+
+          } else {
+
+            return "Description cannot exced 140 characters.";
+
+          }
+
+        } else {
+          
+          return "Description is empty.";
+
+        }
+
+      } else {
+
+        return "Title is empty.";
+
+      }
+      
+    }
+
+    /**
+     * Delete Idea
+     */
+    public function deleteIdea() {
+      
+      // Check idea ownership
+      if($this->account_id != $this->ideaOwnerID()) {
+        return "You are not the owner!";
+      }
+
+      // Delete the idea
+      $query = "DELETE FROM Ideas WHERE id='".$this->idea_id."' AND owner_id='".$this->account_id."';";
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+
+        $team_size = $this->getTeamsize();
+
+        $query = "DELETE FROM IdeaAccount WHERE idea_id='".$this->idea_id."';";
+        $result = $this->conn->query($query);
+
+        if($this->conn->affected_rows == $team_size){
+
+          return "ok";
+
+        }
+
+        $team_size_deleted = $this->conn->affected_rows;
+        return "Idea not correctly deleted. Only $team_size_deleted/$team_size members deleted.";
+
+      }
+
+      return "It was not possible to delete the idea, please try later.";
 
     }
 

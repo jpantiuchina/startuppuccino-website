@@ -161,13 +161,13 @@ function publishIdea() {
 function publishIdeaCallback(response) {
 	
 	if(response == "ok"){
-		// Hide loader
-		alert("Congrats!");
-		hideLoadingScreen();
+		alert("Congrats! You published a new idea");
 		// Refresh the page
 		location.reload(); 
 	} else {
 		alert(response);
 	}
-
+	
+	// Hide loader
+	hideLoadingScreen();
 }
