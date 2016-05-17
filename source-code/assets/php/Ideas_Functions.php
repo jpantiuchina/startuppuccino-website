@@ -164,19 +164,20 @@ class Ideas_Functions {
     public function joinIdea() {
       
       $query = "INSERT INTO IdeaAccount (idea_id,account_id,date) VALUE ('".$this->idea_id."','".$this->account_id."',NOW());";
-      $query .= "UPDATE Ideas SET current_team_size = current_team_size + 1 WHERE id=".$this->idea_id.";";
 
-      if($this->conn->multi_query($query)){
+      if($this->conn->query($query)){
 
-        // Count the number of affected rows
-        $i = 0;
-        do {
-            $i += $this->conn->affected_rows;
-        } while($this->conn->next_result());
+        $query = "UPDATE Ideas SET current_team_size = current_team_size + 1 WHERE id=".$this->idea_id.";";
+
+        if($this->conn->affected_rows == 1 && $this->conn->query($query)){
+
+            // if($this->conn->affected_rows != 1) // Error team size not updated
+            
+            return "ok";
+        }
         
-        if($i == 2) return "ok";
-        else return "Error, not all the query have been executed $i";
-
+        return "Error, please try again.";
+        
       }
       
       return "Error";
@@ -194,18 +195,19 @@ class Ideas_Functions {
       }
 
       $query = "DELETE FROM IdeaAccount WHERE idea_id='".$this->idea_id."' AND account_id='".$this->account_id."';";
-      $query .= "UPDATE Ideas SET current_team_size = current_team_size - 1 WHERE id=".$this->idea_id.";";
+      
+      if($this->conn->query($query)){
 
-      if($this->conn->multi_query($query)){
+        $query = "UPDATE Ideas SET current_team_size = current_team_size - 1 WHERE id=".$this->idea_id.";";
 
-        // Count the number of affected rows
-        $i = 0;
-        do {
-            $i += $this->conn->affected_rows;
-        } while($this->conn->next_result());
-        
-        if($i == 2) return "ok";
-        else return "Error, not all the query have been executed $i";
+        if($this->conn->affected_rows == 1 && $this->conn->query($query)){
+            
+            // if($this->conn->affected_rows != 1) // Error team size not updated
+            
+            return "ok";
+        }
+
+        return "Error, please try again.";
 
       }
 
@@ -241,7 +243,7 @@ class Ideas_Functions {
 
       $result = $this->conn->query($query);
 
-      if($result->num_rows > 0) {
+      if($result->num_rows >= 0) {
 
         return $result->num_rows;
 
