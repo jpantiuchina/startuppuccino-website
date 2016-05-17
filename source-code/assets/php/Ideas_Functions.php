@@ -20,6 +20,13 @@ class Ideas_Functions {
     function __destruct() {
         $this->conn->close();
     }
+
+    /**
+     * Set the idea
+     */
+    public function setIdea($idea) {
+      $this->idea_id = $idea;
+    }
  
     /**
      * Get the list of all ideas IDs owned by the current user
@@ -52,13 +59,50 @@ class Ideas_Functions {
      */
     public function getAllMyIdeasID() {
       return $this->my_ideas_id;
-    }   
+    }
 
     /**
-     * Set the idea
+     * Get all the data of the current set idea
      */
-    public function setIdea($idea) {
-      $this->idea_id = $idea;
+    public function getIdeaData() {
+      
+      $query = "SELECT * FROM Ideas WHERE id='".$this->idea_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows == 1) {
+        return $result->fetch_assoc();
+      }
+     
+      // No idea found
+      return [];
+     
+    }
+
+    /**
+     * Get all idea members
+     */
+    public function getIdeaMembers($value='')
+    {
+      $query = "SELECT account_id FROM IdeaAccount WHERE idea_id='".$this->idea_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0) {
+
+        // Fetch idea members into array
+        $idea_members = [];
+        while($member = $result->fetch_assoc()) {
+          $idea_members[] = $member['account_id'];
+        }
+        // Add the idea owner to the idea members (not included in the IdeaAccount table)
+        $idea_members[] = $this->ideaOwnerID();        
+
+        return $idea_members;
+      }
+     
+      // No member found
+      return [];
     }
 
     /**

@@ -1,10 +1,14 @@
 function upgradeIdea(idea_id){
 
-	url = "./upgrade_ideas.php";
-	parameters = "idea_id="+idea_id;
-	callback = "upgrade_idea";
+	if(confirm("Do you really want to upgrade this idea to team?")) {
 
-	connectPOST(url,parameters,callback);
+		url = "./upgrade_ideas.php";
+		parameters = "idea_id="+idea_id;
+		callback = "upgrade_idea";
+
+		connectPOST(url,parameters,callback);
+
+	}
 
 }
 

@@ -119,6 +119,7 @@ function deleteIdeaCallback(response) {
 
 function updateIdea() {
 	// ... still to  implement
+	// Does it make sense to update an idea? Or this is just another idea?
 }
 
 function updateIdeaCallback(response){
@@ -131,6 +132,12 @@ function updateIdeaCallback(response){
 }
 
 function publishIdea() {
+
+	confirm_message = "Please double check your data.\nOnce published it is not possible to edit the idea.";
+
+	if(!confirm(confirm_message)) {
+		return false;
+	}
 
 	// Set parameters
 	title = document.getElementById("idea_form_title").value;

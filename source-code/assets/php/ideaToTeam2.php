@@ -2,7 +2,7 @@
 
 	// TODO: improve the script in order to automatically fix not executed queries and database errors
 
-	require '../../../assets/php/session.php';
+	require_once '../../../assets/php/session.php';
 
 	// Check if the current user is an "educator"
 	if($_SESSION['role'] == "educator"){
