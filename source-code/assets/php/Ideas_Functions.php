@@ -41,8 +41,9 @@ class Ideas_Functions {
 
       }
       
-      // No people found
-      return NULL;
+      // No ideas found
+      // Return an empty array
+      return [];
 
     }
 
