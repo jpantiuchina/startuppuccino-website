@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+
+body {background-color: #fbfbfb; font-family: Arial, sans-serif}
+
+/* ******* */
+
+.project_chart {
+	background: #fefefe;
+	height: auto;
+	padding: 20px;
+	overflow: hidden;
+}
+
+.project_chart__row {
+	position: relative;
+	height: 70px;
+	padding: 10px auto;
+}
+
+.project_chart__milestones {
+	position: relative;
+	display: flex;
+	display: -webkit-flex;
+}
+
+.project_chart__milestones--footer {
+	margin-top: 70px;
+	background: #f2f2f2
+}
+
+.milestone{
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	-webkit-flex: 1;  /* Safari 6.1+ */
+    -ms-flex: 1;  /* IE 10 */    
+    flex: 1;
+}
+
+.milestone__smile {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	background-position: center;
+	background-size: 50px 50px;
+	background-repeat: no-repeat;
+	margin: auto;
+	border-radius: 50%;
+	z-index: 1
+}
+
+.milestone__smile--happy {
+	background-image: url('../assets/pics/smiley/happy.png');
+}
+
+.milestone__smile--sad {
+	background-image: url('../assets/pics/smiley/sad.png');
+}
+
+.milestone__smile--placeholder {
+	background-color: #f9f9f9
+}
+
+.milestone__label {
+	display: block;
+}
+
+.milestone__date {
+	color: #555;
+	font-size: 12px
+}
+
+.milestone__dot {
+	position: absolute;
+	top: -40px;
+	left: calc(50% - 15px);
+	width: 20px;
+	height: 20px;
+	border: 5px solid #555;
+	border-radius: 20px;
+	background-color: #96FF00;
+	z-index: 1;
+}
+
+.project_chart__segment {
+	height: 5px;
+	background-color: #555;
+	position: relative;
+	top: -50%;
+}
+
+.project_chart__segment--placeholder {
+	background-color: #f9f9f9;
+}
+
+.project_chart__segment--full {
+	position: absolute;
+	top: -30px;
+	width: 100%;
+}
+
+.project_chart__segment--half {
+	width: 50%;
+}
+
+.project_chart__segment--halfright {
+	left: 50%;
+	width: 50%;
+}
+
+.project_chart__arrow {
+	display: block;
+	overflow: hidden;
+	height: 30px;
+	width: 17px;
+	position: absolute;
+	top:-13px;right: -4px
+}
+.project_chart__arrow:before {
+	border: 15px solid transparent;
+	content: ' ';
+	display: block;
+	border-left-color: #555;
+}
+
+@media all and (max-width: 550px) {
+	/* Milestione text smaller */
+	.milestone__smile {
+		background-size: 30px 30px;
+		height: 30px;
+		width: 30px
+	}
+
+	.project_chart__row {
+		height: 40px
+	}
+
+	.project_chart__milestones--footer {
+		margin-top: 40px;
+		background-color: transparent;
+	}
+
+	.milestone__label {
+		transform: rotate(80deg);
+		font-size: 12px;
+		margin-top: 10px
+	}
+
+	.milestone__date {
+		display: block;
+		font-size: 9px;
+		margin-left: -35px;
+		margin-bottom: 10px;
+		transform: rotate(80deg);
+	}
+
+	.milestone__dot {
+		top: -37px;
+		left: calc(50% - 10px);
+		width: 15px;
+		height: 15px;
+		border: 2px solid #555;
+	}
+}
+
+	</style>
+	<title>Project Chart Mockup</title>
+</head>
+<body>
+
+	<h4>PROJECT STATUS</h4>
+
+	<div class="project_chart">
+
+		<div class="project_chart__contents">
+
+			<div class="project_chart__row project_chart__row--completed">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--halfright"></div>
+					</div>
+					
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+					
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment project_chart__segment--halfright"></div>
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment"></div>
+					</div>
+	
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--sad"></div>
+						<div class="project_chart__segment"></div>
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy milestone__smile--win"></div>
+						<div class="project_chart__segment project_chart__segment--half"></div>
+					</div>
+
+				</div>				
+
+			</div>
+
+			<div class="project_chart__row">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--halfright"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+					
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+					<div class="project_chart__segment project_chart__segment--halfright"></div>
+
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--sad"></div>
+						<div class="project_chart__segment project_chart__segment--half"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--half"></div>
+					</div>
+					
+				</div>				
+
+			</div>
+
+			<div class="project_chart__row">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--halfright"></div>
+					</div>
+				
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment project_chart__segment--halfright"></div>
+					</div>
+			
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment"></div>
+					</div>
+		
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--sad"></div>
+						<div class="project_chart__segment"></div>
+					</div>
+		
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment project_chart__segment--half"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--half"></div>
+					</div>
+
+				</div>				
+
+			</div>
+
+			<div class="project_chart__row">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment project_chart__segment--halfright"></div>
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--sad"></div>
+						<div class="project_chart__segment"></div>
+					</div>
+					
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+						<div class="project_chart__segment project_chart__segment--half"></div>
+					</div>
+					
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+			
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--half"></div>
+					</div>
+
+				</div>				
+
+			</div>
+
+		</div>
+
+		<div class="project_chart__milestones project_chart__milestones--footer">
+
+			<div class="project_chart__segment project_chart__segment--full">
+				<div class="project_chart__arrow"></div>
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot"></div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<!--
+		
+	<div class="project_chart">
+
+		<div class="project_chart__contents">
+
+			<div class="project_chart__row">
+
+				<div class="project_chart__milestones">
+		
+					<div class="milestone milestone--placeholder"></div>
+					<div class="project_chart__segment project_chart__segment--placeholder"></div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>		
+					</div>
+					<div class="project_chart__segment"></div>
+
+				</div>				
+
+			</div>
+
+		</div>
+
+		<div class="project_chart__milestones project_chart__milestones--footer">
+
+			<div class="project_chart__segment project_chart__segment--full">
+				<div class="project_chart__arrow"></div>
+			</div>
+
+			<div class="milestone">
+
+				<div class="milestone__dot">|</div>
+				
+				<span class="milestone__label">Milestone Name</span>
+				<span class="milestone__date">28/06/2015</span>
+
+			</div>
+
+		</div>
+
+	</div>
+	
+	-->
+
+</body>
+</html>
