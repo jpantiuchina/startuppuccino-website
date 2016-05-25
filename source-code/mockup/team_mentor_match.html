@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Team-Mentor Match</title>
+	<style type="text/css">
+
+body {margin: 0;padding: 0;background: #123;color: #333; font-family: Arial,sans-serif}
+
+* {transition: all 0.3s}
+
+.filters {
+	position: relative;
+	text-align: center;
+}
+
+.filters_filter {
+	display: inline-block;
+	padding: 10px;
+	background-color: #00008b;
+	color: #fff;
+	box-shadow: 2px 2px 3px #00008b;
+	margin: 20px;
+	cursor: pointer;
+}
+
+.filter_filter--selected {
+	opacity: 0.5;
+	box-shadow: 0px 0px 1px #00008b;
+}
+
+.matchboard {
+	position: relative;
+	margin-top: 50px;
+	text-align: center;
+	font-size: 0px;
+}
+
+.matchboard__teams,
+.matchboard__mentors,
+.matchboard__connections {
+	display: inline-block;
+	max-width: 300px;
+	min-width: 120px;
+	width: 30%;
+	font-size: 16px;
+}
+
+.matchboard__team,
+.matchboard__mentor {
+	cursor: pointer;
+	padding: 5px;
+	margin: 10px auto;
+	border-radius: 7px;
+}
+
+.matchboard__team {
+	background: #001188;
+	color: #fff;
+}
+
+.matchboard__mentor {
+	background: #001188;
+	color: #fff;
+}
+
+.matchboard__team:hover,
+.matchboard__mentor:hover {
+	opacity: 1 !important
+}
+
+.matchboard__teams:hover > .matchboard__team,
+.matchboard__mentors:hover > .matchboard__mentor {
+	opacity: 0.5
+}
+
+
+	</style>
+
+</head>
+<body>
+
+	<section class="filters">
+		
+		<div class="filters_filter">1 choice</div>
+		<div class="filters_filter">2 choice</div>
+		<div class="filters_filter filter_filter--selected">3 choice</div>
+
+	</section>
+
+	<main class="matchboard">
+
+		<section class="matchboard__teams">
+
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+			<div class="matchboard__team">
+				<p>TEAM NAME</p>
+			</div>
+
+		</section>
+
+		<section class="matchboard__connections">
+
+			<div class="connection connection--h1">
+				<div class="connection__arrow "></div>
+			</div>
+
+		</section>
+
+		<section class="matchboard__mentors">
+
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+			<div class="matchboard__mentor">
+				<p>MENTOR NAME</p>
+			</div>
+			
+		</section>
+
+	</main>
+
+</body>
+</html>

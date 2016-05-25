@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Mentor Chooser</title>
+	<style type="text/css">
+
+body {margin: 0;padding: 0;font-family: Arial,sans-serif;background-color: #fff;}
+
+h1,h2 {text-align: center;color: #789;}
+
+* {transition: all 300ms; -webkit-transition: all 300ms;}
+
+/**********/
+
+.choice_deck,.choice_list {
+	text-align: center;
+	padding: 20px;
+	background-color: #E7F2FF;
+}
+
+.choice_deck__element {
+	color: #678;
+	margin: 15px;
+	display: inline-block;
+}
+
+.choice_deck__element__label {
+	font-style: italic;
+	color: #345;
+}
+
+.choice_deck__element__pic {
+	width: 300px;
+	height: 300px;
+	background-size: cover;
+	background-position: center;
+	background-color: #fbfbfb;
+	background-repeat: no-repeat;
+}
+
+.choice_deck__element__pic--placeholder {
+	background-image: url('../assets/pics/default/people.png');
+	opacity: 0.2;
+}
+
+.choice_deck__element__button {
+	position: relative;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin: 15px auto;
+}
+
+.choice_deck__element__button--delete {
+	background-color: #a00
+}
+
+.choice_deck__element__button--delete:hover {
+	background-color: #f00
+}
+
+.choice_deck__element__button--notenabled {
+	opacity: 0.2;
+	cursor: initial;
+}
+
+
+
+
+
+.choice_list__element {
+	position: relative;
+	display: inline-block;
+	margin: 5px
+}
+
+.choice_list__element--selected {
+	box-shadow: 0px 0px 7px #000;
+}
+
+.choice_list__element__shadow {
+	position: absolute;
+	top: 0; left: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	opacity: 0;
+	background-color: rgba(30,30,30,0.7);
+}
+
+.choice_list__element:hover > .choice_list__element__shadow {
+	opacity: 1;
+}
+
+.choice_list__element__button {
+	position: relative;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	margin-top: 50px;
+	left: calc(50% - 25px);
+	border-radius: 50%;
+}
+
+.choice_list__element__button--add {
+	background-color: #0d0;
+}
+
+.choice_list__element__button--remove {
+	background-color: #d00;
+}
+
+.choice_list__element__button--info {
+	background-color: #333;
+}
+
+.choice_list__element__button--add:hover {
+	background-color: #0f0;
+}
+
+.choice_list__element__button--remove:hover {
+	background-color: #f00;
+}
+
+.choice_list__element__button--info:hover {
+	background-color: #000;
+}
+
+.choice_list__element__pic {
+	height: 220px;
+}
+
+.choice_list__element__label {
+	background: #fbfbfb;
+	color: #123;
+	padding: 5px 0px;
+}
+
+
+
+.x {
+	position: relative;
+	border-radius: 50%;
+	width: 80%;
+	height: 80%;
+}
+
+.x1, .x2 {
+	position: absolute;
+	left: 13%;
+	top: calc(65% - 3px);
+	width: 100%;
+	height: 3px;
+	border-radius: 5px;
+	background-color: #fff
+}
+
+.x--add > .x2 {
+	transform: rotate(90deg);
+}
+
+.x--remove > .x2 {
+	transform: rotate(45deg);
+}
+
+.x--remove > .x1 {
+	transform: rotate(-45deg);
+}
+
+.i {
+	width: 100%;
+	height: 100%;
+}
+
+.i1, .i2 {
+	position: relative;
+	top: 15%;
+	border-radius: 5px;
+	margin: 7% auto;
+	background-color: #fff;
+}
+
+.i1 {
+	width: 14%;
+	height: 14%;
+	margin-bottom: 10%;
+}
+
+.i2 {
+	width: 12%;
+	height: 40%;
+}
+
+	</style>
+</head>
+<body>
+
+	<h1>Mentor Chooser</h1>
+
+	<h2>Your choice</h2>
+
+	<section class="choice_deck">
+
+		<div class="choice_deck__element">
+			<h3>1</h3>
+			<p class="choice_deck__element__label">
+				<span>Mentor Name</span>
+			</p>
+			<div class="choice_deck__element__pic" id="pic_choice1" style="background-image: url('./mentors/mark-haris.jpg')"></div>
+			<div class="choice_deck__element__button choice_deck__element__button--delete">
+				<div class="x x--remove">
+					<div class="x1"></div>
+					<div class="x2"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="choice_deck__element">
+			<h3>2</h3>
+			<p class="choice_deck__element__label">
+				<span>Mentor Name</span>
+			</p>
+			<div class="choice_deck__element__pic" id="pic_choice2" style="background-image: url('./mentors/profilbild1.jpg')"></div>
+			<div class="choice_deck__element__button choice_deck__element__button--delete">
+				<div class="x x--remove">
+					<div class="x1"></div>
+					<div class="x2"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="choice_deck__element">
+			<h3>3</h3>
+			<p class="choice_deck__element__label">
+				<span>Mentor Name</span>
+			</p>
+			<div class="choice_deck__element__pic choice_deck__element__pic--placeholder"  id="pic_choice3"></div>
+			<div class="choice_deck__element__button choice_deck__element__button--delete choice_deck__element__button--notenabled">
+				<div class="x x--remove">
+					<div class="x1"></div>
+					<div class="x2"></div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<h2>Mentors list</h2>
+
+	<section class="choice_list">
+
+		<div class="choice_list__element">
+			<img class="choice_list__element__pic" src="./mentors/patrick.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--add">
+					<div class="x x--add">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<a href="#">
+						<div class="i">
+							<div class="i1"></div>
+							<div class="i2"></div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+		
+		<div class="choice_list__element choice_list__element--selected">
+			<img class="choice_list__element__pic" src="./mentors/profilbild1.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--remove">
+					<div class="x x--remove">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+		<div class="choice_list__element choice_list__element--selected">
+			<img class="choice_list__element__pic" src="./mentors/mark-haris.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--remove">
+					<div class="x x--remove">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+		<div class="choice_list__element">
+			<img class="choice_list__element__pic" src="./mentors/Miriam-Lomsdalen-Pic-213x300.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--add">
+					<div class="x x--add">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+		<div class="choice_list__element">
+			<img class="choice_list__element__pic" src="./mentors/hannes_pardeller.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--add">
+					<div class="x x--add">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+		<div class="choice_list__element">
+			<img class="choice_list__element__pic" src="./mentors/luigi_cavaliere_.jpg" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--add">
+					<div class="x x--add">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+		<div class="choice_list__element">
+			<img class="choice_list__element__pic" src="./mentors/Jari_gnibeni.png" />
+			<div class="choice_list__element__shadow">
+				<div class="choice_list__element__button choice_list__element__button--add">
+					<div class="x x--add">
+						<div class="x1"></div>
+						<div class="x2"></div>
+					</div>
+				</div>
+				<div class="choice_list__element__button choice_list__element__button--info">
+					<div class="i">
+						<div class="i1"></div>
+						<div class="i2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="choice_list__element__label">
+				<span>Mentor Name</span>
+			</div>
+		</div>
+
+	</section>
+
+</body>
+</html>
