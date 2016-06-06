@@ -37,11 +37,13 @@
 
         		// Show the form to create a new Idea
         		?>
-        			<span id="new_idea__button" class="button" onclick="showIdeaForm()">
-        				NEW IDEA
-        		  	</span>
+        			<div class="new_idea__button">
+        				<span onclick="showIdeaForm()">NEW IDEA</span>
+        		  	</div>
         		  	<section id="new_idea__section">
-        		  		<div class="close close--topright" onclick="hideIdeaForm()"></div>
+        		  		<div class="new_idea__button">
+        		  			<span  onclick="hideIdeaForm()">CANCEL</span>
+        		  		</div>
         		  		<?php include 'idea_form.php'; ?>
         		  	</section>
         		<?php
@@ -63,23 +65,26 @@
 
 					        ?>
 
-					        	<div class="card card--idea">
+					        	<div class="list_element list_element--idea">
 
-					        		<div class="card__details">
+					        		<div class="idea__details">
 
-					        			<h5 class="card__details_title">
+					        			<h3 class="idea__details_title">
 					        				<?php print $idea['title']; ?>
-					        			</h5>
+					        			</h3>
 
-					        			<p class="card__details_description">
+					        			<p class="idea__details_description">
 						        			<?php print $idea['description']; ?>
 						        		</p>
 
-							        	<div class="card__details_extra">
+							        	<div class="idea__details_extra">
 
 							        		<span>
-							        			Owner: <?php print $idea['firstName']." ".$idea['lastName']; ?>
-												- <?php print $idea['date']; ?>
+							        			<a href="../people/?user_id=<?php print $idea['owner_id']; ?>"><?php print $idea['firstName']." ".$idea['lastName']; ?></a>
+							        		</span>
+
+							        		<span>
+							        			<?php print $idea['date']; ?>
 							        		</span>
 
 							        		<span id="team_<?php print $idea['id'];?>" maxteamsize="<?php print $idea['team_size'];?>">
@@ -112,25 +117,31 @@
 
 					        		<?php if ($userLogged){ ?>
 
-					        			<div class="card__footer center">
+					        			<div class="idea__footer">
 					        				
 					        				<?php // Case: Idea owner ?>
 					        				<?php if($_SESSION['id'] == $idea['owner_id']){ ?>
+	
+						        				<?php // Filter to highlight user ideas or joined ideas ?>
+					        					<!-- <div class="idea__lens"></div> -->
 
-					        					<!--<span  class="card__button card__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span> -->
-					        					<span  class="card__button card__button--full" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
-
+					        					<!--<span  class="idea__button idea__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span> -->
+					        					<span  class="idea__button idea__button--delete" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
+					        					
 					        				<?php } else { ?>
 
 					        					<?php // Case: User not join this idea ?>
 					        					<?php if(!$isMyIdea && !$teamCompleted){ ?>
 
-						        					<span class="card__button card__button--full" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
+						        					<span class="idea__button" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
 
 						        				<?php // Case: User not join this idea ?>
 							        			<?php } else if($isMyIdea){ ?>
+
+						        					<?php // Filter to highlight user ideas or joined ideas ?>
+					        						<!-- <div class="idea__lens"></div> -->
 							        				
-							        				<span class="card__button card__button--full" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
+							        				<span class="idea__button" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
 
 						        			<?php } } ?>
 

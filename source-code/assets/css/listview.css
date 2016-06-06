@@ -176,3 +176,16 @@
 .line_element__cell--button:hover {
 	background-color: #227722;
 }
+
+/* List View */
+/* used in the the idea page */
+
+.list_element {
+	position: relative;
+	margin: 7px auto;
+	padding: 15px;
+}
+
+.list_element--idea {
+	background-color: #F9ECE2;
+}

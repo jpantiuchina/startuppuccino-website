@@ -118,16 +118,16 @@ class Ideas_Functions {
     public function getAllIdeas() {
 
       $query = "SELECT i.title,
-                             i.description,
-                             i.team_size,
-                             i.current_team_size,
-                             i.date,
-                             i.background_pref,
-                             a.firstName, 
-                             a.lastName,
-                             i.id,
-                             i.owner_id
-                          FROM Ideas i, Account a WHERE i.owner_id = a.id";
+                       i.description,
+                       i.team_size,
+                       i.current_team_size,
+                       i.date,
+                       i.background_pref,
+                       a.firstName, 
+                       a.lastName,
+                       i.id,
+                       i.owner_id
+                    FROM Ideas i, Account a WHERE i.owner_id = a.id";
 
       $result = $this->conn->query($query);
 
