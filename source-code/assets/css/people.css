@@ -200,3 +200,45 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
+
+/* ************************** User Profile *********************/
+
+.profile_wrapper {
+	max-width: 900px;
+	margin: auto;
+	margin-top: 40px;
+	padding: 15px;
+}
+
+.profile_pic, .profile_head {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.profile_pic {
+	width: 200px;
+	height: 200px;
+	margin-right: 50px;
+}
+
+.profile_role {
+	padding: 7px;
+	background: #fff;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+}
+
+.profile_details__email a {
+	display: inline-block;
+	padding: 7px;
+	background-color: #fff;
+	color: #222;
+	text-decoration: none;
+}
+
+#mail_ico {
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}

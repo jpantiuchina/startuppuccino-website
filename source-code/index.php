@@ -79,7 +79,7 @@
             			
             			<h3>Meet Startuppuccino</h3>
 		                <p>Startuppuccino is a project whose vision is to provide startups the guidance they need at their early steps</p>
-		                <span><a href="#">DISCOVER</a></span>
+		                <span><a href="./ideas/">DISCOVER</a></span>
 
             		</div>
 
@@ -119,7 +119,6 @@
 	                </h3>
 	                <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
 	                <a href="http://unibz.it" target="_blank"><img src="assets/pics/unibz_logo.jpg" /></a>
-	                <a href="http://international.unitn.it/mim/clab-trento" target="_blank"><img src="assets/pics/CLab_logo.jpg" /></a>
 	                <a href="#"><img src="assets/pics/minetoolz.jpg" /></a>
 	            
 	            </section>
