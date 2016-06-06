@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<style>
 
 body {background-color: #fbfbfb; font-family: Arial, sans-serif}
@@ -62,6 +63,20 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 
 .milestone__smile--placeholder {
 	background-color: #f9f9f9
+}
+
+.milestone__smile--pivot {
+	background-color: #f0f56e;
+	cursor: pointer;
+}
+
+.milestone__smile--target {
+	background-color: #a2a2d2;
+}
+
+.milestone__smile--target:hover {
+	background-color: #f29582;
+	cursor: pointer;
 }
 
 .milestone__label {
@@ -166,6 +181,40 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 	}
 }
 
+/* ************************ Project console ********************** */
+
+.project_console {
+	position: fixed;
+	top: 0;left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #fbfbfb;
+	z-index: 9999;
+	background: #f2f2f2;
+}
+
+.project_console__section {
+	background-color: #fbfbfb;
+	padding: 20px;
+	margin: 20px;
+	height: auto;
+	overflow: hidden;
+}
+
+.project_console__section--hidden {
+	height: 20px;
+}
+
+.tempclose {
+	width: 50px;
+	height: 50px;
+	background-color: red;
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
 	</style>
 	<title>Project Chart Mockup</title>
 </head>
@@ -173,10 +222,48 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 
 	<h4>PROJECT STATUS</h4>
 
-	<div class="project_chart">
+	<div class="project_chart" id="project_chart">
 
 		<div class="project_chart__contents">
 
+			<div class="project_chart__row project_chart__row--last">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--pivot" onclick="c.pivot()"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--half"></div>
+					</div>
+
+				</div>
+
+			</div>
+
+<!--
 			<div class="project_chart__row project_chart__row--completed">
 
 				<div class="project_chart__milestones">
@@ -243,6 +330,47 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 					<div class="milestone">
 						<div class="milestone__smile milestone__smile--sad"></div>
 						<div class="project_chart__segment project_chart__segment--half"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--half"></div>
+					</div>
+					
+				</div>				
+
+			</div>
+
+-->
+
+			<div class="project_chart__row">
+
+				<div class="project_chart__milestones">
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder project_chart__segment--halfright"></div>
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+					
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--placeholder"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
+					</div>
+
+					<div class="milestone">
+						<div class="milestone__smile milestone__smile--happy"></div>
+					<div class="project_chart__segment project_chart__segment--halfright"></div>
+
+					</div>
+
+					<div class="milestone milestone--placeholder">
+						<div class="milestone__smile milestone__smile--target" onclick="c.milestone()"></div>
+						<div class="project_chart__segment project_chart__segment--placeholder"></div>
 					</div>
 
 					<div class="milestone milestone--placeholder">
@@ -397,43 +525,171 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 	</div>
 
 
-	<div class="project_console">
+	<div class="project_console" id="project_console" style="display: none;">
 
 		<h3>Project Console</h3>
 
-		<li>
+		<section class="project_console__section" id="project_console__pivot">
+			
+			<!-- Pivot -->
 
-			<label for="addmilestone">New milestone</label>	
-			<select name="addmilestone">
-				<option value="1">Milestone 1</option>
-				<option value="2">Milestone 2</option>
-				<option value="3">Milestone 3</option>
-				<option value="4">Milestone 4</option>
-				<option value="5">Milestone 5</option>
-				<option value="6">Milestone 6</option>
-			</select>
+			<h3 id="project_console__pivot__title">Pivot</h3>
 
-			<input type="button" value="SAVE">
+			<p>What are you pivoting?<br>Select the milestone from which you will go on with your project.</p>
 
-		</li>
+			<div id="project_console__pivot__milestones">
+				<!-- list of the milestones reached from where the user can pivot -->
+			</div>
 
-		<li>
+			<input type="button" onclick="c.submitPivot()" value="SUBMIT">
 
-			<label for="newpivot">New pivot</label>	
-			<select name="newpivot">
-				<option value="1">Milestone 1</option>
-				<option value="2">Milestone 2</option>
-				<option value="3">Milestone 3</option>
-				<option value="4">Milestone 4</option>
-				<option value="5">Milestone 5</option>
-				<option value="6">Milestone 6</option>
-			</select>
+		</section>
 
-			<input type="button" value="SAVE">
 
-		</li>
+		<section class="project_console__section" id="project_console__milestone">
+			
+			<!-- Milestone -->
+
+			<h3 id="project_console__milestone__title"></h3>
+
+			<!-- Milestone requirements -->
+
+			<div id="project_console__milestone__requirements"></div>
+
+			<input type="button" onclick="c.submitMilestone()" value="SUBMIT">
+
+		</section>
+
+		<div class="tempclose" onclick="c.hide()"></div>
 
 	</div>
+
+
+
+<script type="text/javascript">
+
+// !Only for test
+// Project data matrix example
+/*
+	
+	0 -> null
+	1 -> happy
+	2 -> sad
+	3 -> ...
+	7 -> end
+
+*/
+project_data = [
+
+	[1,2,1,0,0,0],
+	[0,1,1,2,1,0],
+	[0,0,0,2,0,0]
+
+]
+
+// !Only for test
+// Array with all current milestones
+milestones_array = [
+	"Milestone 1",
+	"Milestone 2",
+	"Milestone 3",
+	"Milestone 4",
+	"Milestone 5",
+	"Milestone 6"
+]
+
+function Project_Console(project){
+
+	this.project = project;
+	this.console = document.getElementById('project_console');
+
+	// Display the project console
+	this.show = function(){
+		this.console.style.display = 'block';		
+	}
+
+	// Hide the project console
+	this.hide = function(){
+		document.getElementById('project_console').style.display = 'none';
+	}
+
+	// Toggle project console contents
+	// Show the specified section
+	this.toggle = function(t) {
+		// Hide all the sections
+		elems = document.getElementsByClassName('project_console__section');
+		for (var i = elems.length - 1; i >= 0; i--) {
+			elems[i].classList.add('project_console__section--hidden');	
+		}
+		// Show the section
+		section_x = document.getElementById(t);
+		section_x.classList.remove('project_console__section--hidden');
+	}
+
+	// Display the project console with the elements to define a new pivot
+	this.pivot = function() {
+		// Add correct data to the console
+		// Create array with only reached milestones
+		node = document.createElement("UL");
+		current_milestone_id = this.project.getCurrentMilestoneID();
+		for (var i = current_milestone_id; i > 0; i--) {
+			elem = document.createElement("LI");
+			elem.classList.add("blabla");
+			elem.innerHTML = milestones_array[i];
+			node.appendChild(elem);
+		}
+		// Append data to DOM
+		document.getElementById('project_console__pivot__milestones').innerHTML = "";
+		document.getElementById('project_console__pivot__milestones').appendChild(node);
+		// Toggle the project console view
+		this.toggle('project_console__pivot');
+		// Display the project console
+		this.show();
+	};
+
+	// Display the project console with the elements to define a new milestone
+	this.milestone = function() {
+		// Add correct data to the console
+		// ...
+		// Toggle the project console view
+		this.toggle('project_console__milestone');
+		// Display the project console
+		this.show();	
+	};
+
+
+
+}
+
+
+// The main class
+function Project(pivots,data){
+
+	this.pivots = pivots;
+	this.data = data;
+
+};
+
+// Render the new project row
+Project.prototype.new_row = function(milestone_pos){}
+
+// Get current milestone id
+Project.prototype.getCurrentMilestoneID = function(){
+	return this.data[0].length;
+}
+
+// Get project data
+Project.prototype.getData = function() {
+	return this.data;
+}
+
+p = new Project(3,project_data);
+c = new Project_Console(p);
+
+
+
+
+</script>
 
 </body>
 </html>

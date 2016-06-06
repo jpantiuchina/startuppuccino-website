@@ -38,6 +38,8 @@
                 	<img class="logo" alt="Startuppuccino" src="assets/pics/startuppuccino_logo-white.svg" />
 
 	                <nav id="main_menu">
+						
+						<a class="menu_link" href="./mockup/">MOCKUP</a>
 
            				<a class="menu_link" href="./ideas/">IDEAS</a>
 

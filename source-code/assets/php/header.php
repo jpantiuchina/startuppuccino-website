@@ -46,6 +46,8 @@
 
             <nav id="main_menu">
 
+				<a class="menu_link" href="../mockup/">MOCKUP</a>
+
    				<a class="menu_link" href="../ideas/">IDEAS</a>
 
        			<?php if ($userLogged){ ?>
