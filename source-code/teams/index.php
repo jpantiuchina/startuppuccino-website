@@ -58,16 +58,21 @@
 							
 						        ?>
 
-						        	<div class="card">
+						        	<div class="list_element list_element--team">
 
-						        		<div class="card__details card__details--project">
-							        		<a href="./?team_id=<?php print $team['id']; ?>">
-								        		
-								        		<span class="card__details_name">
-								        			<?php print $team['name']; ?>
-								        		</span>
-							        		
-							        		</a>
+						        		<div class="team__details">
+						        			
+						        			<?php 
+						        				$team_pic_src = "../assets/pics/teams/".$team['pic'];
+						        				if(!file_exists($team_pic_src)) $team_pic_src = "../assets/pics/startuppuccino_logo-white.svg";
+						        			?>
+
+							        		<img src="<?php echo $team_pic_src; ?>" class="team__details_pic" />
+						        			<h3 class="team__details_title">
+								        		<a href="./?team_id=<?php print $team['id']; ?>">
+								        			<?php echo $team['name']; ?>
+								        		</a>
+								        	</h3>
 							        	</div>
 
 						        	</div>

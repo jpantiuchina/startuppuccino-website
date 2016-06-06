@@ -1,10 +1,33 @@
-#edit_project {
-	background-color: #567;
+/* *********************** Layout team list ********************** */
+
+.team__details {
+	text-align: left;
 }
 
-.card__details--project {
-	padding: 7px;
+.team__details a {
+	text-decoration: none;
+	color: #222;
 }
+
+.team__details_pic, .team__details_title {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.team__details_pic {
+	width: 150px;
+	height: 150px;
+	background-color: #E7E7E7
+}
+
+.team__details_title {
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	font-size: 22px
+}
+
+/* ******************* END Layout team list ****************** */
 
 /************************** PROJECT CHART **********************/
 
