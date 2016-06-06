@@ -18,6 +18,7 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
 		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
 		<title>People - Startuppuccino</title>
 
 	</head>
@@ -65,13 +66,14 @@
 
 			<!-- Display filter for only students|mentors -->
 			<div class="filter_menu filter_menu--people">
-				<li class="filter_menu__button" id="filter_button--STUDENT" onclick="filterResults('STUDENT',this)">Students</li>
-				<li class="filter_menu__button" id="filter_button--MENTOR" onclick="filterResults('MENTOR',this)">Mentors</li>
+				<span class="filter_menu__button" id="filter_button--STUDENT" onclick="filterResults('STUDENT',this)">Students</span>
+				<span class="filter_menu__button" id="filter_button--MENTOR" onclick="filterResults('MENTOR',this)">Mentors</span>
+				<span class="filter_menu__button" id="filter_button--ALL" onclick="removeFilters()">All</span>
 			</div>
 
 			<br><br>
 
-			<div class="list_view">
+			<div class="list_view list_view--linear" id="people_wrapper">
 
 				<?php
 
@@ -83,10 +85,28 @@
 
 						        <div class="card card--<?php print strtoupper($person['role']); ?>">
 
-						        	<!-- card content -->
-						        	<div class="card__details--brown">
-						        		<a href="./?user_id=<?php print $person['id']; ?>">
-							        		<span class="card__details_name">
+						        	<a href="./?user_id=<?php print $person['id']; ?>">
+							        	
+							        	<!-- card content -->
+							        	<div class="card__pic" 
+
+							        		<?php
+							        			
+							        			$pic_name = "../assets/pics/".$person['avatar'];
+
+							        			if(trim($person['avatar'])!="" && file_exists($pic_name)){
+								        			// set the user picture
+								        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
+							        			} else {
+							        				// set the default picture
+								        			echo 'style="background-image:url(\'../assets/pics/default/people.png\');/*background-size:190px 190px;*/opacity:0.4"';
+								        		}
+
+							        		?>
+
+							        	></div>
+							        	<div class="card__details">
+						        			<span class="card__details_name">
 							        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
 							        		</span>
 							        		<span class="card__details_role">
@@ -95,25 +115,9 @@
 							        		<span class="card__details_background">
 							        			<?php print $person['background']; ?>
 							        		</span>
-						        		</a>
-						        	</div>
-						        	<div class="card__details_pic" 
+							        	</div>
 
-						        		<?php
-						        			
-						        			$pic_name = "../assets/pics/".$person['avatar'];
-
-						        			if(trim($person['avatar'])!="" && file_exists($pic_name)){
-							        			// set the user picture
-							        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
-						        			} else {
-						        				// set the default picture
-							        			echo 'style="background-image:url(\'../assets/pics/default/people.png\');background-size:190px 190px"';
-							        		}
-
-						        		?>
-
-						        	></div>
+							        </a>
 
 								</div>
 
@@ -126,6 +130,10 @@
 					}
 
 				?>
+
+			<div class="change_view_button" onclick="toggleLayout()">
+				<img src="../assets/pics/default/listico.png" id="change_view_icon">
+			</div>
 
 			</div>
 

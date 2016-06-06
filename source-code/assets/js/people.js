@@ -48,6 +48,16 @@ function renderUserCards(target){
 	view_all = false;
 }
 
+function removeFilters(){
+	// Render all the users
+	renderAllUserCards();
+	// Remove the active color from filters
+	elems = document.getElementsByClassName('filter_menu__button');
+	for (var i = elems.length - 1; i >= 0; i--) {
+		elems[i].classList.remove("filter_menu__button--active");
+	}
+}
+
 function renderAllUserCards(){
 	cards = document.getElementsByClassName("card");
 	for (var i = cards.length - 1; i >= 0; i--) {
@@ -55,4 +65,19 @@ function renderAllUserCards(){
 	}
 
 	view_all = true;
+}
+
+// Toggle list layout from (card view/vertical list)
+var current_layout = "card";
+
+function toggleLayout(){
+	if(current_layout=="card"){
+		document.getElementById("people_wrapper").classList.remove("list_view--linear");
+		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/gridico.png");
+		current_layout = "list";
+	} else if (current_layout=="list"){
+		document.getElementById("people_wrapper").classList.add("list_view--linear");
+		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/listico.png");
+		current_layout = "card";
+	}
 }
