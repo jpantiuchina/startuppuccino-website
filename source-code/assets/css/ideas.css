@@ -27,7 +27,7 @@
 	width: -webkit-fit-content;
 	width: -moz-fit-content;
 	width: fit-content;
-	border-top: 1px solid #CC7532;
+	border-bottom: 1px solid #CC7532;
 	padding-top: 7px;
 	font-size: 24px
 }
