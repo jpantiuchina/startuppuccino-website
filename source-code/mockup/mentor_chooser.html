@@ -65,6 +65,7 @@ main {
 
 .choice_deck__element {
 	margin: 15px;
+	position: relative;
 }
 
 .choice_deck__element--notenabled > 
@@ -118,6 +119,18 @@ main {
 	background-color: #a22
 }
 
+.choice_deck__element__position {
+	display: none;
+	color: #fbfbfb;
+	font-size: 25px;
+	position: absolute;
+	left: 10px;
+}
+
+.choice_deck__element--notenabled > 
+.choice_deck__element__position {
+	display: inline-block;
+}
 
 /* Choice List */
 
@@ -273,6 +286,9 @@ main {
 			</div>
 
 			<div class="choice_deck__element" id="choice_1" mentorid="3">
+				<div class="choice_deck__element__position">
+					<span>1</span>
+				</div>
 				<div class="choice_deck__element__pic" id="pic_choice1" style="background-image: url('./mentors/mark-haris.jpg')"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
@@ -288,6 +304,9 @@ main {
 			</div>
 
 			<div class="choice_deck__element" id="choice_2" mentorid="2">
+				<div class="choice_deck__element__position">
+					<span>2</span>
+				</div>
 				<div class="choice_deck__element__pic" id="pic_choice2" style="background-image: url('./mentors/profilbild1.jpg')"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
@@ -303,6 +322,9 @@ main {
 			</div>
 
 			<div class="choice_deck__element choice_deck__element--notenabled" id="choice_3" mentorid="0">
+				<div class="choice_deck__element__position">
+					<span>3</span>
+				</div>
 				<div class="choice_deck__element__pic choice_deck__element__pic--placeholder"  id="pic_choice3"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
