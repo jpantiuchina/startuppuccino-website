@@ -13,6 +13,12 @@ body {margin: 0;padding: 0;font-family: Arial,sans-serif;background-color: #fff;
 
 /**********/
 
+/* TEMP FIX */
+	
+#delete_choice1, #delete_choice2, #delete_choice3 {
+	display: none;
+}
+
 /* Page layout - container */
 
 main {
@@ -265,13 +271,13 @@ main {
 
 			</div>
 
-			<div class="choice_deck__element" id="choice_1">
+			<div class="choice_deck__element" id="choice_1" mentorid="3">
 				<div class="choice_deck__element__pic" id="pic_choice1" style="background-image: url('./mentors/mark-haris.jpg')"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
-						<span>Mentor Name</span>
+						<span id="label_choice1">Mark Harris</span>
 					</p>
-					<div class="choice_deck__element__button choice_deck__element__button--delete">
+					<div class="choice_deck__element__button choice_deck__element__button--delete" id="delete_choice1" onclick="c.remove(3)">
 						<div class="x x--remove">
 							<div class="x1"></div>
 							<div class="x2"></div>
@@ -280,13 +286,13 @@ main {
 				</div>
 			</div>
 
-			<div class="choice_deck__element" id="choice_2">
+			<div class="choice_deck__element" id="choice_2" mentorid="2">
 				<div class="choice_deck__element__pic" id="pic_choice2" style="background-image: url('./mentors/profilbild1.jpg')"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
-						<span>Mentor Name</span>
+						<span id="label_choice2">Stani Dobenko</span>
 					</p>
-					<div class="choice_deck__element__button choice_deck__element__button--delete">
+					<div class="choice_deck__element__button choice_deck__element__button--delete" id="delete_choice2" onclick="c.remove(2)">
 						<div class="x x--remove">
 							<div class="x1"></div>
 							<div class="x2"></div>
@@ -295,13 +301,13 @@ main {
 				</div>
 			</div>
 
-			<div class="choice_deck__element choice_deck__element--notenabled" id="choice_3">
+			<div class="choice_deck__element choice_deck__element--notenabled" id="choice_3" mentorid="0">
 				<div class="choice_deck__element__pic choice_deck__element__pic--placeholder"  id="pic_choice3"></div>
 				<div class="choice_deck__element__footer">
 					<p class="choice_deck__element__label">
-						<span>Mentor Name</span>
+						<span id="label_choice3">Mentor Name</span>
 					</p>
-					<div class="choice_deck__element__button choice_deck__element__button--delete">
+					<div class="choice_deck__element__button choice_deck__element__button--delete" id="delete_choice3" onclick="">
 						<div class="x x--remove">
 							<div class="x1"></div>
 							<div class="x2"></div>
@@ -312,9 +318,9 @@ main {
 
 		</section>
 
-	<!--
-		<h2>Mentors list</h2>
-	-->
+
+
+
 
 		<section class="choice_list">
 
@@ -324,7 +330,7 @@ main {
 					<div class="choice_list__element">
 						<img class="choice_list__element__pic" src="./mentors/patrick.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--add">
+							<div class="choice_list__element__button choice_list__element__button--add" onclick="c.add(1,this)">
 								<div class="x x--add">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -340,7 +346,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Patrick Ohnewein</span>
 						</div>
 					</div>
 				</div>
@@ -349,7 +355,7 @@ main {
 					<div class="choice_list__element choice_list__element--selected">
 						<img class="choice_list__element__pic" src="./mentors/profilbild1.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--remove">
+							<div class="choice_list__element__button choice_list__element__button--remove" onclick="c.remove(2,this)">
 								<div class="x x--remove">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -363,7 +369,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Stani Dobenko</span>
 						</div>
 					</div>
 				</div>
@@ -372,7 +378,7 @@ main {
 					<div class="choice_list__element choice_list__element--selected">
 						<img class="choice_list__element__pic" src="./mentors/mark-haris.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--remove">
+							<div class="choice_list__element__button choice_list__element__button--remove" onclick="c.remove(3,this)">
 								<div class="x x--remove">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -386,7 +392,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Mark Harris</span>
 						</div>
 					</div>
 				</div>
@@ -395,7 +401,7 @@ main {
 					<div class="choice_list__element">
 						<img class="choice_list__element__pic" src="./mentors/Miriam-Lomsdalen-Pic-213x300.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--add">
+							<div class="choice_list__element__button choice_list__element__button--add" onclick="c.add(4,this)">
 								<div class="x x--add">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -409,7 +415,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Miriam Lomsdalen</span>
 						</div>
 					</div>
 				</div>
@@ -418,7 +424,7 @@ main {
 					<div class="choice_list__element">
 						<img class="choice_list__element__pic" src="./mentors/hannes_pardeller.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--add">
+							<div class="choice_list__element__button choice_list__element__button--add" onclick="c.add(5,this)">
 								<div class="x x--add">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -432,7 +438,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Hannes Pardeller</span>
 						</div>
 					</div>
 				</div>
@@ -441,7 +447,7 @@ main {
 					<div class="choice_list__element">
 						<img class="choice_list__element__pic" src="./mentors/luigi_cavaliere_.jpg" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--add">
+							<div class="choice_list__element__button choice_list__element__button--add" onclick="c.add(6,this)">
 								<div class="x x--add">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -455,7 +461,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Luigi Cavaliere</span>
 						</div>
 					</div>
 				</div>
@@ -464,7 +470,7 @@ main {
 					<div class="choice_list__element">
 						<img class="choice_list__element__pic" src="./mentors/Jari_gnibeni.png" />
 						<div class="choice_list__element__shadow">
-							<div class="choice_list__element__button choice_list__element__button--add">
+							<div class="choice_list__element__button choice_list__element__button--add" onclick="c.add(7,this)">
 								<div class="x x--add">
 									<div class="x1"></div>
 									<div class="x2"></div>
@@ -478,7 +484,7 @@ main {
 							</div>
 						</div>
 						<div class="choice_list__element__label">
-							<span>Mentor Name</span>
+							<span>Jari Gnibeni</span>
 						</div>
 					</div>
 				</div>
@@ -491,8 +497,8 @@ main {
 
 	<script type="text/javascript">
 		
-	mentors = [['mentor name','mentor id'],['mentor name','mentor id']];
-	choice_deck = [['mentor name','mentor id'],['mentor name','mentor id'],['mentor name','mentor id']];
+	mentors = [['Patrick Ohnewein',1],['Stani Dobenko',2],['Mark Harris',3],['Miriam Lomsdalen',4],['Hannes Pardeller',5],['Luigi Cavaliere',6],['Jari Ognibeni',7]];
+	choice_deck = [['Mark Harris',3],['Stani Dobenko',2]];
 
 	function MentorChooser(mentor_list,choice_deck) {
 
@@ -522,15 +528,34 @@ main {
 
 					// Check for one slot ready on the choice_deck
 					for(var i=1;i<=3;i++){
-						node = document.getElementByID('choice_'+i);
+						node = document.getElementById('choice_'+i);
 						slotready = node.classList.contains('choice_deck__element--notenabled');
 						if(slotready){
+							// Add propery to this node with the index of the mentor
+							node.setAttribute('mentorid',mentor_id);
+							// default picture src
+							img_src = "../assets/pics/default/people.png";
+							// Change the button from add to remove on the mentors list
+							if(dom_element!=null){
+								dom_element.classList.remove('choice_list__element__button--add');
+								dom_element.classList.add('choice_list__element__button--remove');
+								// WARNING --> will not work when you will change the html dom
+								dom_element.childNodes[1].classList.remove('x--add');
+								dom_element.childNodes[1].classList.add('x--remove');
+								img_src = dom_element.parentNode.parentNode.childNodes[1].src;
+								dom_element.setAttribute('onclick','c.remove('+mentor_id+',this)');
+								dom_element.parentNode.parentNode.classList.add("choice_list__element--selected");
+							}
+							// change the picture
+							pic_node = document.getElementById('pic_choice'+i);
+							pic_node.classList.remove('choice_deck__element__pic--placeholder');
+							pic_node.style = "background-image: url('"+img_src+"')";
+							// change the label
+							document.getElementById("label_choice"+i).innerHTML = mentor_name;
 							// remove notenabled css class
 							node.classList.remove('choice_deck__element--notenabled');
-							// change the picture
-							pic_node = document.getElementByID('pic_choice'+i);
-							pic_node.classList.remove('choice_deck__element__pic--placeholder');
-							pic_node.style = "background-image: url('./mentors/pics/"+mentor_name+".jpg')";
+							// add the correct script to the deck delete button
+							document.getElementById("delete_choice"+i).setAttribute('onclick','c.remove('+mentor_id+')');
 							// exit the loop
 							break;
 						}
@@ -556,7 +581,64 @@ main {
 		// Remove mentors from the choice list
 		this.remove = function(mentor_id,dom_element) {
 			
-			// 
+			// get mentor name
+			mentor_name = "";
+			for (var i = mentors.length - 1; i >= 0; i--) {
+				if(mentors[i][1]==mentor_id){
+					mentor_name = mentors[i][0];
+					break;
+				}
+			}
+
+			if(mentor_name != ""){
+
+				// remove mentor name and picture to choice_deck
+				// change css classes to dom element
+
+				// Check for the right slot on the choice_deck where the mentor is placed
+				for(var i=1;i<=3;i++){
+					node = document.getElementById('choice_'+i);
+					if(node.getAttribute('mentorid')==mentor_id){
+						// default picture src
+						img_src = "../assets/pics/default/people.png";
+						// Change the button from remove to add on the mentors list
+						if(dom_element!=null){
+							dom_element.classList.add('choice_list__element__button--add');
+							dom_element.classList.remove('choice_list__element__button--remove');
+							// WARNING --> will not work when you will change the html dom
+							dom_element.childNodes[1].classList.add('x--add');
+							dom_element.childNodes[1].classList.remove('x--remove');
+							dom_element.setAttribute('onclick','c.add('+mentor_id+',this)');
+								dom_element.parentNode.parentNode.classList.remove("choice_list__element--selected");
+						}
+						// change the picture
+						pic_node = document.getElementById('pic_choice'+i);
+						pic_node.classList.add('choice_deck__element__pic--placeholder');
+						pic_node.style = "";
+						// change the label
+						document.getElementById("label_choice"+i).innerHTML = "";
+						// remove notenabled css class
+						node.classList.add('choice_deck__element--notenabled');
+						// add the correct script to the deck delete button
+						document.getElementById("delete_choice"+i).setAttribute('onclick','');
+						// exit the loop
+						break;
+					}
+				}
+
+				// remove mentor to choice_deck array
+				/*for(var i = choice_deck.length - 1; i >= 0; i--) {
+				    if(choice_deck[i] === [mentor_name,mentor_id]) {
+				       choice_deck.splice(i, 1);
+				    }
+				}*/
+				choice_deck.splice(i-1, 1);
+
+			} else {
+
+				alert("Something went wrong, please reload the page and try again.");
+
+			}
 
 		}
 
