@@ -193,7 +193,7 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 	background: #f2f2f2;
 }
 
-.project_console__section {
+.project_console__section, .project_console > h3 {
 	background-color: #fbfbfb;
 	padding: 20px;
 	margin: 20px;
@@ -202,10 +202,10 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 }
 
 .project_console__section--hidden {
-	height: 20px;
+	display: none;
 }
 
-.tempclose {
+.close_wrapper {
 	width: 50px;
 	height: 50px;
 	background-color: red;
@@ -213,7 +213,40 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	border-radius: 50%
 }
+
+/* Default X - close */
+
+.x {
+	position: relative;
+	border-radius: 50%;
+	width: 80%;
+	height: 80%;
+}
+
+.x1, .x2 {
+	position: absolute;
+	left: 13%;
+	top: calc(65% - 3px);
+	width: 100%;
+	height: 3px;
+	border-radius: 5px;
+	background-color: #fff
+}
+
+.x--add > .x2 {
+	transform: rotate(90deg);
+}
+
+.x--remove > .x2 {
+	transform: rotate(45deg);
+}
+
+.x--remove > .x1 {
+	transform: rotate(-45deg);
+}
+
 
 	</style>
 	<title>Project Chart Mockup</title>
@@ -343,7 +376,7 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 
 -->
 
-			<div class="project_chart__row">
+			<div class="project_chart__row project_chart__row--active">
 
 				<div class="project_chart__milestones">
 
@@ -362,13 +395,12 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 						<div class="project_chart__segment project_chart__segment--placeholder"></div>
 					</div>
 
-					<div class="milestone">
+					<div class="milestone milestone--active">
 						<div class="milestone__smile milestone__smile--happy"></div>
-					<div class="project_chart__segment project_chart__segment--halfright"></div>
-
+						<div class="project_chart__segment project_chart__segment--halfright"></div>
 					</div>
 
-					<div class="milestone milestone--placeholder">
+					<div class="milestone milestone--placeholder milestone--next">
 						<div class="milestone__smile milestone__smile--target" onclick="c.milestone()"></div>
 						<div class="project_chart__segment project_chart__segment--placeholder"></div>
 					</div>
@@ -554,13 +586,42 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 
 			<!-- Milestone requirements -->
 
-			<div id="project_console__milestone__requirements"></div>
+			<!-- Temp -> for the mockup -->
+			<style type="text/css">
+				#project_console__milestone__requirements {
+					position: relative;
+					width: 300px;
+					height: 150px;
+					line-height: 150px;
+					border: 4px dashed #999;
+					color: #999;
+					font-size: 22px;
+					font-weight: bold;					
+					text-align: center;
+					margin: 20px 0px
+				}
+			</style>
+
+			<div id="project_console__milestone__requirements">REQUIREMENTS</div>
+
+			<div>
+				<label for="mood">Current Mood</label>
+				<select name="mood" id="current_mood">
+					<option value="1">Happy</option>
+					<option value="2">Sad</option>					
+				</select>
+			</div>
 
 			<input type="button" onclick="c.submitMilestone()" value="SUBMIT">
 
 		</section>
 
-		<div class="tempclose" onclick="c.hide()"></div>
+		<div class="close_wrapper" onclick="c.hide()">
+			<div class="x x--remove">
+				<div class="x1"></div>
+				<div class="x2"></div>
+			</div>
+		</div>
 
 	</div>
 
@@ -579,6 +640,7 @@ body {background-color: #fbfbfb; font-family: Arial, sans-serif}
 	7 -> end
 
 */
+smiles = ["null","happy","sad","...","...","...","...","end"];
 project_data = [
 
 	[1,2,1,0,0,0],
@@ -601,16 +663,16 @@ milestones_array = [
 function Project_Console(project){
 
 	this.project = project;
-	this.console = document.getElementById('project_console');
+	const P_CONSOLE = document.getElementById('project_console');
 
 	// Display the project console
 	this.show = function(){
-		this.console.style.display = 'block';		
+		P_CONSOLE.style.display = 'block';		
 	}
 
 	// Hide the project console
 	this.hide = function(){
-		document.getElementById('project_console').style.display = 'none';
+		P_CONSOLE.style.display = 'none';
 	}
 
 	// Toggle project console contents
@@ -630,34 +692,61 @@ function Project_Console(project){
 	this.pivot = function() {
 		// Add correct data to the console
 		// Create array with only reached milestones
-		node = document.createElement("UL");
+		node = document.createElement("SELECT");
 		current_milestone_id = this.project.getCurrentMilestoneID();
-		for (var i = current_milestone_id; i > 0; i--) {
-			elem = document.createElement("LI");
-			elem.classList.add("blabla");
-			elem.innerHTML = milestones_array[i];
-			node.appendChild(elem);
+		for (var i = current_milestone_id; i >= 0; i--) {
+			node.appendChild(pivotMilestoneDOMelem(milestones_array[i],i));
 		}
 		// Append data to DOM
-		document.getElementById('project_console__pivot__milestones').innerHTML = "";
-		document.getElementById('project_console__pivot__milestones').appendChild(node);
+		document.getElementById('project_console__pivot__milestones').innerHTML = ""; // Clear old data
+		document.getElementById('project_console__pivot__milestones').appendChild(node); // Add new data
 		// Toggle the project console view
 		this.toggle('project_console__pivot');
 		// Display the project console
 		this.show();
 	};
 
+	// Create a milestone option for the pivot select
+	function pivotMilestoneDOMelem(milestone_name,milestone_id){
+		// create the node
+		option = document.createElement("OPTION");
+		// Set all the attributes
+		option.setAttribute("value",milestone_id);
+		// append child text node
+		option.appendChild(document.createTextNode(milestone_name));
+		return option;
+	}
+
 	// Display the project console with the elements to define a new milestone
 	this.milestone = function() {
 		// Add correct data to the console
-		// ...
+		// Get new milestone name
+		milestone_id = this.project.getCurrentMilestoneID() + 1;
+		milestone_name = milestones_array[milestone_id];
+		// Update milestone title
+		document.getElementById("project_console__milestone__title").innerHTML = milestone_name;
+		// Add milestone requirements to the console
+		// ... not for the mockup
 		// Toggle the project console view
 		this.toggle('project_console__milestone');
 		// Display the project console
-		this.show();	
+		this.show();
 	};
 
-
+	// Submit new milestones
+	// Inputs validation here
+	this.submitMilestone = function() {
+		// Inputs validation
+		// ...
+		// Get the current mood
+		current_mood = document.getElementById("current_mood").value;
+		// Render the new milestone
+		if(this.project.renderNewMilestone(current_mood)){
+			// Chart updated
+			// Close the console
+			this.hide();
+		}
+	}
 
 }
 
@@ -668,6 +757,51 @@ function Project(pivots,data){
 	this.pivots = pivots;
 	this.data = data;
 
+	this.renderNewPivot = function() {
+		// ...
+	}
+
+	this.renderNewMilestone = function(mood) {
+		
+		// Add constraints for first and last milestone in the path
+
+		// ...
+
+		// Get the active row
+		active_row = document.getElementsByClassName("project_chart__row--active")[0];
+		// Get the active and next milestones
+		active_milestone = document.getElementsByClassName("milestone--active")[0];
+		next_milestone = document.getElementsByClassName("milestone--next")[0];
+		new_next_milestone = next_milestone.nextSibling.nextSibling;
+
+		// Check if we are at the end of the path
+		if(new_next_milestone == null) {
+			// ...
+		}
+
+		// Update all the css classes
+		active_milestone.classList.remove("milestone--active");
+		next_milestone.classList.add("milestone--active");
+		next_milestone.classList.remove("milestone--next");
+		new_next_milestone.classList.add("milestone--next");
+		new_next_milestone.classList.remove("milestone--placeholder");
+		// Update childs --> segments
+		next_milestone_segment = next_milestone.childNodes[3];
+		next_milestone_segment.classList.remove("project_chart__segment--placeholder");
+		// Update childs --> smiles
+		next_milestone_smile = next_milestone.childNodes[1];
+		next_milestone_smile.classList.remove("milestone__smile--target");
+		next_milestone_smile.classList.add("milestone__smile--"+smiles[mood]);
+		new_next_milestone_smile = new_next_milestone.childNodes[1];
+		new_next_milestone_smile.classList.add("milestone__smile--target");
+
+		// Move the onclick value to the next milestone
+		next_milestone.removeAttribute("onclick");
+		new_next_milestone.setAttribute("onclick","c.milestone()");
+
+		return true;
+	}
+
 };
 
 // Render the new project row
@@ -675,7 +809,13 @@ Project.prototype.new_row = function(milestone_pos){}
 
 // Get current milestone id
 Project.prototype.getCurrentMilestoneID = function(){
-	return this.data[0].length;
+	// Find the last milestone reached in the current path
+	row = this.data[this.data.length-1];
+	for (var i = row.length - 1; i >= 0; i--) {
+		if(row[i]!=0) return i;
+	}
+	// If no milestone is found
+	return 1;
 }
 
 // Get project data
