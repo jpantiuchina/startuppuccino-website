@@ -1,10 +1,10 @@
 // Loading screen
 function showLoadingScreen(){
-    document.getElementById("loading_screen").style = "display:block";
+    document.getElementById("loading_screen").style.display = "block";
 }
 
 function hideLoadingScreen(){
-    document.getElementById("loading_screen").style = "display:none";
+    document.getElementById("loading_screen").style.display = "none";
 }
 
 // Redirect to logout page (note: with this path it doesn't work from the homepage)

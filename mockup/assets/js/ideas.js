@@ -34,12 +34,14 @@ function ideaHelper(action, idea_id, dom_element){
 
 	}	
 	
-	connectPOST(url,parameters,callback);
+	//connectPOST(url,parameters,callback);
 
 	// save temporary the button and idea selected
 	button_selected = dom_element;
 	ideaID = idea_id;
 	team_size_node = document.getElementById("team_"+idea_id);
+
+	ideaHelperCallback(action, "ok");
 
 }
 
@@ -71,7 +73,7 @@ function ideaHelperCallback(action, response){
 		}
 
 		// Async update team size
-		connectPOST("./manage_ideas.php","key=teamsize&idea_id="+ideaID,"idea_teamsize");
+		//connectPOST("./manage_ideas.php","key=teamsize&idea_id="+ideaID,"idea_teamsize");
 	
 	} else {
 

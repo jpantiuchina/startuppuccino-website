@@ -575,7 +575,7 @@ main {
 							// change the picture
 							pic_node = document.getElementById('pic_choice'+i);
 							pic_node.classList.remove('choice_deck__element__pic--placeholder');
-							pic_node.style = "background-image: url('"+img_src+"')";
+							pic_node.setAttribute("style","background-image: url('"+img_src+"')");
 							// change the label
 							document.getElementById("label_choice"+i).innerHTML = mentor_name;
 							// remove notenabled css class
@@ -652,7 +652,7 @@ main {
 						// change the picture
 						pic_node = document.getElementById('pic_choice'+i);
 						pic_node.classList.add('choice_deck__element__pic--placeholder');
-						pic_node.style = "";
+						pic_node.removeAttribute("style");
 						// change the label
 						document.getElementById("label_choice"+i).innerHTML = "";
 						// remove notenabled css class
