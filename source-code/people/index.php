@@ -166,7 +166,7 @@
 				?>
 
 			<div class="change_view_button" onclick="toggleLayout()">
-				<img src="../assets/pics/default/listico.png" id="change_view_icon">
+				<img src="../assets/pics/default/gridico.png" id="change_view_icon">
 			</div>
 
 			</div>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<title>Startuppuccino - Edit Team</title>
+
+	</head>
+	<body>
+		
+			
+
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+		<!--
+        <div class="header__background"></div>
+		-->
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="../educators/manage/manage_ideas.html">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../teams/">TEAMS</a>
+
+   				<a class="menu_link" href="../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller" >
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
+				</div>
+
+            </nav>
+            
+        </section>
+
+    </header>
+
+    <main>
+				
+		<form class="form_custom form_custom--slim" action="" method="post" onclick="return false">
+
+			<li class="form_box_item">
+				<label for="name">Team name</label>
+				<input class="form_pretty_general_input" name="name" value="Kids on Board" required="" type="text">
+			</li>
+
+			<input name="team_id" value="35" type="hidden">
+			
+			<li class="form_box_item">
+				<input class="form_pretty_button_input" name="submit_team" value="SAVE" type="submit">
+			</li>
+
+		</form>
+
+		<form class="form_custom form_custom--slim" action="" method="post" onsubmit="return confirm('Are you sure you want to leave this team?');">
+			
+			<input name="team_id" value="35" type="hidden">
+			
+			<li class="form_box_item">
+				<input class="form_pretty_button_input" name="submit_quit_team" value="LEAVE TEAM" type="submit">
+			</li>
+
+		</form>
+	
+	</main>
+
+	<script src="../assets/js/general.js"></script>
+	
+</body>
+</html>

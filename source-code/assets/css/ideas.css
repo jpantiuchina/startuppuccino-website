@@ -28,8 +28,8 @@
 	width: -moz-fit-content;
 	width: fit-content;
 	border-bottom: 1px solid #CC7532;
-	padding-top: 7px;
-	font-size: 24px
+	font-size: 24px;
+	margin-top: 0px
 }
 
 .idea__lens {
@@ -55,7 +55,7 @@
 	background-color: #EAE1DA;
 	color: #3A2514;
 	padding: 7px;
-	margin: 0px 7px;
+	display: inline-block;
 }
 
 .idea__details_extra > span > a {

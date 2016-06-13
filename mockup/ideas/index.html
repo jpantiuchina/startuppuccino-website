@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/ideas.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+	<title>Ideas - Startuppuccino</title>
+
+</head>
+<body>
+		
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="../educators/manage/manage_ideas.html">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../teams/">TEAMS</a>
+
+   				<a class="menu_link" href="../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller" >
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
+				</div>
+				
+            </nav>
+            
+        </section>
+
+    </header>
+		
+	<main>
+
+		<div class="new_idea__button">
+        	<span onclick="showIdeaForm()">NEW IDEA</span>
+        </div>
+		
+		<section id="new_idea__section">
+		
+			<div class="new_idea__button">
+				<span onclick="hideIdeaForm()">CANCEL</span>
+			</div>
+			<form class="form_custom form_custom--slim" action="#" onsubmit="return publishIdea();">
+
+				<li class="form_box_item">
+					<label for="title">Idea Title</label>
+					<input class="form_pretty_general_input" id="idea_form_title" name="title" required="" type="text">
+				</li>
+
+				<li class="form_box_item">
+					<label for="team_size">Team Size</label>
+					<input class="form_pretty_general_input" id="idea_form_team_size" min="2" step="1" name="team_size" required="" type="number">
+				</li>
+				
+				<li class="form_box_item">
+					<label for="description">Description</label>
+					<textarea class="form_pretty_general_input" id="idea_form_description" maxlength="140" name="description" required=""></textarea>
+				</li>
+				
+				<li class="form_box_item">
+					<label for="background_pref">Preferred Memebers Background</label>
+					<input class="form_pretty_general_input" id="idea_form_background_pref" name="background_pref" type="text">
+				</li>
+
+				<li class="form_box_item">
+					<input class="form_pretty_button_input" value="Publish" type="submit">
+				</li>
+
+			</form>
+
+		</section>
+        		
+		<section class="list_view">
+
+			
+			<div class="list_element list_element--idea">
+
+				<div class="idea__details">
+					<h3 class="idea__details_title">DO!T</h3>
+					<p class="idea__details_description">Fun and challenging way to achieve your goals and resolutions for the New Year!</p>
+					<div class="idea__details_extra">
+						<span><a href="#">John</a></span>
+						<span>2016-05-02</span>
+						<span id="team_2" maxteamsize="7">Team size: 3/7</span>
+						<span>IT</span>
+					</div>
+				</div>
+			
+				<div class="idea__footer">
+					<span class="idea__button" onclick="ideaHelper('leave','2',this)">LEAVE IDEA</span>
+				</div>
+
+			</div>
+
+					        
+			<div class="list_element list_element--idea">
+
+				<div class="idea__details">
+					<h3 class="idea__details_title">JYM</h3>
+					<p class="idea__details_description">Gymnet takes gyms and its members into the 21st century - finally!</p>
+					<div class="idea__details_extra">
+						<span><a href="#">Alexandra</a></span>
+						<span>2016-05-16</span>
+						<span id="team_6" maxteamsize="4">Team size: 1/4</span>
+						<span>Economics</span>
+					</div>
+				</div>
+				<div class="idea__footer">
+					<span class="idea__button" onclick="ideaHelper('join','6',this)">JOIN IDEA</span>
+				</div>
+
+			</div>
+
+					        
+		</section>
+
+	</main>
+
+		
+	<script src="../assets/js/general.js"></script>
+	<script src="../assets/js/ideas.js"></script>
+
+	
+</body>
+</html>

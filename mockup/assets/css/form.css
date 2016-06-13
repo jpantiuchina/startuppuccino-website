@@ -1,0 +1,89 @@
+.form_custom {
+    max-width: 900px;
+    margin: 20px auto;
+    width: 100%;
+    background-color: #fefefe;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 20px 0px;
+    color: #555;
+    text-align: center;
+}
+
+.form_custom--slim {
+    max-width: 500px
+}
+
+.form_box_item {    
+    display: inline-block;
+    padding: 5px 10px;
+    min-width: 300px;
+}
+
+.form_box_item--full {
+    width: 100%
+}
+
+.form_box_item label {
+    display: block;
+    text-align: left;
+    margin: auto;
+    width: 250px;
+    margin-bottom: 5px;
+}
+
+.form_pretty_general_input {
+    border: none;
+    width: 250px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #f2f2f2;
+    padding-left: 2px;
+}
+
+textarea.form_pretty_general_input {
+    height: auto;
+    transition: none;
+    -webkit-transition: none;
+}
+
+.form_pretty_button_input {
+    padding: 5px;
+    background-color: #555;
+    color: #fefefe;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    transition: background-color 300ms;
+    -webkit-transition: background-color 300ms;
+}
+
+.form_pretty_button_input:hover {
+    background-color: #222;
+}
+
+.form_input--forgot_password {
+    background-color: #999;
+    text-decoration: none;
+    font-size: 13px;
+	display: inline-block;
+    height: 19px;
+    line-height: 19px;
+	vertical-align: top;
+}
+
+.form_pretty_button_link {
+    color: #222;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    transition: all 300ms;
+    -webkit-transition: all 300ms;
+}
+
+.form_pretty_button_link:hover {
+    background-color: #999;
+    color: #fefefe;
+}

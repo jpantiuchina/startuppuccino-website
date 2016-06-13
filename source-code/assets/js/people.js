@@ -68,16 +68,16 @@ function renderAllUserCards(){
 }
 
 // Toggle list layout from (card view/vertical list)
-var current_layout = "card";
+var current_layout = "list";
 
 function toggleLayout(){
-	if(current_layout=="card"){
+	if(current_layout=="list"){
 		document.getElementById("people_wrapper").classList.remove("list_view--linear");
-		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/gridico.png");
-		current_layout = "list";
-	} else if (current_layout=="list"){
-		document.getElementById("people_wrapper").classList.add("list_view--linear");
 		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/listico.png");
 		current_layout = "card";
+	} else if (current_layout=="card"){
+		document.getElementById("people_wrapper").classList.add("list_view--linear");
+		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/gridico.png");
+		current_layout = "list";
 	}
 }
