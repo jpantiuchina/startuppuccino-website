@@ -332,6 +332,7 @@ main, header {max-width: 900px; margin: 10px auto; border-radius: 5px; position:
 
 	</style>
 	<title>Project Chart Mockup</title>
+
 </head>
 <body>
 
@@ -1113,6 +1114,24 @@ c = new Project_Console(p);
 
 
 </script>
+
+
+	<script type="text/javascript">
+		
+		safe_exit = function (event) {
+		    var message = 'Important: Please click on \'Save\' button to leave this page.';
+		    if (typeof event == 'undefined') {
+		        event = window.event;
+		    }
+		    if (event) {
+		        event.returnValue = message;
+		    }
+		    return message;
+		};
+
+		///window.onbeforeunload = safe_exit;
+
+	</script>
 
 </body>
 </html>
