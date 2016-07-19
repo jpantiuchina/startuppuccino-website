@@ -2,7 +2,10 @@
 
 	require '../assets/php/session.php';
 
-	if(!$userLogged) die("What are you doing here? :(");
+	if(!$userLogged) {
+		header('Location: ../');
+		exit;
+	}
 
 	// Include and Initialize People Functions
 	require_once '../assets/php/People_Functions.php';

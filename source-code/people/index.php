@@ -3,7 +3,10 @@
 	require '../assets/php/session.php';
 
 	// Redirect to home if user is not logged
-	if(!$userLogged) header("Location: ../");
+	if(!$userLogged){
+		header("Location: ../");
+		exit;
+	}
 
 	// Include and Initialize People Functions
 	require_once '../assets/php/People_Functions.php';

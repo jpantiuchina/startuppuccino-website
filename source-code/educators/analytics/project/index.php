@@ -3,7 +3,10 @@
   require '../../../assets/php/session.php';
 
   // Give the access to this page only to educators
-  if(!$userLogged || $_SESSION['role']!="educator") header("Location: ../../../");
+  if(!$userLogged || $_SESSION['role']!="educator"){
+    header("Location: ../../../");
+    exit;
+  }
 
   require '../../../assets/php/db_connect.php';
 

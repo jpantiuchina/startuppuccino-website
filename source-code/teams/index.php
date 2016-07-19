@@ -3,7 +3,10 @@
 	include '../assets/php/session.php';
 
 	// Redirect to home if user is not logged
-	if(!$userLogged) header("Location: ../");
+	if(!$userLogged) {
+		header("Location: ../");
+		exit;
+	}
 
 	// Include the Team Functions
 	require_once '../assets/php/Team_Functions.php';			

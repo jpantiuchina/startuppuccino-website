@@ -2,7 +2,10 @@
 
 	require '../assets/php/session.php'; 
 
-	if ($userLogged) header('Location: ../');
+	if ($userLogged) {
+		header('Location: ../');
+		exit;
+	}
 
 ?>
 <!DOCTYPE html>

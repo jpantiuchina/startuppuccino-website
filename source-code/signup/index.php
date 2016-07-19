@@ -1,6 +1,13 @@
-<?php require '../assets/php/session.php'; ?>
+<?php
+	
+	require '../assets/php/session.php';
 
-<?php if($userLogged) header('Location: ../') ?>
+	if ($userLogged){
+		header('Location: ../')
+		exit;
+	}
+
+?>
 
 <!DOCTYPE html>
 <html>
