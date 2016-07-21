@@ -3,7 +3,7 @@
 	require '../assets/php/session.php';
 
 	if ($userLogged){
-		header('Location: ../')
+		header('Location: ../');
 		exit;
 	}
 
