@@ -111,5 +111,5 @@ ALTER TABLE Ideas ADD COLUMN current_team_size INT(2) NOT NULL DEFAULT '1';
 CREATE TABLE Milestones ( id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(63) NOT NULL UNIQUE);
 CREATE TABLE ProjectMilestones ( project_id INT(11) NOT NULL, milestone_id INT(11) NOT NULL, update_date DATE NOT NULL, PRIMARY KEY(project_id, milestone_id));
 
-
+ALTER TABLE 'account' ADD 'skills' VARCHAR(255) NOT NULL AFTER 'background'; 
 
