@@ -2,9 +2,12 @@
 
 	require '../assets/php/session.php';
 	
+	// Account id
+	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+
 	// Include and Initialize People Functions
 	require_once '../assets/php/Ideas_Functions.php';
-	$ideas_func = new Ideas_Functions($_SESSION['id']);
+	$ideas_func = new Ideas_Functions($account_id);
 
 ?>
 

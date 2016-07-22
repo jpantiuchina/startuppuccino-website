@@ -15,7 +15,8 @@
 		$ideas_func = new Ideas_Functions($_SESSION['id']);
 
 		// Set the current idea
-		$ideas_func->setIdea($_POST['idea_id']);
+		$idea_id = isset($_POST['idea_id']) ? $_POST['idea_id'] : null;
+		$ideas_func->setIdea($idea_id);
 
 		switch ($_POST['key']) {
 
