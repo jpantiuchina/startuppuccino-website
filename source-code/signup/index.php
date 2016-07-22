@@ -40,17 +40,28 @@
 
 				// Validate required field (server check to avoid client injections)
 
-				if ($_POST['password'] != ""){
+				if (!empty($_POST['password'])){
 
-					if ($_POST['email'] != ""){
+					if (!empty($_POST['email'])){
 
-						if($_POST['firstname'] != ""){
+						if(!empty($_POST['firstname'])){
 
-							if ($_POST['lastname'] != ""){
+							if (!empty($_POST['lastname'])){
 
-								if($_POST['background'] != ""){
+								if(!empty($_POST['background'])){
 
-									if($_POST['role'] == ""){
+									if(!empty($_POST['role'])){
+
+										if(!empty($_POST['skills']) && count(explode(",", $_POST['skills']))>=1) {
+
+										} else {
+
+											$signupOk = false;
+											$error_message = "You must add at least one skill";
+
+										}
+
+									} else {
 
 										$signupOk = false;
 										$error_message = "Role field cannot be empty";
@@ -96,8 +107,9 @@
 				// Check if there was any input error
 				if($signupOk){
 
-					$sql = "INSERT INTO Account (background, email, firstname, lastname, password, role, created, avatar, about )
+					$sql = "INSERT INTO Account (background, skills, email, firstname, lastname, password, role, created, avatar, about )
 							VALUES ('" . $_POST['background'] . "',
+									'" . $_POST['skills'] . "',
 									'" . $account_email . "',
 									'" . $_POST['firstname'] . "',
 									'" . $_POST['lastname'] . "',
