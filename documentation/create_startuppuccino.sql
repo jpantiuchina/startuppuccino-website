@@ -32,6 +32,7 @@ CREATE TABLE `account` (
   `avatar` longblob,
   `background` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `skills` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `socials` longtext COLLATE utf8mb4_unicode_ci,
   `email` varchar(63) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstName` varchar(63) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastName` varchar(63) COLLATE utf8mb4_unicode_ci NOT NULL,

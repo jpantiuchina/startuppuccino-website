@@ -148,4 +148,9 @@ GENERAL NOTES
 22/07/2016
 
 	Edit Account table to add new field "Skills"
-	Mysql: ALTER TABLE 'account' ADD 'skills' VARCHAR(255) NOT NULL AFTER 'background'; 
+	Mysql: ALTER TABLE 'account' ADD 'skills' VARCHAR(255) NOT NULL AFTER 'background';
+
+25/07/2016
+
+	Edit Account table to add new field "Socials"
+	Mysql: ALTER TABLE `account` ADD `socials` LONGTEXT COLLATE utf8mb4_unicode_ci AFTER `skills`;

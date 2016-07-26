@@ -119,7 +119,6 @@
 									'" . $avatar . "',
 									'" . $_POST['about'] . "' )";
 
-
 					// Doublecheck if email already exists
 					include '../assets/php/check_email.php';
 					// Resturn $emailAvailable = false if the email already exists

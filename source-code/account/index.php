@@ -7,12 +7,10 @@
 		exit;
 	}
 
-	// Include and Initialize People Functions
-	require_once '../assets/php/People_Functions.php';
-	$people_func = new People_Functions($_SESSION['id']);
-	// Set Person selected
-	$people_func->setPerson($_SESSION['id']);
-
+	// Include and Initialize Account Functions
+	require_once '../assets/php/Account_Functions.php';
+	$account_func = new Account_Functions($_SESSION['id']);
+	
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +43,7 @@
 
 				} else {
 
-					if ($people_func->updateAccount($_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['background'],$_POST['role'],$_POST['about'])){
+					if ($account_func->updateAccount($_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['background'],$_POST['role'],$_POST['about'])){
 
 						// Update session data
 						$_SESSION['email'] = $_POST['email'];
@@ -80,7 +78,7 @@
 
 				} else {
 
-					if ($people_func->updatePassword($_POST['old_password'],$_POST['new_password'])){
+					if ($account_func->updatePassword($_POST['old_password'],$_POST['new_password'])){
 
 						echo "Password successfully updated<br><br><a href=''>Back to account settings</a>";
 					
@@ -95,8 +93,8 @@
 			} 
 
 			// Get current account info and show the form
-		    if ($account = $people_func->getPersonInfo()) {
-			
+		    if ($account = $account_func->readAccountData()) {
+
 		    	// Print out the account form
 		    	require 'account_form.php';
 
