@@ -1,6 +1,6 @@
 <?php
 	
-	require '../../../assets/php/session.php';
+	require_once '../../../app/models/session.php';
 
 	// Give the access to this page only to educators
 	if(!$userLogged || $_SESSION['role']!="educator"){
@@ -8,7 +8,7 @@
 		exit;
 	}
 
-	require '../../../assets/php/db_connect.php';
+	require '../../../app/models/db_connect.php';
 
 ?>
 
@@ -17,8 +17,8 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../../../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../../../assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../../../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../../../app/assets/css/listview.css">
 		<title>Ideas Manager - Startuppuccino</title>
 
 	</head>
@@ -71,8 +71,8 @@
 
 		</div> <!-- Listview -->
 
-		<script src="../../../assets/js/general.js"></script>
-		<script src="../../../assets/js/educators.js"></script>
+		<script src="../../../app/assets/js/general.js"></script>
+		<script src="../../../app/assets/js/educators.js"></script>
 
 	</body>
 </html>

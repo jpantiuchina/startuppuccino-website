@@ -1,6 +1,6 @@
 <?php
 
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged){
@@ -9,7 +9,7 @@
 	}
 
 	// Include and Initialize People Functions
-	require_once '../assets/php/People_Functions.php';
+	require_once '../app/models/People_Functions.php';
 	$people_func = new People_Functions($_SESSION['id']);
 
 ?>
@@ -18,16 +18,16 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/people.css">
 		<title>People - Startuppuccino</title>
 
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<?php
 			
@@ -56,7 +56,7 @@
 
 					<section>
 						
-						<img class="profile_pic" src="../assets/pics/people/<?php echo $person['avatar']; ?>">
+						<img class="profile_pic" src="../app/assets/pics/people/<?php echo $person['avatar']; ?>">
 
 						<div class="profile_head">
 							<h3 class="profile_name"><?php echo trim($person["firstname"]) . " " . trim($person["lastname"]); ?></h3>
@@ -151,14 +151,14 @@
 
 							        		<?php
 							        			
-							        			$pic_name = "../assets/pics/".$person['avatar'];
+							        			$pic_name = "../app/assets/pics/".$person['avatar'];
 
 							        			if(trim($person['avatar'])!="" && file_exists($pic_name)){
 								        			// set the user picture
 								        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
 							        			} else {
 							        				// set the default picture
-								        			echo 'style="background-image:url(\'../assets/pics/default/people.png\');/*background-size:190px 190px;*/opacity:0.4"';
+								        			echo 'style="background-image:url(\'../app/assets/pics/default/people.png\');/*background-size:190px 190px;*/opacity:0.4"';
 								        		}
 
 							        		?>
@@ -191,17 +191,17 @@
 				?>
 
 			<div class="change_view_button" onclick="toggleLayout()">
-				<img src="../assets/pics/default/gridico.png" id="change_view_icon">
+				<img src="../app/assets/pics/default/gridico.png" id="change_view_icon">
 			</div>
 
 			</div>
 
 		<?php } // endif switch all users list or single user details ?>
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 
-		<script src="../assets/js/people.js"></script>
+		<script src="../app/assets/js/people.js"></script>
 
 	</body>
 </html>

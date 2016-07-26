@@ -4,7 +4,7 @@
 
 		// Initialize Project Functions
 		// Include the project functions
-		require_once '../assets/php/Project_Functions.php';
+		require_once '../app/models/Project_Functions.php';
 		$project_func = new Project_Functions($_SESSION['id'],$project_id);
 
 		$chart_data = $project_func->currentProjectMilestones();

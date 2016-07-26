@@ -1,10 +1,10 @@
-<?php require './assets/php/session.php'; ?> 
+<?php require_once './app/models/session.php'; ?> 
 
 <!DOCTYPE html>
 <html>
 	<head>
 		
-		<link href="assets/css/general.css" rel="stylesheet" media="all" type="text/css" />
+		<link href="./app/assets/css/general.css" rel="stylesheet" media="all" type="text/css" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Startuppuccino</title>
 
@@ -35,7 +35,7 @@
 	            		<div></div>
 	            	</div>
 
-                	<img class="logo" alt="Startuppuccino" src="assets/pics/startuppuccino_logo-white.svg" />
+                	<img class="logo" alt="Startuppuccino" src="./app/assets/pics/startuppuccino_logo-white.svg" />
 
 	                <nav id="main_menu">
 						
@@ -116,8 +116,8 @@
 	                    PARTNERS
 	                </h3>
 	                <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
-	                <a href="http://unibz.it" target="_blank"><img src="assets/pics/unibz_logo.jpg" /></a>
-	                <a href="#"><img src="assets/pics/minetoolz.jpg" /></a>
+	                <a href="http://unibz.it" target="_blank"><img src="./app/assets/pics/unibz_logo.jpg" /></a>
+	                <a href="#"><img src="./app/assets/pics/minetoolz.jpg" /></a>
 	            
 	            </section>
 	            

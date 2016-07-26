@@ -1,6 +1,6 @@
 <?php
   
-  require '../../../assets/php/session.php';
+  require_once '../../../app/models/session.php';
 
   // Give the access to this page only to educators
   if(!$userLogged || $_SESSION['role']!="educator"){
@@ -8,7 +8,7 @@
     exit;
   }
 
-  require '../../../assets/php/db_connect.php';
+  require '../../../app/models/db_connect.php';
 
 ?>
 

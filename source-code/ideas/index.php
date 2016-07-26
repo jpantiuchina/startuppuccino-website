@@ -1,12 +1,12 @@
 <?php
 
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 	
 	// Account id
 	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
 	// Include and Initialize People Functions
-	require_once '../assets/php/Ideas_Functions.php';
+	require_once '../app/models/Ideas_Functions.php';
 	$ideas_func = new Ideas_Functions($account_id);
 
 ?>
@@ -15,16 +15,16 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/ideas.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/ideas.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
 		<title>Ideas - Startuppuccino</title>
 
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 		
 		<main>
 
@@ -168,9 +168,9 @@
 
 		</main>
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
-		<script src="../assets/js/ideas.js"></script>
+		<script src="../app/assets/js/ideas.js"></script>
 
 	</body>
 </html>

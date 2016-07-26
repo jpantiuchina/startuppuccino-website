@@ -1,6 +1,6 @@
 <?php
 
-	include '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged) {
@@ -9,7 +9,7 @@
 	}
 
 	// Include the Team Functions
-	require_once '../assets/php/Team_Functions.php';			
+	require_once '../app/models/Team_Functions.php';			
 
 ?>
 
@@ -17,16 +17,16 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/team.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/team.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
 		<title>Startuppuccino - Teams</title>
 
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 
 		<?php
@@ -66,8 +66,8 @@
 						        		<div class="team__details">
 						        			
 						        			<?php 
-						        				$team_pic_src = "../assets/pics/teams/".$team['pic'];
-						        				if(!file_exists($team_pic_src)) $team_pic_src = "../assets/pics/startuppuccino_logo-white.svg";
+						        				$team_pic_src = "../app/assets/pics/teams/".$team['pic'];
+						        				if(!file_exists($team_pic_src)) $team_pic_src = "../app/assets/pics/startuppuccino_logo-white.svg";
 						        			?>
 
 							        		<img src="<?php echo $team_pic_src; ?>" class="team__details_pic" />
@@ -98,7 +98,7 @@
 
 			?>
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

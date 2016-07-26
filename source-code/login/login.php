@@ -1,6 +1,6 @@
 <?php
 	
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// default global variable to switch and redirect if login is successful
 	$loginOk = true;
@@ -9,8 +9,7 @@
 		&& ( ($new_account_email != "" && $new_account_password != "") 
 			  || (isset($_POST['login'])) ) ) {
 
-		require '../assets/php/db_connect.php';
-
+		require '../app/models/db_connect.php';
 
 		// Set the right value to check
 		// This let you use this script to login from different pages of the web application
@@ -33,7 +32,7 @@
 		        foreach ($row as $key => $value) {
 		        	// save all the data in the session array (not sensible data - like 'password')
 		        	$_SESSION[$key] = $value;
-		        }
+		       	}
 		    }
 
 		    // if isset the POST parameter 'redirect'

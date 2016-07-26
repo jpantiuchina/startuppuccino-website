@@ -1,6 +1,6 @@
 <?php
 	
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	if ($userLogged){
 		header('Location: ../');
@@ -12,15 +12,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
 		<title>Startuppuccino - Signup</title>
 	</head>
 	<body>
 
 		<?php
 
-			include '../assets/php/header.php';
+			include '../app/views/header.php';
 
 
 			// evaluate data if for has been submited else show the form
@@ -36,7 +36,7 @@
 				$account_email = $_POST['email'];
 
 				// Connect to db
-				include '../assets/php/db_connect.php';
+				include '../app/models/db_connect.php';
 
 				// Validate required field (server check to avoid client injections)
 
@@ -120,7 +120,7 @@
 									'" . $_POST['about'] . "' )";
 
 					// Doublecheck if email already exists
-					include '../assets/php/check_email.php';
+					include '../app/models/check_email.php';
 					// Resturn $emailAvailable = false if the email already exists
 
 					if($emailAvailable){
@@ -180,7 +180,7 @@
 			}
 
 
-			include '../assets/php/footer.php';
+			include '../app/views/footer.php';
 
 		?>
 

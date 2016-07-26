@@ -1,6 +1,6 @@
 <?php
 
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged){
@@ -14,14 +14,14 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
 		<title>Startuppuccino - Edit Team</title>
 
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<?php 
 
@@ -33,7 +33,7 @@
 			if($team_id == "") die("Some parameters were missing.");
 
 			// If the team_id is set initialize the Team Functions
-			require_once '../assets/php/Team_Functions.php';
+			require_once '../app/models/Team_Functions.php';
 			$team_func = new Team_Functions($_SESSION['id'],$team_id);
 
 			// Check if the user is a team member
@@ -121,7 +121,7 @@
 		?>
 
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

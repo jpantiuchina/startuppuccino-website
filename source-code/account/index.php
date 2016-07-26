@@ -1,6 +1,6 @@
 <?php
 
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	if(!$userLogged) {
 		header('Location: ../');
@@ -8,7 +8,7 @@
 	}
 
 	// Include and Initialize Account Functions
-	require_once '../assets/php/Account_Functions.php';
+	require_once '../app/models/Account_Functions.php';
 	$account_func = new Account_Functions($_SESSION['id']);
 	
 ?>
@@ -17,14 +17,14 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
 		<title>Account - Startuppuccino</title>
 	
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<?php 
 
@@ -106,7 +106,7 @@
 
 		?>
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

@@ -1,6 +1,6 @@
 <?php 
 
-	require '../assets/php/session.php'; 
+	require_once '../app/models/session.php'; 
 
 	if ($userLogged) {
 		header('Location: ../');
@@ -12,24 +12,25 @@
 <html>
 	<head>
 		<title>Startuppuccino - Login</title>
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
 	</head>
 	<body>
 
 		<?php 
 			
-			include '../assets/php/header.php';
+			include '../app/views/header.php';
 
 		 	if (isset($_POST['login'])){ 
 
 		 		include 'login.php'; 
 	
 		  		// javascript (client) redirect to home page once the user is logged
-		    	if ($loginOk)
+		    	if ($loginOk){
 				   	echo "<script>window.location='../'</script>";
-			    else
+		    	} else {
 			    	include 'login_form.php';
+		    	}
 		  
 			} else {
 
@@ -38,7 +39,7 @@
 
 			}
 		
-			include '../assets/php/footer.php'; 
+			include '../app/views/footer.php'; 
 
 		?>
 

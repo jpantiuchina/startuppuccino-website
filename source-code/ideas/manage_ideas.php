@@ -1,17 +1,14 @@
 <?php
 	
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 	
 	// Default response
 	$response = "Error... please try again";
 
 	if(isset($_POST['key'])){
 
-		// connect db
-		require '../assets/php/db_connect.php';
-
 		// Include and Initialize People Functions
-		require_once '../assets/php/Ideas_Functions.php';
+		require_once '../app/models/Ideas_Functions.php';
 		$ideas_func = new Ideas_Functions($_SESSION['id']);
 
 		// Set the current idea
