@@ -42,59 +42,67 @@
 
 				if (!empty($_POST['password'])){
 
-					if (!empty($_POST['email'])){
+					if($_POST['password'] == $_POST['password1']){
 
-						if(!empty($_POST['firstname'])){
+						if (!empty($_POST['email'])){
 
-							if (!empty($_POST['lastname'])){
+							if(!empty($_POST['firstname'])){
 
-								if(!empty($_POST['background'])){
+								if (!empty($_POST['lastname'])){
 
-									if(!empty($_POST['role'])){
+									if(!empty($_POST['background'])){
 
-										if(!empty($_POST['skills']) && count(explode(",", $_POST['skills']))>=1) {
+										if(!empty($_POST['role'])){
+
+											if(!empty($_POST['skills']) && count(explode(",", $_POST['skills']))>=1) {
+
+											} else {
+
+												$signupOk = false;
+												$error_message = "You must add at least one skill";
+
+											}
 
 										} else {
 
 											$signupOk = false;
-											$error_message = "You must add at least one skill";
+											$error_message = "Role field cannot be empty";
 
 										}
 
 									} else {
 
 										$signupOk = false;
-										$error_message = "Role field cannot be empty";
+										$error_message = "Background field cannot be empty";
 
 									}
 
 								} else {
 
 									$signupOk = false;
-									$error_message = "Background field cannot be empty";
-
+									$error_message = "Email field cannot be empty";
+								
 								}
+
 
 							} else {
 
 								$signupOk = false;
-								$error_message = "Email field cannot be empty";
+								$error_message = "Firstname field cannot be empty";
 							
 							}
-
 
 						} else {
 
 							$signupOk = false;
-							$error_message = "Firstname field cannot be empty";
+							$error_message = "Email field cannot be empty";
 						
 						}
 
 					} else {
 
 						$signupOk = false;
-						$error_message = "Email field cannot be empty";
-					
+						$error_message = "Passwords do not match";
 					}
 
 				} else {

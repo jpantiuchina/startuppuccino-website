@@ -6,4 +6,4 @@
 
 ?>
 
-<script src="../assets/js/general.js"></script>
+<script src="../app/assets/js/general.js"></script>
