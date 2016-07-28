@@ -3,6 +3,8 @@
 	if($account){
 	
 ?>
+	
+	<style>.form_box_item{vertical-align: top;}</style>
 
 	<form action="" method="post" class="form_custom" >
 
@@ -31,17 +33,11 @@
 			<input class="form_pretty_general_input" type="text" name="skills" placeholder="e.g. IT, design, law, economics, management" value="<?php echo trim($account['skills']);?>" required/>
 		</li>
 
-		<br><br>
-
 		<li class="form_box_item">
 			<label>About me (optional)</label>
 			<textarea class="form_pretty_general_input" name="about" placeholder="More info about me, about my startup idea, etc."><?php echo trim($account['about']);?></textarea>
 		</li>
 
-		<li class="form_box_item">
-			<label>Socials Links</label>
-			<input class="form_pretty_button_input" type="button" onclick="displaySocialBox()" value="Manage Socials" />
-		</li>
 
 		<!-- Temporary -->
 		<input type="hidden" value="<?php echo $account['role'];?>" name="role">
@@ -130,44 +126,40 @@
     <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
 
-	<style> #social_box{position: fixed; width: 100%; left:0;top:100px;} #social_box_inside{width: 90%; margin:auto; max-width: 500px; min-width: 270px; background: #f9f9f9; border: 2px solid #777; padding: 15px;} </style>
-	<div id="social_box" style="display:none">
-		<div id="social_box_inside">
+    <hr>
+
+    <div class="form_custom">
+	
+		<h4>Social links</h4>
+	
 		<?php 
 
-			// Socials array example:
-			// [["facebook","https://facebook.com/user/helloworld","primary"],["twitter","https://twitter.com/user/helloworld","secondary"]]
-			$socials = !empty($person["socials"]) ? json_decode(trim($person["socials"]),true) : array();
-			$ind = 0;
-			foreach ($socials as $social) {
-				?>
-					<li class="social" socialname="<?php echo $ind;?>" />
-						<input type="text" value="<?php echo $social[0];?>" socialname="label" placeholde="Label (ex: Facebook, Google, ..)" />
-						<input type="link" value="<?php echo $social[1];?>" socialname="link" placeholde="Url" />
-						<label><input type="checkbox" socialname="priority" <?php if($social[2]=="primary"){echo "checked='checked'";}?> />Favorite</label>
-					</li>
-				<?php
-				$ind++;
-			}
-			?>
-				<div id="new_inputs_box"></div>
-				<li class="form_box_item">
-					<input class="form_pretty_button_input" type="button" onclick="renderNewSocialInput(<?php echo $ind; ?>,this)" value="New" />
-				</li>
-			
+		// Socials array example:
+		// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
+		$socials = !empty($person["socials"]) ? json_decode(trim($person["socials"]),true) : array();
+		$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','twitter','vimeo','whatsapp','youtube','website'];
 
-				<li class="form_box_item">
-					<input class="form_pretty_button_input" type="button" onclick="saveSocialInputs()" value="SAVE" />
-				</li>
+		foreach ($default_socials as $social) {
 			
+			?>
+
+			<li class="social form_box_item" id="<?php echo $social; ?>" style="border:1px solid #f2f2f2;margin:5px 0px">
+				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social; ?>.svg" alt="<?php echo $social; ?>" /></label>
+				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="Url" />
+				<label><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
+			</li>
 
 			<?php
 
+		}
+
 		?>
+	
+		<br>
 
-			<div style="padding-bottom:20px"><input class="form_pretty_button_input" style="float:right" type="button" onclick="hideSocialBox()" value="DONE" /></div>
-
-		</div>
+		<li class="form_box_item">
+			<input class="form_pretty_button_input" type="button" onclick="saveSocialInputs()" value="SAVE" />
+		</li>
 
 	</div>
 

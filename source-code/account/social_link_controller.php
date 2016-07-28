@@ -6,7 +6,7 @@
 	require_once '../app/models/session.php';
 
 	// Check if the parameter socialdata is set
-	if(!isset($_POST['socialdata'])){
+	if(!isset($_POST['socialdata']) || empty($_POST['socialdata'])){
 		die('There are no data to be saved.');
 	}
 
@@ -15,6 +15,10 @@
 	$account_func = new Account_Functions($_SESSION['id']);
 
 	// Save the socialdata
-	echo $account_func->saveSocialdata($_POST['socialdata']);
+	if($account_func->saveSocialdata($_POST['socialdata'])){
+		exit("ok");
+	}
+
+	echo "Error while saving data, please try again.";
 
 ?>

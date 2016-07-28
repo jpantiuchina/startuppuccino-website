@@ -118,13 +118,13 @@ class Account_Functions {
 
         if ($this->conn->affected_rows == 1) {
 
-          return "ok";
+          return true;
 
         }
 
       }
 
-      return "Error while saving data, please try again.";
+      return false;
 
     }
 
