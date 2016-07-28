@@ -46,14 +46,14 @@
 
     // Exit with an error if the file content is not set
     if(!isset($_FILES['picture']) || empty($_FILES['picture'])){
-        exit(set_notify("No file selected."));
+        exit(set_notify("No file selected. ".$_FILES['picture']["tmp_name"]));
     } else {
         $pic = $_FILES['picture'];
     }
 
 
     // Check file extensions
-    $exts = ["jpg","jpeg","png","gif"];
+    $exts = ["jpg","jpeg","png","gif","JPG"];
     if(!in_array(pathinfo($pic["name"], PATHINFO_EXTENSION), $exts)){
         exit(set_notify("File extension not supported."));
     }
