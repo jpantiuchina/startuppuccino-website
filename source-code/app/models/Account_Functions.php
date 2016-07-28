@@ -128,6 +128,56 @@ class Account_Functions {
 
     }
 
+    /**
+     *  Save New Profile Picture
+     */
+    public function saveProfilePicture($avatar) {
+
+      // Check if the new avatar has the same name (extension) of the old one
+      if($this->account_data["avatar"] == $avatar){
+        // Do not need to update the db
+        return true;
+      }
+
+      if(!empty($avatar)){
+
+        $query = "UPDATE Account SET avatar='".$avatar."' WHERE id='".$this->account_id."';";
+
+        $this->conn->query($query);
+
+        if ($this->conn->affected_rows == 1) {
+
+          return true;
+
+        }
+
+      }
+
+      return false;
+
+    }
+
+    /**
+     *  Delete Profile Picture
+     */
+    public function deleteProfilePicture() {
+
+      $path = "../assets/pics/people/".$this->account_data["avatar"];
+
+      $query = "UPDATE Account SET avatar='' WHERE id='".$this->account_id."';";
+
+      $this->conn->query($query);
+
+      if ($this->conn->affected_rows == 1 && unlink($path)) {
+
+        return true;
+
+      }
+
+      return false;
+
+    }    
+
 }
 
 ?>

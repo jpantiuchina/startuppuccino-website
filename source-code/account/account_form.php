@@ -90,6 +90,7 @@
 		</li>						
 	</form>
 
+	<style>hr{border: 0;height: 0;border-top: 1px solid rgba(0, 0, 0, 0.1);border-bottom: 1px solid rgba(255, 255, 255, 0.3);}</style>
 	<hr>
 
 	<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
@@ -111,6 +112,22 @@
 		</li>
 
 	</form>
+
+	<hr>
+
+	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box">
+        <h4>Profile Picture</h4>
+        <li class="form_box_item">
+	        <label for="file_input" style="cursor:pointer"><img src="../app/assets/pics/people/<?php echo trim($account['avatar']);?>" id="target_picture" style="max-height:200px;max-width:200px" alt="Upload Your Profile Picture" /></label>
+	        <input class="form_pretty_button_input" style="cursor:pointer"  type="file" accept="image/*" name="picture" id="file_input">
+    	</li>
+    	<br>
+        <li class="form_box_item">
+        	<input class="form_pretty_button_input" type="submit" value="Upload" name="picture_submit">
+        </li>
+    </form>
+    <!-- Need for async uploads, and used as upload notification box -->
+    <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
 
 	<style> #social_box{position: fixed; width: 100%; left:0;top:100px;} #social_box_inside{width: 90%; margin:auto; max-width: 500px; min-width: 270px; background: #f9f9f9; border: 2px solid #777; padding: 15px;} </style>
@@ -156,12 +173,7 @@
 
 
 	<script type="text/javascript" src="../app/assets/js/account.js"></script>
-
-	<!-- 
-		TODO -> Add form to upload profile picture
-		hint: use the iframe and with a javascript callback
-			  in order to make the upload async
-	-->
+	<script type="text/javascript" src="../app/assets/js/upload.js"></script>
 
 <?php
 

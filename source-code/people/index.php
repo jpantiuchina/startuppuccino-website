@@ -151,9 +151,9 @@
 
 							        		<?php
 							        			
-							        			$pic_name = "../app/assets/pics/".$person['avatar'];
+							        			$pic_name = "../app/assets/pics/people/".$person['avatar'];
 
-							        			if(trim($person['avatar'])!="" && file_exists($pic_name)){
+							        			if(!empty(trim($person['avatar'])) && file_exists($pic_name)){
 								        			// set the user picture
 								        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
 							        			} else {
