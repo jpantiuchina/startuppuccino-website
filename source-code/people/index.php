@@ -85,17 +85,30 @@
 							</a>
 						</p>
 
+
+						<style>.profile_role.primary{border:2px solid #0f0;}</style>
 						<?php 
 
 							// Socials array example:
-							// [["facebook","https://facebook.com/user/helloworld","primary"],["twitter","https://twitter.com/user/helloworld","secondary"]]
+							// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
 							$socials = !empty($person["socials"]) ? json_decode(trim($person["socials"]),true) : array();
-							foreach ($socials as $social) {
+							foreach ($socials as $social_label => $social_data ) {
+								// Fix url format
+								if($social_label == "skype"){
+									$social_data[0] = "skype:".$social_data[0];
+								} else if($social_label == "whatsapp"){
+									$social_data[0] = "whatsapp://".$social_data[0];
+								} else if($social_label == "telegram"){
+									// ...
+								} else if(substr($social_label, 0, 7) == 'http://' || substr($social_label, 0, 8) == 'https://'){
+									$social_data[0] = "//".$social_data[0];
+								}
+								
 								?>
-									<a class="profile_role <?php echo $social[2];?>" style="color:green;display:inline-block" href="<?php echo $social[1];?>"><?php echo $social[0];?></a>
+									<a class="profile_role <?php echo $social_data[1];?>" style="color:green;display:inline-block" target="_blank" href="<?php echo $social_data[0];?>"><img src="../app/assets/pics/icons/<?php echo $social_label; ?>.svg" width="40" /></a>
 								<?php
 							}
-	
+
 						?>
 
 					</section>

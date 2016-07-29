@@ -7,7 +7,7 @@
 
 	// Check if the parameter socialdata is set
 	if(!isset($_POST['socialdata']) || empty($_POST['socialdata'])){
-		die('There are no data to be saved.');
+		exit('There are no data to be saved.');
 	}
 
 	// Include People functions

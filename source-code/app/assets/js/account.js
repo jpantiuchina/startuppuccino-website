@@ -20,29 +20,35 @@ function saveSocialInputs(){
 	// Socials array example:
 	// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
 	
-	socialdata = [];
-	// Collect data
+	// Initialize empty object
+	socialdata = {};
+	// Collect data and push into object socialdata
 	inputs = document.getElementsByClassName("social");
 	for (var i = 0; i <= inputs.length; i++) {
-		if(inputs[i]){
-			childs = inputs[i].childNodes;
-			for (var k = childs.length - 1; k>= 0; k--) {
-				if(childs[k].tagName == "label"){
-				} else if(childs[k].getAttribute("socialname") == "link") {
-					social[1] = childs[k].value;
-				} else if(childs[k].getAttribute("socialname") == "priority") {
-					if(childs[k].checked){
-						social[2] = "primary";
-					} else {
-						social[2] = "secondary";
-					}
-				}
-			}
-			socialdata.push(social);
+		if(!(social = inputs[i])){
+			continue;
 		}
+
+		// Get social label
+		label = social.getAttribute("id");
+		// Check if the social link is set
+		if(!(link = document.getElementById(label+"_link").value) || link.trim()==""){
+			continue;
+		}
+
+		// Get the priority of the social
+		if(document.getElementById(label+"_priority").checked){
+			priority = "primary";
+		} else {
+			priority = "secondary";
+		}
+
+		// Push
+		socialdata[label] = [link,priority];
 	};
 
-	alert(JSON.stringify(socialdata));
+	// Format object into json
+	socialdata = JSON.stringify(socialdata);
 
 	// Send data to server
 	var xmlhttp = new XMLHttpRequest();
@@ -58,7 +64,7 @@ function saveSocialInputs(){
 	    }
 	};
 	xmlhttp.open("POST", "./social_link_controller.php", true);
-	xmlhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");//"application/x-www-form-urlencoded");
+	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xmlhttp.send("socialdata="+socialdata);
 
 }

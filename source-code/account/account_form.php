@@ -136,8 +136,8 @@
 
 		// Socials array example:
 		// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
-		$socials = !empty($person["socials"]) ? json_decode(trim($person["socials"]),true) : array();
-		$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','twitter','vimeo','whatsapp','youtube','website'];
+		$socials = !empty($account["socials"]) ? json_decode(trim($account["socials"]),true) : array();
+		$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','vimeo','whatsapp','youtube','website'];
 
 		foreach ($default_socials as $social) {
 			
