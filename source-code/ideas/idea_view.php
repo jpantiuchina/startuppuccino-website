@@ -29,7 +29,13 @@
 
 		<div class='list_element list_element--idea'>
 
-			<div class='idea__details'>
+			<div class='idea__details'>";
+
+				if(!empty($idea['avatar']) && file_exists("../app/assets/pics/ideas/".$idea['avatar'])){
+					$ideas_html .= "<img class='idea__details_pic' src='../app/assets/pics/ideas/".$idea['avatar']."' width='100'/>";
+				}
+
+				$ideas_html .= "
 
 				<h3 class='idea__details_title'>".$idea['title']."</h3>
 

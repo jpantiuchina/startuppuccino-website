@@ -122,6 +122,30 @@ function hideIdeaForm(){
 	document.getElementById("new_idea__section").style.display = "none";
 }
 
+function uploadIdeaPicture(){
+	// Check for picture name
+	var idea_title = document.getElementById("idea_form_title").value;
+	if(idea_title.trim() == ""){
+		alert("Please insert an idea title first.");
+		return false;
+	}
+	var confirm_message = confirm("Once you upload a picture, you cannot change the idea title. Your current idea title is:\n"+idea_title);
+	if(!confirm_message){
+		return false;
+	}
+
+	// Set profile picture name
+	document.getElementById("idea_picture_title").setAttribute("value",idea_title);
+
+	return upload_form_submit();
+}
+
+function uploadIdeaPictureCallback(filename,dir){
+	document.getElementById("idea_form_avatar").setAttribute("value",filename);
+	render_picture_callback(filename,dir);   
+}
+
+
 function publishIdea() {
 
 	var confirm_message = "Please double check your data.\nOnce published it is not possible to edit the idea.";
@@ -134,12 +158,14 @@ function publishIdea() {
 	var title = document.getElementById("idea_form_title").value;
 	//team_size = document.getElementById("idea_form_team_size").value;
 	var description = document.getElementById("idea_form_description").value;
+	var avatar = document.getElementById("idea_form_avatar").value;
 	var background_pref = document.getElementById("idea_form_background_pref").value;
 
 	var parameters = "key=new_idea";
 	parameters += "&title=" + title;
 	//parameters += "&team_size=" + team_size;
 	parameters += "&description=" + description;
+	parameters += "&avatar=" + avatar;
 	parameters += "&background_pref=" + background_pref;
 
 	var url = "./manage_ideas.php";

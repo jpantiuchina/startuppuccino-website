@@ -122,6 +122,7 @@ class Ideas_Functions {
                        i.team_size,
                        i.current_team_size,
                        i.date,
+                       i.avatar,
                        i.background_pref,
                        a.firstName, 
                        a.lastName,
@@ -258,7 +259,7 @@ class Ideas_Functions {
     /**
      * Create a new Idea
      */
-    public function newIdea($title,$description,$background_pref) {
+    public function newIdea($title,$description,$avatar,$background_pref) {
 
       // Temp fix
       $team_size = 2;
@@ -277,8 +278,8 @@ class Ideas_Functions {
             
             if($team_size > 1) {
 
-              $query = "INSERT INTO Ideas (title,owner_id,team_size,description,date,background_pref)
-                        VALUES ('".$title."','".$this->account_id."','".$team_size."','".$description."',NOW(),'".$background_pref."');";
+              $query = "INSERT INTO Ideas (title,owner_id,team_size,description,date,avatar,background_pref)
+                        VALUES ('".$title."','".$this->account_id."','".$team_size."','".$description."',NOW(),'".$avatar."','".$background_pref."');";
 
               $result = $this->conn->query($query);
 

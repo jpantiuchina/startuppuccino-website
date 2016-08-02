@@ -30,7 +30,7 @@
 			<div class="new_idea__button">
 				<span onclick="showIdeaForm()">NEW IDEA</span>
 		  	</div>
-		  	<section id="new_idea__section">
+		  	<section id="new_idea__section" style="position: relative;top: -50px;margin-top:0px">
 		  		<div class="new_idea__button">
 		  			<span  onclick="hideIdeaForm()">CANCEL</span>
 		  		</div>

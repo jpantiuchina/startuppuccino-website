@@ -1,5 +1,7 @@
 <?php
     
+    // TODO: add check for already existing idea title = picture name
+
     require_once '../app/models/session.php';
 
     // Redirect to home if user is not logged
@@ -11,11 +13,11 @@
     // Include and Initialize Upload and Account Functions
     require_once '../app/models/Upload_Functions.php';
     $upload_func = new Upload_Functions();
-    require_once '../app/models/Account_Functions.php';
-    $account_func = new Account_Functions($_SESSION["id"]);
+    require_once '../app/models/Ideas_Functions.php';
+    $account_func = new Ideas_Functions($_SESSION["id"]);
 
 
-    $dir = "../app/assets/pics/people/";
+    $dir = "../app/assets/pics/ideas/";
     
     // HELPERS FUNCTIONS
 
@@ -25,12 +27,12 @@
     }
     // Function to return a js callback to render the picture uploaded in the parent window
     function render_picture($filename,$dir){
-        return "<script>parent.render_picture_callback('$filename','$dir');</script>";
+        return "<script>parent.uploadIdeaPictureCallback('$filename','$dir');</script>";
     }
     // Function to rename a file with the hash of the user email
     function rename_profile_pic($filename){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $basename = $_SESSION['email'];
+        $basename = $_POST['title'];
         return md5($basename).".".$ext;
     }
     
@@ -81,9 +83,8 @@
     $upload_func->setTemporaryName($pic["tmp_name"]);
     $upload_func->setReplace(TRUE); // Set if the new file will replace the old one
 
-    if($upload_func->upload() && $account_func->saveProfilePicture($pic["name"])){
-        $_SESSION["avatar"] = $pic["name"];
-        exit(render_picture($pic["name"]),$dir);
+    if($upload_func->upload()){
+        exit(render_picture($pic["name"],$dir));
     }
 
     echo set_notify("Error while uploading..");

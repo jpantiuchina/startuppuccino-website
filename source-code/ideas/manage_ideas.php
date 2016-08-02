@@ -37,10 +37,11 @@
 			exit($ideas_func->leaveIdea());
 		
 		case 'new_idea':
-		
+			
 			exit($response = $ideas_func->newIdea($_POST['title'],
 											//$_POST['team_size'],
 											$_POST['description'],
+											$_POST['avatar'],
 											$_POST['background_pref']));
 			
 		case 'teamsize':

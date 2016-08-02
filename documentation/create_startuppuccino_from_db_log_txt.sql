@@ -114,3 +114,5 @@ CREATE TABLE ProjectMilestones ( project_id INT(11) NOT NULL, milestone_id INT(1
 ALTER TABLE 'account' ADD 'skills' VARCHAR(255) NOT NULL AFTER 'background';
 
 ALTER TABLE `account` ADD `socials` LONGTEXT COLLATE utf8mb4_unicode_ci AFTER `skills`;
+
+ALTER TABLE `ideas` ADD `avatar` TEXT NULL AFTER `team_size`;

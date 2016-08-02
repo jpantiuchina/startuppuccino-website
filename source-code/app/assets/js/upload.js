@@ -17,7 +17,7 @@ function notify_callback(text){
     hideLoadingScreen();
 }
 
-function render_picture_callback(filename){
-    document.getElementById("target_picture").setAttribute("src","../app/assets/pics/people/"+filename+"?"+(Math.floor((Math.random()*1000000)+1)));
+function render_picture_callback(filename,directory){
+    document.getElementById("target_picture").setAttribute("src",directory+filename+"?"+(Math.floor((Math.random()*1000000)+1)));
     hideLoadingScreen();
 }
