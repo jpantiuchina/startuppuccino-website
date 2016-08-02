@@ -1,45 +1,25 @@
 
-var button_selected;
-var ideaID;
+/* JOIN & LEAVE */
 
-var team_size_node;
-
-// TODO: Refactor --> use OO for general js and management of callbacks
-
-function showIdeaForm(){
-	document.getElementById("new_idea__section").style.display = "block";
-}
-
-function hideIdeaForm(){
-	document.getElementById("new_idea__section").style.display = "none";
-}
+var BUTTON_SELECTED;
+var IDEA_ID;
+var TEAMSIZE_NODE;
 
 function ideaHelper(action, idea_id, dom_element){
 	
 	// show the loading
 	showLoadingScreen();
 
-	// send data to server to be
-	url = "./manage_ideas.php";
-
-	if(action == "join"){
-
-		parameters = "key=join_idea&idea_id="+idea_id;
-		callback = "join_idea";
-
-	} else if(action == "leave"){
-
-		parameters = "key=leave_idea&idea_id="+idea_id;
-		callback = "leave_idea";
-
-	}	
-	
+	// send data to server
+	var url = "./manage_ideas.php";
+	var parameters = "key="+action+"_idea&idea_id="+idea_id;
+	var callback = action+"_idea";
 	connectPOST(url,parameters,callback);
 
 	// save temporary the button and idea selected
-	button_selected = dom_element;
-	ideaID = idea_id;
-	team_size_node = document.getElementById("team_"+idea_id);
+	BUTTON_SELECTED = dom_element;
+	IDEA_ID = idea_id;
+	TEAMSIZE_NODE = document.getElementById("team_"+idea_id);
 
 }
 
@@ -51,18 +31,18 @@ function ideaHelperCallback(action, response){
 		if(action == "join"){
 
 			// Change style to the button
-			button_selected.innerHTML = "LEAVE IDEA";
+			BUTTON_SELECTED.innerHTML = "LEAVE IDEA";
 
 			// Update click listener from the button
-			button_selected.setAttribute("onclick","ideaHelper('leave','"+ideaID+"',this);");
+			BUTTON_SELECTED.setAttribute("onclick","ideaHelper('leave','"+IDEA_ID+"',this);");
 
 		} else if (action == "leave"){
 
 			// Change style to the button
-			button_selected.innerHTML = "JOIN IDEA";
+			BUTTON_SELECTED.innerHTML = "JOIN IDEA";
 			
 			// Update click listener from the button
-			button_selected.setAttribute("onclick","ideaHelper('join','"+ideaID+"',this);");
+			BUTTON_SELECTED.setAttribute("onclick","ideaHelper('join','"+IDEA_ID+"',this);");
 	
 		} else {
 
@@ -71,7 +51,7 @@ function ideaHelperCallback(action, response){
 		}
 
 		// Async update team size
-		connectPOST("./manage_ideas.php","key=teamsize&idea_id="+ideaID,"idea_teamsize");
+		connectPOST("./manage_ideas.php","key=teamsize&idea_id="+IDEA_ID,"idea_teamsize");
 	
 	} else {
 
@@ -83,27 +63,26 @@ function ideaHelperCallback(action, response){
 	hideLoadingScreen();
 
 	// Reset variable button_selected;
-	button_selected = null;
+	BUTTON_SELECTED = null;
 
 }
 
 function teamsizeCallback(response){
 
-	max_team_size = team_size_node.getAttribute("maxteamsize");
-
-	team_size_node.innerHTML = "Team size: " + (parseInt(response)+1) + "/" + max_team_size; // +1 is the idea owner
+	TEAMSIZE_NODE.innerHTML = "Team size: " + parseInt(response); // +1 is the idea owner
 
 }
+
+/* DELETE */
 
 function deleteIdea(idea_id) {
 
 	confirmMessage = "!!! Attention !!!\nAre you sure you want to delete this idea?";
 
 	if (confirm(confirmMessage)){
-		url = "./manage_ideas.php";
-		parameters = "key=delete_idea&idea_id="+idea_id;
-		callback = "delete_idea";
-		connectPOST(url,parameters,callback);
+		
+		connectPOST("./manage_ideas.php","key=delete_idea&idea_id="+idea_id,"delete_idea");
+	
 	}
 
 }
@@ -117,12 +96,14 @@ function deleteIdeaCallback(response) {
 	}
 }
 
-function updateIdea() {
+/* EDIT */
+
+function editIdea() {
 	// ... still to  implement
 	// Does it make sense to update an idea? Or this is just another idea?
 }
 
-function updateIdeaCallback(response){
+function editIdeaCallback(response){
 	if(response == "ok") {
 		alert("Your idea has been updated");
 		location.reload();
@@ -131,28 +112,38 @@ function updateIdeaCallback(response){
 	}	
 }
 
+/* PUBLISH */
+
+function showIdeaForm(){
+	document.getElementById("new_idea__section").style.display = "block";
+}
+
+function hideIdeaForm(){
+	document.getElementById("new_idea__section").style.display = "none";
+}
+
 function publishIdea() {
 
-	confirm_message = "Please double check your data.\nOnce published it is not possible to edit the idea.";
+	var confirm_message = "Please double check your data.\nOnce published it is not possible to edit the idea.";
 
 	if(!confirm(confirm_message)) {
 		return false;
 	}
 
 	// Set parameters
-	title = document.getElementById("idea_form_title").value;
-	team_size = document.getElementById("idea_form_team_size").value;
-	description = document.getElementById("idea_form_description").value;
-	background_pref = document.getElementById("idea_form_background_pref").value;
+	var title = document.getElementById("idea_form_title").value;
+	//team_size = document.getElementById("idea_form_team_size").value;
+	var description = document.getElementById("idea_form_description").value;
+	var background_pref = document.getElementById("idea_form_background_pref").value;
 
-	parameters = "key=new_idea";
+	var parameters = "key=new_idea";
 	parameters += "&title=" + title;
-	parameters += "&team_size=" + team_size;
+	//parameters += "&team_size=" + team_size;
 	parameters += "&description=" + description;
 	parameters += "&background_pref=" + background_pref;
 
-	url = "./manage_ideas.php";
-	callback = "new_idea";
+	var url = "./manage_ideas.php";
+	var callback = "new_idea";
 
 	// Display loader
 	showLoadingScreen();

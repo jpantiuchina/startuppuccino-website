@@ -6,8 +6,8 @@
 	$loginOk = true;
 
 	if( !$userLogged
-		&& ( ($new_account_email != "" && $new_account_password != "") 
-			  || (isset($_POST['login'])) ) ) {
+		&& ( (isset($_POST['login']))
+			 || ($new_account_email != "" && $new_account_password != "")  ) ) {
 
 		require '../app/models/db_connect.php';
 
@@ -34,6 +34,14 @@
 		        	$_SESSION[$key] = $value;
 		       	}
 		    }
+
+
+		   	// Load Config
+		   	require_once '../app/models/Config_Functions.php';
+		   	$config_func = new Config_Functions();
+		   	// Load ideas settings
+		   	$config_func->load();
+
 
 		    // if isset the POST parameter 'redirect'
 		    if (isset($_POST['redirect'])){

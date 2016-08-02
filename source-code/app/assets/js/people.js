@@ -73,11 +73,11 @@ var current_layout = "list";
 function toggleLayout(){
 	if(current_layout=="list"){
 		document.getElementById("people_wrapper").classList.remove("list_view--linear");
-		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/listico.png");
+		document.getElementById("change_view_icon").setAttribute("src","../app/assets/pics/default/listico.png");
 		current_layout = "card";
 	} else if (current_layout=="card"){
 		document.getElementById("people_wrapper").classList.add("list_view--linear");
-		document.getElementById("change_view_icon").setAttribute("src","../assets/pics/default/gridico.png");
+		document.getElementById("change_view_icon").setAttribute("src","../app/assets/pics/default/gridico.png");
 		current_layout = "list";
 	}
 }

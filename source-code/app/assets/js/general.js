@@ -34,7 +34,7 @@ function connectGET(url,callback){
     xmlhttp.send();
 }
 
-// http postrequest to server with callback
+// http post request to server with callback
 function connectPOST(url,parameters,callback){
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {

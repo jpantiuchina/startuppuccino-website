@@ -258,7 +258,10 @@ class Ideas_Functions {
     /**
      * Create a new Idea
      */
-    public function newIdea($title,$team_size,$description,$background_pref) {
+    public function newIdea($title,$description,$background_pref) {
+
+      // Temp fix
+      $team_size = 2;
 
       // Clean inputs
       $title = trim($title);
