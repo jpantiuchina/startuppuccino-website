@@ -92,7 +92,7 @@ if($userLogged){
         
         <section>
         	<span class="toplink"><a href="./login/">Login</a></span>
-        	<span class="toplink"><a href="./signup/">Register</a></span>
+        	<span class="toplink"><a href="./register/">Register</a></span>
         	<span class="toplink"><a href="./about/">About</a></span>
         	<p id="tagline_wrapper">
                 <span id="tagline"></span>

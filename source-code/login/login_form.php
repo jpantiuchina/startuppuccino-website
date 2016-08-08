@@ -24,7 +24,7 @@
 	</li>
 	
 	<li class="form_box_item form_box_item--full">
-        <p>New user? <a class="form_pretty_button_link" href="../signup/">Sign up</a></p>
+        <p>New user? <a class="form_pretty_button_link" href="../register/">REGISTER</a></p>
     </li>
 
 </form>

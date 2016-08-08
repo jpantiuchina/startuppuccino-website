@@ -70,7 +70,7 @@
 					<!-- change this into a login form (external ajax login form script -> include) -->
 					<a class="menu_link" href="../login/">LOGIN</a>
 
-					<a class="menu_link" href="../signup/">REGISTER</a>
+					<a class="menu_link" href="../register/">REGISTER</a>
 
 				<?php } // endif userlogged ?>
 
