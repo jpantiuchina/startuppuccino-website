@@ -36,7 +36,7 @@
 	            	</div>
 
 	            	<a href="../" title="Home - Startuppuccino">
-                		<img class="logo" alt="Startuppuccino" src="../app/assets/pics/startuppuccino_logo-white.svg" />
+                		<img class="logo" alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
                 	</a>
 
 	                <nav id="main_menu">
@@ -122,8 +122,8 @@
 	                    PARTNERS
 	                </h3>
 	                <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
-	                <a href="http://unibz.it" target="_blank"><img src="./app/assets/pics/unibz_logo.jpg" /></a>
-	                <a href="#"><img src="./app/assets/pics/minetoolz.jpg" /></a>
+	                <a href="http://unibz.it" target="_blank"><img src="../app/assets/pics/logos/unibz_logo.jpg" /></a>
+	                <a href="#"><img src="../app/assets/pics/logos/minetoolz.jpg" /></a>
 	            
 	            </section>
 	            

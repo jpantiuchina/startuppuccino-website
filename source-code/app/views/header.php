@@ -41,7 +41,7 @@
         	</div>
 
         	<a href="../" title="Home - Startuppuccino">
-	        	<img class="logo logo--link" alt="Startuppuccino" src="../app/assets/pics/startuppuccino_logo-white.svg" />
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
 	        </a>
 
             <nav id="main_menu">
