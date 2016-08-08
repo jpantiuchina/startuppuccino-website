@@ -86,6 +86,9 @@ function switchCallback(callback, value){
         case "get_comments_idea":
             displayCommentsCallback(value);
             break;
+        case "askforhelp":
+            askForHelpCallback(value);
+            break;
 	}
 }
 

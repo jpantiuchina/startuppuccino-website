@@ -32,6 +32,8 @@
 
 	}
 
+	$ideas_html .= "<h4 style='background-color:#000;color:#fff;cursor:pointer' onclick='showAskForHelp()'>ASK FOR HELP</h4>";
+
 	foreach ($ideas as $idea){
 	
 		$ideas_html .= "

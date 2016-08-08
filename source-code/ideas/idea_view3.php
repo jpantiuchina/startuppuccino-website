@@ -2,6 +2,8 @@
 
 	$ideas_html = "<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>";
 
+	$ideas_html .= "<h4 style='background-color:#000;color:#fff;cursor:pointer' onclick='showAskForHelp()'>ASK FOR HELP</h4>";
+
 	foreach ($ideas as $idea){
 	
 		// Define if the idea is approved
