@@ -18,11 +18,15 @@
 	$idea_id = isset($_POST['idea_id']) ? $_POST['idea_id'] : null;
 	$ideas_func->setIdea($idea_id);
 
+	// TODO: add check for current user role
+
 	// Check current ideas phase
-	$phase1 = ["new_idea","delete_idea","edit_idea"];
-	$phase2 = ["join_idea","leave_idea"];
+	$phase1 = ["new_idea","delete_idea","edit_idea","get_comments","new_comment","delete_comment"];
+	$phase2 = ["like_idea","unlike_idea"];
+	$phase3 = ["join_idea","leave_idea"];
 	if(($_SESSION['ideas_phase']==1 && !in_array($key, $phase1)) ||
-	   ($_SESSION['ideas_phase']==2 && !in_array($key, $phase2))){
+	   ($_SESSION['ideas_phase']==2 && !in_array($key, $phase2)) ||
+	   ($_SESSION['ideas_phase']==3 && !in_array($key, $phase3))){
 		exit("Error, you do not have the access to this functionality.");
 	}
 
@@ -37,7 +41,7 @@
 			exit($ideas_func->leaveIdea());
 		
 		case 'new_idea':
-			
+
 			exit($response = $ideas_func->newIdea($_POST['title'],
 											//$_POST['team_size'],
 											$_POST['description'],
@@ -54,7 +58,32 @@
 
 		case 'edit_idea':
 
-			exit("Not yet implemented");
+			//exit("Not yet implemented");
+			exit($ideas_func->editIdea($_POST['title'],
+										//$_POST['team_size'],
+										$_POST['description'],
+										$_POST['avatar'],
+										$_POST['background_pref']));
+
+		case 'get_comments':
+
+			exit(implode("<br>", $ideas_func->getComments()));
+
+		case 'new_comment':
+
+			exit($ideas_func->newComment($_POST['comment']));
+
+		case 'delete_comment':
+
+			exit($ideas_func->deleteComment($_POST['comment_id']));
+
+		case 'like_idea':
+
+			exit($ideas_func->like());
+
+		case 'unlike_idea':
+
+			exit($ideas_func->unlike());
 
 	}
 

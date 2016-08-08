@@ -14,7 +14,7 @@
 <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
 
-<form class="form_custom form_custom--slim" action="#" onsubmit="return publishIdea();">
+<form class="form_custom form_custom--slim" id="idea_form" action="#" onsubmit="return publishIdea(true,'');">
 
 	<li class="form_box_item">
 		<label for="title">Idea Title</label>

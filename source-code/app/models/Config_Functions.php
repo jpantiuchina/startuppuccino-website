@@ -1,12 +1,12 @@
 <?php
- 
+
 class Config_Functions {
 
     var $json_data;
 
     function __construct() {
       require_once 'session.php';
-      $this->json_data = json_decode(file_get_contents("../app/models/configs/configs.json"),true); // After deploy path sould be set to abosolute
+      $this->json_data = json_decode(file_get_contents("../app/configs/configs.json"),true); // After deploy path sould be set to abosolute
     }
  
     function __destruct() {}

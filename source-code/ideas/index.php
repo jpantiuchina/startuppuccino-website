@@ -2,6 +2,12 @@
 
 	require_once '../app/models/session.php';
 
+	// Redirect to home if user is not logged
+	if(!$userLogged){
+		header("Location: ../");
+		exit;
+	}
+
 	// Account id
 	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
@@ -24,24 +30,28 @@
 		
 		<main>
 
-			<?php // If user is logged and current phase: 1, students can create new ideas ?> 
-			<?php if ($_SESSION['ideas_phase']==1 && $_SESSION['role']=="student"){ ?>
+			<?php 
 
-			<div class="new_idea__button">
-				<span onclick="showIdeaForm()">NEW IDEA</span>
-		  	</div>
-		  	<section id="new_idea__section" style="position: relative;top: -50px;margin-top:0px">
-		  		<div class="new_idea__button">
-		  			<span  onclick="hideIdeaForm()">CANCEL</span>
-		  		</div>
-		  		<?php include 'idea_form.php'; ?>
-		  	</section>
-			
-			<?php } ?>
+				// Account id
+				$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+
+				// Include and Initialize Ideas Functions
+				require_once '../app/models/Ideas_Functions.php';
+				$ideas_func = new Ideas_Functions($account_id);
+
+
+				if (!($ideas = $ideas_func->getAllIdeas())){
+					return "No ideas found...";
+				}
+
+				$isStudent = (isset($_SESSION['role']) && $_SESSION['role']=="student");
+				$isMentor = (isset($_SESSION['role']) && $_SESSION['role']=="mentor");
+
+			?>
 
 
 			<section class="list_view">
-				<?php echo include 'idea_view.php'; ?>
+				<?php echo include 'idea_view_switch.php'; ?>
 			</section>
 
 		</main>

@@ -5,6 +5,8 @@ class Ideas_Functions {
     var $account_id;
     var $idea_id;
     var $my_ideas_id;
+    var $user_likes;
+    var $LIKES_LIMIT;
 
     // constructor
     function __construct($account) {
@@ -14,6 +16,8 @@ class Ideas_Functions {
         $this->conn = $db->connect();
         $this->account_id = $account;
         $this->my_ideas_id = $this->readAllMyIdeasIDs();
+        $this->user_likes = $this->loadUserLikes();
+        $this->LIKES_LIMIT = 3;
     }
  
     // destructor
@@ -55,6 +59,25 @@ class Ideas_Functions {
     }
 
     /**
+     * Get the list of all ideas IDs that the current user liked
+     */
+    private function loadUserLikes(){
+
+      $query = "SELECT idea_id FROM idealike WHERE account_id='".$this->account_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0) {
+        return $result->fetch_assoc();
+      }
+     
+      // No likes found
+      return [];
+
+    }
+
+
+    /**
      * Get the list of all ideas IDs owned by the current user
      */
     public function getAllMyIdeasID() {
@@ -82,9 +105,10 @@ class Ideas_Functions {
     /**
      * Get all idea members
      */
-    public function getIdeaMembers($value='')
-    {
+    public function getIdeaMembers(){
+
       $query = "SELECT account_id FROM IdeaAccount WHERE idea_id='".$this->idea_id."';";
+      //$query = "SELECT id,skills FROM Account WHERE idea_selected='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -124,6 +148,7 @@ class Ideas_Functions {
                        i.date,
                        i.avatar,
                        i.background_pref,
+                       i.approved,
                        a.firstName, 
                        a.lastName,
                        i.id,
@@ -151,11 +176,60 @@ class Ideas_Functions {
     /**
      * Update Idea Details
      */
-    public function updateIdea(/* ... */) {
+    public function editIdea($title,$description,$avatar,$background_pref) {
       
       // Should be better here to doublecheck if some parameters is empty (not required now)
 
-      // ...
+      // Temp fix
+      $team_size = 2;
+
+      // Clean inputs
+      $title = trim($title);
+      $team_size = intval($team_size);
+      $description = trim($description);
+
+      // Validate inputs
+      if($title != "") {
+
+        if($description != "") {
+
+          if(strlen($description) < 141){
+            
+            if($team_size > 1) {
+
+              $query = "UPDATE Ideas SET title='".$title."',owner_id='".$this->account_id."',team_size='".$team_size."',description='".$description."',
+                                         date=NOW(),avatar='".$avatar."',background_pref='".$background_pref."'
+                                         WHERE id='".$this->idea_id."';";
+
+              $result = $this->conn->query($query);
+
+              if($this->conn->affected_rows == 1) return "ok";
+
+              return "Error, please try again.";
+
+            } else {
+
+              return "Team size cannot be less than 2.";
+
+            }
+
+          } else {
+
+            return "Description cannot exced 140 characters.";
+
+          }
+
+        } else {
+          
+          return "Description is empty.";
+
+        }
+
+      } else {
+
+        return "Title is empty.";
+
+      }
 
     }
 
@@ -348,6 +422,134 @@ class Ideas_Functions {
       return "It was not possible to delete the idea, please try later.";
 
     }
+
+
+    /**
+     * Get comments related to current selected idea
+     */
+    public function getComments() {
+      
+      $query = "SELECT * FROM ideacomment WHERE idea_id='".$this->idea_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0) {
+        return $result->fetch_assoc();
+      }
+     
+      // No comments found
+      return ["No comments found"];
+     
+    }
+
+
+    /**
+     * Delete comment
+     */
+    public function deleteComment($comment_id) {
+      
+      $query = "DELETE FROM ideacomment WHERE id='".$comment_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error while deleting the comment.";
+     
+    }
+
+
+    /**
+     * New comment on the current idea
+     */
+    public function newComment($comment) {
+      
+      $query = "INSERT INTO ideacomment ('account_id','idea_id','text','date')
+      			VALUES ('".$this->account_id."','".$this->idea_id."','".$comment."',NOW());";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error while saving your new comment.";
+     
+    }
+
+
+    /**
+     * Like the current idea
+     */
+    public function like() {
+      
+      if(count($this->user_likes) >= $this->LIKES_LIMIT){
+        return "You have reached the maximum number of likes.";
+      }
+
+      $query = "INSERT INTO idealike ('account_id','idea_id','date') VALUES ('".$this->account_id."','".$this->idea_id."',NOW());";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        return "ok";
+      }
+     
+      // Error in the query
+      return false;
+     
+    }
+
+
+    /**
+     * Unlike the current idea
+     */
+    public function unlike() {
+      
+      $query = "DELETE FROM idealike WHERE account_id='".$this->account_id."' AND idea_id='".$this->idea_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        return "ok";
+      }
+     
+      // Error in the query
+      return false;
+     
+    }
+
+    /**
+     * Get list of account IDs that liked the current idea
+     */
+    public function getIdeasLikes() {
+    
+      $query = "SELECT account_id FROM idealike WHERE idea_id='".$this->idea_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows > 0) {
+        return $result->fetch_assoc();
+      }
+     
+      // No likes found
+      return [];
+    
+    }
+
+    /**
+     * Get list of ideas IDs that the current user liked
+     */
+    public function getUserLikes() {
+    
+      return $this->user_likes;
+    
+    }
+
 
 }
 

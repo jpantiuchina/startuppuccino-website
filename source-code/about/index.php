@@ -35,22 +35,28 @@
 	            		<div></div>
 	            	</div>
 
-                	<img class="logo" alt="Startuppuccino" src="../app/assets/pics/startuppuccino_logo-white.svg" />
+	            	<a href="../" title="Home - Startuppuccino">
+                		<img class="logo" alt="Startuppuccino" src="../app/assets/pics/startuppuccino_logo-white.svg" />
+                	</a>
 
 	                <nav id="main_menu">
 						
-						<a class="menu_link" href="../ideas/">IDEAS</a>
+						<?php if ($userLogged){ ?>
 
-	           			<?php if ($userLogged){ ?>
+							<a class="menu_link" href="../ideas/">IDEAS</a>
 
 		       				<a class="menu_link" href="../teams/">TEAMS</a>
 
 	           				<a class="menu_link" href="../people/">PEOPLE</a>
 
+	           				<a class="menu_link" href="../account/"><?php print strtoupper($_SESSION['firstname']); ?></a>
+
+	           				<!--
 							<div class="menu_link menu_link--controller" >
-								<span class="menu_link menu_link--placeholder"><?php print strtoupper($_SESSION['firstname']); ?></span>
+								<span class="menu_link menu_link--placeholder"><?php //print strtoupper($_SESSION['firstname']); ?></span>
 								<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
 							</div>
+							-->
 
 							<a class="menu_link" href="../logout/">LOGOUT</a>
 
@@ -59,7 +65,7 @@
 							<!-- change this into a login form (external ajax login form script -> include) -->
 							<a class="menu_link" href="../login/">LOGIN</a>
 
-							<a class="menu_link" href="../signup/">SIGN UP</a>
+							<a class="menu_link" href="../signup/">REGISTER</a>
 
 						<?php } // endif userlogged ?>
 

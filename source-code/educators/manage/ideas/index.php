@@ -8,8 +8,6 @@
 		exit;
 	}
 
-	require '../../../app/models/db_connect.php';
-
 ?>
 
 
@@ -18,61 +16,22 @@
 	<head>
 
 		<link rel="stylesheet" type="text/css" href="../../../app/assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../../../app/assets/css/listview.css">
 		<title>Ideas Manager - Startuppuccino</title>
+
+		<style type="text/css">
+		.box{position:relative; margin: 20px;padding: 15px;font-weight: bold;background-color: #333;}
+		.box:hover{background-color: #777}
+		.box > a {text-decoration: none;color:#fff;display: block;height: 100%}
+		</style>
 
 	</head>
 	<body>
-		
-		<div class="listview">
 
-		<div class="line_element line_element--header">
-			<span class="line_element__cell">Owner</span>
-			<span class="line_element__cell">Title</span>
-			<span class="line_element__cell">N^ Members</span>
-		</div>
+		<div class="box"><a href="./idea_phase.php">Change ideas phase</a></div>
 
-		<?php
+		<div class="box"><a href="./idea_approve.php">Approve ideas</a></div>
 
-			// List all the ideas
-
-			$query = "SELECT i.id, a.firstName, a.lastName, i.title, i.current_team_size, i.team_size
-					  FROM Ideas i, Account a WHERE i.owner_id=a.id;";
-			if($ideas = mysqli_query($dbconn,$query)){
-
-				while($idea = mysqli_fetch_assoc($ideas)){
-
-					?>
-
-					<div class="line_element 
-						<?php if($idea['team_size']==$idea['current_team_size']) echo "line_element--fluo"; ?>
-					">
-						<span class="line_element__cell"><?php echo $idea['firstName']." ".$idea['lastName']; ?></span>
-						<span class="line_element__cell"><?php echo $idea['title']; ?></span>
-						<span class="line_element__cell"><?php echo $idea['current_team_size']."/".$idea['team_size']; ?></span>
-
-						<span class="line_element__cell line_element__cell--button" onclick="upgradeIdea('<?php echo $idea['id'];?>')">Upgrade</span>
-
-					</div>
-
-					<?php
-
-				}
-
-			} else {
-
-				die("Error, it was not possible to get any idea from the database. ".mysqli_error($dbconn));
-
-			}
-
-
-
-		?>
-
-		</div> <!-- Listview -->
-
-		<script src="../../../app/assets/js/general.js"></script>
-		<script src="../../../app/assets/js/educators.js"></script>
+		<div class="box"><a href="./idea_to_team.php">Ideas to teams</a></div>
 
 	</body>
 </html>

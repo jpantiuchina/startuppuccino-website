@@ -68,11 +68,23 @@ function switchCallback(callback, value){
         case "delete_idea":
             deleteIdeaCallback(value);
             break;
-        case "update_idea":
-            updateIdeaCallback(value);
+        case "edit_idea":
+            editIdeaCallback(value);
             break;
         case "upgrade_idea":
             upgradeIdeaCallback(value);
+            break;
+        case "like_idea":
+            ideaHelperCallback("like", value);
+            break;
+        case "unlike_idea":
+            ideaHelperCallback("unlike", value);
+            break;
+        case "new_comment_idea":
+            submitCommentCallback(value);
+            break;
+        case "get_comments_idea":
+            displayCommentsCallback(value);
             break;
 	}
 }

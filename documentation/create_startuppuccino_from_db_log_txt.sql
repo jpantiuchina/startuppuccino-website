@@ -116,3 +116,9 @@ ALTER TABLE 'account' ADD 'skills' VARCHAR(255) NOT NULL AFTER 'background';
 ALTER TABLE `account` ADD `socials` LONGTEXT COLLATE utf8mb4_unicode_ci AFTER `skills`;
 
 ALTER TABLE `ideas` ADD `avatar` TEXT NULL AFTER `team_size`;
+
+ALTER TABLE `ideas` ADD `approved` CHAR(1) NOT NULL DEFAULT 'F' AFTER `background_pref`;
+CREATE TABLE `startuppuccino`.`ideacomment` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `account_id` INT(11) NOT NULL , `idea_id` INT(11) NOT NULL , `text` TEXT NOT NULL , `date` DATE NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+CREATE TABLE `startuppuccino`.`idealike` ( `id` INT(11) NOT NULL AUTO_INCREMENT , `account_id` INT(11) NOT NULL , `idea_id` INT(11) NOT NULL , `date` DATE NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `idealike` ADD UNIQUE( `account_id`, `idea_id`);
