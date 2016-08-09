@@ -71,8 +71,10 @@ function switchCallback(callback, value){
         case "edit_idea":
             editIdeaCallback(value);
             break;
+        case "approve_idea":
+        case "disapprove_idea":
         case "upgrade_idea":
-            upgradeIdeaCallback(value);
+            generalEducatorsCallback(value);
             break;
         case "like_idea":
             ideaHelperCallback("like", value);

@@ -1,21 +1,25 @@
-function upgradeIdea(idea_id){
+function generalEducatorsCallback(response){
 
-	if(confirm("Do you really want to upgrade this idea to team?")) {
+	alert(response);
 
-		url = "./upgrade_ideas.php";
-		parameters = "idea_id="+idea_id;
-		callback = "upgrade_idea";
-
-		connectPOST(url,parameters,callback);
-
+	if(confirm("Reload the page to see the changes.")){
+		window.location='./idea_approve.php';
 	}
 
 }
 
-function upgradeIdeaCallback(response){
+function upgradeIdea(idea_id){
 
-	alert(response);
+	if(confirm("Do you really want to upgrade this idea to team?")) {
+		connectPOST("./upgrade_ideas.php","idea_id="+idea_id,"upgrade_idea");
+	}
 
-	if(confirm("Reload the page to see the changes.")) Location.reload();
+}
 
+function approve(idea_id){
+	connectPOST("./idea_approve_controller.php","idea_id="+idea_id+"&action=approve","approve_idea");
+}
+
+function disapprove(idea_id){
+	connectPOST("./idea_approve_controller.php","idea_id="+idea_id+"&action=disapprove","disapprove_idea");	
 }
