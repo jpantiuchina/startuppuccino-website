@@ -67,12 +67,15 @@ class Ideas_Functions {
 
       $result = $this->conn->query($query);
 
+      $temp_arr = [];
+
       if($result->num_rows > 0) {
-        return $result->fetch_assoc();
+        while($idealike = $result->fetch_assoc()) {
+          $temp_arr[] = $idealike['idea_id'];
+        }
       }
      
-      // No likes found
-      return [];
+      return $temp_arr;
 
     }
 
@@ -112,21 +115,22 @@ class Ideas_Functions {
 
       $result = $this->conn->query($query);
 
+      $idea_members = [];
+
       if($result->num_rows > 0) {
 
         // Fetch idea members into array
-        $idea_members = [];
         while($member = $result->fetch_assoc()) {
           $idea_members[] = $member['account_id'];
         }
-        // Add the idea owner to the idea members (not included in the IdeaAccount table)
-        $idea_members[] = $this->ideaOwnerID();        
-
-        return $idea_members;
+        
       }
-     
-      // No member found
-      return [];
+
+      // Add the idea owner to the idea members (not included in the IdeaAccount table)
+      $idea_members[] = $this->ideaOwnerID();
+
+      return $idea_members;
+
     }
 
     /**
@@ -491,16 +495,18 @@ class Ideas_Functions {
         return "You have reached the maximum number of likes.";
       }
 
-      $query = "INSERT INTO idealike ('account_id','idea_id','date') VALUES ('".$this->account_id."','".$this->idea_id."',NOW());";
+      $query = "INSERT INTO idealike (account_id,idea_id,date) VALUES ('".$this->account_id."','".$this->idea_id."',NOW());";
 
       $result = $this->conn->query($query);
 
       if($this->conn->affected_rows == 1) {
+        // Push idea_id to user likes
+        $this->user_likes[] = $this->idea_id;
         return "ok";
       }
      
       // Error in the query
-      return false;
+      return "Error";
      
     }
 
@@ -515,11 +521,19 @@ class Ideas_Functions {
       $result = $this->conn->query($query);
 
       if($this->conn->affected_rows == 1) {
+        // Pop idea_id to user likes
+        $temp_user_likes = [];
+        foreach ($this->user_likes as $idea_id) {
+          if($idea_id != $this->idea_id){
+            $temp_user_likes[] = $idea_id;
+          }
+        }
+        $this->user_likes = $temp_user_likes;
         return "ok";
       }
      
       // Error in the query
-      return false;
+      return "Error";
      
     }
 

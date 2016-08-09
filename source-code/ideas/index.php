@@ -10,6 +10,12 @@
 
 	// Account id
 	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+	$isStudent = (isset($_SESSION['role']) && $_SESSION['role']=="student");
+	$isMentor = (isset($_SESSION['role']) && $_SESSION['role']=="mentor");
+
+	// Include and Initialize Ideas Functions
+	require_once '../app/models/Ideas_Functions.php';
+	$ideas_func = new Ideas_Functions($account_id);
 
 ?>
 
@@ -30,29 +36,17 @@
 		
 		<main>
 
-			<?php 
+			<?php if (!($ideas = $ideas_func->getAllIdeas())){ ?>
+			
+				<section><p>No ideas found...</p></section>
+			
+			<?php } else { ?>
 
-				// Account id
-				$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+				<section class="list_view">
+					<?php echo include 'idea_view_switch.php'; ?>
+				</section>
 
-				// Include and Initialize Ideas Functions
-				require_once '../app/models/Ideas_Functions.php';
-				$ideas_func = new Ideas_Functions($account_id);
-
-
-				if (!($ideas = $ideas_func->getAllIdeas())){
-					return "No ideas found...";
-				}
-
-				$isStudent = (isset($_SESSION['role']) && $_SESSION['role']=="student");
-				$isMentor = (isset($_SESSION['role']) && $_SESSION['role']=="mentor");
-
-			?>
-
-
-			<section class="list_view">
-				<?php echo include 'idea_view_switch.php'; ?>
-			</section>
+			<?php } ?>
 
 		</main>
 

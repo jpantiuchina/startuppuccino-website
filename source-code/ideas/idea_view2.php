@@ -50,7 +50,7 @@
 
 					} else {
 
-						$ideas_html .= "<span  class='idea__button idea__button--delete' onclick='ideaHelper(\"unlike\",\"".$idea['id']."\",this);'>UNLIKE</span>";
+						$ideas_html .= "<span  class='idea__button idea__button--full' onclick='ideaHelper(\"unlike\",\"".$idea['id']."\",this);'>UNLIKE</span>";
 
 					}
 

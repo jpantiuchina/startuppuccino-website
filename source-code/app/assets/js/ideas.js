@@ -55,7 +55,7 @@ function ideaHelperCallback(action, response){
 		} else if (action == "unlike"){
 
 			// Change style to the button
-			BUTTON_SELECTED.innerHTML = "LIKE IDEA";
+			BUTTON_SELECTED.innerHTML = "LIKE";
 			
 			// Update click listener from the button
 			BUTTON_SELECTED.setAttribute("onclick","ideaHelper('like','"+IDEA_ID+"',this);");
