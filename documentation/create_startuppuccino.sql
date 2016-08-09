@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2016 at 03:17 PM
+-- Generation Time: Aug 09, 2016 at 12:03 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.6.19
 
@@ -71,6 +71,33 @@ CREATE TABLE `ideaaccount` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ideacomment`
+--
+
+CREATE TABLE `ideacomment` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `idea_id` int(11) NOT NULL,
+  `text` text NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `idealike`
+--
+
+CREATE TABLE `idealike` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `idea_id` int(11) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ideas`
 --
 
@@ -80,7 +107,9 @@ CREATE TABLE `ideas` (
   `description` varchar(144) DEFAULT NULL,
   `owner_id` int(11) NOT NULL,
   `team_size` int(2) NOT NULL DEFAULT '2',
+  `avatar` text,
   `background_pref` longtext,
+  `approved` char(1) NOT NULL DEFAULT 'F',
   `date` date DEFAULT NULL,
   `current_team_size` int(2) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -190,6 +219,19 @@ ALTER TABLE `ideaaccount`
   ADD UNIQUE KEY `idea_id` (`idea_id`,`account_id`);
 
 --
+-- Indexes for table `ideacomment`
+--
+ALTER TABLE `ideacomment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `idealike`
+--
+ALTER TABLE `idealike`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_id` (`account_id`,`idea_id`);
+
+--
 -- Indexes for table `ideas`
 --
 ALTER TABLE `ideas`
@@ -249,7 +291,7 @@ ALTER TABLE `teams`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `comment`
 --
@@ -259,12 +301,22 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `ideaaccount`
 --
 ALTER TABLE `ideaaccount`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+--
+-- AUTO_INCREMENT for table `ideacomment`
+--
+ALTER TABLE `ideacomment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `idealike`
+--
+ALTER TABLE `idealike`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `ideas`
 --
 ALTER TABLE `ideas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `like`
 --
