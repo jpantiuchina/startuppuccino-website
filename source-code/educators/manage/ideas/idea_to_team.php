@@ -37,7 +37,7 @@
 			// List all the ideas
 
 			$query = "SELECT i.id, a.firstName, a.lastName, i.title, i.current_team_size, i.team_size
-					  FROM Ideas i, Account a WHERE i.owner_id=a.id;";
+					  FROM "._T_IDEA." i, "._T_ACCOUNT." a WHERE i.owner_id=a.id;";
 			if($ideas = mysqli_query($dbconn,$query)){
 
 				while($idea = mysqli_fetch_assoc($ideas)){

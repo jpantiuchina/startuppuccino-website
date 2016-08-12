@@ -25,7 +25,7 @@ class Account_Functions {
      */
     public function readAccountData() {
 
-      $query = "SELECT * FROM Account WHERE id='".$this->account_id."';";
+      $query = "SELECT * FROM "._T_ACCOUNT." WHERE id='".$this->account_id."';";
 
       $result = $this->conn->query($query);
 
@@ -57,7 +57,7 @@ class Account_Functions {
       
       // Should be better here to doublecheck if some parameters is empty (not required now)
 
-      $query = "UPDATE Account SET
+      $query = "UPDATE "._T_ACCOUNT." SET
                       email='".$email."',
                       firstname='".$firstname."',
                       lastname='".$lastname."',
@@ -89,7 +89,7 @@ class Account_Functions {
         
       if ($old_password != $new_password || $new_password != "") {
 
-        $query = "UPDATE Account SET password='".md5($new_password)."' WHERE id='".$this->account_id."' AND password='".md5($old_password)."';";
+        $query = "UPDATE "._T_ACCOUNT." SET password='".md5($new_password)."' WHERE id='".$this->account_id."' AND password='".md5($old_password)."';";
 
         $this->conn->query($query);
 
@@ -112,7 +112,7 @@ class Account_Functions {
 
       if(!empty($socialdata)){
 
-        $query = "UPDATE Account SET socials='".$socialdata."' WHERE id='".$this->account_id."';";
+        $query = "UPDATE "._T_ACCOUNT." SET socials='".$socialdata."' WHERE id='".$this->account_id."';";
 
         $this->conn->query($query);
 
@@ -141,7 +141,7 @@ class Account_Functions {
 
       if(!empty($avatar)){
 
-        $query = "UPDATE Account SET avatar='".$avatar."' WHERE id='".$this->account_id."';";
+        $query = "UPDATE "._T_ACCOUNT." SET avatar='".$avatar."' WHERE id='".$this->account_id."';";
 
         $this->conn->query($query);
 
@@ -164,7 +164,7 @@ class Account_Functions {
 
       $path = "../assets/pics/people/".$this->account_data["avatar"];
 
-      $query = "UPDATE Account SET avatar='' WHERE id='".$this->account_id."';";
+      $query = "UPDATE "._T_ACCOUNT." SET avatar='' WHERE id='".$this->account_id."';";
 
       $this->conn->query($query);
 

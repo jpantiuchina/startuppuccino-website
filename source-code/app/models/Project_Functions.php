@@ -27,7 +27,7 @@ class Project_Functions {
     public function userProjectRights() {
 
         $query = "SELECT p.id, p.title, p.description, p.vision, p.team_id
-                  FROM TeamAccount ta, Project p, Teams team
+                  FROM "._T_TEAM_ACCOUNT." ta, "._T_PROJECT." p, "._T_TEAM." team
                   WHERE ta.account_id=".$this->account_id."
                   AND p.id=".$this->project_id."
                   AND ta.team_id=team.id
@@ -55,7 +55,7 @@ class Project_Functions {
         $milestones_data = [];
 
         // Store all the milestones in the array
-        $query = "SELECT id, name FROM Milestones";
+        $query = "SELECT id, name FROM "._T_MILESTONE.";";
         
         $result = $this->conn->query($query);
  
@@ -66,7 +66,7 @@ class Project_Functions {
             }
 
             $query = "SELECT m.id, m.name, pm.update_date
-                      FROM ProjectMilestones pm, Milestones m
+                      FROM "._T_PROJECT_MILESTONE." pm, "._T_MILESTONE." m
                       WHERE pm.project_id=".$this->project_id."
                       AND m.id = pm.milestone_id";
 
@@ -97,7 +97,7 @@ class Project_Functions {
      */
     public function updateProject($title,$description,$vision) {
 
-        $query = "UPDATE Project 
+        $query = "UPDATE "._T_PROJECT." 
                   SET updated_date=NOW(),
                       title='".$title."',
                       description='".$description."',
@@ -131,7 +131,7 @@ class Project_Functions {
         $query = "";
 
         foreach ($milestones as $key => $milestone_id) {
-            $query .= "INSERT INTO ProjectMilestones
+            $query .= "INSERT INTO "._T_PROJECT_MILESTONE."
                        VALUES ('".$this->project_id."','".$milestone_id."',NOW());";
         }
  

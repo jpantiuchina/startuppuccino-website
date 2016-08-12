@@ -26,7 +26,7 @@ class Educators_Functions {
      */
     public function approveIdea($idea_id) {
 
-      $query = "UPDATE Ideas SET approved='T' WHERE id='".$idea_id."';";
+      $query = "UPDATE "._T_IDEA." SET approved='T' WHERE id='".$idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -43,7 +43,7 @@ class Educators_Functions {
      */
     public function disapproveIdea($idea_id) {
 
-      $query = "UPDATE Ideas SET approved='F' WHERE id='".$idea_id."';";
+      $query = "UPDATE "._T_IDEA." SET approved='F' WHERE id='".$idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -74,7 +74,7 @@ class Educators_Functions {
 
           // Add new Team
           // When the team is created it will have the same name of the idea title
-          $query = "INSERT INTO Teams (name) VALUES ('".$idea_data['title']."');";
+          $query = "INSERT INTO "._T_TEAM." (name) VALUES ('".$idea_data['title']."');";
             
           $result = $this->conn->query($query);
 
@@ -86,7 +86,7 @@ class Educators_Functions {
             $members_not_added = [];
             foreach ($idea_members as $member_id) {
               
-              $this->conn->query("INSERT INTO TeamAccount (team_id,date,account_id) VALUES ('".$team_id."',NOW(),'".$member_id."')");
+              $this->conn->query("INSERT INTO "._T_TEAM_ACCOUNT." (team_id,date,account_id) VALUES ('".$team_id."',NOW(),'".$member_id."')");
 
               if($this->conn->affected_rows != 1) $members_not_added[] = $member_id;
 
@@ -95,19 +95,19 @@ class Educators_Functions {
             if(count($members_not_added)==0) {
 
               // Create the project associated with the team
-              $query = "INSERT INTO Project (description,title,team_id,created_date,updated_date) VALUES ('".$idea_data['description']."','".$idea_data['title']."','".$team_id."',NOW(),NOW())";
+              $query = "INSERT INTO "._T_PROJECT." (description,title,team_id,created_date,updated_date) VALUES ('".$idea_data['description']."','".$idea_data['title']."','".$team_id."',NOW(),NOW())";
               
               $this->conn->query($query);
 
               if($this->conn->affected_rows == 1) {
 
                 // Delete the idea tuples from Ideas
-                $this->conn->query("DELETE FROM Ideas WHERE id='".$idea_id."';");
+                $this->conn->query("DELETE FROM "._T_IDEA." WHERE id='".$idea_id."';");
 
                 if($this->conn->affected_rows == 1) {
 
                   // Delete old idea members from IdeaAccount
-                  $this->conn->query("DELETE FROM IdeaAccount WHERE idea_id='".$idea_id."';");
+                  $this->conn->query("DELETE FROM "._T_IDEA_ACCOUNT." WHERE idea_id='".$idea_id."';");
 
                   if($this->conn->affected_rows == $num_idea_members) {
                     return "Idea has been converted into the new team '".$idea_data['title']."'";

@@ -23,10 +23,10 @@
 		}
 
 		// check the account matching password and email
-		$account = mysqli_query($dbconn, "SELECT id, avatar, background, email, firstname, lastname, role FROM Account WHERE email='" . $login_mail . "' AND password='" . $login_password . "'");
+		$account = mysqli_query($dbconn, "SELECT id, avatar, background, email, firstname, lastname, role FROM "._T_ACCOUNT." WHERE email='" . $login_mail . "' AND password='" . $login_password . "'");
 
 		// query result is ok if only one match is found (one account)
-		if (mysqli_num_rows($account) == 1) {
+		if ($account && mysqli_num_rows($account) == 1) {
 
 		    while($row = mysqli_fetch_assoc($account)) {
 		        foreach ($row as $key => $value) {

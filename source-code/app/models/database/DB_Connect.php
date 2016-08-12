@@ -1,4 +1,8 @@
 <?php
+
+// Inlcude db constants (table names, ...)
+require_once 'DB_Names.php';
+
 class DB_Connect {
     private $conn;
  

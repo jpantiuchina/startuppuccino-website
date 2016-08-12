@@ -33,7 +33,7 @@ class People_Functions {
     public function getPersonInfo() {
       
       $query = "SELECT about, avatar, background, skills, socials, email, firstname, lastname, role
-                FROM Account WHERE id='".$this->person_id."';";
+                FROM "._T_ACCOUNT." WHERE id='".$this->person_id."';";
 
       $result = $this->conn->query($query);
 
@@ -61,7 +61,7 @@ class People_Functions {
      */
     public function getAllPeople() {
 
-      $query = "SELECT id, firstname, lastname, avatar, background, role FROM Account;";
+      $query = "SELECT id, firstname, lastname, avatar, background, role FROM "._T_ACCOUNT.";";
 
       $result = $this->conn->query($query);
 

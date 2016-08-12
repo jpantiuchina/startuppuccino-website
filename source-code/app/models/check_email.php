@@ -12,7 +12,7 @@
 			require 'db_connect.php';
 		}
 
-		$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM Account WHERE email='" . $account_email . "'");
+		$check_mail_query = mysqli_query($dbconn, "SELECT id, firstname FROM "._T_ACCOUNT." WHERE email='" . $account_email . "'");
 
 		// Check if email already exists
 		if ($check_mail_query){

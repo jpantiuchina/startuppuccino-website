@@ -26,7 +26,7 @@ class Team_Functions {
      */
     public function getAllTeams() {
       
-      $query = "SELECT * FROM Teams;";
+      $query = "SELECT * FROM "._T_TEAM.";";
 
       $result = $this->conn->query($query);
 
@@ -54,7 +54,7 @@ class Team_Functions {
      */
     public function getTeamInfo() {
       
-      $query = "SELECT * FROM Teams
+      $query = "SELECT * FROM "._T_TEAM."
                 WHERE id='".$this->team_id."';";
 
       $result = $this->conn->query($query);
@@ -70,7 +70,7 @@ class Team_Functions {
           $team_data['members'] = [];
 
           $query = "SELECT a.firstName, a.lastName, a.background, a.id 
-                      FROM TeamAccount ta, Account a, Teams t
+                      FROM "._T_TEAM_ACCOUNT." ta, "._T_ACCOUNT." a, "._T_TEAM." t
                       WHERE ta.team_id = '". $this->team_id ."'
                       AND t.id = ta.team_id
                       AND ta.account_id = a.id";
@@ -103,7 +103,7 @@ class Team_Functions {
      */
     public function getTeamProject() {
         
-      $query = "SELECT * FROM Project WHERE team_id = '" . $this->team_id ."';";
+      $query = "SELECT * FROM "._T_PROJECT." WHERE team_id = '" . $this->team_id ."';";
 
       $result = $this->conn->query($query);
 
@@ -124,7 +124,7 @@ class Team_Functions {
     public function userIsMember() {
 
         $query = "SELECT team.id, team.name
-                FROM TeamAccount ta, Teams team
+                FROM "._T_TEAM_ACCOUNT." ta, "._T_TEAM." team
                 WHERE ta.account_id='".$this->account_id."'
                 AND ta.team_id='".$this->team_id."'
                 AND ta.team_id=team.id";
@@ -148,7 +148,7 @@ class Team_Functions {
      */
     public function updateTeam($name) {
       
-      $query = "UPDATE Teams SET name='".$name."' WHERE id='".$this->team_id."'";
+      $query = "UPDATE "._T_TEAM." SET name='".$name."' WHERE id='".$this->team_id."'";
 
       $result = $this->conn->query($query);
 

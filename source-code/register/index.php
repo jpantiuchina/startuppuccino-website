@@ -115,7 +115,7 @@
 				// Check if there was any input error
 				if($signupOk){
 
-					$sql = "INSERT INTO Account (background, skills, email, firstname, lastname, password, role, created, avatar, about )
+					$sql = "INSERT INTO "._T_ACCOUNT." (background, skills, email, firstname, lastname, password, role, created, avatar, about )
 							VALUES ('" . $_POST['background'] . "',
 									'" . $_POST['skills'] . "',
 									'" . $account_email . "',
