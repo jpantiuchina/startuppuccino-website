@@ -48,6 +48,12 @@
 
        			<?php if ($userLogged){ ?>
 
+       			<?php if($_SESSION['role']=="educator"){ ?>
+
+					<a class="menu_link" href="../educators/manage/ideas/">EDU-AREA</a>
+
+       			<?php } ?>
+
 					<a class="menu_link" href="../ideas/">IDEAS</a>
 
        				<a class="menu_link" href="../teams/">TEAMS</a>

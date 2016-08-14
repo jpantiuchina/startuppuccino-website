@@ -27,6 +27,8 @@
 	</head>
 	<body>
 
+		<div class="box"><a href="../../../"><- Back home</a></div>
+
 		<div class="box"><a href="./idea_phase.php">Change ideas phase</a></div>
 
 		<div class="box"><a href="./idea_approve.php">Approve ideas</a></div>
