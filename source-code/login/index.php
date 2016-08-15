@@ -23,19 +23,17 @@
 
 		 	if (isset($_POST['login'])){ 
 
-		 		include 'login.php'; 
-	
-		  		// javascript (client) redirect to home page once the user is logged
-		    	if ($loginOk){
-				   	echo "<script>window.location='../'</script>";
-		    	} else {
-			    	include 'login_form.php';
-		    	}
-		  
+		 		$login_email = $_POST['email'];
+		 		$login_password = md5($_POST['password']);
+
+		 		include '../app/controllers/login.php';
+				
 			} else {
 
-				$loginOk = true; // initialize variable to prevent to show the error message
-				include 'login_form.php';
+				// initialize variable to prevent to show the error message
+				$loginOk = true;
+				
+				include '../app/views/login_form.php';
 
 			}
 		
