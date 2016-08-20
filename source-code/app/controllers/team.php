@@ -1,8 +1,11 @@
 <?php
 
+	$team_id = $_GET['team_id'];
+
 	if($team_id){
 
 		// Instantiate the Team Functions
+		require_once '../app/models/Team_Functions.php';
 		$team_func = new Team_Functions($_SESSION['id'],$team_id);
 
 		if ($team = $team_func->getTeamInfo()) {
@@ -19,7 +22,7 @@
 			    			// Team mentor not yet implemented 
 			    			// todo: Add mentor field in Teams database
 			    		?>
-			    		<?php if(trim($team['mentor']) != ""){ ?>
+			    		<?php if(isset($team['mentor']) && trim($team['mentor']) != ""){ ?>
 
 			    			<h4>MENTOR</h4>
 
@@ -32,6 +35,9 @@
 
 			    		<?php // list all the members
 			    			
+			    			// Switch
+			    			$isMyTeam = false;
+
 				    		foreach ($team['members'] as $member) {
 				    			
 				    			?>
@@ -44,7 +50,7 @@
 				    			<?php
 
 				    			// Check if the user is looking at his own team page
-				    			if ($member['id'] == $_SESSION['id']) $isMyTeam = true;
+				    			if ($member['id'] == $_SESSION['id']){ $isMyTeam = true; }
 
 				    		}
 
@@ -70,20 +76,24 @@
 
 				    			<?php
 
+				    			// Initialize Project Functions
+								// Include the project functions
+								require_once '../app/models/Project_Functions.php';
+								$project_func = new Project_Functions($_SESSION['id'],$project_id);
+
+								// TODO --> edit db with new tables and fix this
+								$chart_data = $project_func->currentProjectMilestones();
+
+						    	// Include the project status
+						    	include '../app/views/project_status.php'; 
+
 							} else {
 
 								echo "Project not found.";
 
 							}
 
-				    	?>
-
-					    <?php 
-
-					    	// PROJECT STATUS
-					    	include 'project_status.php'; 
-
-					    ?>				    	
+				    	?>		    	
 
 			    	</div>
 
