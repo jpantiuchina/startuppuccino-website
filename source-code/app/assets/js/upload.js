@@ -1,4 +1,5 @@
-function upload_form_submit() {
+
+var upload_form_submit = function() {
     // Check if file input is empty
     if(document.getElementById("file_input").files.length == 0){
         alert("File input is empty!");
@@ -6,18 +7,18 @@ function upload_form_submit() {
     }
     
     // display loader
-    showLoadingScreen();
+    Sp.layout.showLoading();
     
     // Return true to submit the form
     return true;
 }
 
-function notify_callback(text){
+var notify_callback = function(text){
     alert(text);
-    hideLoadingScreen();
+    Sp.layout.hideLoading();
 }
 
-function render_picture_callback(filename,directory){
+var render_picture_callback = function(filename,directory){
     document.getElementById("target_picture").setAttribute("src",directory+filename+"?"+(Math.floor((Math.random()*1000000)+1)));
-    hideLoadingScreen();
+    Sp.layout.hideLoading();
 }

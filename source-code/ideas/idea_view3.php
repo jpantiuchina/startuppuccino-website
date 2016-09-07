@@ -61,12 +61,12 @@
 					// Case: User already joined this idea
 	    			if($ideas_func->isMyIdea()){
 
-						$ideas_html .= "<span class='idea__button' onclick='ideaHelper(\"leave\",\"".$idea['id']."\",this)'>LEAVE IDEA</span>";
+						$ideas_html .= "<span class='idea__button' onclick='SpIdea.ideaHelper(\"leave\",\"".$idea['id']."\",this)'>LEAVE IDEA</span>";
 						
 					// Case: User did not joined yet this idea
 					} else {
 
-	    				$ideas_html .= "<span class='idea__button' onclick='ideaHelper(\"join\",\"".$idea['id']."\",this)'>JOIN IDEA</span>";
+	    				$ideas_html .= "<span class='idea__button' onclick='SpIdea.ideaHelper(\"join\",\"".$idea['id']."\",this)'>JOIN IDEA</span>";
 
 					}
 

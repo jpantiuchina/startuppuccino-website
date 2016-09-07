@@ -1,4 +1,4 @@
-<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return uploadIdeaPicture();" target="notification_box">
+<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
     <h4>Picture</h4>
     <li class="form_box_item">
         <label for="file_input" style="cursor:pointer"><img src="../app/assets/pics/default/picture_upload.svg" id="target_picture" style="max-height:200px;max-width:200px" alt="Upload Picture" /></label>
@@ -14,7 +14,7 @@
 <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
 
-<form class="form_custom form_custom--slim" id="idea_form" action="#" onsubmit="return publishIdea(true,'');">
+<form class="form_custom form_custom--slim" id="idea_form">
 
 	<li class="form_box_item">
 		<label for="title">Idea Title</label>

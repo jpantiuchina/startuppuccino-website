@@ -4,16 +4,8 @@
 
 ?>	
 
-	<section id="loading_screen" style="display: none">
-		
-		<div id="loading_circle">
-			<div id="loading_ball1" class="loading_ball"></div>
-			<div id="loading_ball2" class="loading_ball"></div>
-			<div id="loading_ball3" class="loading_ball"></div>
-			<div id="loading_ball4" class="loading_ball"></div>
-		</div>
-
-	</section>
+	<?php include 'search.php'; ?>
+	<?php include 'loading_screen.php'; ?>
 
 	<script>
 		// Javascript script to manage the mobile menu view
@@ -26,10 +18,6 @@
 	</script>
 
 	<header>
-
-		<!--
-        <div class="header__background"></div>
-		-->
 
         <section class="top_header custom_padding__header">
             
@@ -58,9 +46,9 @@
 
        				<a class="menu_link" href="../teams/">TEAMS</a>
        				
-                	<a class="menu_link" href="../people/">PEOPLE</a>
+                	<a class="menu_link" href="#">SEARCH</a>
 
-                	<a class="menu_link" href="../account/"><?php print strtoupper($_SESSION['firstname']); ?></a>
+                	<a class="menu_link" href="../account/">ACCOUNT</a>
 
                 	<!--
 					<div class="menu_link menu_link--controller" >

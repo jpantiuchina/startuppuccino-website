@@ -46,11 +46,11 @@
 					$userlikes = $ideas_func->getUserLikes();
 					if(!in_array($idea['id'], $userlikes)){
 
-						$ideas_html .= "<span  class='idea__button idea__button--full' onclick='ideaHelper(\"like\",\"".$idea['id']."\",this);'>LIKE</span>";
+						$ideas_html .= "<span  class='idea__button idea__button--full' onclick='SpIdea.ideaHelper(\"like\",\"".$idea['id']."\",this);'>LIKE</span>";
 
 					} else {
 
-						$ideas_html .= "<span  class='idea__button idea__button--full' onclick='ideaHelper(\"unlike\",\"".$idea['id']."\",this);'>UNLIKE</span>";
+						$ideas_html .= "<span  class='idea__button idea__button--full' onclick='SpIdea.ideaHelper(\"unlike\",\"".$idea['id']."\",this);'>UNLIKE</span>";
 
 					}
 

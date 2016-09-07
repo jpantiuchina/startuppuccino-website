@@ -33,11 +33,10 @@
 			var i = document.getElementById("askforhelp_id").value;
 			var e = document.getElementById("askforhelp_email").value;
 			var m = document.getElementById("askforhelp_message").value;
-			if(i==""||e==""||m==""){alert("Please fill all inputs"+i+e+m);}
-			else{connectGET("../app/controllers/askforhelp.php?i="+i+"&e="+e+"&m="+m,"askforhelp");}
+			if (i==""||e==""||m==""){alert("Please fill all inputs"+i+e+m);}
+			else {Sp.get({url : "../app/controllers/askforhelp.php?i="+i+"&e="+e+"&m="+m}, function(response){alert(response);});}
 			return false;
 		}
-		function askForHelpCallback(reponse){alert(response);}
 	</script>
 
 <?php } ?>

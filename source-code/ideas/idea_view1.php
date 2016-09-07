@@ -14,11 +14,11 @@
 
 		$ideas_html = "
 			<div class='new_idea__button'>
-				<span onclick='openNewIdeaForm()'>NEW IDEA</span>
+				<span onclick='SpIdea.openNewIdeaForm()'>NEW IDEA</span>
 		  	</div>
 		  	<section id='new_idea__section' style='position: relative;top: -50px;margin-top:0px'>
 		  		<div class='new_idea__button'>
-		  			<span  onclick='hideIdeaForm()'>CANCEL</span>
+		  			<span  onclick='SpIdea.hideIdeaForm()'>CANCEL</span>
 		  		</div>";
 		$ideas_html .= includeToVar('idea_form.php');
 		$ideas_html .= "</section>";
@@ -71,13 +71,13 @@
 				// Edit/delete ideas -> available only for idea owener
 				if($_SESSION['id']==$idea['owner_id']){
 
-					$ideas_html .= "<span  class='idea__button idea__button--full' onclick='editIdea(\"".$idea['id']."\");'>EDIT IDEA</span>
-									<span  class='idea__button idea__button--delete' onclick='deleteIdea(\"".$idea['id']."\");'>DELETE IDEA</span>";
+					$ideas_html .= "<span  class='idea__button idea__button--full' onclick='SpIdea.editIdea(\"".$idea['id']."\");'>EDIT IDEA</span>
+									<span  class='idea__button idea__button--delete' onclick='SpIdea.deleteIdea(\"".$idea['id']."\");'>DELETE IDEA</span>";
 				
 				}
 
 				// Comments functionality -> available to all students
-				//$ideas_html .= "<br><span class='idea__button idea__button--full' onclick='displayComments(".$idea['id'].")'>COMMENTS</span>";
+				//$ideas_html .= "<br><span class='idea__button idea__button--full' onclick='SpIdea.displayComments(".$idea['id'].")'>COMMENTS</span>";
 
 			$ideas_html .= "</div>"; // idea__footer
 

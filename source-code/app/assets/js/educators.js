@@ -1,25 +1,30 @@
-function generalEducatorsCallback(response){
+
+var educatorsCallback = function(response){
 
 	alert(response);
 
-	if(confirm("Reload the page to see the changes.")){
-		window.location='./idea_approve.php';
+	if( confirm("Reload the page to see the changes.") ){
+		window.location = './idea_approve.php';
 	}
 
 }
 
 function upgradeIdea(idea_id){
 
-	if(confirm("Do you really want to upgrade this idea to team?")) {
-		connectPOST("./upgrade_ideas.php","idea_id="+idea_id,"upgrade_idea");
+	if( confirm("Do you really want to upgrade this idea to team?") ) {
+		Sp.post({url : "./upgrade_ideas.php", parameters : "idea_id="+idea_id}, educatorsCallback);
 	}
 
 }
 
 function approve(idea_id){
-	connectPOST("./idea_approve_controller.php","idea_id="+idea_id+"&action=approve","approve_idea");
+
+	Sp.post({url : "./idea_approve_controller.php", parameters : "idea_id="+idea_id+"&action=approve"}, educatorsCallback);
+
 }
 
 function disapprove(idea_id){
-	connectPOST("./idea_approve_controller.php","idea_id="+idea_id+"&action=disapprove","disapprove_idea");	
+
+	Sp.post({url : "./idea_approve_controller.php", parameters : "idea_id="+idea_id+"&action=disapprove"}, educatorsCallback);	
+
 }

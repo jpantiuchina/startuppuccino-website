@@ -83,7 +83,7 @@
 
     if($upload_func->upload() && $account_func->saveProfilePicture($pic["name"])){
         $_SESSION["avatar"] = $pic["name"];
-        exit(render_picture($pic["name"]),$dir);
+        exit(render_picture($pic["name"],$dir));
     }
 
     echo set_notify("Error while uploading..");

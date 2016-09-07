@@ -27,7 +27,7 @@
     }
     // Function to return a js callback to render the picture uploaded in the parent window
     function render_picture($filename,$dir){
-        return "<script>parent.uploadIdeaPictureCallback('$filename','$dir');</script>";
+        return "<script>parent.SpIdea.uploadIdeaPictureCallback('$filename','$dir');</script>";
     }
     // Function to rename a file with the hash of the user email
     function rename_profile_pic($filename){

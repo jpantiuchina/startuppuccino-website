@@ -449,18 +449,36 @@ header, .top_header, .bottom_header {
 
 @keyframes ball_move2 {
     from {transform: translateX(0px);}
-    50% {transform: translateX(40px);;background-color: #555}
+    50% {transform: translateX(40px);background-color: #555}
     to {transform: translateX(0px);}
 }
 
 @keyframes ball_move3 {
     from {transform: translateY(0px);}
-    50% {transform: translateY(40px);;background-color: #555}
+    50% {transform: translateY(40px);background-color: #555}
     to {transform: translateY(0px);}
 }
 
 @keyframes ball_move4 {
     from {transform: translateX(0px);}
-    50% {transform: translateX(-40px);;background-color: #555}
+    50% {transform: translateX(-40px);background-color: #555}
     to {transform: translateX(0px);}
+}
+
+/* SEARCH */
+
+.search {
+    text-align: left;
+    position: fixed;
+    top: 70px;
+    left: 0px;
+            transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+            transition: all 400ms;
+    -webkit-transition: all 400ms;
+}
+
+.search.show {
+            transform: translateX(0);
+    -webkit-transform: translateX(0);
 }
