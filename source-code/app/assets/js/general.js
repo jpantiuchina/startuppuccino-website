@@ -1,4 +1,40 @@
+"use strict";
+
 function Startuppuccino(){
+
+    // Global variable to store data for the search function
+    var data_set = [];
+
+    this.downloadSearchResult = function() {
+        // Download data
+        this.get({url : "../app/controllers/search.php"},function(data){
+            data_set = JSON.parse(data);
+        });
+    }
+
+    this.search = function(text){
+
+        text = text.toLowerCase();
+
+        if(typeof text === "undefined" || text == null){
+            this.layout.renderSearchResult(data_set);
+            return;
+        }
+
+        var result_set = [],
+            length = data_set.length,
+            i;
+
+        for (i = 0; i < length; i++) {
+            var x = data_set[i];
+            if( x.name.toLowerCase().search(text) != -1 ){
+                result_set.push(x); 
+            }
+        }
+
+        this.layout.renderSearchResult(result_set);
+
+    }
 
     // Redirect to logout page
     this.logout = function() {
@@ -129,29 +165,88 @@ Startuppuccino.prototype.layout.hideLoading = function(){
 
 // Helpers to easily hide or show sections
 Startuppuccino.prototype.layout.showSection = function(target){
-    elem = document.getElementById(target);
+    var elem = document.getElementById(target);
     elem.classList.remove("hidden_element");
 }
 Startuppuccino.prototype.layout.hideSection = function(target){
-    elem = document.getElementById(target);
+    var elem = document.getElementById(target);
     elem.classList.add("hidden_element");
 }
 
+Startuppuccino.prototype.layout.toggleMobileMenu = function(target){
+    target.classList.toggle("mobile_menu__button--active");
+    document.getElementById("main_menu").classList.toggle("main_menu--visible");
+    document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+    document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+}
 
+Startuppuccino.prototype.layout.toggleSearch = function() {
+    document.getElementById("search").classList.toggle("search--visible");
+}
 
+// Render search results in the search section
+Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
+        
+    var i,
+        length = result_set.length,
+        container = document.createElement("div"),
+        wrapper = document.getElementById("search_result_list");
 
-Startuppuccino.prototype.search = function(){
+    var node = document.createElement("div"),
+        a = document.createElement("a"),
+        img = document.createElement("img"),
+        labels = document.createElement("div"),
+        p_name = document.createElement("p"),
+        p_role = document.createElement("p");
 
-    var data;
+    container.className = "search_results";
+    node.className = "search_result";
+    img.className = "search_result__pic";
+    labels.className = "search_result__labels";
+    p_name.className = "search_result__labels__name";
+    p_role.className = "search_result__labels__role";
 
-    // Download data
+    labels.appendChild(p_name);
+    labels.appendChild(p_role);
+    a.appendChild(img);
+    a.appendChild(labels);
+    node.appendChild(a);
 
-    // Render lastest data
+    for (i = 0; i < length; i++) {
+        
+        var x = result_set[i];
+        
+        var n = node.cloneNode(true);
 
-    // Search by name
+        n.children[0].href = "../" + x.id;
+        n.children[0].children[0].src = "../app/assets/pics/" + x.avatar;
+        n.children[0].children[1].children[0].innerHTML = x.name;
+        n.children[0].children[1].children[1].innerHTML = x.role;
+        
+        container.appendChild(n);
+    }
+
+    // Replace DOM with new results
+    wrapper.innerHTML = "";
+    wrapper.appendChild(container);
 
 }
 
+
+
 /* Initialize Startuppuccino */
 
-if(typeof Sp === "undefined" || Sp === null){ Sp = new Startuppuccino(); }
+if(typeof Sp === "undefined" || Sp === null){ 
+
+    var Sp = new Startuppuccino();
+
+}
+
+/* Download search result after the has been loaded */
+
+window.onload = function(){ Sp.downloadSearchResult(); };
+
+/* Set search event listeners */
+document.getElementById("search_input").oninput = function(){
+    Sp.search(this.value);
+}

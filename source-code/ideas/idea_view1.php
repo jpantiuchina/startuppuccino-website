@@ -38,7 +38,7 @@
 	
 		$ideas_html .= "
 
-		<div class='list_element list_element--idea'>
+		<div class='list_element list_element--idea' id='i".$idea['id']."'>
 
 			<div class='idea__details'>";
 

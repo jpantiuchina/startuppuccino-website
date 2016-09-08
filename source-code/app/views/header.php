@@ -7,21 +7,11 @@
 	<?php include 'search.php'; ?>
 	<?php include 'loading_screen.php'; ?>
 
-	<script>
-		// Javascript script to manage the mobile menu view
-		function toggleMobileMenu(e){
-			e.classList.toggle("mobile_menu__button--active");
-			document.getElementById("main_menu").classList.toggle("main_menu--visible");
-			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
-			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
-		}
-	</script>
-
 	<header>
 
         <section class="top_header custom_padding__header">
             
-        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        	<div onclick="Sp.layout.toggleMobileMenu(this)" id="mobile_menu__button" class="mobile_menu__button">
         		<div></div>
         		<div></div>
         		<div></div>
@@ -46,7 +36,7 @@
 
        				<a class="menu_link" href="../teams/">TEAMS</a>
        				
-                	<a class="menu_link" href="#">SEARCH</a>
+                	<a class="menu_link" href="#" onclick="Sp.layout.toggleSearch()">SEARCH</a>
 
                 	<a class="menu_link" href="../account/">ACCOUNT</a>
 
