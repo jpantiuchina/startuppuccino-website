@@ -1,3 +1,15 @@
+
+<!--
+<script type="text/javascript" src="//platform.linkedin.com/in.js">
+    api_key: YOUR_API_KEY_HERE
+    authorize: true
+    onLoad: onLinkedInLoad
+</script>
+
+<script type="in/Login"></script>
+
+-->
+
 <form class="form_custom form_custom--slim" action="" method="post">
 
 	<?php if(!$loginOk){ ?>
