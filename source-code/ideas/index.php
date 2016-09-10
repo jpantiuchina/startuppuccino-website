@@ -23,18 +23,17 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/ideas.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/ideas.css">
 		<title>Ideas - Startuppuccino</title>
 
 	</head>
 	<body>
 		
-		<?php include '../app/views/header.php'; ?>
+		<?php include '../app/views/header_new.php'; ?>
 		
 		<main>
+
+			<p class="page_title">Ideas</p>
 
 			<?php if (!($ideas = $ideas_func->getAllIdeas())){ ?>
 			
@@ -42,7 +41,7 @@
 			
 			<?php } else { ?>
 
-				<section class="list_view">
+				<section>
 					<?php echo include 'idea_view_switch.php'; ?>
 				</section>
 

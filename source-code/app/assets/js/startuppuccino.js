@@ -250,3 +250,21 @@ window.onload = function(){ Sp.downloadSearchResult(); };
 document.getElementById("search_input").oninput = function(){
     Sp.search(this.value);
 }
+
+
+
+
+
+
+/* ASK FOR HELP SECTION */
+
+function showAskForHelp(){document.getElementById("askforhelp").setAttribute("style","top:0px");}
+function hideAskForHelp(){document.getElementById("askforhelp").removeAttribute("style");}
+function askForHelp(){
+    var i = document.getElementById("askforhelp_id").value;
+    var e = document.getElementById("askforhelp_email").value;
+    var m = document.getElementById("askforhelp_message").value;
+    if (i==""||e==""||m==""){alert("Please fill all inputs"+i+e+m);}
+    else {Sp.get({url : "../app/controllers/askforhelp.php?i="+i+"&e="+e+"&m="+m}, function(response){alert(response);});}
+    return false;
+}

@@ -1,12 +1,20 @@
 
 /* Set event listeners */
 
-document.getElementById("idea_form_picture_upload").onsubmit = function(){
-	return SpIdea.uploadIdeaPicture();
-}
+var idea_form = document.getElementById("idea_form"),
+	picture_form = document.getElementById("idea_form_picture_upload");
 
-document.getElementById("idea_form").onsubmit = function(){
-	return SpIdea.publishIdea(true,'');
+if(typeof idea_form != "undefined" && 
+   typeof picture_form != "undefined" &&
+   idea_form != null &&
+   picture_form != null){
+	document.getElementById("idea_form").onsubmit = function(){
+		return SpIdea.publishIdea(true,'');
+	}
+
+	picture_form.onsubmit = function(){
+		return SpIdea.uploadIdeaPicture();
+	}
 }
 
 
@@ -43,7 +51,8 @@ var SpIdea = new function(){
 					if(action == "join"){
 
 						// Change style to the button
-						BUTTON_SELECTED.innerHTML = "LEAVE IDEA";
+						BUTTON_SELECTED.value = "Leave";
+						BUTTON_SELECTED.className = "c_red";
 
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('leave','" + IDEA_ID + "',this);");
@@ -51,7 +60,8 @@ var SpIdea = new function(){
 					} else if (action == "leave"){
 
 						// Change style to the button
-						BUTTON_SELECTED.innerHTML = "JOIN IDEA";
+						BUTTON_SELECTED.value = "Join";
+						BUTTON_SELECTED.className = "c_green";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('join','" + IDEA_ID + "',this);");
@@ -59,7 +69,8 @@ var SpIdea = new function(){
 					} else if (action == "like"){
 
 						// Change style to the button
-						BUTTON_SELECTED.innerHTML = "UNLIKE";
+						BUTTON_SELECTED.value = "Unlike";
+						BUTTON_SELECTED.className = "c_red";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('unlike','" + IDEA_ID + "',this);");
@@ -67,7 +78,8 @@ var SpIdea = new function(){
 					} else if (action == "unlike"){
 
 						// Change style to the button
-						BUTTON_SELECTED.innerHTML = "LIKE";
+						BUTTON_SELECTED.value = "Like";
+						BUTTON_SELECTED.className = "c_green";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('like','" + IDEA_ID + "',this);");

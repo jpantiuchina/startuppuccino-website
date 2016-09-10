@@ -1,0 +1,135 @@
+
+$header-height: 70px;
+$header-background: #fff;
+$header-shadow: 0px 0px 2px #a7a7a7;
+
+$logo-original-width: 300px;
+$logo-original-height: 92px;
+$logo-ratio-width: $logo-original-width / $logo-original-height;
+$logo-ratio-height: $logo-original-height / $logo-original-width;
+$logo-height: 100%;
+$logo-width: $header-height * $logo-ratio-width;
+
+$menu-picture-size-percent: 0.60;
+$menu-picture-margin-top: #{($header-height / 1px * (1 - $menu-picture-size-percent))/2}px;
+$menu-picture-size: #{$header-height / 1px * $menu-picture-size-percent}px;
+
+$submenu-background: #f9f9f9;
+
+main {
+	margin-top: $header-height;
+}
+
+header {
+
+	z-index: 3;
+	position: fixed;
+	top:0;left:0;
+	width: 100%;
+	height: $header-height;
+	padding: 0px $page-lateral-padding;
+	margin: auto;
+	font-size: 0px;
+	background-color: $header-background;
+	@include box-shadow($header-shadow);
+	margin-bottom: 0px;
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.header_element {
+		position: relative;
+		height: 100%;
+		display: inline-block;
+		vertical-align: top
+	}
+
+	>.logo {
+
+		@extend .header_element;
+		
+		img {
+			height: $logo-height;
+		}
+	
+	}
+
+	>.menu {
+
+		@extend .header_element;
+		font-size: 17px;
+		width: calc(100% - #{$logo-width + 1} );
+		text-align: right;
+		
+		a:before {
+			content: ">";
+		}
+
+		a {
+			color: $logo-brown;
+			text-decoration: none;
+		}
+	
+		> ul {
+			margin-right: 30px;
+			height: $header-height;
+		}
+
+	}
+
+	.menu_link {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		width: 100px;
+	}
+
+	.menu_link--top {
+		@extend .menu_link;
+		height: $header-height;
+		line-height: $header-height;
+		text-align: center;
+	}
+
+	.submenu_trigger {	
+		padding-bottom: $menu-picture-margin-top;
+	}
+
+	.menu_profile_picture {
+		width: $menu-picture-size;
+		height: $menu-picture-size;
+		@include border-radius(50%);
+		margin: auto;
+		margin-top: $menu-picture-margin-top;
+		@extend .picture;
+	}
+
+	$submenu-link-height: 40px;
+	$submenu-padding: 10px;
+
+	.submenu {
+		position: absolute;
+		top: $header-height;
+		height: 0px;
+		overflow: hidden;
+		background: $submenu-background;
+		padding: 0px $submenu-padding;
+		@include box-shadow($header-shadow);
+		@include transition(300ms);
+	}
+
+	.menu_link--sub {
+		@extend .menu_link;
+		height: $submenu-link-height;
+		line-height: $submenu-link-height;
+		text-align: left;
+	}
+
+	.submenu_trigger:hover > .submenu {
+		height: $submenu-link-height * 2
+	}
+
+}

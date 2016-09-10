@@ -1,36 +1,39 @@
 <?php
 
+	function ideaDiv($avatar,$id){
+		if(!empty($avatar) && file_exists("../app/assets/pics/ideas/".$avatar)){
+			return "<div id='idea_picture__".$id."' style=\"background-image:url('../app/assets/pics/ideas/".$avatar."')\"></div>";
+		} else {
+			return "<div style=\"background-image:url('../app/assets/pics/default/idea_pic.png')\"  id='idea_picture__".$id."'></div>";
+		}
+	}
+
+	
+
 	$ideas_html = "";
 
 	foreach ($ideas as $idea){
 
 		$ideas_html .= "
 
-		<div class='list_element list_element--idea' id='i".$idea['id']."'>
+		<div class='idea' id='i".$idea['id']."'>
 
-			<div class='idea__details'>";
+			<div class='picture_box'>";
 
-				if(!empty($idea['avatar']) && file_exists("../app/assets/pics/ideas/".$idea['avatar'])){
-					$ideas_html .= "<img class='idea__details_pic'  id='idea_picture__".$idea['id']."' src='../app/assets/pics/ideas/".$idea['avatar']."' width='100'/>";
-				} else {
-					$ideas_html .= "<img style='display:none' src=''  id='idea_picture__".$idea['id']."'/>";
-				}
+				$ideas_html .= ideaDiv($idea['avatar'],$idea['id']);
 
 				$ideas_html .= "
 
-				<h3 class='idea__details_title' id='idea_title__".$idea['id']."'>".$idea['title']."</h3>
+			</div>
+			<div class=\"info_box\">
 
-				<p class='idea__details_description' id='idea_description__".$idea['id']."'>".$idea['description'].".</p>
+				<p class='idea_title' id='idea_title__".$idea['id']."'>".$idea['title']."</p>
 
-	        	<div class='idea__details_extra'>
-	        	
-	        		<span>".$idea['date']."</span>
-		    
-		        </div>
+				<p class='idea_description' id='idea_description__".$idea['id']."'>".$idea['description'].".</p>
 			
 			</div>
 
-		</div>"; // list_element
+		</div>"; // idea element
 
 	}
 

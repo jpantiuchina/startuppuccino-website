@@ -1,0 +1,105 @@
+
+@import 'general';
+
+
+$idea-width: 650px;
+$picture-size: 80px;
+
+$picture-box-width: 20%;
+$info-box-width: 100% - $picture-box-width;
+
+$input-border: none;
+$idea-border-bottom: 1px dotted #999;
+$idea-margin-bottom: 20px;
+
+$idea-footer-lineheight: 35px;
+$idea-footer-padding-bottom: 15px;
+
+/* form */
+.picture_form_wrapper {
+	display: none;
+}
+
+.idea {
+
+	font-size: 0px;
+	width: 100%;
+	max-width: $idea-width;
+	height: auto;
+	border-bottom: $idea-border-bottom;
+	margin-bottom: $idea-margin-bottom;
+
+	>.info_box,
+	>.picture_box {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	>.picture_box {
+		width: $picture-box-width;
+
+		>div {
+			margin: auto;
+			width: $picture-size;
+			height: $picture-size;
+			background-color: #e8e8cd;
+			@extend .picture;
+		}
+
+	}
+
+	>.info_box {
+		width: $info-box-width;
+		font-size: 16px;
+	}
+
+}
+
+.info_box {
+
+	>p {
+		margin: 0px;
+		margin-bottom: 10px;
+	}
+
+	>.idea_description {
+		font-weight: 200
+	}
+
+	input,
+	textarea {
+		background: transparent;
+	}
+
+	>input[type=text],
+	>textarea {
+		border: $input-border;
+		display: block;
+		width: 100%;
+	}
+
+	>input[type=text] {
+		font-weight: 900
+	}
+
+	>textarea {
+		margin: 15px auto;
+	}
+
+}
+
+.info_box_footer {
+
+	text-align: right;
+	height: $idea-footer-lineheight + $idea-footer-padding-bottom;
+	line-height: $idea-footer-lineheight;
+	padding-bottom: $idea-footer-padding-bottom;
+
+	>input[type=submit],
+	>input[type=button] {
+		border: none;
+		padding: 0;
+		text-decoration: underline;
+	}
+
+}

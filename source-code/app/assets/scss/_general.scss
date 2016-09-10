@@ -1,0 +1,159 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+          box-shadow: $shadow;
+}
+
+@mixin transition($ttime){
+	-webkit-transition: all $ttime;
+			transition: all $ttime;
+}
+
+.display_flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.display_flex_column {
+	@extend .display_flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.display_flex_vertical_aligner {
+	@extend .display_flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+
+/* Fonts */
+@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Regular.otf') format('opentype');}
+@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-weight:900}
+@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Light.otf') format('opentype');font-weight:200}
+@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-style:italic}
+
+
+$font-stack: "Maison", "Lato", "Arial", sans-serif;
+
+$picture-filter-opacity: 0.3;
+
+$background-color: #f7f7dd;
+$logo-green: #7fb03b;
+$logo-red: #be3b43;
+$logo-brown: #513a2b;
+
+$palette-yellow: #fcc124;
+
+$page-lateral-padding: 40px;
+
+$transition-time: 300ms;
+
+@import 'header';
+@import 'search';
+@import 'askforhelp';
+
+
+/* *** */
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+	font: 100% $font-stack;
+	background-color: $background-color;
+	margin: 0;
+	padding: 0;
+}
+
+main {
+	position: relative;
+	padding: 0px $page-lateral-padding;
+}
+
+input {
+	font-family: $font-stack;
+}
+
+input[type=submit],
+input[type=button],
+input[type=file] {
+	cursor: pointer;
+}
+
+/* Page title - subheader */
+p.page_title {
+    margin: 0px;
+    padding: 50px 0px;
+
+	&:before {
+		content: ">";
+	}
+}
+
+/* General picture */
+.picture {
+	position: relative;
+	background-color: $logo-green;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	overflow: hidden;
+}
+
+/* Role filters */
+
+.role_filer {
+	position: absolute;
+	top: 0; left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: $picture-filter-opacity;
+}
+
+.role_filer--student {
+	@extend .role_filer;
+	background-color: $logo-green;
+}
+.role_filer--mentor {
+	@extend .role_filer;
+	background-color: $logo-red;
+}
+.role_filer--educator {
+	@extend .role_filer;
+	background-color: $logo-brown;
+}
+
+/* general color style classes */
+
+.c_green {
+	color: $logo-green;
+}
+.c_red {
+	color: $logo-red;
+}
+.c_brown {
+	color: $logo-brown;
+}
