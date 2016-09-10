@@ -31,10 +31,15 @@ class Search_Functions {
      */
     private function loadResults(){
         
-        $result = $this->loadUsers();
+        $users = $this->loadUsers();
+        $ideas = $this->loadIdeas();
 
-        foreach ($this->loadIdeas() as $idea) {
-            array_push($result, $idea);
+        $result = $users;
+
+        if(count($ideas) > 0){
+            foreach ($ideas as $idea) {
+                array_push($result, $idea);
+            }
         }
 
         return $result;
