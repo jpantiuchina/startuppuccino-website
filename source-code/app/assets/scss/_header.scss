@@ -1,7 +1,7 @@
 
 $header-height: 70px;
-$header-background: #fff;
-$header-shadow: 0px 0px 2px #a7a7a7;
+$header-background: $background-color;
+$header-shadow: none; /*0px 0px 2px #a7a7a7;*/
 
 $logo-original-width: 300px;
 $logo-original-height: 92px;
@@ -65,7 +65,7 @@ header {
 		text-align: right;
 		
 		a:before {
-			content: ">";
+			content: "";
 		}
 
 		a {

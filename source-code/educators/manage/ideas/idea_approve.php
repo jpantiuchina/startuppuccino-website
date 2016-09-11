@@ -77,7 +77,7 @@
 
 		</div> <!-- Listview -->
 
-		<script src="../../../app/assets/js/general.js"></script>
+		<script src="../../../app/assets/js/startuppuccino.js"></script>
 		<script src="../../../app/assets/js/educators.js"></script>
 
 	</body>

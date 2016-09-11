@@ -43,6 +43,17 @@
     justify-content: center;
 }
 
+.center_column {
+    @extend .display_flex_column;
+    height: 100%;
+
+    > .center_aligner {
+        @extend .display_flex_vertical_aligner;
+        height: 100%;
+    }
+
+}
+
 
 /* Fonts */
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Regular.otf') format('opentype');}
@@ -52,6 +63,7 @@
 
 
 $font-stack: "Maison", "Lato", "Arial", sans-serif;
+$font-text: san-serif;
 
 $picture-filter-opacity: 0.3;
 
@@ -62,9 +74,10 @@ $logo-brown: #513a2b;
 
 $palette-yellow: #fcc124;
 
-$page-lateral-padding: 40px;
-
 $transition-time: 300ms;
+
+$page-lateral-padding: 40px;
+$page-lateral-padding-mobile: 15px;
 
 @import 'header';
 @import 'search';
@@ -82,7 +95,7 @@ html, body {
 }
 
 body {
-	font: 100% $font-stack;
+	font-family: $font-text;
 	background-color: $background-color;
 	margin: 0;
 	padding: 0;
@@ -93,7 +106,11 @@ main {
 	padding: 0px $page-lateral-padding;
 }
 
-input {
+@media all and (max-width: 700px){
+	main {padding: 0px $page-lateral-padding-mobile;}
+}
+
+input, a, h1, h2, h3, h4, h5, header, .page_title {
 	font-family: $font-stack;
 }
 
@@ -150,10 +167,13 @@ p.page_title {
 
 .c_green {
 	color: $logo-green;
+	fill: $logo-green
 }
 .c_red {
 	color: $logo-red;
+	fill: $logo-red
 }
 .c_brown {
 	color: $logo-brown;
+	fill: $logo-brown
 }

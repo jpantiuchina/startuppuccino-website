@@ -4,140 +4,89 @@
 <html>
 	<head>
 		
-		<link href="../app/assets/css/general.css" rel="stylesheet" media="all" type="text/css" />
+		<link href="../app/assets/newcss/about.css" rel="stylesheet" media="all" type="text/css" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Startuppuccino</title>
-
-		<script>
-    		function toggleMobileMenu(e){
-    			e.classList.toggle("mobile_menu__button--active");
-    			document.getElementById("main_menu").classList.toggle("main_menu--visible");
-    			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
-    			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
-    		}
-    	</script>
 
 	</head>
 	<body>
 
-		<div id="wrapper">
-	        
-	        <header class="header--home">
+		<header>
+		        
+			<div class="logo">
+		    	<a href="../" title="Home - Startuppuccino">
+		        	<img alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
+		    	</a>
+		    </div>
 
-	            <div class="header__background"></div>
+		    <nav class="menu">
 
-	            <section class="top_header custom_padding__header">
-	                
-	            	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
-	            		<div></div>
-	            		<div></div>
-	            		<div></div>
-	            		<div></div>
-	            	</div>
+		    	<ul>
 
-	            	<a href="../" title="Home - Startuppuccino">
-                		<img class="logo" alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
-                	</a>
+		    		<!--
+					<li class="menu_link--top"><a href="../login/">Login</a></li>
 
-	                <nav id="main_menu">
-						
-						<?php if ($userLogged){ ?>
+					<li class="menu_link--top"><a href="../register/">Register</a></li>
+					-->
+				</ul>
 
-							<a class="menu_link" href="../ideas/">IDEAS</a>
+		    </nav>
+		        
+		</header>
+        <main>
+            
+            <section class="split_view">
 
-		       				<a class="menu_link" href="../teams/">TEAMS</a>
+            	<div class="split_view__column">
+            		
+            		<p class="tagline_big">
+            			<span class="c_green">Start</span>
+            			<span class="c_red">Grow up</span>
+            			<span class="c_brown">Be ready!</span>
+            		</p>
 
-	           				<a class="menu_link" href="../people/">PEOPLE</a>
+            	</div>
 
-	           				<a class="menu_link" href="../account/"><?php print strtoupper($_SESSION['firstname']); ?></a>
+            	<div class="split_view__column">
+            		
+            		<table>
+            			<tr>
+            				<td>
+            					<p>
+            						<h3>Startuppuccino?</h3>
+            						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, 
+            					</p>
+            				</td>
+            				<td>
+            					<p>
+            						lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.
 
-	           				<!--
-							<div class="menu_link menu_link--controller" >
-								<span class="menu_link menu_link--placeholder"><?php //print strtoupper($_SESSION['firstname']); ?></span>
-								<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
-							</div>
-							-->
+            						<p><a class="about_links" href="../">Enter</a></p>
 
-							<a class="menu_link" href="../logout/">LOGOUT</a>
+				            		<svg xmlns="http://www.w3.org/2000/svg" id="logo_balls" viewBox="0 0 500 500"><path class="c_green" d="M132.12,221.32a44.39,44.39,0,1,1-44.39-44.39,44.39,44.39,0,0,1,44.39,44.39"/><path class="c_red" d="M316.74,116.52a74,74,0,1,1-74-74,74,74,0,0,1,74,74"/><path class="c_brown" d="M450.66,346.37A118.37,118.37,0,1,1,332.29,228,118.37,118.37,0,0,1,450.66,346.37"/></svg>
 
-						<?php } else { ?>
+            					</p>
+            				</td>
+            			</tr>
+            		</table>
 
-							<!-- change this into a login form (external ajax login form script -> include) -->
-							<a class="menu_link" href="../login/">LOGIN</a>
+            	</div>
 
-							<a class="menu_link" href="../register/">REGISTER</a>
 
-						<?php } // endif userlogged ?>
+            </section>
 
-	                </nav>
-	                
-	            </section>
+            <section>
+            	<p><a class="about_links" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a></p>
+            	<p><a class="about_links" href="http://unibz.it" target="_blank">Unibz.it</a></p>
+            </section>
+            
+        </main>
 
-	            <section class="bottom_header split_view">
-	                
-            		<div class="box_view custom_padding">
-            			<h3></h3>
-            			<p></p>
-            		</div>
-            		<div class="box_view box_view--tagline custom_padding">
-            			
-            			<h3>Meet Startuppuccino</h3>
-		                <p>Startuppuccino is a project whose vision is to provide startups the guidance they need at their early steps</p>
-		                <span><a href="../ideas/">DISCOVER</a></span>
+        <footer>
 
-            		</div>
+        	<p>© 2016 Startuppuccino. All rights reserved<!-- — Privacy — Contacts--></p>
 
-	            </section>
-
-	        </header>
-	        
-	        <main>
-	            
-	            <section class="split_view split_view--info">
-	                
-	                <div class="box_view custom_padding">
-	                    <h3>
-	                        <span class="span-line span-line-orange"></span>
-	                        INTRODUCTION
-	                    </h3>
-	                    <p>Startuppuccino is a project whose vision is to provide startups the guidance they may need in their early steps.</p>
-	                    <p>On the portal, startuppers and enterpreneurs can find every direct guidance through the help of our mentors team, specialized personal ready to direct people into the correct direction, as well as a selection of useful web tools they can use to improve their working experience.</p>
-	                    <p>Startuppuccino is a free service, born during the Lean Startup course and sponsored by Unibz.</p>
-	                </div>
-	                
-	                <div class="box_view custom_padding" id="vision">
-	                    <h3>
-	                        <span class="span-line span-line-black"></span>
-	                        VIDEO
-	                    </h3>
-	                    <iframe src="https://player.vimeo.com/video/151849090" width="300" height="180" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-	                </div>
-	                
-	            </section>
-	            
-	            <section class="full-view custom_padding" id="partners">
-	                
-	                <h3>
-	                    <span class="span-line span-line-white"></span>
-	                    PARTNERS
-	                </h3>
-	                <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
-	                <a href="http://unibz.it" target="_blank"><img src="../app/assets/pics/logos/unibz_logo.jpg" /></a>
-	                <a href="#"><img src="../app/assets/pics/logos/minetoolz.jpg" /></a>
-	            
-	            </section>
-	            
-	        </main>
-	        
-	        <footer>
-	            
-	            <!--
-	            <p>Developed with love by your <a href="http://startuppuccino.com">Startuppuccino</a></p>
-	            -->
-	            
-	        </footer>
-	        
-	    </div>
+        </footer> 
 
 	</body>
 </html>

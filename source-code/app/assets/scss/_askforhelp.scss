@@ -44,17 +44,6 @@ $askforhelp-margin: 20px;
         @include border-radius(50%);
     }
 
-    > .center_column {
-    	@extend .display_flex_column;
-    	height: 100%;
-
-    	> .center_aligner {
-	    	@extend .display_flex_vertical_aligner;
-	    	height: 100%;
-	    }
-
-    }
-
 }
 
 .askforhelp_form {
