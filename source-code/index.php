@@ -25,8 +25,7 @@
                 
         <header>
             
-        <!--
-
+        
             <nav class="menu">
                 <ul>
                     <li class="menu_link--top"><a href="./login/">Login</a></li>
@@ -34,8 +33,7 @@
                 </ul>
             </nav>
         
-        -->            
-    
+        
         </header>
 
         <main>

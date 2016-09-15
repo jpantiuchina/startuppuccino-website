@@ -13,7 +13,7 @@
 <html>
 	<head>
 	
-		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/register.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/register2.css">
 		<title>Startuppuccino - Register</title>
 	
 	</head>
@@ -30,7 +30,7 @@
 
 				} else {
 
-					include '../app/views/register_form.php';
+					include '../app/views/register_form2.php';
 
 				}
 			?>

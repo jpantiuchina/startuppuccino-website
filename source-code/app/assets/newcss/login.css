@@ -356,39 +356,74 @@ p.page_title {
   color: #513a2b;
   fill: #513a2b; }
 
-header {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
-
-body {
-  background-color: #f7f7dd; }
-
-main {
-  height: calc(100% - 70px);
-  padding-top: 0px;
-  /* Overwrite definition in header, because the header is hidden */ }
-
-.menu {
-  float: right; }
-  .menu .menu_link--top {
-    text-align: right !important; }
-  .menu ul {
-    margin: 0px !important; }
-
-#landing_logo_container {
+form.form_custom {
+  max-width: 640px;
+  margin: 40px auto;
   width: 100%;
-  -webkit-box-flex: 0;
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none; }
+  background-color: #f0f0d1;
+  -webkit-box-shadow: 0px 0px 2px #a7a7a7;
+  box-shadow: 0px 0px 2px #a7a7a7;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px 15px;
+  color: #555;
+  text-align: left;
+  font-family: "Maison", "Lato", "Arial", sans-serif; }
 
-.landing_footer {
-  text-align: right;
-  margin: 0px 40px;
-  line-height: 70px; }
-  .landing_footer > a {
-    color: #513a2b; }
-    .landing_footer > a:before {
-      content: ">"; }
+.form_box_item {
+  display: inline-block;
+  padding: 14px 10px;
+  min-width: 300px; }
+  .form_box_item > label {
+    display: block;
+    margin: auto;
+    margin-bottom: 5px; }
 
-/*# sourceMappingURL=landing.css.map */
+.form_box_item--full {
+  width: 100%; }
+
+.form_pretty_general_input {
+  border: none;
+  width: 250px;
+  height: 30px;
+  line-height: 30px;
+  background-color: #f2f2f2;
+  padding: 7px; }
+
+textarea.form_pretty_general_input {
+  height: auto; }
+
+.form_pretty_button_input {
+  padding: 5px;
+  background-color: #7fb03b;
+  color: #fefefe;
+  border: none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: all 300ms;
+  transition: all 300ms; }
+  .form_pretty_button_input:hover {
+    -webkit-filter: brightness(120%);
+    -moz-filter: brightness(120%);
+    -ms-filter: brightness(120%);
+    -o-filter: brightness(120%);
+    filter: brightness(120%); }
+  .form_pretty_button_input.form_input--forgot_password {
+    background-color: transparent;
+    color: #be3b43;
+    font-size: 12px;
+    display: inline-block;
+    height: 19px;
+    line-height: 19px;
+    vertical-align: top; }
+
+.form_pretty_button_link {
+  color: #513a2b;
+  padding: 5px;
+  @inlcude border-radius(3px); }
+
+/*# sourceMappingURL=login.css.map */

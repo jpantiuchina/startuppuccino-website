@@ -2,11 +2,11 @@
  
 class Ideas_Functions {
  
-    var $account_id;
-    var $idea_id;
-    var $my_ideas_id;
-    var $user_likes;
-    var $LIKES_LIMIT;
+    private $account_id;
+    private $idea_id;
+    private $my_ideas_id;
+    private $user_likes;
+    private $LIKES_LIMIT;
 
     // constructor
     function __construct($account) {

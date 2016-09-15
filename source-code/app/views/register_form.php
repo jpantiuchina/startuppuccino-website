@@ -16,7 +16,7 @@
 	</li>
 
 
-	<hr />
+	<p class="form_separator"></p>
 
 
 	<li class="form_box_item">
@@ -37,7 +37,7 @@
 	</li>
 
 	
-	<hr />
+	<p class="form_separator"></p>
 
 
 	<li class="form_box_item">
@@ -56,8 +56,8 @@
 		<input class="form_pretty_general_input" type="text" name="background" <?php if(isset($_POST['background'])) print('value="'.$_POST['background'].'"'); ?> required/>
 	</li>
 
-
-	<hr />
+	
+	<p class="form_separator"></p>
 
 
 	<li class="form_box_item">
@@ -66,7 +66,8 @@
 	</li>
 
 
-	<hr />
+	<p class="form_separator"></p>
+
 
 	<!--
 

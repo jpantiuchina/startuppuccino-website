@@ -11,35 +11,40 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		
 		<title>Startuppuccino - Login</title>
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/login.css">
+
 	</head>
 	<body>
 
-		<?php 
+		<?php include '../app/views/header_new.php'; ?>
+
+		<main>
+
+			<?php
+
+			 	if (isset($_POST['login'])){ 
+
+			 		$login_email = $_POST['email'];
+			 		$login_password = md5($_POST['password']);
+
+			 		include '../app/controllers/login.php';
+					
+				} else {
+
+					// initialize variable to prevent to show the error message
+					$loginOk = true;
+					
+					include '../app/views/login_form.php';
+
+				}
 			
-			include '../app/views/header.php';
+			?>
 
-		 	if (isset($_POST['login'])){ 
+		</main>
 
-		 		$login_email = $_POST['email'];
-		 		$login_password = md5($_POST['password']);
-
-		 		include '../app/controllers/login.php';
-				
-			} else {
-
-				// initialize variable to prevent to show the error message
-				$loginOk = true;
-				
-				include '../app/views/login_form.php';
-
-			}
-		
-			include '../app/views/footer.php'; 
-
-		?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

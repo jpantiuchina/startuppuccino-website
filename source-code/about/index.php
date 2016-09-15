@@ -23,11 +23,11 @@
 
 		    	<ul>
 
-		    		<!--
+		    		
 					<li class="menu_link--top"><a href="../login/">Login</a></li>
 
 					<li class="menu_link--top"><a href="../register/">Register</a></li>
-					-->
+					
 				</ul>
 
 		    </nav>
@@ -77,9 +77,9 @@
 
             <section>
             	<p><a class="about_links" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a></p>
-            	<p><a class="about_links" href="http://unibz.it" target="_blank">Unibz.it</a></p>
+            	<p><a class="about_links" href="https://unibz.it" target="_blank">Unibz.it</a></p>
             </section>
-            
+
         </main>
 
         <footer>

@@ -5,6 +5,13 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema startup
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
 -- Schema startup
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `startup` DEFAULT CHARACTER SET utf8mb4 ;
@@ -15,7 +22,6 @@ USE `startup` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `startup`.`account` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `linkedin_id` VARCHAR(63) NULL,
   `about` LONGTEXT COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
   `avatar` LONGBLOB NULL DEFAULT NULL,
   `background` VARCHAR(255) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
@@ -28,8 +34,7 @@ CREATE TABLE IF NOT EXISTS `startup`.`account` (
   `role` VARCHAR(15) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `account_email` (`email` ASC),
-  UNIQUE INDEX `linkedin_id_UNIQUE` (`linkedin_id` ASC))
+  UNIQUE INDEX `account_email` (`email` ASC))
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
 COLLATE = utf8mb4_unicode_ci;
@@ -105,6 +110,55 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
+-- Table `startup`.`idea_comment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`idea_comment` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `account_id` INT(11) NOT NULL,
+  `text` TEXT NOT NULL,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `startup`.`idea_like`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`idea_like` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `account_id` INT(11) NOT NULL,
+  `idea_id` INT(11) NOT NULL,
+  `date` DATE NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `account_id` (`account_id` ASC, `idea_id` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `startup`.`ideas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`ideas` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(63) NOT NULL,
+  `description` VARCHAR(144) NULL DEFAULT NULL,
+  `owner_id` INT(11) NOT NULL,
+  `avatar` TEXT NULL DEFAULT NULL,
+  `background_pref` LONGTEXT NULL DEFAULT NULL,
+  `team_size` INT(2) NOT NULL DEFAULT '2',
+  `current_team_size` INT(2) NOT NULL DEFAULT '1',
+  `approved` CHAR(1) NOT NULL DEFAULT 'F',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `title` (`title` ASC))
+ENGINE = MyISAM
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `startup`.`like`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `startup`.`like` (
@@ -155,6 +209,32 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
   PRIMARY KEY (`id`),
   INDEX `project_milestones_idx` (`project_id` ASC),
   INDEX `fk_milestone_p_idx` (`milestone_id` ASC))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `startup`.`teamaccount`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`teamaccount` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `team_id` INT(11) NOT NULL,
+  `account_id` INT(11) NOT NULL,
+  `date` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `startup`.`teams`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`teams` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(63) NOT NULL,
+  `mentor_id` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name` (`name` ASC))
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = latin1;
 

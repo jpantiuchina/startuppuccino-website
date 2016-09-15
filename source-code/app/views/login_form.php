@@ -10,7 +10,7 @@
 
 -->
 
-<form class="form_custom form_custom--slim" action="" method="post">
+<form class="form_custom form_login" action="" method="post">
 
 	<?php if(!$loginOk){ ?>
 
@@ -36,7 +36,7 @@
 	</li>
 	
 	<li class="form_box_item form_box_item--full">
-        <p>New user? <a class="form_pretty_button_link" href="../register/">REGISTER</a></p>
+        <p>New user? <a class="form_pretty_button_link" href="../register/">Register</a></p>
     </li>
 
 </form>

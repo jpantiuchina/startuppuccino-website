@@ -1,0 +1,76 @@
+
+$form-shadow: $header-shadow;
+
+$form-font: $font-stack;
+
+form.form_custom {
+    max-width: 640px;
+    margin: 40px auto;
+    width: 100%;
+    background-color: #f0f0d1; 
+    @include box-shadow($form-shadow);
+    @include border-radius(5px);
+    padding: 20px 15px;
+    color: #555;
+    text-align: left;
+    font-family: $form-font;
+}
+
+.form_box_item {    
+    display: inline-block;
+    padding: 14px 10px;
+    min-width: 300px;
+    
+    > label {
+        display: block;
+        margin: auto;
+        margin-bottom: 5px;
+    }
+}
+
+.form_box_item--full {
+    width: 100%
+}
+
+.form_pretty_general_input {
+    border: none;
+    width: 250px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f2f2f2;
+    padding: 7px;
+}
+
+textarea.form_pretty_general_input {
+    height: auto;
+}
+
+.form_pretty_button_input {
+    padding: 5px;
+    background-color: $logo-green;
+    color: #fefefe;
+    border: none;
+    @include border-radius(3px);
+    @include transition(300ms);  
+
+    &:hover { 
+        @include bright(120%);  
+    }
+
+    &.form_input--forgot_password {
+        background-color: transparent;
+        color: $logo-red;
+        font-size: 12px;
+        display: inline-block;
+        height: 19px;
+        line-height: 19px;
+        vertical-align: top;
+    }
+
+}
+
+.form_pretty_button_link {
+    color: $logo-brown;
+    padding: 5px;
+    @inlcude border-radius(3px);
+}
