@@ -29,11 +29,11 @@
 	</head>
 	<body>
 		
+		<?php $page_title = 'Ideas'; ?>
+
 		<?php include '../app/views/header_new.php'; ?>
 		
 		<main>
-
-			<p class="page_title">Ideas</p>
 
 			<?php if (!($ideas = $ideas_func->getAllIdeas())){ ?>
 			

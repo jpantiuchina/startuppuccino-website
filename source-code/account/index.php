@@ -24,6 +24,8 @@
 	</head>
 	<body>
 		
+		<?php $page_title = "Account settings"; ?>
+
 		<?php include '../app/views/header.php'; ?>
 
 		<?php 

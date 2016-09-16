@@ -2,7 +2,7 @@
 <div class="idea">
 
 	<div class="picture_box">
-		<div style="background-image:url('../app/assets/pics/default/add_picture.svg')"></div>
+		<div style="background-image:url('../app/assets/pics/default/new_picture.svg');background-size: 50%;"></div>
 	</div>
 
 	<form class="info_box" id="idea_form">

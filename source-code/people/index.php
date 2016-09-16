@@ -27,6 +27,8 @@
 	</head>
 	<body>
 		
+		<?php $page_title = "People"; ?>
+
 		<?php include '../app/views/header.php'; ?>
 
 		<?php

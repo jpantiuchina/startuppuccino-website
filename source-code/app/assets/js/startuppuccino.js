@@ -180,8 +180,11 @@ Startuppuccino.prototype.layout.toggleMobileMenu = function(target){
     document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
 }
 
-Startuppuccino.prototype.layout.toggleSearch = function() {
+Startuppuccino.prototype.layout.toggleSearch = function(not_focus) {
     document.getElementById("search").classList.toggle("search--visible");
+    if(typeof not_focus == "undefined" || !not_focus){
+        document.getElementById("search_input").focus();
+    }
 }
 
 // Render search results in the search section
@@ -194,21 +197,25 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
 
     var node = document.createElement("div"),
         a = document.createElement("a"),
-        img = document.createElement("img"),
+        img_wrap = document.createElement("div"),
+        img = document.createElement("div"),
+        role_filter = document.createElement("div"),
         labels = document.createElement("div"),
         p_name = document.createElement("p"),
         p_role = document.createElement("p");
 
     container.className = "search_results";
     node.className = "search_result";
-    img.className = "search_result__pic";
+    img_wrap.className = "search_result__pic";
     labels.className = "search_result__labels";
     p_name.className = "search_result__labels__name";
     p_role.className = "search_result__labels__role";
 
+    img.appendChild(role_filter);
+    img_wrap.appendChild(img);
     labels.appendChild(p_name);
     labels.appendChild(p_role);
-    a.appendChild(img);
+    a.appendChild(img_wrap);
     a.appendChild(labels);
     node.appendChild(a);
 
@@ -219,7 +226,8 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
         var n = node.cloneNode(true);
 
         n.children[0].href = "../" + x.id;
-        n.children[0].children[0].src = "../app/assets/pics/" + x.avatar;
+        n.children[0].children[0].children[0].children[0].className = "role_filter--" + x.role;
+        n.children[0].children[0].children[0].style = "background-image:url('../app/assets/pics/" + x.avatar + "')";
         n.children[0].children[1].children[0].innerHTML = x.name;
         n.children[0].children[1].children[1].innerHTML = x.role;
         
@@ -248,7 +256,10 @@ window.onload = function(){ Sp.downloadSearchResult(); };
 
 /* Set search event listeners */
 document.getElementById("search_input").oninput = function(){
-    Sp.search(this.value);
+    var text = this.value.replace(/^\s*/, "").replace(/\s*$/, ""); // trim5 string value
+    if(text != ""){
+        Sp.search(text);
+    }
 }
 
 

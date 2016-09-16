@@ -11,8 +11,8 @@
 }
 
 @mixin transition($ttime){
-	-webkit-transition: all $ttime;
-			transition: all $ttime;
+	-webkit-transition: all $ttime ease-in-out;
+			transition: all $ttime ease-in-out;
 }
 
 @mixin box-sizing($box-size) {
@@ -83,18 +83,21 @@
 
 
 /* Fonts */
+/*
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Regular.otf') format('opentype');}
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-weight:900}
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Light.otf') format('opentype');font-weight:200}
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-style:italic}
+*/
 
+@import 'https://fonts.googleapis.com/css?family=Roboto';
 
-$font-stack: "Maison", "Lato", "Arial", sans-serif;
-$font-text: san-serif;
+$font-stack: "Roboto", "Arial", sans-serif;
+$font-text: "Roboto", "Arial", san-serif;
 
 $picture-filter-opacity: 0.3;
 
-$background-color: #fff;
+$background-color: #f7f7dd;
 $logo-green: #7fb03b;
 $logo-red: #be3b43;
 $logo-brown: #513a2b;
@@ -152,16 +155,6 @@ input[type=file] {
 	cursor: pointer;
 }
 
-/* Page title - subheader */
-p.page_title {
-    margin: 0px;
-    padding: 50px 0px;
-
-	&:before {
-		content: ">";
-	}
-}
-
 /* General picture */
 .picture {
 	position: relative;
@@ -174,7 +167,7 @@ p.page_title {
 
 /* Role filters */
 
-.role_filer {
+.role_filter {
 	position: absolute;
 	top: 0; left: 0;
 	height: 100%;
@@ -182,30 +175,69 @@ p.page_title {
 	opacity: $picture-filter-opacity;
 }
 
-.role_filer--student {
-	@extend .role_filer;
+.role_filter--student {
+	@extend .role_filter;
 	background-color: $logo-green;
 }
-.role_filer--mentor {
-	@extend .role_filer;
+.role_filter--mentor {
+	@extend .role_filter;
 	background-color: $logo-red;
 }
-.role_filer--educator {
-	@extend .role_filer;
+.role_filter--educator {
+	@extend .role_filter;
 	background-color: $logo-brown;
 }
 
 /* general color style classes */
 
-.c_green {
+.c_green, .c_student {
 	color: $logo-green;
-	fill: $logo-green
+	fill: $logo-green;
+  border-color: $logo-green;
+  box-shadow-color: $logo-green;
+  -webkit-box-shadow-color: $logo-green;
 }
-.c_red {
+.c_red, .c_mentor {
 	color: $logo-red;
-	fill: $logo-red
+	fill: $logo-red;
+  border-color: $logo-red;
+  box-shadow-color: $logo-red;
+  -webkit-box-shadow-color: $logo-red;
 }
-.c_brown {
+.c_brown, .c_educator {
 	color: $logo-brown;
-	fill: $logo-brown
+	fill: $logo-brown;
+  border-color: $logo-brown;
+  box-shadow-color: $logo-brown;
+  -webkit-box-shadow-color: $logo-brown;
+}
+
+.b_student {
+  background-color: $logo-green;
+}
+
+.b_mentor {
+  background-color: $logo-red;
+}
+
+.b_educator {
+  background-color: $logo-brown;
+}
+
+/* Buttons */
+    
+.st_button {
+    border: none;
+    padding: 7px;
+    margin: 3px;
+    text-decoration: none;
+    @include border-radius(15px);
+    @include box-shadow(0px 0px 0px 1px);
+    @include transition($transition-time);
+
+    &:hover {
+      color: $palette-yellow !important;
+      box-shadow-color: $palette-yellow !important;
+      -webkit-box-shadow-color: $palette-yellow !important;
+    }
 }

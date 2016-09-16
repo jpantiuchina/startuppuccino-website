@@ -4,10 +4,11 @@
 
 		<input type="text" placeholder="..." id="search_input"/>
 		
-		<span class="tempclose" onclick="Sp.layout.toggleSearch()">X</span>
+		<span class="tempclose" onclick="Sp.layout.toggleSearch(true)">X</span>
 
 		<div class="search_filters">
-
+			<span id="search_filter__people">People</span>
+			<span id="search_filter__ideas">Ideas</span>
 		</div>
 
 	</div>

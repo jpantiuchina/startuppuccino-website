@@ -23,6 +23,8 @@
 	</head>
 	<body>
 		
+		<?php $page_title = "Teams"; ?>
+
 		<?php include '../app/views/header.php'; ?>
 
 

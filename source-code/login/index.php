@@ -18,6 +18,8 @@
 	</head>
 	<body>
 
+		<?php $page_title = "Login"; ?>
+
 		<?php include '../app/views/header_new.php'; ?>
 
 		<main>

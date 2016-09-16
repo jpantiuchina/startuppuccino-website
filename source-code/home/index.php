@@ -18,11 +18,11 @@
 </head>
 <body>
 
+	<?php $page_title = 'Lectures'; ?>
+
 	<?php include '../app/views/header_new.php'; ?>
 
 	<main>
-
-		<p class="page_title">Lectures</p>
 
 		<section>
 			

@@ -1,7 +1,10 @@
 
 $header-height: 70px;
-$header-background: #f7f7dd;
-$header-shadow: 0px 0px 2px #a7a7a7;
+$header-background: rgba(247, 247, 221, 0.9);
+$header-shadow: none /*0px 0px 2px #a7a7a7 */;
+$header-transition-timing: $transition-time;
+
+$page-title-width: 120px;
 
 $logo-original-width: 300px;
 $logo-original-height: 92px;
@@ -10,11 +13,13 @@ $logo-ratio-height: $logo-original-height / $logo-original-width;
 $logo-height: 100%;
 $logo-width: $header-height * $logo-ratio-width;
 
-$menu-picture-size-percent: 0.60;
+$menu-width: calc(100% - #{$logo-width + $page-title-width + 1} );
+
+$menu-picture-size-percent: 0.50;
 $menu-picture-margin-top: #{($header-height / 1px * (1 - $menu-picture-size-percent))/2}px;
 $menu-picture-size: #{$header-height / 1px * $menu-picture-size-percent}px;
 
-$submenu-background: #f9f9f9;
+$submenu-background: rgba(81, 58, 43, 0.4);
 
 main {
 	padding-top: #{$header-height} !important;
@@ -57,11 +62,25 @@ header {
 	
 	}
 
+	>.page_title {
+		@extend .header_element;
+		font-size: 14px;
+		width: $page-title-width;
+		line-height: $header-height;
+		color: $logo-brown;
+
+		>span {
+			border-left: 1px solid #{$logo-brown};
+			padding-left: 7px;
+		}
+	}
+
+
 	>.menu {
 
 		@extend .header_element;
-		font-size: 17px;
-		width: calc(100% - #{$logo-width + 1} );
+		font-size: 16px;
+		width: $menu-width;
 		text-align: right;
 		
 		a:before {
@@ -92,19 +111,37 @@ header {
 		height: $header-height;
 		line-height: $header-height;
 		text-align: center;
+		@include transition($header-transition-timing);
 	}
 
 	.submenu_trigger {	
 		padding-bottom: $menu-picture-margin-top;
 	}
 
-	.menu_profile_picture {
+	.menu_bubble_item {
 		width: $menu-picture-size;
 		height: $menu-picture-size;
-		@include border-radius(50%);
 		margin: auto;
 		margin-top: $menu-picture-margin-top;
+		@include border-radius(50%);
+	}
+
+	.menu_profile_picture {
+		@extend .menu_bubble_item;
 		@extend .picture;
+		@include box-shadow(0px 0px 0px 1px #333);
+	}
+
+	.search_icon, .idea_icon {
+		@extend .menu_bubble_item;
+		fill: #{$header-background} !important;
+		@include box-shadow(0px 0px 0px 1px);
+		@include transition($header-transition-timing);
+
+		&:hover {
+			background-color: $palette-yellow;
+			@include box-shadow(none);
+		}
 	}
 
 	$submenu-link-height: 40px;
@@ -118,7 +155,7 @@ header {
 		background: $submenu-background;
 		padding: 0px $submenu-padding;
 		@include box-shadow($header-shadow);
-		@include transition(300ms);
+		@include transition($header-transition-timing);
 	}
 
 	.menu_link--sub {
@@ -126,10 +163,20 @@ header {
 		height: $submenu-link-height;
 		line-height: $submenu-link-height;
 		text-align: left;
+		border-bottom: 1px solid #f7f7dd;
+
+		&:last-child {
+			border-bottom: none;
+		}
+
+		> a {
+			color: #f7f7dd;
+		}
+
 	}
 
 	.submenu_trigger:hover > .submenu {
-		height: $submenu-link-height * 2
+		height: $submenu-link-height * 3
 	}
 
 }

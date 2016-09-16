@@ -19,6 +19,10 @@
 		    	</a>
 		    </div>
 
+            <div class="page_title">
+                <span>About</span>
+            </div>
+
 		    <nav class="menu">
 
 		    	<ul>
