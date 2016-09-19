@@ -46,7 +46,7 @@ class Credential_Functions {
      */
     public function register(){
 
-      $query = "INSERT INTO "._T_ACCOUNT." (background, skills, email, firstname, lastname, password, role, created)
+      $query = "INSERT INTO "._T_ACCOUNT." (background, skills, email, firstname, lastname, password, role, created_at)
                 VALUES ('" . $this->background . "',
                     '" . $this->skills . "',
                     '" . $this->email . "',

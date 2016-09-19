@@ -3,8 +3,8 @@
 /**
  * Database table name variables
  */
-define("_T_ACCOUNT", "account");
-define("_T_IDEA", "ideas");
+define("_T_ACCOUNT", "account"); //+
+define("_T_IDEA", "project"); //+
 define("_T_IDEA_ACCOUNT", "ideaaccount");
 define("_T_IDEA_COMMENT", "ideacomment");
 define("_T_IDEA_LIKE", "idealike");
