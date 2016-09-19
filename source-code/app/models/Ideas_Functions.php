@@ -147,17 +147,15 @@ class Ideas_Functions {
 
       $query = "SELECT i.title,
                        i.description,
-                       i.team_size,
-                       i.current_team_size,
+                       i.ideal_team_size,
+                       (SELECT COUNT(*) FROM project_participant WHERE project_id = i.id) + 1 AS current_team_size,
                        i.date,
                        i.avatar,
-                       i.background_pref,
-                       i.approved,
                        a.firstName, 
                        a.lastName,
                        i.id,
                        i.owner_id
-                    FROM "._T_IDEA." i, "._T_ACCOUNT." a WHERE i.owner_id = a.id";
+                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id WHERE NOT a.is_approved";
 
       $result = $this->conn->query($query);
 
@@ -201,8 +199,8 @@ class Ideas_Functions {
             
             if($team_size > 1) {
 
-              $query = "UPDATE "._T_IDEA." SET title='".$title."',owner_id='".$this->account_id."',team_size='".$team_size."',description='".$description."',
-                                         date=NOW(),avatar='".$avatar."',background_pref='".$background_pref."'
+              $query = "UPDATE "._T_IDEA." SET title='".$title."',owner_id='".$this->account_id."',ideal_team_size='".$team_size."',description='".$description."',
+                                         updated_at=NOW(),avatar='".$avatar."',background='".$background_pref."'
                                          WHERE id='".$this->idea_id."';";
 
               $result = $this->conn->query($query);
@@ -277,16 +275,8 @@ class Ideas_Functions {
       
       if($this->conn->query($query)){
 
-        $query = "UPDATE "._T_IDEA." SET current_team_size = current_team_size - 1 WHERE id=".$this->idea_id.";";
 
-        if($this->conn->affected_rows == 1 && $this->conn->query($query)){
-            
-            // if($this->conn->affected_rows != 1) // Error team size not updated
-            
             return "ok";
-        }
-
-        return "Error, please try again.";
 
       }
 
@@ -356,8 +346,8 @@ class Ideas_Functions {
             
             if($team_size > 1) {
 
-              $query = "INSERT INTO "._T_IDEA." (title,owner_id,team_size,description,date,avatar,background_pref)
-                        VALUES ('".$title."','".$this->account_id."','".$team_size."','".$description."',NOW(),'".$avatar."','".$background_pref."');";
+              $query = "INSERT INTO "._T_IDEA." (title,owner_id,ideal_team_size,description,avatar,background)
+                        VALUES ('$title','$this->account_id','$team_size','".$description."','".$avatar."','".$background_pref."');";
 
               $result = $this->conn->query($query);
 

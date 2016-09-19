@@ -36,8 +36,18 @@
 
 			// List all the ideas
 
-			$query = "SELECT i.id, a.firstName, a.lastName, i.title, i.current_team_size, i.team_size, i.approved
-					  FROM "._T_IDEA." i, "._T_ACCOUNT." a WHERE i.owner_id=a.id;";
+		$query = "SELECT i.title,
+                       i.description,
+                       i.ideal_team_size,
+                       (SELECT COUNT(*) FROM project_participant WHERE project_id = i.id) + 1 AS current_team_size,
+                       i.date,
+                       i.avatar,
+                       a.firstName, 
+                       a.lastName,
+                       i.id,
+                       i.owner_id
+                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id WHERE NOT a.is_approved";
+
 			if($ideas = mysqli_query($dbconn,$query)){
 
 				while($idea = mysqli_fetch_assoc($ideas)){

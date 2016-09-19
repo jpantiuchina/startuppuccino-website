@@ -26,7 +26,7 @@ class Team_Functions {
      */
     public function getAllTeams() {
       
-      $query = "SELECT * FROM "._T_TEAM.";";
+      $query = "SELECT * FROM project WHERE is_approved";
 
       $result = $this->conn->query($query);
 
@@ -54,8 +54,8 @@ class Team_Functions {
      */
     public function getTeamInfo() {
       
-      $query = "SELECT * FROM "._T_TEAM."
-                WHERE id='".$this->team_id."';";
+      $query = "SELECT * FROM project
+                WHERE id='".$this->team_id."'";
 
       $result = $this->conn->query($query);
 
@@ -69,11 +69,15 @@ class Team_Functions {
           // Add to team_data array the list of team_members
           $team_data['members'] = [];
 
-          $query = "SELECT a.firstName, a.lastName, a.background, a.id 
-                      FROM "._T_TEAM_ACCOUNT." ta, "._T_ACCOUNT." a, "._T_TEAM." t
-                      WHERE ta.team_id = '". $this->team_id ."'
-                      AND t.id = ta.team_id
-                      AND ta.account_id = a.id";
+          $query = "SELECT 
+                      a.firstName, a.lastName, a.background, a.id 
+                    FROM 
+                      account AS a
+                    WHERE
+                      a.id = (SELECT owner_id FROM project WHERE project.id = '".$this->team_id."') 
+                      OR
+                      a.id IN (SELECT account_id FROM project_participant WHERE project_id = '".$this->team_id."')
+                    ";
   
           $result = $this->conn->query($query);
 

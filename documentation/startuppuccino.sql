@@ -46,11 +46,10 @@ CREATE TABLE IF NOT EXISTS `startup`.`project` (
   `vision` LONGTEXT COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
   `avatar` TEXT NULL,
   `ideal_team_size` INT(2) NULL,
-  `current_team_size` INT(2) NULL,
   `looking_for` VARCHAR(63) NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `approved` CHAR(1) NOT NULL DEFAULT 'F',
+  `is_approved` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `title` (`title` ASC),
   INDEX `fk_project_author_idx` (`owner_id` ASC),
@@ -90,9 +89,9 @@ COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`project_participants`
+-- Table `startup`.`project_participant`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`project_participants` (
+CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `account_id` INT(11) NOT NULL,
@@ -193,6 +192,20 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `startup`.`assignments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(63) NOT NULL,
+  `deadline` DATETIME NULL,
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `milestone/session_fk` INT(11) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `startup`.`assignments_copy1`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `startup`.`assignments_copy1` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
   `deadline` DATETIME NULL,

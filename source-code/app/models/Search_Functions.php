@@ -81,7 +81,7 @@ class Search_Functions {
      */
     private function loadIdeas(){
     
-        $query = "SELECT id, title, avatar  FROM "._T_IDEA.";";
+        $query = "SELECT id, title, avatar  FROM "._T_IDEA;
 
         $result = $this->conn->query($query);
 
