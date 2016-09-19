@@ -256,7 +256,7 @@ window.onload = function(){ Sp.downloadSearchResult(); };
 
 /* Set search event listeners */
 document.getElementById("search_input").oninput = function(){
-    var text = this.value.replace(/^\s*/, "").replace(/\s*$/, ""); // trim5 string value
+    var text = this.value.replace(/^\s*/, "").replace(/\s*$/, ""); // trim string value
     if(text != ""){
         Sp.search(text);
     }

@@ -231,6 +231,7 @@ input[type=file] {
     padding: 7px;
     margin: 3px;
     text-decoration: none;
+    cursor: pointer;
     @include border-radius(15px);
     @include box-shadow(0px 0px 0px 1px);
     @include transition($transition-time);

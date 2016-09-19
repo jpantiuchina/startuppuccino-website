@@ -439,6 +439,7 @@ input[type=file] {
   padding: 7px;
   margin: 3px;
   text-decoration: none;
+  cursor: pointer;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;
@@ -472,7 +473,8 @@ main {
     margin: 0px !important; }
 
 #landing_logo_container {
-  width: 100%;
+  width: 90%;
+  max-width: 900px;
   -webkit-box-flex: 0;
   -webkit-flex: none;
   -ms-flex: none;

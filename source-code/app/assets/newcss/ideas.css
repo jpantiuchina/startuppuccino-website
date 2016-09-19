@@ -440,6 +440,7 @@ input[type=file] {
   padding: 7px;
   margin: 3px;
   text-decoration: none;
+  cursor: pointer;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   -ms-border-radius: 15px;

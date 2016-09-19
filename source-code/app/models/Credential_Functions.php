@@ -46,15 +46,14 @@ class Credential_Functions {
      */
     public function register(){
 
-      $query = "INSERT INTO "._T_ACCOUNT." (background, skills, email, firstname, lastname, password, role, created)
+      $query = "INSERT INTO "._T_ACCOUNT." (background, skills, email, firstname, lastname, password, role)
                 VALUES ('" . $this->background . "',
                     '" . $this->skills . "',
                     '" . $this->email . "',
                     '" . $this->fname . "',
                     '" . $this->lname . "',
                     '" . $this->password . "',
-                    '" . $this->role . "',
-                    '" . date("Y-m-d H:i:s") . "');";
+                    '" . $this->role . "');";
       
       $this->conn->query($query);
 

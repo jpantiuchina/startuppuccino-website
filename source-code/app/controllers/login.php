@@ -25,6 +25,13 @@
 	   	// Load ideas settings
 	   	$config_func->load();
 
+	   	// If is a mentor we load the sessions availability
+	   	if($_SESSION['role'] === "mentor"){
+	   		require_once '../app/models/CourseSessions_Functions.php';
+			$cs_func = new CourseSessions_Functions();
+			$_SESSION['lectures_availability'] = $cs_func->getMentorSessionAvailability($_SESSION['id']);
+	   	}
+
 	   	// Redirect to home page
     	header("Location: ../");
 
