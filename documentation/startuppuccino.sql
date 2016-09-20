@@ -5,6 +5,14 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema startup
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `startup` ;
+
+-- -----------------------------------------------------
 -- Schema startup
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `startup` DEFAULT CHARACTER SET utf8mb4 ;
@@ -166,8 +174,9 @@ CREATE TABLE IF NOT EXISTS `startup`.`session` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` VARCHAR(45) NULL,
-  `date` DATETIME NOT NULL,
-  `description` VARCHAR(45) NULL,
+  `date` DATE NOT NULL,
+  `description` VARCHAR(255) NULL,
+  `resource` LONGTEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = latin1;
@@ -192,20 +201,6 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `startup`.`assignments`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(63) NOT NULL,
-  `deadline` DATETIME NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `milestone/session_fk` INT(11) NULL,
-  PRIMARY KEY (`id`))
-ENGINE = MyISAM
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `startup`.`assignments_copy1`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`assignments_copy1` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
   `deadline` DATETIME NULL,
