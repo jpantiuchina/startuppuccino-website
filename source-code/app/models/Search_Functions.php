@@ -81,9 +81,11 @@ class Search_Functions {
      */
     private function loadIdeas(){
     
-        $query = "SELECT id, title, avatar  FROM "._T_IDEA;
+        $query = "SELECT id, title, avatar  FROM "._T_PROJECT;
 
         $result = $this->conn->query($query);
+
+        $ideas = [];
 
         if($result){
 
@@ -96,13 +98,9 @@ class Search_Functions {
 
             }
 
-            return $ideas;
-
         }
 
-        // No idea found
-        // Return an empty array
-        return [];
+        return $ideas;
 
     }
 }
