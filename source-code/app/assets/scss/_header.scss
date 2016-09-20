@@ -10,7 +10,7 @@ $logo-original-width: 300px;
 $logo-original-height: 55px;
 $logo-ratio-width: $logo-original-width / $logo-original-height;
 $logo-ratio-height: $logo-original-height / $logo-original-width;
-$logo-height: 80%;
+$logo-height: 70%;
 $logo-width: $header-height * $logo-ratio-width;
 
 $menu-width: calc(100% - #{$logo-width + $page-title-width + 1} );

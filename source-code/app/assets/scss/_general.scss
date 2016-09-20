@@ -1,99 +1,14 @@
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
-
-@mixin box-shadow($shadow) {
-  -webkit-box-shadow: $shadow;
-          box-shadow: $shadow;
-}
-
-@mixin transition($ttime){
-	-webkit-transition: all $ttime ease-in-out;
-			transition: all $ttime ease-in-out;
-}
-
-@mixin box-sizing($box-size) {
-	-webkit-box-sizing: $box-size;
-       -moz-box-sizing: $box-size;
-            box-sizing: $box-size;
-}
-
-@mixin scale($x){
-  transform: scale($x);
-  -webkit-transform: scale($x);
-}
-
-@mixin filter($filter-type,$filter-amount) { 
-  -webkit-filter: unquote($filter-type+unquote('(#{$filter-amount})'));
-  -moz-filter: unquote($filter-type+unquote('(#{$filter-amount})'));
-  -ms-filter: unquote($filter-type+unquote('(#{$filter-amount})'));
-  -o-filter: unquote($filter-type+unquote('(#{$filter-amount})'));
-  filter: unquote($filter-type+unquote('(#{$filter-amount})'));
-}
-
-@mixin bright($filter-amount) { 
-  -webkit-filter: brightness+unquote('(#{$filter-amount})');
-  -moz-filter: brightness+unquote('(#{$filter-amount})');
-  -ms-filter: brightness+unquote('(#{$filter-amount})');
-  -o-filter: brightness+unquote('(#{$filter-amount})');
-  filter: brightness+unquote('(#{$filter-amount})');
-}
-
-.display_flex {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-.display_flex_column {
-	@extend .display_flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-
-.display_flex_vertical_aligner {
-	@extend .display_flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-}
-
-.center_column {
-    @extend .display_flex_column;
-    height: 100%;
-
-    > .center_aligner {
-        @extend .display_flex_vertical_aligner;
-        height: 100%;
-    }
-
-}
-
-
 /* Fonts */
-/*
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Regular.otf') format('opentype');}
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-weight:900}
 @font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Light.otf') format('opentype');font-weight:200}
-@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-style:italic}
-*/
 
 @import 'https://fonts.googleapis.com/css?family=Roboto';
 
 $font-stack: "Roboto", "Arial", sans-serif;
 $font-text: "Roboto", "Arial", san-serif;
+$font-title: "Maison", "Roboto", "Arial", san-serif;
+
 
 $picture-filter-opacity: 0.3;
 
@@ -109,9 +24,12 @@ $transition-time: 300ms;
 $page-lateral-padding: 40px;
 $page-lateral-padding-mobile: 15px;
 
+
+@import 'mixes';
 @import 'header';
 @import 'search';
 @import 'askforhelp';
+@import 'flexcenter';
 
 
 /* *** */
@@ -127,7 +45,6 @@ html {
 *, :before, *:after {
 	@include box-sizing(inherit);
 }
-
 
 body {
 	font-family: $font-text;
@@ -158,7 +75,7 @@ input[type=file] {
 /* General picture */
 .picture {
 	position: relative;
-	background-color: $logo-green;
+	background-color: #fff;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;

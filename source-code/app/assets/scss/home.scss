@@ -6,12 +6,13 @@ $session-width: 650px;
 $session-background-color: #fff;
 $session-border-separator: none /* 1px dotted #999 */;
 $session-box-shadow: none /* 0px 0px 1px #bbb */;
+$session-margin-top: 30px;
 
 .session {
 
 	width: 100%;
 	max-width: $session-width;
-	margin-top: 30px;
+	margin-top: $session-margin-top;
 	background-color: $session-background-color;
 	border-bottom: $session-border-separator;
 	@include box-shadow($session-box-shadow);
@@ -27,6 +28,7 @@ $session-box-shadow: none /* 0px 0px 1px #bbb */;
 		padding-top: 1px !important;
 
 		> h3 {
+			font-family: $font-title !important;
 			color: $palette-yellow;
 		}
 	}
@@ -104,7 +106,7 @@ $session-box-shadow: none /* 0px 0px 1px #bbb */;
 
 .column_right {
 	width: 100%;
-	background-color: #fff;
+	background-color: $session-background-color;
 	@include box-shadow($session-box-shadow);
 }
 
@@ -112,8 +114,8 @@ $session-box-shadow: none /* 0px 0px 1px #bbb */;
 	> .head {
 		height: 40px;
 		line-height: 40px;
-		background-color: $logo-brown;
-		color: #fbfbfb;
+		background-color: $logo-green;
+		color: $session-background-color;
 		padding: 0px 10px;
 	}
 }
@@ -143,21 +145,29 @@ $session-box-shadow: none /* 0px 0px 1px #bbb */;
 	}
 }
 
-@media all and (min-width: 1000px){
+
+
+
+@media all and (min-width: 1040px){
 
 	.column_right {
 		position: fixed;
-		top: 100px;
-		right: 20px;
+		top: $header-height + $session-margin-top;
+		right: $page-lateral-padding;
 		max-width: 300px;
 	}
 
 }
 
-@media all and (max-width: 999px){
+@media all and (max-width: 1039px){
+
+	.session {
+		max-width: 100%
+	}
 
 	.column_right {
 		height: 40px;
+		margin-top: $session-margin-top;
 		overflow: hidden;
 		@include transition($transition-time);
 

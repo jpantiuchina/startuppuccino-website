@@ -1,39 +1,16 @@
-@import "https://fonts.googleapis.com/css?family=Roboto";
-.display_flex, .display_flex_column, .center_column, .display_flex_vertical_aligner, .center_column > .center_aligner {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
-
-.display_flex_column, .center_column {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-
-.display_flex_vertical_aligner, .center_column > .center_aligner {
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center; }
-
-.center_column {
-  height: 100%; }
-  .center_column > .center_aligner {
-    height: 100%; }
-
 /* Fonts */
-/*
-@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Regular.otf') format('opentype');}
-@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-weight:900}
-@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Light.otf') format('opentype');font-weight:200}
-@font-face{font-family:'Maison';src:url('../fonts/Maison-Mono-Bold.otf') format('opentype');font-style:italic}
-*/
+@import "https://fonts.googleapis.com/css?family=Roboto";
+@font-face {
+  font-family: 'Maison';
+  src: url("../fonts/Maison-Mono-Regular.otf") format("opentype"); }
+@font-face {
+  font-family: 'Maison';
+  src: url("../fonts/Maison-Mono-Bold.otf") format("opentype");
+  font-weight: 900; }
+@font-face {
+  font-family: 'Maison';
+  src: url("../fonts/Maison-Mono-Light.otf") format("opentype");
+  font-weight: 200; }
 main {
   padding-top: 50px !important; }
 
@@ -69,9 +46,9 @@ header {
   header > .logo {
     width: 272.72727px; }
     header > .logo img {
-      height: 80%;
+      height: 70%;
       position: relative;
-      top: 10%;
+      top: 15%;
       left: 20px; }
   header > .page_title {
     font-size: 14px;
@@ -353,6 +330,34 @@ header {
     -webkit-box-shadow: 0px 0px 0px 1px #fff;
     box-shadow: 0px 0px 0px 1px #fff; }
 
+.display_flex, .display_flex_column, .center_column, .display_flex_vertical_aligner, .center_column > .center_aligner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.display_flex_column, .center_column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+.display_flex_vertical_aligner, .center_column > .center_aligner {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.center_column {
+  height: 100%; }
+  .center_column > .center_aligner {
+    height: 100%; }
+
 /* *** */
 html, body {
   height: 100%; }
@@ -391,7 +396,7 @@ input[type=file] {
 /* General picture */
 .picture, header .menu_profile_picture {
   position: relative;
-  background-color: #7fb03b;
+  background-color: #fff;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -476,6 +481,7 @@ input[type=file] {
   .session > .head {
     padding-top: 1px !important; }
     .session > .head > h3 {
+      font-family: "Maison", "Roboto", "Arial", san-serif !important;
       color: #fcc124; }
   .session > .foot,
   .session > .resources,
@@ -529,8 +535,8 @@ input[type=file] {
 .sidebar_container > .head {
   height: 40px;
   line-height: 40px;
-  background-color: #513a2b;
-  color: #fbfbfb;
+  background-color: #7fb03b;
+  color: #fff;
   padding: 0px 10px; }
 
 .list_el {
@@ -548,15 +554,19 @@ input[type=file] {
     .list_el > .list_el__right > span {
       font-size: 12px; }
 
-@media all and (min-width: 1000px) {
+@media all and (min-width: 1040px) {
   .column_right {
     position: fixed;
-    top: 100px;
-    right: 20px;
+    top: 80px;
+    right: 40px;
     max-width: 300px; } }
-@media all and (max-width: 999px) {
+@media all and (max-width: 1039px) {
+  .session {
+    max-width: 100%; }
+
   .column_right {
     height: 40px;
+    margin-top: 30px;
     overflow: hidden;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out; }

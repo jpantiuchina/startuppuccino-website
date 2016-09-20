@@ -7,7 +7,7 @@
 		echo empty(trim($_SESSION['avatar'])) ? 'people.png' : $_SESSION['avatar'];
 	}
 
-?>	
+?>
 
 <?php if ($userLogged){ ?>
     <?php include 'search.php'; ?>
@@ -15,7 +15,7 @@
 <?php } ?>
 
 <header>
-        
+
 	<div class="logo">
     	<a href="../" title="Home - Startuppuccino">
         	<img alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
@@ -50,9 +50,13 @@
 			<?php } ?>
 
 			<li class="menu_link--top">
+                <a href="../home/">Lectures</a>
+            </li>
+
+            <li class="menu_link--top">
                 <a href="../ideas/">Ideas</a>
             </li>
-				
+			
         	<li class="menu_link--top">
                 <a href="#" onclick="Sp.layout.toggleSearch()">Search</a>
             </li>
