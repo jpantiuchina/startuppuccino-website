@@ -53,10 +53,9 @@ $search-result-height: 120px;
         vertical-align: middle;
         width: $tempclose-size;
         height: $tempclose-size;
-        background: #f00;
-        color: #fff;
-        font-weight: 200;
+        color: #999;
         text-align: center;
+        font-size: $tempclose-size;
         line-height: $tempclose-size;
         @include border-radius(50%);
     }
