@@ -5,9 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema startup
 -- -----------------------------------------------------
 DROP SCHEMA IF EXISTS `startup` ;
@@ -106,8 +103,18 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
   `joined_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idea_id` (`project_id` ASC, `account_id` ASC),
-  INDEX `fk_account_id_idx` (`account_id` ASC))
-ENGINE = MyISAM
+  INDEX `fk_account_id_idx` (`account_id` ASC),
+  CONSTRAINT `fk_project_id`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `startup`.`project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_account_id`
+    FOREIGN KEY (`account_id`)
+    REFERENCES `startup`.`account` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
 AUTO_INCREMENT = 58
 DEFAULT CHARACTER SET = latin1;
 
@@ -148,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `startup`.`milestone` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name` (`title` ASC))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -162,8 +169,18 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   INDEX `project_milestones_idx` (`project_id` ASC),
-  INDEX `fk_milestone_p_idx` (`milestone_id` ASC))
-ENGINE = MyISAM
+  INDEX `fk_milestone_p_idx` (`milestone_id` ASC),
+  CONSTRAINT `fk_project_m`
+    FOREIGN KEY (`project_id`)
+    REFERENCES `startup`.`project` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_milestone_p`
+    FOREIGN KEY (`milestone_id`)
+    REFERENCES `startup`.`milestone` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -174,26 +191,35 @@ CREATE TABLE IF NOT EXISTS `startup`.`session` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` VARCHAR(45) NULL,
-  `date` DATE NOT NULL,
+  `date` DATETIME NOT NULL,
   `description` VARCHAR(255) NULL,
   `resource` LONGTEXT NULL,
   PRIMARY KEY (`id`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`mentor_availability`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`mentor_availability` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `mentor_id` INT(11) NOT NULL,
   `session_id` INT(11) NOT NULL,
   `confirmed_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `available_id` (`mentor_id` ASC, `session_id` ASC),
-  INDEX `fk_session_id_idx` (`session_id` ASC))
-ENGINE = MyISAM
+  INDEX `fk_session_id_idx` (`session_id` ASC),
+  CONSTRAINT `fk_mentor_id`
+    FOREIGN KEY (`mentor_id`)
+    REFERENCES `startup`.`account` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_session_id`
+    FOREIGN KEY (`session_id`)
+    REFERENCES `startup`.`session` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -207,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `milestone/session_fk` INT(11) NULL,
   PRIMARY KEY (`id`))
-ENGINE = MyISAM
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 
