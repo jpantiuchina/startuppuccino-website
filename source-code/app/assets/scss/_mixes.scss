@@ -41,3 +41,8 @@
   -o-filter: brightness+unquote('(#{$filter-amount})');
   filter: brightness+unquote('(#{$filter-amount})');
 }
+
+@mixin grayscale($filter-amount) { 
+  -webkit-filter: grayscale+unquote('(#{$filter-amount})');
+  filter: grayscale+unquote('(#{$filter-amount})');
+}
