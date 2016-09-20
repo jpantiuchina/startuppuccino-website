@@ -18,6 +18,8 @@ USE `startup` ;
 -- -----------------------------------------------------
 -- Table `startup`.`account`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`account` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`account` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `linkedin_id` VARCHAR(63) NULL,
@@ -32,17 +34,21 @@ CREATE TABLE IF NOT EXISTS `startup`.`account` (
   `password` VARCHAR(63) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `role` VARCHAR(15) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `account_email` (`email` ASC),
-  UNIQUE INDEX `linkedin_id_UNIQUE` (`linkedin_id` ASC))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 5
-COLLATE = utf8mb4_unicode_ci;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE UNIQUE INDEX `account_email` ON `startup`.`account` (`email` ASC);
+
+CREATE UNIQUE INDEX `linkedin_id_UNIQUE` ON `startup`.`account` (`linkedin_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`project`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`project` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`project` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
@@ -56,20 +62,24 @@ CREATE TABLE IF NOT EXISTS `startup`.`project` (
   `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `is_approved` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `title` (`title` ASC),
-  INDEX `fk_project_author_idx` (`owner_id` ASC),
   CONSTRAINT `fk_project_author`
     FOREIGN KEY (`owner_id`)
     REFERENCES `startup`.`account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-COLLATE = utf8mb4_unicode_ci;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE UNIQUE INDEX `title` ON `startup`.`project` (`title` ASC);
+
+CREATE INDEX `fk_project_author_idx` ON `startup`.`project` (`owner_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`comment`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`comment` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`comment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
@@ -77,8 +87,6 @@ CREATE TABLE IF NOT EXISTS `startup`.`comment` (
   `text` LONGTEXT COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `commented_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `comment_project` (`project_id` ASC),
-  INDEX `comment_author` (`author_id` ASC),
   CONSTRAINT `comment_author`
     FOREIGN KEY (`author_id`)
     REFERENCES `startup`.`account` (`id`)
@@ -90,20 +98,24 @@ CREATE TABLE IF NOT EXISTS `startup`.`comment` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-COLLATE = utf8mb4_unicode_ci;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE INDEX `comment_project` ON `startup`.`comment` (`project_id` ASC);
+
+CREATE INDEX `comment_author` ON `startup`.`comment` (`author_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`project_participant`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`project_participant` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `account_id` INT(11) NOT NULL,
   `joined_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idea_id` (`project_id` ASC, `account_id` ASC),
-  INDEX `fk_account_id_idx` (`account_id` ASC),
   CONSTRAINT `fk_project_id`
     FOREIGN KEY (`project_id`)
     REFERENCES `startup`.`project` (`id`)
@@ -116,20 +128,23 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 58
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE UNIQUE INDEX `idea_id` ON `startup`.`project_participant` (`project_id` ASC, `account_id` ASC);
+
+CREATE INDEX `fk_account_id_idx` ON `startup`.`project_participant` (`account_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`like`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`like` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`like` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `account_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `like_project` (`project_id` ASC),
-  INDEX `like_account` (`account_id` ASC),
-  UNIQUE INDEX `unique_likes` (`project_id` ASC, `account_id` ASC),
   CONSTRAINT `like_account`
     FOREIGN KEY (`account_id`)
     REFERENCES `startup`.`account` (`id`)
@@ -141,35 +156,44 @@ CREATE TABLE IF NOT EXISTS `startup`.`like` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-COLLATE = utf8mb4_unicode_ci;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE INDEX `like_project` ON `startup`.`like` (`project_id` ASC);
+
+CREATE INDEX `like_account` ON `startup`.`like` (`account_id` ASC);
+
+CREATE UNIQUE INDEX `unique_likes` ON `startup`.`like` (`project_id` ASC, `account_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`milestone`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`milestone` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`milestone` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
   `deadline` DATETIME NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name` (`title` ASC))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE UNIQUE INDEX `name` ON `startup`.`milestone` (`title` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`project_milestones`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`project_milestones` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `milestone_id` INT(11) NOT NULL,
   `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `project_milestones_idx` (`project_id` ASC),
-  INDEX `fk_milestone_p_idx` (`milestone_id` ASC),
   CONSTRAINT `fk_project_m`
     FOREIGN KEY (`project_id`)
     REFERENCES `startup`.`project` (`id`)
@@ -181,12 +205,18 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE INDEX `project_milestones_idx` ON `startup`.`project_milestones` (`project_id` ASC);
+
+CREATE INDEX `fk_milestone_p_idx` ON `startup`.`project_milestones` (`milestone_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`session`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`session` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`session` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -196,19 +226,20 @@ CREATE TABLE IF NOT EXISTS `startup`.`session` (
   `resource` LONGTEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`mentor_availability`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`mentor_availability` ;
+
+CREATE TABLE IF NOT EXISTS `startup`.`mentor_availability` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `mentor_id` INT(11) NOT NULL,
   `session_id` INT(11) NOT NULL,
   `confirmed_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `available_id` (`mentor_id` ASC, `session_id` ASC),
-  INDEX `fk_session_id_idx` (`session_id` ASC),
   CONSTRAINT `fk_mentor_id`
     FOREIGN KEY (`mentor_id`)
     REFERENCES `startup`.`account` (`id`)
@@ -220,12 +251,18 @@ DEFAULT CHARACTER SET = latin1;
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE UNIQUE INDEX `available_id` ON `startup`.`mentor_availability` (`mentor_id` ASC, `session_id` ASC);
+
+CREATE INDEX `fk_session_id_idx` ON `startup`.`mentor_availability` (`session_id` ASC);
 
 
 -- -----------------------------------------------------
 -- Table `startup`.`assignments`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `startup`.`assignments` ;
+
 CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
@@ -234,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
   `milestone/session_fk` INT(11) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
