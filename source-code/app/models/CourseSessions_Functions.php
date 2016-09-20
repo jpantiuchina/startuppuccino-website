@@ -47,26 +47,30 @@ class CourseSessions_Functions {
     /**
      * Scan session documents directory and get resources
      */
-    private function loadHosts($sessions_array){
+    private function loadGuests($sessions_array){
         
-        $query = "SELECT ma.mentor_id, a.avatar
-                  FROM "._T_MENTOR_AVAILABILITY." ma, "._T_ACCOUNT." a
-                  WHERE ma.mentor_id = a.id
-                  GROUP BY session_id ;";
 
-        $result = $this->conn->query($query);
+        foreach ($sessions_array as $i => $session_value) {
 
-        $hosts = [];
+            $query = "SELECT ma.mentor_id as id, a.avatar
+                      FROM "._T_MENTOR_AVAILABILITY." ma, "._T_ACCOUNT." a
+                      WHERE ma.mentor_id = a.id
+                      AND ma.session_id = ".$sessions_array[$i]['id'].";";
 
-        if($result){
+            $result = $this->conn->query($query);
 
-            while ($host = $result->fetch_assoc()){
-                $hosts[] = ["id"=>$host['mentor_id'],
-                            "avatar"=>$host['avatar']];
-            }
+            $guests = [];
 
-            if(count($hosts) > 0){
-                $sessions_array['hosts'] = $hosts;
+            if($result){
+
+                while ($guest = $result->fetch_assoc()){
+                    $guests[] = $guest;
+                }
+
+                if(count($guests) > 0){
+                    $sessions_array[$i]['guests'] = $guests;
+                }
+
             }
 
         }
@@ -82,20 +86,24 @@ class CourseSessions_Functions {
     
         $sessions = [];
 
-        $query = "SELECT s.id, s.title, s.date, s.description 
+        $query = "SELECT s.id,
+                         s.title,
+                         s.date,
+                         s.description
                   FROM "._T_SESSION." s;";
 
         $result = $this->conn->query($query);
 
         if($result){
 
-            while ($sesssion = $result->fetch_assoc()){
-                $sessions[] = $sesssion;
+            while ($session = $result->fetch_assoc()){
+                $sessions[] = $session;
             }
 
             if(count($sessions) > 0){
                 // Fill sessions array with resources data
                 $sessions = $this->loadResources($sessions);
+                $sessions = $this->loadGuests($sessions);
             }
 
         }

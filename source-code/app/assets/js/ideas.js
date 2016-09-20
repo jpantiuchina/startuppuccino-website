@@ -195,15 +195,6 @@ var SpIdea = new function(){
 		this.showIdeaForm();
 	}
 
-	this.cancelPublish(){
-		// Reset inputs
-		document.getElementById("idea_form_title").setAttribute("value","");
-		document.getElementById("idea_form_description").innerHTML = "";
-		document.getElementById("idea_form_avatar").setAttribute("value","");
-		document.getElementById("idea_form_background_pref").setAttribute("value","");
-		document.getElementById("idea_form_picture").setAttribute("src","background-image:url('../app/assets/pics/default/new_picture.svg');background-size: 50%;");
-	}
-
 	this.uploadIdeaPicture = function(){
 		// Check for picture name
 		var idea_title = document.getElementById("idea_form_title").value;

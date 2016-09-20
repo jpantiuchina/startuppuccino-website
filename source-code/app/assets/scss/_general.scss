@@ -232,13 +232,11 @@ input[type=file] {
     margin: 3px;
     text-decoration: none;
     cursor: pointer;
-    @include border-radius(15px);
-    @include box-shadow(0px 0px 0px 1px);
+    background-color: $logo-brown;
+    color: #fff;
     @include transition($transition-time);
 
     &:hover {
       color: $palette-yellow !important;
-      box-shadow-color: $palette-yellow !important;
-      -webkit-box-shadow-color: $palette-yellow !important;
     }
 }

@@ -5,11 +5,10 @@ $form-font: $font-stack;
 
 form.form_custom {
     max-width: 640px;
-    margin: 40px auto;
+    margin: 40px 0px;
     width: 100%;
-    background-color: #f0f0d1; 
+    background-color: #f9f9f9; 
     @include box-shadow($form-shadow);
-    @include border-radius(5px);
     padding: 20px 15px;
     color: #555;
     text-align: left;
@@ -46,11 +45,8 @@ textarea.form_pretty_general_input {
 }
 
 .form_pretty_button_input {
-    padding: 5px;
-    background-color: $logo-green;
-    color: #fefefe;
+    @extend .st_button;
     border: none;
-    @include border-radius(3px);
     @include transition(300ms);  
 
     &:hover { 
@@ -58,13 +54,10 @@ textarea.form_pretty_general_input {
     }
 
     &.form_input--forgot_password {
-        background-color: transparent;
+        background-color: #f2f2f2;
         color: $logo-red;
         font-size: 12px;
         display: inline-block;
-        height: 19px;
-        line-height: 19px;
-        vertical-align: top;
     }
 
 }

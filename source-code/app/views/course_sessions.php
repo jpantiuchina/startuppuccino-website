@@ -9,8 +9,8 @@
 			</div>
 
 			<div class="guests">
-				<?php if(isset($session['guest'])){ ?>
-				<?php foreach ($session['guest'] as $guest){ ?>
+				<?php if(isset($session['guests'])){ ?>
+				<?php foreach ($session['guests'] as $guest){ ?>
 					<div class="guest">
 						<a href="../people/?user_id=<?php echo $guest['id']; ?>">
 							<div style="background-image:url('<?php echo $guest['avatar']; ?>')"></div>

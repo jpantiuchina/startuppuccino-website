@@ -440,18 +440,12 @@ input[type=file] {
   margin: 3px;
   text-decoration: none;
   cursor: pointer;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 0px 1px;
-  box-shadow: 0px 0px 0px 1px;
+  background-color: #513a2b;
+  color: #fff;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out; }
   .st_button:hover, .askforhelp_form > input[type=submit]:hover {
-    color: #fcc124 !important;
-    box-shadow-color: #fcc124 !important;
-    -webkit-box-shadow-color: #fcc124 !important; }
+    color: #fcc124 !important; }
 
 main, header, footer {
   position: relative;
