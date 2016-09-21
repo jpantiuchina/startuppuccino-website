@@ -1,0 +1,87 @@
+/* Profile styles */
+
+@import 'general';
+
+$p-picture-size: 220px;
+
+
+
+
+.p_wrapper > section {
+	position: relative;
+	margin-top: 30px;
+	background-color: #fff;
+	padding: 15px;
+	max-width: 650px;
+	height: auto;
+	overflow: hidden;
+}
+
+.p_infobox {
+	padding: 0px !important;
+	color: $logo-brown;
+	
+	>.head,
+	>.foot {
+		padding: 15px;
+	}
+
+	>.head {
+		height: auto;
+		overflow: hidden;
+	}
+
+	>.foot {
+		background-color: #f9f9f9
+	}
+
+}
+
+.p_info,
+.p_picturebox {
+	display: inline-block;
+	vertical-align: top;
+
+	a {
+		color: #000;
+	}
+}
+
+.p_picturebox {
+	float: right;
+
+	>.p_picture {
+		margin: 20px;
+		width: $p-picture-size;
+		height: $p-picture-size;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		@include border-radius(50%);
+	}
+}
+
+.p_name {
+	font-size: 150%;
+	font-family: $font-title;
+}
+
+.p_skills > span {
+	display: inline-block;
+	background-color: #fff;
+	color: $logo-brown;
+	padding: 5px;
+	margin: 0px 3px;
+}
+
+.p_about {
+	font-size: 16px;
+	font-family: $font-stack;
+}
+
+.p_socials {
+	a {
+		display: inline-block;
+		margin: 0px 3px;
+	}
+}

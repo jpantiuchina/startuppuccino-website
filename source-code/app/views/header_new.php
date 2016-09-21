@@ -66,7 +66,8 @@
         			<div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
         		</div> 
         		<ul class="submenu">
-					<li class="menu_link--sub"><a href="../account/">Profile</a></li>
+                    <li class="menu_link--sub"><a href="../people/?user_id=<?php echo $_SESSION['id'];?>">Profile</a></li>
+                    <li class="menu_link--sub"><a href="../account/">Settings</a></li>
 					<li class="menu_link--sub"><a href="../logout/">Logout</a></li>
                     <li class="menu_link--sub"><a href="#" onclick="showAskForHelp()">Help</a></li>
 				</ul>

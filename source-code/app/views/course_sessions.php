@@ -13,7 +13,7 @@
 				<?php foreach ($session['guests'] as $guest){ ?>
 					<div class="guest">
 						<a href="../people/?user_id=<?php echo $guest['id']; ?>">
-							<div style="background-image:url('<?php echo $guest['avatar']; ?>')"></div>
+							<div style="background-image:url('../app/assets/pics/people/<?php echo $guest['avatar']; ?>')"></div>
 						</a>
 					</div>
 				<?php }} ?>

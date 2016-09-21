@@ -20,25 +20,20 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
-		<link rel="stylesheet" type="text/css" href="../app/assets/css/people.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/people.css">
 		<title>People - Startuppuccino</title>
 
 	</head>
 	<body>
-		
-		<?php $page_title = "People"; ?>
 
-		<?php include '../app/views/header.php'; ?>
+		<?php include '../app/views/header_new.php'; ?>
+
+		<main>
 
 		<?php
 			
 			/* If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
-			links like ../people/xxxx are manage with .htaccess and loaded the content as the sintax above ( with GET parameter )
 			then the user details are diplayed instead of the list of users and mentors */
-		
 
 		if (isset($_GET['user_id'])){
 
@@ -47,92 +42,17 @@
 			// Set the account_id of the person to show
 			$people_func->setPerson($_GET['user_id']);
 
-			?>
+			if ($user = $people_func->getPersonInfo()){
 
-			<div class="profile_wrapper">
+				// Profile view
+				include '../app/views/profile.php';	
 
-				<?php
+			} else {
 
-				// Get the person info
-				if ($person = $people_func->getPersonInfo()) {
+				echo "Nobody is here";
 
-					?>
+			}
 
-					<section>
-						
-						<img class="profile_pic" src="../app/assets/pics/people/<?php echo $person['avatar']; ?>">
-
-						<div class="profile_head">
-							<h3 class="profile_name"><?php echo trim($person["firstname"]) . " " . trim($person["lastname"]); ?></h3>
-							<p class="profile_role"><?php echo trim($person["role"]); ?></p>
-							<p class="profile_role"><?php echo trim($person["background"]); ?></p>
-							<?php 
-								$skills = explode(",", trim($person["skills"]));
-								foreach ($skills as $skill) {
-									?>
-										<p class="profile_role" style="color:green;display:inline-block"><?php echo trim($skill); ?></p>
-									<?php
-								}
-							?>
-						</div>
-						
-					</section>
-
-					<section class="profile_details">
-					
-						<p class="profile_details__about"><?php echo trim($person["about"]); ?></p>	
-
-						<p class="profile_details__email">
-							<a href="mailto:<?php echo trim($person["email"]); ?>">
-								<svg id="mail_ico" version="1.1" viewBox="0 0 483.3 483.3" style="enable-background:new 0 0 483.3 483.3;"><g><g><path d="M424.3,57.75H59.1c-32.6,0-59.1,26.5-59.1,59.1v249.6c0,32.6,26.5,59.1,59.1,59.1h365.1c32.6,0,59.1-26.5,59.1-59.1v-249.5C483.4,84.35,456.9,57.75,424.3,57.75z M456.4,366.45c0,17.7-14.4,32.1-32.1,32.1H59.1c-17.7,0-32.1-14.4-32.1-32.1v-249.5c0-17.7,14.4-32.1,32.1-32.1h365.1c17.7,0,32.1,14.4,32.1,32.1v249.5H456.4z"/><path d="M304.8,238.55l118.2-106c5.5-5,6-13.5,1-19.1c-5-5.5-13.5-6-19.1-1l-163,146.3l-31.8-28.4c-0.1-0.1-0.2-0.2-0.2-0.3c-0.7-0.7-1.4-1.3-2.2-1.9L78.3,112.35c-5.6-5-14.1-4.5-19.1,1.1c-5,5.6-4.5,14.1,1.1,19.1l119.6,106.9L60.8,350.95c-5.4,5.1-5.7,13.6-0.6,19.1c2.7,2.8,6.3,4.3,9.9,4.3c3.3,0,6.6-1.2,9.2-3.6l120.9-113.1l32.8,29.3c2.6,2.3,5.8,3.4,9,3.4c3.2,0,6.5-1.2,9-3.5l33.7-30.2l120.2,114.2c2.6,2.5,6,3.7,9.3,3.7c3.6,0,7.1-1.4,9.8-4.2c5.1-5.4,4.9-14-0.5-19.1L304.8,238.55z"/></g></g></svg>
-								<?php echo trim($person["email"]); ?>
-							</a>
-						</p>
-
-
-						<style>.profile_role.primary{border:2px solid #0f0;}</style>
-						<?php 
-
-							// Socials array example:
-							// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
-							$socials = !empty($person["socials"]) ? json_decode(trim($person["socials"]),true) : array();
-							foreach ($socials as $social_label => $social_data ) {
-								// Fix url format
-								if($social_label == "skype"){
-									$social_data[0] = "skype:".$social_data[0];
-								} else if($social_label == "whatsapp"){
-									$social_data[0] = "whatsapp://".$social_data[0];
-								} else if($social_label == "telegram"){
-									// ...
-								} else if(substr($social_label, 0, 7) == 'http://' || substr($social_label, 0, 8) == 'https://'){
-									$social_data[0] = "//".$social_data[0];
-								}
-								
-								?>
-									<a class="profile_role <?php echo $social_data[1];?>" style="color:green;display:inline-block" target="_blank" href="<?php echo $social_data[0];?>"><img src="../app/assets/pics/icons/<?php echo $social_label; ?>.svg" width="40" /></a>
-								<?php
-							}
-
-						?>
-
-					</section>
-			        					
-			        <?php
-
-					// Check if we are looking at our profile
-			        if($people_func->isMyProfile()) {
-			        	echo "<div class='button button--big'><a href='../account/'>Edit Profile</a></div>";
-			        }
-
-				} else {
-				    echo "Nobody is here!";
-				}
-
-			?>
-
-			</div> <!-- end profile wrapper -->
-
-			<?php
 
 		} else {
 
@@ -214,6 +134,10 @@
 			</div>
 
 		<?php } // endif switch all users list or single user details ?>
+
+
+		</main>
+
 
 		<?php include '../app/views/footer.php'; ?>
 

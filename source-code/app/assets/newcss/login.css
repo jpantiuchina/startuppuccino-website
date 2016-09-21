@@ -129,7 +129,7 @@ header {
       header .menu_link--sub > a:hover {
         color: #fcc124; }
   header .submenu_trigger:hover > .submenu {
-    height: 120px; }
+    height: 160px; }
 
 /* SEARCH */
 .search {
@@ -362,6 +362,18 @@ header {
 html, body {
   height: 100%; }
 
+pre {
+  white-space: pre-wrap;
+  /* css-3 */
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */ }
+
 html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -400,9 +412,7 @@ input[type=file] {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  overflow: hidden;
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%); }
+  overflow: hidden; }
 
 /* Role filters */
 .role_filter, .role_filter--student, .role_filter--mentor, .role_filter--educator {

@@ -67,6 +67,11 @@ $session-margin-top: 30px;
 		>a{
 			display: block;
 			height: 100%;
+			
+			div {
+				@extend .picture;
+				height: 100%;
+			}
 		}
 	}
 }
@@ -117,6 +122,7 @@ $session-margin-top: 30px;
 		background-color: $logo-green;
 		color: $session-background-color;
 		padding: 0px 10px;
+		font-family: $font-title;
 	}
 }
 
