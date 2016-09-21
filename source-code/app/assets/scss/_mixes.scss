@@ -46,3 +46,11 @@
   -webkit-filter: grayscale+unquote('(#{$filter-amount})');
   filter: grayscale+unquote('(#{$filter-amount})');
 }
+
+
+/* Animation mixin */
+
+@mixin rotate(){
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}

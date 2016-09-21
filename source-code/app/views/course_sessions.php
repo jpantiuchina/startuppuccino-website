@@ -2,25 +2,25 @@
 
 	<?php foreach ($sessions_set as $session) { ?>
 
-		<div class="session" id="<?php echo $session['id']; ?>">
+		<div class="session" id="session<?php echo $session['id']; ?>">
 
 			<div class="head">
 				<h3><?php echo $session['title']." | ".$session['date']; ?></h3>
 			</div>
+			
+			<div class="description">
+				<p><?php echo $session['description']; ?></p>
+			</div>
 
-			<div class="guests">
+			<div class="guests" id="guests__<?php echo $session['id']; ?>">
 				<?php if(isset($session['guests'])){ ?>
 				<?php foreach ($session['guests'] as $guest){ ?>
-					<div class="guest">
+					<div class="guest" guest-id="<?php echo $guest['id']; ?>">
 						<a href="../people/?user_id=<?php echo $guest['id']; ?>">
 							<div style="background-image:url('../app/assets/pics/people/<?php echo $guest['avatar']; ?>')"></div>
 						</a>
 					</div>
 				<?php }} ?>
-			</div>
-			
-			<div class="description">
-				<p><?php echo $session['description']; ?></p>
 			</div>
 
 			<div class="foot">

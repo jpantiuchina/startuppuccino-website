@@ -18,6 +18,14 @@
 
 	<title>Home - Startuppuccino</title>
 	<link rel="stylesheet" type="text/css" href="../app/assets/newcss/home.css">
+
+	<script type="text/javascript">
+		var STARTUPPUCCINO_USER = {
+				id : "<?php echo $_SESSION['id']; ?>",
+				avatar : "<?php echo $_SESSION['avatar']; ?>"
+			};
+	</script>
+
 </head>
 <body>
 
