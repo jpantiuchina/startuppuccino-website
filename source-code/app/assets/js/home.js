@@ -7,16 +7,36 @@ function StartuppuccinoHome(){}
 StartuppuccinoHome.prototype.layout = {}
 
 StartuppuccinoHome.prototype.layout.showTinyloader = function(loader){
+
 	loader.setAttribute("style","display:block");
+
 }
 StartuppuccinoHome.prototype.layout.hideTinyloader = function(loader){
+
 	loader.setAttribute("style","display:none");	
+
 }
-StartuppuccinoHome.prototype.layout.toogleResources = function(session_id) {
-		
+StartuppuccinoHome.prototype.layout.toogleResources = function(e) {
+
+	var button = e.target || e.srcElement;
+	var session_id = button.parentNode.getAttribute("data-session");
+	var resources = button.parentNode.parentNode.childNodes[9];
+		comments = button.parentNode.parentNode.childNodes[11];
+	
+	resources.classList.toggle("r_show");
+	comments.classList.remove("c_show");	
+
 }
-StartuppuccinoHome.prototype.layout.toogleComments = function(session_id) {
-		
+StartuppuccinoHome.prototype.layout.toogleComments = function(e) {
+
+	var button = e.target || e.srcElement;
+	var session_id = button.parentNode.getAttribute("data-session");
+	var resources = button.parentNode.parentNode.childNodes[9];
+		comments = button.parentNode.parentNode.childNodes[11];
+	
+	comments.classList.toggle("c_show");
+	resources.classList.remove("r_show");
+
 }
 StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(session_id, button) {
 
@@ -176,10 +196,21 @@ if(typeof SpHome === "undefined" || SpHome === null){
 window.onload = function(){
 
 	var pitch_toggle_buttons = document.getElementsByClassName("button_toggle_pitch");
+	var resources_toggle_buttons = document.getElementsByClassName("session_resources_button");
+	var comments_toggle_buttons = document.getElementsByClassName("session_comments_button");
 
-	for (var i = 0; i < pitch_toggle_buttons.length; i++) {
+	var pitch_length = pitch_toggle_buttons.length;
+	var resources_length = resources_toggle_buttons.length;
+	var comments_length = comments_toggle_buttons.length;
+
+	for (var i = 0; i < pitch_length; i++) {
 		pitch_toggle_buttons[i].addEventListener("click", function(e){ SpHome.mentors.setPitch(e); });
 	}
-
+	for (var i = 0; i < resources_length; i++) {
+		resources_toggle_buttons[i].addEventListener("click", function(e){ SpHome.layout.toogleResources(e); });
+	}
+	for (var i = 0; i < comments_length; i++) {
+		comments_toggle_buttons[i].addEventListener("click", function(e){ SpHome.layout.toogleComments(e); });
+	}
 
 }

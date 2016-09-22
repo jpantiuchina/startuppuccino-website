@@ -23,36 +23,29 @@
 				<?php }} ?>
 			</div>
 
-			<div class="foot">
-				<span onclick="SpHome.layout.toogleResources(<?php echo $session['id']; ?>)">Resources</span>
-				<span onclick="SpHome.layout.toogleComments(<?php echo $session['id']; ?>)">Comments</span>
+			<div class="foot" data-session="<?php echo $session['id']; ?>">
+				<span class="session_resources_button">Resources</span>
+				<span class="session_comments_button">Comments</span>
 			</div>
 
 			<div class="resources">
+				<?php $resources = json_decode($session['resource'], true); ?>
 				<ul>
-					<?php if(isset($session['resources'])){
-						foreach ($session['resources'] as $resource) { ?>
+					<?php foreach ($resources as $resource) { ?>
 						<li>
-							<a href="../app/api/download/?f=<?php echo $resource; ?>" target="_blank">
-								<span class="icon pdf"></span><?php echo $resource; ?>
+							<a href="<?php echo $resource['link']; ?>" target="_blank">
+								<span class="icon pdf"></span><?php echo $resource['name']; ?>
 							</a>
 						</li>
-					<?php } } ?>
+					<?php } ?>
 				</ul>
 			</div>
 
-			<!--
-
 			<div class="comments">
-
-				<span class="toggle_button" onclick="Sp.layout.toggleComments('1')">comments (0)</span>
 				<div class="comments_wrapper">
 
 				</div>
-
 			</div>
-
-			-->
 
 		</div>
 

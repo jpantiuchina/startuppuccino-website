@@ -1,5 +1,5 @@
 <?php
- 
+
 class CourseSessions_Functions {
 
     function __construct() {
@@ -14,72 +14,6 @@ class CourseSessions_Functions {
     }
 
     /**
-     * Scan session documents directory and get resources
-     */
-    private function loadResources($sessions_array){
-        
-        // Scan all resources files
-        $files = scandir("../app/assets/docs/session/");
-
-        // Check if there is at least one resource
-        // Remember: scandir, in linux environment, count also the default folders "." and ".."
-        // (that's way the condition is >2)
-        if(count($files)>2){
-            // Load resources on the session array associated to the relative session
-            $l = count($sessions_array);
-            for ($i = 0; $i < $l; $i++) {
-
-                $file_prefix = $sessions_array[$i]['date']."_week_";
-                $prefix_length = count($file_prefix);
-                foreach ($files as $file) {
-                    if(substr($file, 0, $prefix_length) === $file_prefix){
-                        $sessions_array[$i]['resources'][] = $file;
-                    }
-                }
-            
-            }
-        }
-
-        return $sessions_array;
-
-    }
-
-    /**
-     * Scan session documents directory and get resources
-     */
-    private function loadGuests($sessions_array){
-        
-
-        foreach ($sessions_array as $i => $session_value) {
-
-            $query = "SELECT ma.mentor_id as id, a.avatar
-                      FROM "._T_MENTOR_AVAILABILITY." ma, "._T_ACCOUNT." a
-                      WHERE ma.mentor_id = a.id
-                      AND ma.session_id = ".$sessions_array[$i]['id'].";";
-
-            $result = $this->conn->query($query);
-
-            $guests = [];
-
-            if($result){
-
-                while ($guest = $result->fetch_assoc()){
-                    $guests[] = $guest;
-                }
-
-                if(count($guests) > 0){
-                    $sessions_array[$i]['guests'] = $guests;
-                }
-
-            }
-
-        }
-
-        return $sessions_array;
-
-    }
-
-    /**
      * Get all Sessions
      */
     public function getSessions(){
@@ -89,7 +23,8 @@ class CourseSessions_Functions {
         $query = "SELECT s.id,
                          s.title,
                          s.date,
-                         s.description
+                         s.description,
+                         s.resource
                   FROM "._T_SESSION." s;";
 
         $result = $this->conn->query($query);
@@ -101,8 +36,7 @@ class CourseSessions_Functions {
             }
 
             if(count($sessions) > 0){
-                // Fill sessions array with resources data
-                $sessions = $this->loadResources($sessions);
+                // Fill sessions array with guest mentors
                 $sessions = $this->loadGuests($sessions);
             }
 
@@ -204,6 +138,74 @@ class CourseSessions_Functions {
         return $sessions;
 
     }
+
+     /**
+     * Load mentor guest for each lecture/session
+     */
+    private function loadGuests($sessions_array){
+        
+
+        foreach ($sessions_array as $i => $session_value) {
+
+            $query = "SELECT ma.mentor_id as id, a.avatar
+                      FROM "._T_MENTOR_AVAILABILITY." ma, "._T_ACCOUNT." a
+                      WHERE ma.mentor_id = a.id
+                      AND ma.session_id = ".$sessions_array[$i]['id'].";";
+
+            $result = $this->conn->query($query);
+
+            $guests = [];
+
+            if($result){
+
+                while ($guest = $result->fetch_assoc()){
+                    $guests[] = $guest;
+                }
+
+                if(count($guests) > 0){
+                    $sessions_array[$i]['guests'] = $guests;
+                }
+
+            }
+
+        }
+
+        return $sessions_array;
+
+    }
+
+    /**
+     * Scan session documents directory and get resources
+     */
+    /*
+    private function loadResources($sessions_array){
+        
+        // Scan all resources files
+        $files = scandir("../app/assets/docs/session/");
+
+        // Check if there is at least one resource
+        // Remember: scandir, in linux environment, count also the default folders "." and ".."
+        // (that's way the condition is >2)
+        if(count($files)>2){
+            // Load resources on the session array associated to the relative session
+            $l = count($sessions_array);
+            for ($i = 0; $i < $l; $i++) {
+
+                $file_prefix = $sessions_array[$i]['date']."_week_";
+                $prefix_length = count($file_prefix);
+                foreach ($files as $file) {
+                    if(substr($file, 0, $prefix_length) === $file_prefix){
+                        $sessions_array[$i]['resources'][] = $file;
+                    }
+                }
+            
+            }
+        }
+
+        return $sessions_array;
+
+    }
+    */
 
 }
 
