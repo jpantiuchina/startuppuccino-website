@@ -1,0 +1,81 @@
+
+#session_comments {
+	position:fixed;
+	z-index:99999;
+	top:100%;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color: $header-background;
+	text-align:center;
+    @include transition($transition-time);
+
+    .background_close {
+        position: absolute;
+        top:0;left:0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+
+}
+
+.session_comments_form {
+    position: relative;
+	-webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+    text-align: left;
+    width: 100%;
+    max-width: 550px;
+    color: #fff !important;
+    background-color: $logo-green; /* #e3e3c9 */
+    padding: 20px;
+    @include border-radius(3px);
+    z-index: 1;
+
+    >input, >textarea {
+    	display: block;
+    	border: none;
+    	margin: 15px 0px;
+    	width: 100%;
+        padding-left: 5px
+    }
+
+    >textarea {
+        height: 90px;
+        width: 100%;
+        max-height: 120px;
+        max-width: 550px;
+    }
+
+    >input[type=submit] {
+        background-color: transparent;
+        width: 100px;
+        background-color: #444;
+        color: #fff !important;
+        box-shadow-color: #fff !important;
+        -webkit-box-shadow-color: #fff !important;
+    	@extend .st_button;
+    }
+
+    .ask_closer {
+        $tempclose-size: 18px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        display: block;
+        width: $tempclose-size;
+        height: $tempclose-size;
+        background: transparent;
+        color: #fff;
+        font-weight: 200;
+        text-align: center;
+        line-height: $tempclose-size;
+        @include border-radius(50%);
+        @include box-shadow(0px 0px 0px 1px #fff);
+    }
+
+}
