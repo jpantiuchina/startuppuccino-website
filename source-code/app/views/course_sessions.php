@@ -31,10 +31,18 @@
 			<div class="resources">
 				<?php $resources = json_decode($session['resource'], true); ?>
 				<ul>
-					<?php foreach ($resources as $resource) { ?>
+					<?php if (count($resources)>0) { ?>
+						<?php foreach ($resources as $resource) { ?>
+							<li>
+								<a href="<?php echo $resource['link']; ?>" target="_blank">
+									<span class="icon pdf"></span><?php echo $resource['name']; ?>
+								</a>
+							</li>
+						<?php } ?>
+					<?php } else { ?>
 						<li>
-							<a href="<?php echo $resource['link']; ?>" target="_blank">
-								<span class="icon pdf"></span><?php echo $resource['name']; ?>
+							<a>
+								<span class="icon pdf"></span>No resources for this lecture.
 							</a>
 						</li>
 					<?php } ?>
