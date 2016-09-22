@@ -30,7 +30,7 @@
 
     <nav class="menu">
 
-    	<div onclick="Sp.layout.toggleMobileMenu(this)" id="mobile_menu__button" class="mobile_menu__button">
+    	<div id="mobile_menu__button" class="mobile_menu__button">
     		<div></div>
     		<div></div>
     		<div></div>
@@ -49,6 +49,7 @@
 
 			<?php } ?>
 
+            <!--
 			<li class="menu_link--top">
                 <a href="../home/">Lectures</a>
             </li>
@@ -56,9 +57,10 @@
             <li class="menu_link--top">
                 <a href="../ideas/">Ideas</a>
             </li>
-			
+			-->
+
         	<li class="menu_link--top">
-                <a href="#" onclick="Sp.layout.toggleSearch()">Search</a>
+                <a href="#" class="search_trigger_button">Search</a>
             </li>
 
         	<li class="menu_link submenu_trigger">
@@ -69,7 +71,7 @@
                     <li class="menu_link--sub"><a href="../people/?user_id=<?php echo $_SESSION['id'];?>">Profile</a></li>
                     <li class="menu_link--sub"><a href="../account/">Settings</a></li>
 					<li class="menu_link--sub"><a href="../logout/">Logout</a></li>
-                    <li class="menu_link--sub"><a href="#" onclick="showAskForHelp()">Help</a></li>
+                    <li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>
 				</ul>
         	</li>
 

@@ -193,7 +193,7 @@ if(typeof SpHome === "undefined" || SpHome === null){
 
 /* Add event listeners */
 
-window.onload = function(){
+window.addEventListener("load", function(){  
 
 	var pitch_toggle_buttons = document.getElementsByClassName("button_toggle_pitch");
 	var resources_toggle_buttons = document.getElementsByClassName("session_resources_button");
@@ -213,4 +213,4 @@ window.onload = function(){
 		comments_toggle_buttons[i].addEventListener("click", function(e){ SpHome.layout.toogleComments(e); });
 	}
 
-}
+});

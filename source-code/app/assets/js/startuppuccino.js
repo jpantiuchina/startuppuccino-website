@@ -139,7 +139,6 @@ function Startuppuccino(){
 
 
 
-
 Startuppuccino.prototype.helpers = {};
 
 // helper to set multiple attributes on a node
@@ -246,17 +245,37 @@ if(typeof Sp === "undefined" || Sp === null){
 
 }
 
-/* Download search result after the has been loaded */
 
-window.onload = function(){ Sp.downloadSearchResult(); };
+window.addEventListener("load", function(){  
 
-/* Set search event listeners */
-document.getElementById("search_input").oninput = function(){
-    Sp.search(this.value);
-}
+    /* Add event listeners */
+    var search_triggers = document.getElementsByClassName("search_trigger_button"),
+        search_input = document.getElementById("search_input"),
+        mobile_menu_button = document.getElementById("mobile_menu__button"),
+        askforhelp_trigger_button = document.getElementById("askforhelp_trigger_button");
 
+    var search_triggers_length = search_triggers.length;
 
+    for (var i = 0; i < search_triggers_length; i++) {
+        search_triggers[i].addEventListener("click", function(e){ Sp.layout.toggleSearch(); });
+    }
+    
+    search_input.addEventListener("input", function(e){ 
 
+        var input = e.target || e.srcElement,
+            text = input.value;
+        Sp.search(text);
+
+    });
+    
+    mobile_menu_button.addEventListener("click", function(e){ Sp.layout.toggleMobileMenu(e); });    
+    
+    askforhelp_trigger_button.addEventListener("click", function(){ showAskForHelp(); });
+
+    /* Download and store search data */
+    Sp.downloadSearchResult();
+
+}); 
 
 
 
