@@ -33,6 +33,11 @@ $session-margin-top: 30px;
 		}
 	}
 
+	>.description pre {
+		font-family: $font-stack;
+		font-size: 15px;
+	}
+
 	> .foot,
 	> .resources,
 	> .comments {
@@ -142,6 +147,11 @@ $session-margin-top: 30px;
 		
 		p {
 			margin: 3px 0px;
+			font-size: 15px;
+
+			&:last-child {
+				color: #999;
+			}
 		}
 
 		> a {
@@ -193,7 +203,7 @@ $session-margin-top: 30px;
 
 	$button-availabiliy-inactive-color: #f2f2f2;
 
-	.button_pitch_click {
+	.button_toggle_pitch {
 		position: absolute;
 		top: 0px; left: 0px;
 		width: 100%; height: 100%;

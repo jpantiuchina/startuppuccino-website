@@ -16,24 +16,57 @@
 		exit("Some parameter is missing.");
 	}
 
+	// Set pitch value
+	$pitch = (isset($_POST['pitch']) && in_array($_POST['pitch'], ["0","1"])) ? $_POST['pitch'] : null;
+
 	// Include Course sessions functions
 	require_once '../models/CourseSessions_Functions.php';
-	$cs_func = new CourseSessions_Functions();
+	$cs_func = new CourseSessions_Functions();	
+
+	// Check if pitch paramenter is set with the right value ( 0 or 1 )
+	if($pitch != null) {
+
+		$edit_availability = $cs_func->editMentorAvailability($_SESSION['id'], 
+			                                                  $_POST['s_id'], 
+			                                                  $_POST['action'],
+			                                                  $_POST['pitch']);
+		
+	} else {
+		
+		$edit_availability = $cs_func->editMentorAvailability($_SESSION['id'], $_POST['s_id'], $_POST['action']);
+	
+	}
 
 	// Edit availability
-	if ($cs_func->editMentorAvailability($_SESSION['id'], $_POST['s_id'], $_POST['action'])){
+	if ($edit_availability){
 
 		// Edit the session array
 		if($_POST['action'] === "add"){
-			array_push($_SESSION['lectures_availability'], $_POST['s_id']);
+			if($pitch != null){
+				$_SESSION['lectures_availability'][$_POST['s_id']] = $pitch;
+			} else {
+				$_SESSION['lectures_availability'][$_POST['s_id']] = "0";
+			}
 		} else if($_POST['action'] === "remove"){
-			unset(
-				$_SESSION['lectures_availability'][array_search($_POST['s_id'], $_SESSION['lectures_availability'])]
-				);
+			if($pitch == null){
+				foreach ($_SESSION['lectures_availability'] as $key => $value) {
+					if ($_POST['s_id'] == $key){
+						unset($_SESSION['lectures_availability'][$key]);
+					}
+				}
+			} else {
+				foreach ($_SESSION['lectures_availability'] as $key => $value) {
+					if ($_POST['s_id'] == $key){
+						$_SESSION['lectures_availability'][$_POST['s_id']] = $pitch;
+					}
+				}
+			}
 		}
 
 		// Exit with successful answer
 		exit("ok");
+	} else if ($pitch === "0" && $_POST['action'] === "add"){
+		exit("no");
 	}
 
 	echo "Error while saving data, please try again.";

@@ -1,3 +1,14 @@
+<?php
+
+	// Temporary solution to check if the session id is in the array of lecture selected by the user
+	function i_am_attending($s_id){
+		foreach ($_SESSION['lectures_availability'] as $key => $value) {
+			if ($s_id == $key) return true;
+		}
+		return false;
+	}
+
+?>
 
 <section class="column_right">
 
@@ -9,14 +20,21 @@
 
 		<div class="main">
 
-			<?php foreach($sessions_set as $session){ ?>
-				<?php
+			<?php 
+			
+				$l = count($sessions_set);
+				for ($i=0; $i < $l; $i++) { 
+			
+					$session = $sessions_set[$i];
 					$checkbox = ""; 
-					$pitch_ = 0;
-					if ( in_array($session['id'], $_SESSION['lectures_availability']) ){
+					$pitch_ = 1;
+			
+					if (i_am_attending($session['id'])){
 						$data_action = "remove";
-						$pitch_ = 1;//$_SESSION['lectures_availability'][$session['id']]; // 0 or 1
-						$checkbox = "checked";
+						$pitch_ = 1 - intval($_SESSION['lectures_availability'][$session['id']]); // 0 or 1
+						if($pitch_ === 0){
+							$checkbox = "checked";
+						}
 					} else {
 						$data_action = "add";
 					}
@@ -31,6 +49,7 @@
 					</div>
 					<div class="list_el__right">
 						<div class="button_availability action_<?php echo $data_action; ?>"
+							 data-session="<?php echo $session['id']; ?>"
 							 data-action="<?php echo $data_action; ?>">
 							<span 
 								<?php if($data_action === "add") { ?>
@@ -43,8 +62,9 @@
 						</div>
 						<div class="button_pitch">
 							<label class="<?php echo $checkbox; ?>">
-								<div class="button_pitch_click"
-									 onclick="SpHome.mentors.setPitch(<?php echo $pitch_; ?>)"></div>
+								<div class="button_toggle_pitch"
+									 data-session="<?php echo $session['id']; ?>"
+									 data-pitch="<?php echo $pitch_; ?>"></div>
 								<span>PITCH</span><!--
 								--><input type="checkbox" 
 										  <?php echo ($checkbox === "checked") ? 'checked=""' : ''; ?>" />
@@ -55,7 +75,8 @@
 						</div>
 					</div>
 				</div>
-			<?php } ?>
+
+			<?php } // End of for loop ?>
 
 		</div>
 

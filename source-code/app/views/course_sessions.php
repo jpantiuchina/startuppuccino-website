@@ -9,7 +9,7 @@
 			</div>
 			
 			<div class="description">
-				<p><?php echo $session['description']; ?></p>
+				<p><pre><?php echo $session['description']; ?></pre></p>
 			</div>
 
 			<div class="guests" id="guests__<?php echo $session['id']; ?>">

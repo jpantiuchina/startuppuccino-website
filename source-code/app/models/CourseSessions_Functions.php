@@ -115,21 +115,57 @@ class CourseSessions_Functions {
     /**
      * Edit mentor availability
      */
-    public function editMentorAvailability($mentor_id, $session_id, $action){
+    public function editMentorAvailability($mentor_id, $session_id, $action, $pitch = null){
 
-        if ($action === "add"){
+        // action = remove -> yes is enabled and tuple is in the table
+        // action = add -> no is enabled and tuple is not in the table
 
-            $query = "INSERT INTO "._T_MENTOR_AVAILABILITY." (mentor_id, session_id)
-                      VALUES ('".$mentor_id."', '".$session_id."');";
+        if ($action === "remove") {
 
-        } else if ($action === "remove"){
+            if ($pitch === "0") {
 
-            $query = "DELETE FROM "._T_MENTOR_AVAILABILITY."
+                $query = "UPDATE "._T_MENTOR_AVAILABILITY." 
+                      SET pitch='0'
+                      WHERE mentor_id='".$mentor_id."' 
+                      AND session_id='".$session_id."';";
+
+            } else if ($pitch === "1") {
+                
+                $query = "UPDATE "._T_MENTOR_AVAILABILITY." 
+                      SET pitch='1'
+                      WHERE mentor_id='".$mentor_id."' 
+                      AND session_id='".$session_id."';";
+
+            } else {
+
+                $query = "DELETE FROM "._T_MENTOR_AVAILABILITY."
                       WHERE mentor_id = '".$mentor_id."'
                       AND session_id = '".$session_id."' ;";
 
+            }
+
+        } else if ($action === "add") {
+
+            if ($pitch === "1") {
+
+                $query = "INSERT INTO "._T_MENTOR_AVAILABILITY." (mentor_id, session_id, pitch)
+                          VALUES ('".$mentor_id."', '".$session_id."',1);";            
+
+            } else if($pitch === "0") {
+
+                return false;
+
+            } else {
+
+                $query = "INSERT INTO "._T_MENTOR_AVAILABILITY." (mentor_id, session_id)
+                          VALUES ('".$mentor_id."', '".$session_id."');";
+            
+            }
+
         } else {
+
             return false;
+        
         }
 
         $this->conn->query($query);
@@ -145,13 +181,13 @@ class CourseSessions_Functions {
     }
 
     /**
-     * Edit mentor availability
+     * Get all the sessions when the mentor is available
      */
     public function getMentorSessionAvailability($mentor_id){
 
         $sessions = [];
 
-        $query = "SELECT ma.session_id 
+        $query = "SELECT ma.session_id, ma.pitch
                   FROM "._T_MENTOR_AVAILABILITY." ma
                   WHERE ma.mentor_id = '".$mentor_id."';";
 
@@ -159,8 +195,8 @@ class CourseSessions_Functions {
 
         if($result){
 
-            while ($sesssion = $result->fetch_assoc()){
-                $sessions[] = $sesssion['session_id'];
+            while ($session = $result->fetch_assoc()){
+                $sessions[$session['session_id']] = $session['pitch'];
             }
 
         }

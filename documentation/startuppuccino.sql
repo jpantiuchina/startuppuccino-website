@@ -5,20 +5,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema startup
+-- Schema startuppuccino
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `startup` ;
+DROP SCHEMA IF EXISTS `startuppuccino` ;
 
 -- -----------------------------------------------------
--- Schema startup
+-- Schema startuppuccino
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `startup` DEFAULT CHARACTER SET utf8mb4 ;
-USE `startup` ;
+CREATE SCHEMA IF NOT EXISTS `startuppuccino` DEFAULT CHARACTER SET utf8mb4 ;
+USE `startuppuccino` ;
 
 -- -----------------------------------------------------
--- Table `startup`.`account`
+-- Table `startuppuccino`.`account`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`account` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`account` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `linkedin_id` VARCHAR(63) NULL,
   `about` LONGTEXT COLLATE 'utf8mb4_unicode_ci' NULL DEFAULT NULL,
@@ -41,9 +41,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`project`
+-- Table `startuppuccino`.`project`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`project` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`project` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   `owner_id` INT(11) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `startup`.`project` (
   INDEX `fk_project_author_idx` (`owner_id` ASC),
   CONSTRAINT `fk_project_author`
     FOREIGN KEY (`owner_id`)
-    REFERENCES `startup`.`account` (`id`)
+    REFERENCES `startuppuccino`.`account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -68,9 +68,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`comment`
+-- Table `startuppuccino`.`comment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`comment` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`comment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `author_id` INT(11) NOT NULL,
@@ -81,12 +81,12 @@ CREATE TABLE IF NOT EXISTS `startup`.`comment` (
   INDEX `comment_author` (`author_id` ASC),
   CONSTRAINT `comment_author`
     FOREIGN KEY (`author_id`)
-    REFERENCES `startup`.`account` (`id`)
+    REFERENCES `startuppuccino`.`account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `comment_project`
     FOREIGN KEY (`project_id`)
-    REFERENCES `startup`.`project` (`id`)
+    REFERENCES `startuppuccino`.`project` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -94,9 +94,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`project_participant`
+-- Table `startuppuccino`.`project_participant`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`project_participant` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `account_id` INT(11) NOT NULL,
@@ -106,12 +106,12 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_participant` (
   INDEX `fk_account_id_idx` (`account_id` ASC),
   CONSTRAINT `fk_project_id`
     FOREIGN KEY (`project_id`)
-    REFERENCES `startup`.`project` (`id`)
+    REFERENCES `startuppuccino`.`project` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_account_id`
     FOREIGN KEY (`account_id`)
-    REFERENCES `startup`.`account` (`id`)
+    REFERENCES `startuppuccino`.`account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -120,9 +120,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`like`
+-- Table `startuppuccino`.`like`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`like` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`like` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `account_id` INT(11) NOT NULL,
@@ -132,12 +132,12 @@ CREATE TABLE IF NOT EXISTS `startup`.`like` (
   UNIQUE INDEX `unique_likes` (`project_id` ASC, `account_id` ASC),
   CONSTRAINT `like_account`
     FOREIGN KEY (`account_id`)
-    REFERENCES `startup`.`account` (`id`)
+    REFERENCES `startuppuccino`.`account` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `like_project`
     FOREIGN KEY (`project_id`)
-    REFERENCES `startup`.`project` (`id`)
+    REFERENCES `startuppuccino`.`project` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -145,9 +145,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`milestone`
+-- Table `startuppuccino`.`milestone`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`milestone` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`milestone` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
   `description` VARCHAR(45) NOT NULL,
@@ -160,9 +160,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`project_milestones`
+-- Table `startuppuccino`.`project_milestones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`project_milestones` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `project_id` INT(11) NOT NULL,
   `milestone_id` INT(11) NOT NULL,
@@ -172,12 +172,12 @@ CREATE TABLE IF NOT EXISTS `startup`.`project_milestones` (
   INDEX `fk_milestone_p_idx` (`milestone_id` ASC),
   CONSTRAINT `fk_project_m`
     FOREIGN KEY (`project_id`)
-    REFERENCES `startup`.`project` (`id`)
+    REFERENCES `startuppuccino`.`project` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_milestone_p`
     FOREIGN KEY (`milestone_id`)
-    REFERENCES `startup`.`milestone` (`id`)
+    REFERENCES `startuppuccino`.`milestone` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -185,9 +185,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`session`
+-- Table `startuppuccino`.`session`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`session` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`session` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `title` VARCHAR(45) NULL,
@@ -200,9 +200,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`mentor_availability`
+-- Table `startuppuccino`.`mentor_availability`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`mentor_availability` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`mentor_availability` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `mentor_id` INT(11) NOT NULL,
   `session_id` INT(11) NOT NULL,
@@ -213,12 +213,12 @@ CREATE TABLE IF NOT EXISTS `startup`.`mentor_availability` (
   INDEX `fk_session_id_idx` (`session_id` ASC),
   CONSTRAINT `fk_mentor_id`
     FOREIGN KEY (`mentor_id`)
-    REFERENCES `startup`.`account` (`id`)
+    REFERENCES `startuppuccino`.`account` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_session_id`
     FOREIGN KEY (`session_id`)
-    REFERENCES `startup`.`session` (`id`)
+    REFERENCES `startuppuccino`.`session` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -226,9 +226,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `startup`.`assignments`
+-- Table `startuppuccino`.`assignments`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `startup`.`assignments` (
+CREATE TABLE IF NOT EXISTS `startuppuccino`.`assignments` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(63) NOT NULL,
   `deadline` DATETIME NULL,

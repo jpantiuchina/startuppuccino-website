@@ -6,6 +6,12 @@ function StartuppuccinoHome(){}
 
 StartuppuccinoHome.prototype.layout = {}
 
+StartuppuccinoHome.prototype.layout.showTinyloader = function(loader){
+	loader.setAttribute("style","display:block");
+}
+StartuppuccinoHome.prototype.layout.hideTinyloader = function(loader){
+	loader.setAttribute("style","display:none");	
+}
 StartuppuccinoHome.prototype.layout.toogleResources = function(session_id) {
 		
 }
@@ -28,7 +34,8 @@ StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(se
 		button.parentNode.childNodes[1].setAttribute("onclick","SpHome.mentors.setAvailability("+session_id+",this)");
 		button.parentNode.className = "button_availability action_add";
 		button.parentNode.setAttribute("data-action","add");
-		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[5].removeAttribute("checked");
+		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[1].setAttribute("data-pitch", 1);
+		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[5].checked = false;
 		button.parentNode.parentNode.childNodes[3].childNodes[1].className = "";
 		SpHome.layout.renderGuest(session_id, true);
 
@@ -71,6 +78,16 @@ StartuppuccinoHome.prototype.layout.renderGuest = function(session_id, remove_me
 
 	}
 
+}
+StartuppuccinoHome.prototype.layout.setPitchButton = function(button, pitch){
+
+	if(pitch === "1"){
+		button.setAttribute("data-pitch","0");
+		button.parentNode.className = "checked";
+	} else {
+		button.setAttribute("data-pitch","1");
+		button.parentNode.className = "";
+	}
 
 }
 
@@ -80,8 +97,12 @@ StartuppuccinoHome.prototype.mentors = {}
 
 StartuppuccinoHome.prototype.mentors.setAvailability = function(session_id, button) {
 
+	var loader = button.parentNode.parentNode.childNodes[5];
 	var action = button.parentNode.getAttribute("data-action");
 	var data = {};
+
+	// Show loader -> try to prevent double click on button
+	SpHome.layout.showTinyloader(loader);
 
 	data.url = "../app/controllers/mentors_availability.php";
 	data.parameters = "s_id="+session_id+"&action="+action;
@@ -94,6 +115,49 @@ StartuppuccinoHome.prototype.mentors.setAvailability = function(session_id, butt
 			} else {
 				alert(response);
 			}
+			// Hide loader
+			SpHome.layout.hideTinyloader(loader);
+		});
+
+}
+StartuppuccinoHome.prototype.mentors.setPitch = function(e){
+
+	var button = e.target || e.srcElement,
+		loader = button.parentNode.parentNode.parentNode.childNodes[5];
+		session_id = button.getAttribute("data-session");
+		pitch = button.getAttribute("data-pitch");
+		action = button.parentNode
+				       .parentNode
+				       .parentNode.childNodes[1].getAttribute("data-action");
+
+	var data = {};
+
+	// Show loader -> try to prevent double click on button
+	SpHome.layout.showTinyloader(loader);
+
+	data.url = "../app/controllers/mentors_availability.php";
+	data.parameters = "s_id=" + session_id + 
+	                  "&action=" + action + 
+	                  "&pitch=" + pitch ;
+
+	Sp.post(
+		data,
+		function(response){
+			if(response == "ok") {
+				if(action == "add"){
+					var availbility_button = button.parentNode
+					                               .parentNode
+					                               .parentNode
+					                               .childNodes[1]
+					                               .childNodes[3];
+					SpHome.layout.toggleMentorAvailabilityButton(session_id, availbility_button);
+				}
+				SpHome.layout.setPitchButton(button, pitch);
+				// Hide loader
+				SpHome.layout.hideTinyloader(loader);
+			} else {
+				console.log(response);
+			}
 		});
 
 }
@@ -104,5 +168,18 @@ StartuppuccinoHome.prototype.mentors.setAvailability = function(session_id, butt
 if(typeof SpHome === "undefined" || SpHome === null){ 
 
     var SpHome = new StartuppuccinoHome();
+
+}
+
+/* Add event listeners */
+
+window.onload = function(){
+
+	var pitch_toggle_buttons = document.getElementsByClassName("button_toggle_pitch");
+
+	for (var i = 0; i < pitch_toggle_buttons.length; i++) {
+		pitch_toggle_buttons[i].addEventListener("click", function(e){ SpHome.mentors.setPitch(e); });
+	}
+
 
 }

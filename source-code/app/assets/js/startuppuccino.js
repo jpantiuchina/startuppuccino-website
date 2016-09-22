@@ -181,7 +181,11 @@ Startuppuccino.prototype.layout.toggleMobileMenu = function(target){
 }
 
 Startuppuccino.prototype.layout.toggleSearch = function() {
-    document.getElementById("search").classList.toggle("search--visible");
+    var search = document.getElementById("search");
+    search.classList.toggle("search--visible");
+    if(search.classList.contains("search--visible")){
+        document.getElementById("search_input").focus();
+    }
 }
 
 // Render search results in the search section
