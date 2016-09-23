@@ -1,3 +1,4 @@
+
 function checkForm(){
 	// Add here some client checks to prevent bad ux
 	// If you want to block -> return false;
@@ -14,7 +15,11 @@ function checkForm(){
 	}
 }
 
+
 function saveSocialInputs(){
+	
+	Sp.layout.showLoading();
+
 	// Collect all data and send them at server script "social_link_controller.php"
 
 	// Socials array example:
@@ -48,23 +53,32 @@ function saveSocialInputs(){
 	};
 
 	// Format object into json
+	socialdata_o = socialdata;
 	socialdata = JSON.stringify(socialdata);
 
-	// Send data to server
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-	        console.log(xmlhttp.responseText);
-	        if(xmlhttp.responseText=="ok"){
-	        	alert("Data saved");
-	        	hideSocialBox();
-	        } else {
-	        	alert(xmlhttp.responseText);
-	        }
-	    }
-	};
-	xmlhttp.open("POST", "./social_link_controller.php", true);
-	xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xmlhttp.send("socialdata="+socialdata);
+	// Look for edits in social data
+	if ( socialdata == JSON.stringify(CURRENT_SOCIALS) ){
+
+		alert("Social data saved");
+
+		Sp.layout.hideLoading();
+
+	} else {
+
+		// Send data to server
+		Sp.post({
+					url: "../app/controllers/social_link_controller.php",
+					parameters: "socialdata="+socialdata
+				}, function(response){
+					if( response == "ok" ){
+						CURRENT_SOCIALS = socialdata_o;
+			        	alert("Social data saved");
+			        } else {
+			        	alert(response);
+			        }
+		        	Sp.layout.hideLoading();
+				});
+
+	}
 
 }

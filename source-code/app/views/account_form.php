@@ -1,12 +1,15 @@
-<?php
 
-	if($account){
-	
-?>
-	
-	<style>.form_box_item{vertical-align: top;}</style>
+<?php if($account){ ?>
+
+	<?php if( !empty($general_alert) ){ ?>
+		<div class="message_alert_container">
+			<h4><?php echo $general_alert; ?></h4>
+		</div>
+	<?php } ?>
 
 	<form action="" method="post" class="form_custom" >
+
+		<h4>Personal Information</h4>
 
 		<li class="form_box_item">
 			<label>Firstname</label>
@@ -24,7 +27,13 @@
 		</li>
 
 		<li class="form_box_item">
-			<label>Faculty(Student)/Company(Mentor)</label>
+			<label>
+			<?php if ( $_SESSION['role'] === "student" ) { ?>
+				Faculty
+			<?php } else { ?>
+				Company
+			<?php } ?>
+			</label>
 			<input class="form_pretty_general_input" type="text" name="background" value="<?php echo trim($account['background']);?>" required/>
 		</li>
 
@@ -34,60 +43,25 @@
 		</li>
 
 		<li class="form_box_item">
-			<label>About me (optional)</label>
+			<label>Role</label>
+			<input class="form_pretty_general_input" type="text" placeholder="<?php echo trim($account['role']);?>" disabled=""/>
+		</li>
+
+		<li class="form_box_item form_box_item--full">
+			<label>About me <span style="color:#999">(optional)</span></label>
 			<textarea class="form_pretty_general_input" name="about" placeholder="More info about me, about my startup idea, etc."><?php echo trim($account['about']);?></textarea>
 		</li>
 
-
-		<!-- Temporary -->
-		<input type="hidden" value="<?php echo $account['role'];?>" name="role">
-
-		<!--
-
-		<li class="form_box_item">
-			<label>Role</label>
-			<?php
-
-			// If the user is an educator (a super user)
-			// we do not need to show the possibility to change role.
-
-			if ($account['role'] == "educator") {
-
-				?>
-
-					<label>
-						<input type="radio" name="role" value="educator" checked="checked" required/>Educator (I am superman)
-					</label>
-
-				<?php
-
-			} else {
-
-				?>
-
-					<label>
-						<input type="radio" name="role" value="student" <?php if ($account['role'] == "student") print "checked=\"checked\"";?> required/>Student (I'm here to learn)
-					</label>
-					<label>
-						<input type="radio" name="role" value="mentor" <?php if ($account['role'] == "mentor") print "checked=\"checked\"";?> required/>Mentor (I'm here to help)
-					</label>
-		
-				<?php
-
-			}
-
-			?>
-		</li>
-
-			-->
+		<br>
 
 		<li class="form_box_item">
 			<input class="form_pretty_button_input" type="submit" name="update_account_info" value="SAVE" />
 		</li>						
 	</form>
 
-	<style>hr{border: 0;height: 0;border-top: 1px solid rgba(0, 0, 0, 0.1);border-bottom: 1px solid rgba(255, 255, 255, 0.3);}</style>
-	<hr>
+
+
+
 
 	<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
 
@@ -109,7 +83,9 @@
 
 	</form>
 
-	<hr>
+
+
+
 
 	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box">
         <h4>Profile Picture</h4>
@@ -126,9 +102,14 @@
     <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
 
-    <hr>
 
-    <div class="form_custom">
+
+
+    <form class="form_custom">
+
+    	<script>
+    		var CURRENT_SOCIALS = <?php echo trim($account["socials"]); ?>;
+    	</script>
 	
 		<h4>Social links</h4>
 	
@@ -137,23 +118,20 @@
 		// Socials array example:
 		// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
 		$socials = !empty($account["socials"]) ? json_decode(trim($account["socials"]),true) : array();
-		$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','vimeo','whatsapp','youtube','website'];
+		$default_socials = ['facebook','twitter','linkedin','instagram','skype','whatsapp','youtube','website'];
+		//$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','vimeo','whatsapp','youtube','website'];
 
 		foreach ($default_socials as $social) {
 			
 			?>
 
-			<li class="social form_box_item" id="<?php echo $social; ?>" style="border:1px solid #f2f2f2;margin:5px 0px">
+			<li class="form_box_item social" id="<?php echo $social; ?>">
 				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social; ?>.svg" alt="<?php echo $social; ?>" /></label>
 				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="Url" />
 				<label><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
 			</li>
 
-			<?php
-
-		}
-
-		?>
+		<?php } ?>
 	
 		<br>
 
@@ -161,18 +139,17 @@
 			<input class="form_pretty_button_input" type="button" onclick="saveSocialInputs()" value="SAVE" />
 		</li>
 
-	</div>
+	</form>
+
+
+
 
 
 	<script type="text/javascript" src="../app/assets/js/account.js"></script>
 	<script type="text/javascript" src="../app/assets/js/upload.js"></script>
 
-<?php
+<?php } else { ?>
 
-	} else {
+	<h2>Something went wrong, no account selected.</h2>
 
-		"No account selected.";
-
-	}
-
-?>
+<?php } ?>

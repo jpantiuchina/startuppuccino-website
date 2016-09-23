@@ -69,7 +69,7 @@
         		</div> 
         		<ul class="submenu">
                     <li class="menu_link--sub"><a href="../people/?user_id=<?php echo $_SESSION['id'];?>">Profile</a></li>
-                    <li class="menu_link--sub"><a href="../account/">Settings</a></li>
+                    <li class="menu_link--sub"><a href="../settings/">Settings</a></li>
 					<li class="menu_link--sub"><a href="../logout/">Logout</a></li>
                     <li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>
 				</ul>

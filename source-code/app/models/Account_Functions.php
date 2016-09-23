@@ -53,7 +53,7 @@ class Account_Functions {
     /**
      * Update Account Data
      */
-    public function updateAccount($email,$firstname,$lastname,$background,$role,$about) {
+    public function updateAccount($email, $firstname, $lastname, $background, $skills, $about) {
       
       // Should be better here to doublecheck if some parameters is empty (not required now)
 
@@ -62,7 +62,7 @@ class Account_Functions {
                       firstname='".$firstname."',
                       lastname='".$lastname."',
                       background='".$background."',
-                      role='".$role."',
+                      skills='".$skills."',
                       about='".$about."' 
                       WHERE id='".$this->account_id."';";
 
@@ -85,11 +85,14 @@ class Account_Functions {
     /**
      * Update User Password
      */
-    public function updatePassword($old_password,$new_password) {
+    public function updatePassword($old_password, $new_password) {
         
-      if ($old_password != $new_password || $new_password != "") {
+      if ($old_password != $new_password || !empty($new_password) ) {
 
-        $query = "UPDATE "._T_ACCOUNT." SET password='".md5($new_password)."' WHERE id='".$this->account_id."' AND password='".md5($old_password)."';";
+        $query = "UPDATE "._T_ACCOUNT." 
+                  SET password='".md5($new_password)."' 
+                  WHERE id='".$this->account_id."' 
+                  AND password='".md5($old_password)."';";
 
         $this->conn->query($query);
 

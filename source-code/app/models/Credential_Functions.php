@@ -24,7 +24,10 @@ class Credential_Functions {
      */
     public function login() {
 
-      $query = "SELECT id, avatar, background, email, firstname, lastname, role FROM "._T_ACCOUNT." WHERE email='" . $this->email . "' AND password='" . $this->password . "'";
+      $query = "SELECT id, about, avatar, background, skills, email, firstname, lastname, role 
+                FROM "._T_ACCOUNT." 
+                WHERE email='" . $this->email . "' 
+                AND password='" . $this->password . "'";
 
       $result = $this->conn->query($query);
 
@@ -103,7 +106,7 @@ class Credential_Functions {
     /**
      * Validate inputs for new account
      */
-    public function validateInputs($password,$password2,$email,$fname,$lname,$background,$role,$skills) {
+    public function validateInputs($password, $password2, $email, $fname, $lname, $background, $role, $skills) {
 
       // Validate required field
 
