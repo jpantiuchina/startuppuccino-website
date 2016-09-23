@@ -1,6 +1,7 @@
 /* SEARCH */
 
 $search-result-height: 120px;
+$search-result-height-mobile: 80px;
 
 .search {
     text-align: left;
@@ -106,7 +107,7 @@ $search-result-height: 120px;
 .search_result__pic,
 .search_result__labels {
     display: inline-block;
-    vertical-align: top
+    vertical-align: middle;
 }
 
 .search_result__pic {
@@ -130,4 +131,29 @@ $search-result-height: 120px;
 .search_result__labels {
     font-size: 22px;
     padding: 0px 5px;
+}
+
+@media all and (max-width: 500px){
+    
+    .search__header {
+        > input[type=text]{
+            font-size: 32px;
+        }
+    }
+    .search_result {
+        height: $search-result-height-mobile;
+    }
+
+    .search_result__pic {
+        width: $search-result-height-mobile - 20px;
+    }
+
+    .search_result__labels {
+        font-size: 20px;
+        padding: 0px 5px;
+        > p {
+            margin: 0px
+        }
+    }
+
 }

@@ -173,10 +173,13 @@ Startuppuccino.prototype.layout.hideSection = function(target){
 }
 
 Startuppuccino.prototype.layout.toggleMobileMenu = function(target){
-    target.classList.toggle("mobile_menu__button--active");
+    /*target.classList.toggle("mobile_menu__button--active");
     document.getElementById("main_menu").classList.toggle("main_menu--visible");
     document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
-    document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+    document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");*/
+
+    // ...
+
 }
 
 Startuppuccino.prototype.layout.toggleSearch = function() {
@@ -197,7 +200,8 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
 
     var node = document.createElement("div"),
         a = document.createElement("a"),
-        img = document.createElement("img"),
+        img = document.createElement("div"),
+        inner_img = document.createElement("div"),
         labels = document.createElement("div"),
         p_name = document.createElement("p"),
         p_role = document.createElement("p");
@@ -211,6 +215,7 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
 
     labels.appendChild(p_name);
     labels.appendChild(p_role);
+    img.appendChild(inner_img);
     a.appendChild(img);
     a.appendChild(labels);
     node.appendChild(a);
@@ -221,8 +226,13 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
         
         var n = node.cloneNode(true);
 
+        if(x.avatar.trim() == "people/"){
+            x.avatar = "people/people.png";
+        }
+
         n.children[0].href = "../" + x.id;
-        n.children[0].children[0].src = "../app/assets/pics/" + x.avatar;
+        n.children[0].children[0]
+         .children[0].setAttribute("style","background-image:url('../app/assets/pics/" + x.avatar + "')");
         n.children[0].children[1].children[0].innerHTML = x.name;
         n.children[0].children[1].children[1].innerHTML = x.role;
         

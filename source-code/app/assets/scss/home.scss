@@ -276,13 +276,13 @@ $session-margin-top: 30px;
 	}
 
 	.column_right {
-		height: 40px;
+		max-height: 40px;
 		margin-top: $session-margin-top;
 		overflow: hidden;
 		@include transition($transition-time);
 
 		&:hover {
-			height: 100px;
+			max-height: 600px;
 		}
 	}
 
