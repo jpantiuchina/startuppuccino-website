@@ -1,3 +1,13 @@
+<?php 
+
+	// Change the format of the date
+	// return date without time
+	function prettyDate($ugly_date){
+		return date("d/m", strtotime($ugly_date));
+	}
+
+?>
+
 <section>
 
 	<?php foreach ($sessions_set as $session) { ?>
@@ -5,7 +15,8 @@
 		<div class="session" id="session<?php echo $session['id']; ?>">
 
 			<div class="head">
-				<h3><?php echo $session['title']." | ".$session['date']; ?></h3>
+				<h3><?php echo $session['title']; ?></h3>
+				<p>Lecture date: <?php echo prettyDate($session['date']); ?></p>
 			</div>
 			
 			<div class="description">

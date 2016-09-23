@@ -15,7 +15,7 @@
 	<div class="sidebar_container">
 
 		<div class="head">
-			<span>Lecture's attendance</span>
+			<span>Will you be at the lecture?</span>
 		</div>
 
 		<div class="main">
@@ -44,7 +44,7 @@
 			 		<div class="list_el__left">
 			 			<a href="#session<?php echo $session['id']; ?>">
 					 		<p><?php echo $session['title']; ?></p>
-					 		<p><?php echo $session['date']; ?></p>
+					 		<p><?php echo date("d/m/Y", strtotime($session['date'])); ?></p>
 					 	</a>
 					</div>
 					<div class="list_el__right">

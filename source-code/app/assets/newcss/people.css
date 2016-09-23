@@ -264,7 +264,8 @@ header {
 
 .search__header {
   height: 120px;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #f7f7dd; }
   .search__header > input[type=text] {
     margin: 15px 20px;
     margin-right: 10px;
@@ -273,7 +274,7 @@ header {
     height: 90px;
     line-height: 90px;
     font-size: 72px;
-    background: #f7f7dd;
+    background: transparent;
     border: none;
     font-weight: 100;
     vertical-align: middle; }

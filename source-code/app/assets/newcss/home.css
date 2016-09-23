@@ -263,7 +263,8 @@ header {
 
 .search__header {
   height: 120px;
-  overflow: hidden; }
+  overflow: hidden;
+  background-color: #f7f7dd; }
   .search__header > input[type=text] {
     margin: 15px 20px;
     margin-right: 10px;
@@ -272,7 +273,7 @@ header {
     height: 90px;
     line-height: 90px;
     font-size: 72px;
-    background: #f7f7dd;
+    background: transparent;
     border: none;
     font-weight: 100;
     vertical-align: middle; }
@@ -606,19 +607,25 @@ input[type=file] {
     .session > .head > h3 {
       font-family: "Maison", "Roboto", "Arial", san-serif !important;
       color: #fcc124; }
+    .session > .head > p {
+      font-size: 14px;
+      color: #777;
+      margin: 0px; }
   .session > .description pre {
     font-family: "Roboto", "Arial", sans-serif;
     font-size: 15px; }
   .session > .foot,
   .session > .resources,
   .session > .comments {
-    background-color: #f2f2f2; }
+    background-color: #fcfced; }
   .session > .comments {
     display: none; }
   .session > .foot {
     padding: 20px; }
     .session > .foot > span {
-      font-size: 12px; }
+      font-size: 12px;
+      background-color: #fff;
+      color: #513a2b; }
 
 .guests > .guest {
   display: inline-block;
@@ -693,7 +700,7 @@ input[type=file] {
     width: calc( 99% - 57px ); }
     .list_el > .list_el__left p {
       margin: 3px 0px;
-      font-size: 15px; }
+      font-size: 14px; }
       .list_el > .list_el__left p:last-child {
         color: #999; }
     .list_el > .list_el__left > a {
