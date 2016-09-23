@@ -9,7 +9,9 @@
 
 	<form action="" method="post" class="form_custom" >
 
-		<h4>Personal Information</h4>
+		<li class="form_box_item form_box_item--full">
+			<h4>Personal Information</h4>
+		</li>
 
 		<li class="form_box_item">
 			<label>Firstname</label>
@@ -65,7 +67,9 @@
 
 	<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
 
-		<h4>Change Password</h4>
+		<li class="form_box_item form_box_item--full">
+			<h4>Change Password</h4>
+		</li>
 		
 		<li class="form_box_item">
 			<label>Old Password</label>
@@ -88,7 +92,10 @@
 
 
 	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box">
-        <h4>Profile Picture</h4>
+        
+		<li class="form_box_item form_box_item--full">
+        	<h4>Profile Picture</h4>
+        </li>
         <li class="form_box_item">
 	        <label for="file_input" style="cursor:pointer"><img src="../app/assets/pics/people/<?php echo trim($account['avatar']);?>" id="target_picture" style="max-height:200px;max-width:200px" alt="Upload Your Profile Picture" /></label>
 	        <input class="form_pretty_button_input" style="cursor:pointer"  type="file" accept="image/*" name="picture" id="file_input">
@@ -111,7 +118,9 @@
     		var CURRENT_SOCIALS = <?php echo trim($account["socials"]); ?>;
     	</script>
 	
-		<h4>Social links</h4>
+		<li class="form_box_item form_box_item--full">
+			<h4>Social links</h4>
+		</li>
 	
 		<?php 
 

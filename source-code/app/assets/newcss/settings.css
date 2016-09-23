@@ -655,4 +655,10 @@ textarea {
   .message_alert_container a {
     color: #fff; }
 
+.form_custom {
+  background-color: #fff !important; }
+  .form_custom h4 {
+    color: #fcc124;
+    font-family: "Maison", "Roboto", "Arial", san-serif !important; }
+
 /*# sourceMappingURL=settings.css.map */
