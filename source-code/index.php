@@ -1,12 +1,12 @@
 <?php 
 
     require_once './app/models/session.php';
-/*
+
     if($userLogged){
         header("Location: ./home/");
         exit;
     }
-*/  
+
 
     /* Set the correct relative path */
     define("RELATIVE_PATH",".");
