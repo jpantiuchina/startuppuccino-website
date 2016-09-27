@@ -174,6 +174,9 @@ header {
     border-color: #513a2b; }
   header .submenu_trigger:hover > .submenu {
     height: 160px; } }
+footer {
+  padding: 10px 40px; }
+
 /* Small on spot loader */
 .tiny_loader {
   position: absolute;
@@ -633,7 +636,7 @@ input[type=file] {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit] {
+.st_button, .askforhelp_form > input[type=submit], #landing_logo_container .sublogo_links > span a {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -643,15 +646,8 @@ input[type=file] {
   color: #fff;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out; }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, #landing_logo_container .sublogo_links > span a:hover {
     color: #fcc124 !important; }
-
-header {
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important; }
-
-body {
-  background-color: rgba(247, 247, 221, 0.9); }
 
 main {
   height: calc(100% - 70px);
@@ -660,8 +656,6 @@ main {
 
 .menu {
   float: right; }
-  .menu .menu_link--top {
-    text-align: right !important; }
   .menu ul {
     margin: 0px !important; }
 
@@ -672,14 +666,38 @@ main {
   -webkit-flex: none;
   -ms-flex: none;
   flex: none; }
+  #landing_logo_container > div {
+    height: auto;
+    overflow: hidden; }
+    #landing_logo_container > div > h1 {
+      text-align: center;
+      margin: 0px;
+      font-size: 82px;
+      font-weight: 400;
+      color: #513a2b; }
+    #landing_logo_container > div a, #landing_logo_container > div span {
+      display: inline-block;
+      vertical-align: middle; }
+  #landing_logo_container img {
+    max-height: 100%;
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out; }
+    #landing_logo_container img:hover {
+      opacity: 0.7; }
+  #landing_logo_container .sublogo_links {
+    text-align: center; }
+    #landing_logo_container .sublogo_links > span a {
+      background-color: #fff;
+      color: #513a2b;
+      margin: 20px 10px; }
 
 .landing_footer {
-  text-align: right;
+  text-align: center;
   margin: 0px 40px;
-  line-height: 70px; }
+  line-height: 70px;
+  color: #513a2b; }
   .landing_footer > a {
+    text-decoration: none;
     color: #513a2b; }
-    .landing_footer > a:before {
-      content: ">"; }
 
 /*# sourceMappingURL=landing.css.map */

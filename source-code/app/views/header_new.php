@@ -1,11 +1,19 @@
 <?php
 
-	/* General header - menu used in all project pages (except for landing-page) */
+	/* General header - menu used in all project pages */
+    if(!defined("RELATIVE_PATH")){
+        define("RELATIVE_PATH", "..");
+    }
 
-	// Helper function -> print avatar;
-	function printAvatar(){
-		echo empty(trim($_SESSION['avatar'])) ? 'people.png' : $_SESSION['avatar'];
+	// Helper function -> return avatar;
+	function avatar(){
+		return empty(trim($_SESSION['avatar'])) ? 'people.png' : $_SESSION['avatar'];
 	}
+
+    // Helper function -> print uri with the correct relative path
+    function printUri($link){
+        echo RELATIVE_PATH . $link;
+    }
 
 ?>
 
@@ -17,8 +25,8 @@
 <header>
 
 	<div class="logo">
-    	<a href="../" title="Home - Startuppuccino">
-        	<img alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
+    	<a href="<?php printUri("/");?>" title="Home - Startuppuccino">
+        	<img alt="Startuppuccino" src="<?php printUri("/app/assets/pics/logos/startuppuccino_logo.svg");?>" />
     	</a>
     </div>
 
@@ -39,12 +47,12 @@
 
     	<ul>
 
-			<?php if ($userLogged){ ?>
+		<?php if ($userLogged){ ?>
 
 			<?php if($_SESSION['role']=="educator"){ ?>
 
 			<li class="menu_link--top">
-                <a href="../educators/manage/ideas/">Edu-area</a>
+                <a href="<?php printUri("/educators/manage/ideas/");?>">Edu-area</a>
             </li>
 
 			<?php } ?>
@@ -64,13 +72,13 @@
             </li>
 
         	<li class="menu_link submenu_trigger">
-        		<div class="menu_profile_picture" style="background-image: url('../app/assets/pics/people/<?php printAvatar();?>')" alt="Profile">
+        		<div class="menu_profile_picture" style="background-image: url('<?php printUri("/app/assets/pics/people/".avatar());?>')" alt="Profile">
         			<div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
         		</div> 
         		<ul class="submenu">
-                    <li class="menu_link--sub"><a href="../people/?user_id=<?php echo $_SESSION['id'];?>">Profile</a></li>
-                    <li class="menu_link--sub"><a href="../settings/">Settings</a></li>
-					<li class="menu_link--sub"><a href="../logout/">Logout</a></li>
+                    <li class="menu_link--sub"><a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">Profile</a></li>
+                    <li class="menu_link--sub"><a href="<?php printUri("/settings/");?>">Settings</a></li>
+					<li class="menu_link--sub"><a href="<?php printUri("/logout/");?>">Logout</a></li>
                     <li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>
 				</ul>
         	</li>
@@ -79,11 +87,11 @@
 
 			<!-- change this into a login form (external ajax login form script -> include) -->
 			<li class="menu_link--top">
-                <a href="../login/">Login</a>
+                <a href="<?php printUri("/login/");?>">Login</a>
             </li>
 
 			<li class="menu_link--top">
-                <a href="../register/">Register</a>
+                <a href="<?php printUri("/register/");?>">Register</a>
             </li>
 
 		<?php } // endif userlogged ?>

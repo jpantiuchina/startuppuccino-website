@@ -1,90 +1,243 @@
 
 @import 'general';
 
-
-$tagline-font-size: 92px;
-$tagline-font-size-mobile: 45px;
-
-$about-max-width: 1300px;
-
-
-main, header, footer{
-	position: relative;
-	max-width: $about-max-width;
-	margin: auto;
-}
+$goals-picture-size: 180px;
+$description-font-size: 20px;
 
 main {
-	padding-top: 0px !important;
-}
-
-.split_view {
-
-	padding-top: 30px;
-	font-size: 0px;
-	width: 100%;
-	margin: auto;
-
-	>.split_view__column {
-		font-size: 16px;
-		display: inline-block;
-		vertical-align: top;
-		width: 50%;
-		min-width: 300px;
-	}
-
-	td {
-		vertical-align: top;
-		width: 50%;
-		padding: 0px 30px;
-		display: inline-block;
-		min-width: 280px;
-	}
-
-}
-
-.tagline_big {
-	font-size: $tagline-font-size;
-	line-height: $tagline-font-size + 20px;
-	font-family: $font-stack;
-	font-weight: 900;
-	margin: 0px;
-
-	>span {
-		display: block;
-	}
-}
-
-.about_links {
 	color: $logo-brown;
 
-	&:before {
-		content:">";
+	> section {
+		text-align: center;
+		padding: #{ $header-height + 60px } 0px;
 	}
+
 }
 
-footer {
-	padding: 0px $page-lateral-padding;
-	text-align: right;
+.land {
+
+	&__logo {
+		margin-top: 80px;
+		max-width: 900px;
+	}
+
+	&__separator {
+		width: 100%;
+		max-width: 950px;
+		height: 1px;
+		background-color: #d7d7cc;
+		margin: 20px auto;
+	}
+
+	&__anchors {
+
+		> span {
+			margin: 0px 10px;
+		}
+	
+		a {
+			@extend .st_button;
+			display: inline-block;
+			width: 100px;
+			color: $logo-brown;
+			background-color: #fff;
+		}
+	
+	}
+
+}
+
+
+.goals {
+
+	&__box {
+
+		display: inline-block;
+		vertical-align: top;
+		padding: 20px;
+
+		&:first-child {
+			margin-right: 50px;
+
+			> img {
+				background-color: $logo-red;
+			}
+
+		}
+
+		&:last-child {
+			margin-left: 50px;
+
+			> img {
+				background-color: $logo-green;
+			}
+
+		}
+
+		> h4 {
+			font-family: $font-title;
+			font-size: 27px;
+		}
+
+		> img {
+			display: inline-block;
+			width: $goals-picture-size;
+			height: $goals-picture-size;
+			@include border-radius(50%);
+			overflow: hidden;
+		}
+
+		> p {
+			font-size: $description-font-size
+		}
+
+	}
+
+}
+
+@media all and (max-width: 1100px) {
+	.goals__box {
+    	margin: 10px !important;
+    }
+}
+
+.description {
+
+	&__tagline {
+
+		> svg,
+		> p {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		> svg {
+			width: 250px;
+		}
+
+		> p {
+			text-align: left;
+			font-size: 42px;
+			font-family: $font-title;
+		}
+
+	}
+
+	&__longtext {
+		margin: auto;
+		max-width: 900px;
+		font-size: $description-font-size;
+	}
+
 }
 
 @media all and (max-width: 700px) {
-
-	.tagline_big {
-		font-size: $tagline-font-size-mobile;
-		line-height: $tagline-font-size-mobile + 15px;
-	}
-
-	.split_view__column {
-		width: calc(100% - #{$page-lateral-padding-mobile}) !important;
-	}
-
-	td {
-		width: calc(100% - #{$page-lateral-padding-mobile}) !important;
-		padding: 0px !important;
-
-		>#logo_balls {
-			width: 200px;
+	.description__tagline {
+		> svg {
+			width: 120px
+		}
+		> p {
+			font-size: 24px
 		}
 	}
+	.description__longtext > p {
+		font-size: 17px
+	}
+}
+@media all and (max-width: 360px) {
+	.description__tagline {
+		> svg {
+			width: 80px
+		}
+		> p {
+			font-size: 18px
+		}
+	}
+}
+
+.courses {
+
+	> h4 {
+		font-size: 32px;
+		color: $logo-red;
+		font-family: $font-title;
+	}
+
+	&__box {
+		position: relative;
+		max-width: 400px;
+		margin: auto;
+	}
+
+	a {
+		text-decoration: none;
+		color: $logo-brown;
+		display: block;
+		height: 100%;
+		@include transition($transition-time);
+	
+		&:hover {
+			color: $palette-yellow;
+		}
+
+		> img,
+		> span {
+			vertical-align: middle;
+		}
+
+		> img {
+			max-width: 150px;
+			max-height: 150px;
+		}
+
+		> span {
+			font-size: 32px;
+		}
+	}
+
+}
+
+.contacts {
+
+
+	> h4 {
+		font-size: 32px;
+		color: $logo-green;
+		font-family: $font-title;
+	}
+
+	span,
+	input {
+		margin: 10px;
+		height: 40px;
+		line-height: 30px;
+		vertical-align: middle;
+	}
+
+	span {
+		@extend .st_button;
+		display: inline-block;
+		width: 100px;
+		color: $logo-brown;
+		background-color: #fff;
+	}
+
+	input[type=email] {
+		font-size: 16px;
+		width: 250px;
+		padding: 7px;
+		color: $logo-brown;
+		border: 1px solid #d7d7cc;
+	}
+
+}
+
+
+footer {
+	color: $logo-brown;
+
+	a {
+		color: $logo-brown;
+	}
+
 }

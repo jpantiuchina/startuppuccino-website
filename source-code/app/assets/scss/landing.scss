@@ -3,14 +3,6 @@
 
 $footer-height: 70px;
 
-header {
-	@include box-shadow(none !important);
-}
-
-body {
-	background-color: $header-background;
-}
-
 main {
 	height: calc(100% - #{$footer-height});
 	padding-top: 0px; /* Overwrite definition in header, because the header is hidden */
@@ -18,10 +10,6 @@ main {
 
 .menu {
 	float: right;
-	
-	.menu_link--top {
-		text-align: right !important;
-	}
 
 	ul {
 		margin: 0px !important;
@@ -36,21 +24,58 @@ main {
     -webkit-flex: none;
     -ms-flex: none;
     flex: none;
+
+    > div {
+    	height: auto;
+    	overflow: hidden;
+
+    	> h1 {
+    		text-align: center;
+    		margin: 0px;
+    		font-size: 82px;
+    		font-weight: 400;
+    		color: $logo-brown
+    	}
+
+    	a, span {
+    		display: inline-block;
+    		vertical-align: middle;
+    	}
+
+    }
+
+    img {
+    	max-height: 100%;
+    	@include transition($transition-time);
+
+    	&:hover {
+    		opacity: 0.7;
+    	}
+    }
+
+    .sublogo_links {
+    	text-align: center;
+    	> span a {
+    		@extend .st_button;
+            background-color: #fff;
+            color: $logo-brown;
+            margin: 20px 10px;
+    	}
+    }
+
 }
 
 .landing_footer {
 
-	text-align: right;
+	text-align: center;
 	margin: 0px $page-lateral-padding;
 	line-height: $footer-height;
+	color: $logo-brown;
 
 	> a {
 
+		text-decoration: none;
 		color: $logo-brown;
-
-		&:before {
-			content: ">";
-		}
 
 	}
 }

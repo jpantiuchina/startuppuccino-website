@@ -636,7 +636,7 @@ input[type=file] {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input {
+.st_button, .askforhelp_form > input[type=submit] {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -646,79 +646,65 @@ input[type=file] {
   color: #fff;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out; }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover {
     color: #fcc124 !important; }
 
-form.form_custom, .message_alert_container {
-  max-width: 640px;
-  margin: 40px 0px;
+main, header, footer {
+  position: relative;
+  max-width: 1300px;
+  margin: auto; }
+
+main {
+  padding-top: 0px !important; }
+
+.split_view {
+  padding-top: 30px;
+  font-size: 0px;
   width: 100%;
-  background-color: #f9f9f9;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  padding: 20px 15px;
-  color: #555;
-  text-align: left;
-  font-family: "Roboto", "Arial", sans-serif; }
+  margin: auto; }
+  .split_view > .split_view__column {
+    font-size: 16px;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    min-width: 300px; }
+  .split_view td {
+    vertical-align: top;
+    width: 50%;
+    padding: 0px 30px;
+    display: inline-block;
+    min-width: 280px; }
 
-.form_box_item {
-  display: inline-block;
-  padding: 14px 10px;
-  min-width: 300px; }
-  .form_box_item > label {
-    display: block;
-    margin: auto;
-    margin-bottom: 5px; }
+.tagline_big {
+  font-size: 92px;
+  line-height: 112px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-weight: 900;
+  margin: 0px; }
+  .tagline_big > span {
+    display: block; }
 
-.form_box_item--full {
-  width: 100%; }
+.about_links {
+  color: #513a2b; }
+  .about_links:before {
+    content: ">"; }
 
-.form_pretty_general_input {
-  border: none;
-  width: 250px;
-  height: 30px;
-  line-height: 30px;
-  background-color: #f2f2f2;
-  padding: 7px; }
+footer {
+  padding: 0px 40px;
+  text-align: right; }
 
-textarea.form_pretty_general_input {
-  height: auto; }
+@media all and (max-width: 700px) {
+  .tagline_big {
+    font-size: 45px;
+    line-height: 60px; }
 
-.form_pretty_button_input {
-  border: none;
-  -webkit-transition: all 300ms ease-in-out;
-  transition: all 300ms ease-in-out; }
-  .form_pretty_button_input:hover {
-    -webkit-filter: brightness(120%);
-    -moz-filter: brightness(120%);
-    -ms-filter: brightness(120%);
-    -o-filter: brightness(120%);
-    filter: brightness(120%); }
-  .form_pretty_button_input.form_input--forgot_password {
-    background-color: #f2f2f2;
-    color: #be3b43;
-    font-size: 12px;
-    display: inline-block; }
+  .split_view__column {
+    width: calc(100% - 15px) !important; }
 
-.form_pretty_button_link {
-  color: #513a2b;
-  padding: 5px;
-  @inlcude border-radius(3px); }
+  td {
+    width: calc(100% - 15px) !important;
+    padding: 0px !important; }
+    td > #logo_balls {
+      width: 200px; } }
 
-textarea {
-  width: 100% !important;
-  max-width: 100%; }
-
-.message_alert_container {
-  background-color: #333;
-  color: #fff; }
-  .message_alert_container a {
-    color: #fff; }
-
-.form_custom {
-  background-color: #fff !important; }
-  .form_custom h4 {
-    color: #fcc124;
-    font-family: "Maison", "Roboto", "Arial", san-serif !important; }
-
-/*# sourceMappingURL=settings.css.map */
+/*# sourceMappingURL=about2.css.map */

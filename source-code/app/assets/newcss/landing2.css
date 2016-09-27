@@ -636,7 +636,7 @@ input[type=file] {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input {
+.st_button, .askforhelp_form > input[type=submit] {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -646,79 +646,43 @@ input[type=file] {
   color: #fff;
   -webkit-transition: all 300ms ease-in-out;
   transition: all 300ms ease-in-out; }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover {
     color: #fcc124 !important; }
 
-form.form_custom, .message_alert_container {
-  max-width: 640px;
-  margin: 40px 0px;
-  width: 100%;
-  background-color: #f9f9f9;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  padding: 20px 15px;
-  color: #555;
-  text-align: left;
-  font-family: "Roboto", "Arial", sans-serif; }
+header {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; }
 
-.form_box_item {
-  display: inline-block;
-  padding: 14px 10px;
-  min-width: 300px; }
-  .form_box_item > label {
-    display: block;
-    margin: auto;
-    margin-bottom: 5px; }
+body {
+  background-color: rgba(247, 247, 221, 0.9); }
 
-.form_box_item--full {
-  width: 100%; }
+main {
+  height: calc(100% - 70px);
+  padding-top: 0px;
+  /* Overwrite definition in header, because the header is hidden */ }
 
-.form_pretty_general_input {
-  border: none;
-  width: 250px;
-  height: 30px;
-  line-height: 30px;
-  background-color: #f2f2f2;
-  padding: 7px; }
+.menu {
+  float: right; }
+  .menu .menu_link--top {
+    text-align: right !important; }
+  .menu ul {
+    margin: 0px !important; }
 
-textarea.form_pretty_general_input {
-  height: auto; }
+#landing_logo_container {
+  width: 90%;
+  max-width: 900px;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none; }
 
-.form_pretty_button_input {
-  border: none;
-  -webkit-transition: all 300ms ease-in-out;
-  transition: all 300ms ease-in-out; }
-  .form_pretty_button_input:hover {
-    -webkit-filter: brightness(120%);
-    -moz-filter: brightness(120%);
-    -ms-filter: brightness(120%);
-    -o-filter: brightness(120%);
-    filter: brightness(120%); }
-  .form_pretty_button_input.form_input--forgot_password {
-    background-color: #f2f2f2;
-    color: #be3b43;
-    font-size: 12px;
-    display: inline-block; }
+.landing_footer {
+  text-align: right;
+  margin: 0px 40px;
+  line-height: 70px; }
+  .landing_footer > a {
+    color: #513a2b; }
+    .landing_footer > a:before {
+      content: ">"; }
 
-.form_pretty_button_link {
-  color: #513a2b;
-  padding: 5px;
-  @inlcude border-radius(3px); }
-
-textarea {
-  width: 100% !important;
-  max-width: 100%; }
-
-.message_alert_container {
-  background-color: #333;
-  color: #fff; }
-  .message_alert_container a {
-    color: #fff; }
-
-.form_custom {
-  background-color: #fff !important; }
-  .form_custom h4 {
-    color: #fcc124;
-    font-family: "Maison", "Roboto", "Arial", san-serif !important; }
-
-/*# sourceMappingURL=settings.css.map */
+/*# sourceMappingURL=landing2.css.map */
