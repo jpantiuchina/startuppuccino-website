@@ -181,9 +181,10 @@ class CourseSessions_Functions {
         foreach ($sessions_array as $i => $session_value) {
 
             $query = "SELECT ma.mentor_id as id, a.avatar
-                      FROM "._T_MENTOR_AVAILABILITY." ma, "._T_ACCOUNT." a
-                      WHERE ma.mentor_id = a.id
-                      AND ma.session_id = ".$sessions_array[$i]['id'].";";
+                      FROM "._T_MENTOR_AVAILABILITY." AS ma 
+                      JOIN "._T_ACCOUNT." AS a 
+                      ON ma.mentor_id = a.id
+                      WHERE ma.session_id = ".$sessions_array[$i]['id'].";";
 
             $result = $this->conn->query($query);
 
@@ -219,12 +220,10 @@ class CourseSessions_Functions {
                              c.text,
                              c.author_id,
                              a.avatar as author_avatar
-                      FROM "._T_SESSION." as s
-                      LEFT OUTER JOIN (
-                        "._T_SESSION_COMMENT." as c LEFT OUTER JOIN "._T_ACCOUNT." as a
-                        ON c.author_id = a.id
-                      ) ON c.session_id = s.id
-                      WHERE s.id = ".$sessions_array[$i]['id'].";";
+                      FROM "._T_SESSION_COMMENT." AS c
+                      JOIN "._T_ACCOUNT." AS a
+                      ON c.author_id = a.id
+                      WHERE c.session_id = ".$sessions_array[$i]['id'].";";
                       
             $result = $this->conn->query($query);
 

@@ -92,7 +92,7 @@
 							<a class="comment__author">
 								<div style="background-image:url('../app/assets/pics/people/people.png');opacity:0.5"></div>
 							</a>
-							<p>No comments yet.</p>
+							<p class="comment__text">No comments yet.</p>
 						</div>
 					<?php } ?>
 

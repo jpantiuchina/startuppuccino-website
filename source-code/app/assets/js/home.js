@@ -192,6 +192,10 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 		text = button.parentNode.parentNode.childNodes[1].value,
 		loader = button.parentNode.parentNode.childNodes[5];
 
+	if(text == ""){
+		return;
+	}
+
 	var data = {};
 
 	// Show loader -> try to prevent double click on button
@@ -205,8 +209,6 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 		data,
 		function(response){
 			if(response == "ok") {
-				// Hide loader
-				SpHome.layout.hideTinyloader(loader);
 				// Reload the page to see the new comments
 				if(confirm("Comment published!\nReload the page to see your new comment.")){
 					window.location.reload();
@@ -215,6 +217,8 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 				alert(response);
 				console.log(response);
 			}
+			// Hide loader
+			SpHome.layout.hideTinyloader(loader);
 		});
 
 }
