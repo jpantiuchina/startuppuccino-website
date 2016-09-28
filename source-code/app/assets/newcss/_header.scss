@@ -123,8 +123,9 @@ header {
 		position: relative;
 		display: inline-block;
 		vertical-align: top;
-		width: 75px;
+		//width: 75px;
 		@include transition($header-transition-timing);
+		a { padding: 0 20px }
 	}
 
 	.menu_link--top {
@@ -132,10 +133,16 @@ header {
 		height: $header-height;
 		line-height: $header-height;
 		text-align: center;
-		border-bottom: $menu-link-border-size solid $header-background;
+		//border-bottom: $menu-link-border-size solid $header-background;
+		a:hover { text-decoration: underline }
 	}
 
-	.submenu_trigger {	
+	.menu_link--active {
+		background: $logo-green;
+		a { color: white; }
+	}
+
+	.submenu_trigger {
 		padding-bottom: $menu-picture-margin-top;
 	}
 

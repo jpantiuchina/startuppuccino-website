@@ -21,10 +21,12 @@
 	<body>
 
 		<?php $page_title = "Login"; ?>
-
+		<?php $currentPage = 'login' ?>
 		<?php include '../app/views/header_new.php'; ?>
 
 		<main>
+
+
 
 			<?php
 

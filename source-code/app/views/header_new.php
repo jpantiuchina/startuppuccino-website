@@ -86,11 +86,11 @@
 		<?php } else { ?>
 
 			<!-- change this into a login form (external ajax login form script -> include) -->
-			<li class="menu_link--top">
+			<li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'login') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/login/");?>">Login</a>
             </li>
 
-			<li class="menu_link--top">
+            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'register') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/register/");?>">Register</a>
             </li>
 
