@@ -182,6 +182,81 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 
 }
 
+/* Session functionalities */
+StartuppuccinoHome.prototype.session = {}
+
+StartuppuccinoHome.prototype.session.publishComment = function(e){
+
+	var button = e.target || e.srcElement,
+		session_id = button.getAttribute("data-session"),
+		text = button.parentNode.parentNode.childNodes[1].value,
+		loader = button.parentNode.parentNode.childNodes[5];
+
+	var data = {};
+
+	// Show loader -> try to prevent double click on button
+	SpHome.layout.showTinyloader(loader);
+
+	data.url = "../app/controllers/course_sessions_comments.php";
+	data.parameters = "s_id=" + session_id + 
+	                  "&comment_text=" + text;
+
+	Sp.post(
+		data,
+		function(response){
+			if(response == "ok") {
+				// Hide loader
+				SpHome.layout.hideTinyloader(loader);
+				// Reload the page to see the new comments
+				if(confirm("Comment published!\nReload the page to see your new comment.")){
+					window.location.reload();
+				}
+			} else {
+				alert(response);
+				console.log(response);
+			}
+		});
+
+}
+StartuppuccinoHome.prototype.session.deleteComment = function(e){
+
+	var button = e.target || e.srcElement,
+		session_id = button.getAttribute("data-session"),
+		comment_id = button.parentNode.parentNode.getAttribute("comment-id"),
+		comment_text = button.parentNode.parentNode.childNodes[3].innerHTML;
+
+	if( !confirm("Do you really want to delete this comment?\n\n" + comment_text) ){
+		return;
+	}
+
+	var data = {};
+
+	// Show loader -> try to prevent double click on button
+	Sp.layout.showLoading();
+
+	data.url = "../app/controllers/course_sessions_comments.php";
+	data.parameters = "delete&s_id=" + session_id + 
+	                  "&comment_id=" + comment_id;
+
+	Sp.post(
+		data,
+		function(response){
+			// Hide loader
+			Sp.layout.hideLoading();
+			if(response == "ok") {
+				// Reload the page to see the new comments
+				if(confirm("Comment deleted!\nReload the page to update the comments.")){
+					window.location.reload();
+				}
+			} else {
+				alert(response);
+				console.log(response);
+			}
+		});
+
+}
+
+
 
 /* Initialize Startuppuccino Home */
 
@@ -198,10 +273,14 @@ window.addEventListener("load", function(){
 	var pitch_toggle_buttons = document.getElementsByClassName("button_toggle_pitch");
 	var resources_toggle_buttons = document.getElementsByClassName("session_resources_button");
 	var comments_toggle_buttons = document.getElementsByClassName("session_comments_button");
+	var publish_comments_buttons = document.getElementsByClassName("publish_comment_button");
+	var delete_comments_buttons = document.getElementsByClassName("comment__delete");
 
 	var pitch_length = pitch_toggle_buttons.length;
 	var resources_length = resources_toggle_buttons.length;
 	var comments_length = comments_toggle_buttons.length;
+	var publish_comments_length = publish_comments_buttons.length;
+	var delete_comments_length = delete_comments_buttons.length;
 
 	for (var i = 0; i < pitch_length; i++) {
 		pitch_toggle_buttons[i].addEventListener("click", function(e){ SpHome.mentors.setPitch(e); });
@@ -211,6 +290,12 @@ window.addEventListener("load", function(){
 	}
 	for (var i = 0; i < comments_length; i++) {
 		comments_toggle_buttons[i].addEventListener("click", function(e){ SpHome.layout.toogleComments(e); });
+	}
+	for (var i = 0; i < publish_comments_length; i++) {
+		publish_comments_buttons[i].addEventListener("click", function(e){ SpHome.session.publishComment(e); });
+	}
+	for (var i = 0; i < publish_comments_length; i++) {
+		delete_comments_buttons[i].addEventListener("click", function(e){ SpHome.session.deleteComment(e); });
 	}
 
 });

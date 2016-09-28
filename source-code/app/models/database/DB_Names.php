@@ -17,6 +17,7 @@ define("_T_MILESTONE", "milestones");
 define("_T_PROJECT_MILESTONE", "projectmilestones");
 
 define("_T_SESSION", "session");
+define("_T_SESSION_COMMENT", "session_comment");
 define("_T_MENTOR_AVAILABILITY", "mentor_availability");
 
 ?>

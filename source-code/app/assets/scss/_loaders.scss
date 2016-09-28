@@ -16,9 +16,11 @@ $tiny-loader-background: rgba(255,255,255,0.9);
 	> div {
 		position: absolute;
 		top: calc(50% - #{$size/2});
-		left: calc(50% - #{$size/2});
+        left: calc(50% - #{$size/2});
 		width: $size;
 		height: $size;
+        max-width: 50px;
+        max-height: 50px;
 		@include border-radius(50%);
 	}
 

@@ -38,6 +38,8 @@ class CourseSessions_Functions {
             if(count($sessions) > 0){
                 // Fill sessions array with guest mentors
                 $sessions = $this->loadGuests($sessions);
+                // Fill sessions array with comments
+                $sessions = $this->loadComments($sessions);
             }
 
         }
@@ -115,6 +117,37 @@ class CourseSessions_Functions {
     }
 
     /**
+     * Store a new comment
+     */
+    public function comment($author_id, $session_id, $comment_text, $delete = null, $comment_id = null){
+
+        if( $delete === TRUE && $comment_id != null){
+
+          $query = "DELETE FROM "._T_SESSION_COMMENT."
+                    WHERE author_id = '".$author_id."'
+                    AND session_id = '".$session_id."'
+                    AND id = '".$comment_id."';";
+
+        } else {
+
+          $query = "INSERT INTO "._T_SESSION_COMMENT." (session_id, author_id, text)
+                    VALUES ('".$session_id."', '".$author_id."','".$comment_text."');";            
+
+        }
+
+        $this->conn->query($query);
+
+        if($this->conn->affected_rows === 1 ){
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    /**
      * Get all the sessions when the mentor is available
      */
     public function getMentorSessionAvailability($mentor_id){
@@ -139,7 +172,7 @@ class CourseSessions_Functions {
 
     }
 
-     /**
+    /**
      * Load mentor guest for each lecture/session
      */
     private function loadGuests($sessions_array){
@@ -164,6 +197,47 @@ class CourseSessions_Functions {
 
                 if(count($guests) > 0){
                     $sessions_array[$i]['guests'] = $guests;
+                }
+
+            }
+
+        }
+
+        return $sessions_array;
+
+    }
+
+    /**
+     * Load comments for each lecture/session
+     */
+    private function loadComments($sessions_array){
+        
+
+        foreach ($sessions_array as $i => $session_value) {
+
+            $query = "SELECT c.id, 
+                             c.text,
+                             c.author_id,
+                             a.avatar as author_avatar
+                      FROM "._T_SESSION." as s
+                      LEFT OUTER JOIN (
+                        "._T_SESSION_COMMENT." as c LEFT OUTER JOIN "._T_ACCOUNT." as a
+                        ON c.author_id = a.id
+                      ) ON c.session_id = s.id
+                      WHERE s.id = ".$sessions_array[$i]['id'].";";
+                      
+            $result = $this->conn->query($query);
+
+            $comments = [];
+
+            if($result){
+
+                while ($comment = $result->fetch_assoc()){
+                    $comments[] = $comment;
+                }
+
+                if(count($comments) > 0){
+                    $sessions_array[$i]['comments'] = $comments;
                 }
 
             }

@@ -159,11 +159,28 @@ input[type=file] {
     margin: 3px;
     text-decoration: none;
     cursor: pointer;
-    background-color: $logo-brown;
-    color: #fff;
+    background-color: #fff;
+    color: $logo-brown;
     @include transition($transition-time);
 
     &:hover {
       color: $palette-yellow !important;
+    }
+}
+
+/* Scrollbar */
+.pretty_scrollbar {
+	&::-webkit-scrollbar {
+        width: 0.7em;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $background-color
+    }
+     
+    &::-webkit-scrollbar-thumb {
+      background-color: #333;
+      outline: 1px solid #444;
+      cursor: pointer;
     }
 }

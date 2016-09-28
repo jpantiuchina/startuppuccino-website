@@ -8,6 +8,13 @@ $session-border-separator: none /* 1px dotted #999 */;
 $session-box-shadow: none /* 0px 0px 1px #bbb */;
 $session-margin-top: 30px;
 
+$session-comments-height: 450px;
+$session-comments-image-size: 50px;
+$session-comments-content-padding: 5px;
+$session-comments-text-width: calc(100% - #{$session-comments-image-size});
+$session-comments-text-lateral-padding: 15px;
+$session-comments-editor-height: 100px;
+
 .session {
 
 	width: 100%;
@@ -20,7 +27,8 @@ $session-margin-top: 30px;
 	> .head,
 	> .guests,
 	> .description,
-	> .foot {
+	> .foot,
+	.comments__editor {
 		padding: 0px 20px;
 	}
 
@@ -39,19 +47,16 @@ $session-margin-top: 30px;
 		}
 	}
 
-	>.description pre {
+	> .description pre {
 		font-family: $font-stack;
 		font-size: 15px;
 	}
 
 	> .foot,
 	> .resources,
-	> .comments {
+	> .comments,
+	.comments_editor {
 		background-color: #fcfced;
-	}
-
-	> .comments {
-		display: none;
 	}
 
 	> .foot {
@@ -59,8 +64,6 @@ $session-margin-top: 30px;
 		> span {
 			@extend .st_button;
 			font-size: 12px;
-			background-color: $session-background-color;
-			color: $logo-brown;
 		}
 	}
 
@@ -90,10 +93,14 @@ $session-margin-top: 30px;
 	}
 }
 
-.resources {
+.resources,
+.comments {
 	overflow: hidden;
 	max-height: 0px;
 	@include transition($transition-time);
+}
+
+.resources {
 
 	&.r_show {
 		padding: 20px;
@@ -130,6 +137,137 @@ $session-margin-top: 30px;
 
 
 .comments {
+	position: relative;
+
+	&.c_show {
+		padding: 20px;
+		max-height: $session-comments-height;
+	}
+
+	&__wrapper {
+		height: auto;
+		max-height: $session-comments-height - $session-comments-editor-height - 15px;
+		padding-bottom: 20px;
+		overflow-y: scroll;
+		@extend .pretty_scrollbar;
+		margin-bottom: $session-comments-editor-height;
+	}
+
+	&__editor {
+		position: absolute;
+		left: 0px;
+		bottom: 0px;
+		width: 100%;
+		height: $session-comments-editor-height;
+		padding-top: 15px !important;
+		padding-left: $session-comments-image-size + $session-comments-text-lateral-padding;
+
+		> textarea,
+		> div {
+			display: inline-block;
+			vertical-align: bottom;
+		}
+
+		> div:not(.tiny_loader) {
+			width: 80px;
+			text-align: center;
+		}
+
+		> textarea {
+			border: none;
+			padding: 7px;
+			font-family: $font-stack;
+			font-size: 15px;
+			width: calc(100% - 90px);
+			max-width: calc(100% - 90px);
+			line-height: 30px;
+			height: 45px;
+			max-height: 45px;
+			@include transition($transition-time);
+
+			&:focus{
+				height: 70px;
+				max-height: 70px;
+			}
+		}
+		
+		input.publish_comment_button {
+			@extend .st_button;
+			font-size: 12px
+		}
+	}
+
+}
+
+.comment {
+
+	position: relative;
+	font-size: 0px;
+    margin: 10px 0px;
+
+    &:hover {
+    	&:before {
+    		content: "";
+    		position: absolute;
+    		top: $session-comments-image-size - 5px;
+    		left: 0px;
+    		display: block;
+    		height: 10px;
+    		width: 10px;
+    		@include border-radius(50%);
+    		background-color: $logo-red;
+    	}
+    }
+
+	&__author,
+	&__text,
+	&__footer {
+		font-size: 15px
+	}
+
+	&__author,
+	&__text {
+		display: inline-block;
+		vertical-align: top;
+		margin: 0px;
+		padding: $session-comments-content-padding;
+	}
+
+	&__author {
+		width: $session-comments-image-size;
+		height: $session-comments-image-size;
+
+		> div {
+			@include border-radius(50%);
+			display: block;
+			height: 100%;
+			@extend .picture;
+			background-color: #abc
+		}
+
+	}
+
+	&__text {
+		width: $session-comments-text-width;
+		padding-left: $session-comments-text-lateral-padding;
+		padding-right: $session-comments-text-lateral-padding;
+	}
+
+	&__footer {
+		text-align: right;
+	}
+
+	&__delete {
+		color: $logo-red;
+		text-decoration: underline;
+		padding: 2px 15px;
+		cursor: pointer;
+		@include transition($transition-time);
+
+		&:hover {
+			color: $palette-yellow;
+		}
+	}
 
 }
 
