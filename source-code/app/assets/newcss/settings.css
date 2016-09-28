@@ -662,15 +662,16 @@ input[type=file] {
 
 form.form_custom, .message_alert_container {
   max-width: 640px;
-  margin: 40px 0px;
+  margin-bottom: 40px;
   width: 100%;
-  background-color: #f9f9f9;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  background-color: white;
   padding: 20px 15px;
   color: #555;
   text-align: left;
-  font-family: "Roboto", "Arial", sans-serif; }
+  font-family: "Roboto", "Arial", sans-serif;
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5); }
 
 .form_box_item {
   display: inline-block;

@@ -5,14 +5,18 @@ $form-font: $font-stack;
 
 form.form_custom {
     max-width: 640px;
-    margin: 40px 0px;
+    margin-bottom: 40px;
     width: 100%;
-    background-color: #f9f9f9; 
-    @include box-shadow($form-shadow);
+    background-color: white;
+    //@include box-shadow($form-shadow);
     padding: 20px 15px;
     color: #555;
     text-align: left;
     font-family: $form-font;
+
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5);
+    -moz-box-shadow:    0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5);
+    box-shadow:         0 0 0 1px rgba(0, 0, 0, 0.1), 0 10px 35px 0 rgba(0, 0, 0, 0.5);
 }
 
 .form_box_item {    
