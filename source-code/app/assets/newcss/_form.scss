@@ -57,12 +57,7 @@ textarea.form_pretty_general_input {
         @include bright(120%);  
     }
 
-    &.form_input--forgot_password {
-        background-color: #f2f2f2;
-        color: $logo-red;
-        font-size: 12px;
-        display: inline-block;
-    }
+
 
 }
 
@@ -70,4 +65,11 @@ textarea.form_pretty_general_input {
     color: $logo-brown;
     padding: 5px;
     @inlcude border-radius(3px);
+
+  &.form_input--forgot_password {
+    //background-color: #f2f2f2;
+    color: $logo-red;
+    font-size: 12px;
+    display: inline-block;
+  }
 }

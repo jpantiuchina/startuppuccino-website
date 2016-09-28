@@ -27,12 +27,15 @@
 	
 	<li class="form_box_item">
 		<label for="password">Password</label>
-		<input class="form_pretty_general_input" type="password" name="password" placeholder="Password" <?php if(isset($_POST['password'])) print('value="'.$_POST['password'].'"'); ?> required/>
+		<input class="form_pretty_general_input" type="password" name="password" placeholder="" <?php if(isset($_POST['password'])) print('value="'.$_POST['password'].'"'); ?> required/>
 	</li>
 	
 	<li class="form_box_item">
-		<input class="form_pretty_button_input" type="submit" name="login" value="Login" />
-		<span><a class="form_input--forgot_password form_pretty_button_input" href="../resetpassword/" target="_blank">Forgot Password</a></span>
+
+			<input class="form_pretty_button_input" type="submit" name="login" value="Login" />
+		<p>
+			<a class="form_input--forgot_password form_pretty_button_link" href="../resetpassword/" target="_blank">Forgot Password</a>
+		</p>
 	</li>
 	
 	<li class="form_box_item form_box_item--full">
