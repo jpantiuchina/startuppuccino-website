@@ -27,7 +27,13 @@
 	
 	<li class="form_box_item">
 		<label for="password">Password</label>
-		<input class="form_pretty_general_input" type="password" name="password" placeholder="" <?php if(isset($_POST['password'])) print('value="'.$_POST['password'].'"'); ?> required/>
+		<input class="form_pretty_general_input" type="password" name="password" <?php if(isset($_POST['password'])) print('value="'.$_POST['password'].'"'); ?> required/>
+	</li>
+
+	<li class="form_box_item">
+		<label class="form_pretty_general_input">
+			<input type="checkbox" name="permalogin" value="y" <?php if(isset($_POST['permalogin'])) echo 'checked="checked"'; ?> />stay logged in
+		</label>
 	</li>
 	
 	<li class="form_box_item">

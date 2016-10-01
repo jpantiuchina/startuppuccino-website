@@ -2,11 +2,13 @@
 
 class Config_Functions {
 
-    var $json_data;
+    private $json_data;
+    private $dev_local_host = "http://localhost/startuppuccino-website/source-code/";
 
     function __construct() {
       require_once 'session.php';
-      $this->json_data = json_decode(file_get_contents("../app/configs/configs.json"),true); // After deploy path sould be set to abosolute
+      $uri = $_SERVER['HTTP_HOST'] === "localhost" ? $this->dev_local_host : $_SERVER['HTTP_HOST'];
+      $this->json_data = json_decode(file_get_contents($uri."/app/configs/configs.json"),true); // After deploy path sould be set to abosolute
     }
  
     function __destruct() {}

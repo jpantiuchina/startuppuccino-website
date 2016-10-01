@@ -35,6 +35,8 @@
 			 		$login_email = $_POST['email'];
 			 		$login_password = md5($_POST['password']);
 
+			 		$isPermaLogin = isset($_POST['permalogin']) && $_POST['permalogin'] === "y";
+
 			 		include '../app/controllers/login.php';
 					
 				} else {

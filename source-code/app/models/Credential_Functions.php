@@ -4,9 +4,13 @@ require_once '../app/models/session.php';
 
 class Credential_Functions {
  
-    var $email;
-    var $password;
-    var $fname, $lname, $background, $role, $skills;
+    private $email,
+            $password,
+            $fname,
+            $lname,
+            $background,
+            $role,
+            $skills;
 
     function __construct() {
         // connecting to database
@@ -69,6 +73,42 @@ class Credential_Functions {
       return false;
     
     }
+
+    /**
+     * Set Permanent Login
+     */
+    public function setPermaLogin($account_id) {
+
+      $cookie_token = $this->generateCookieToken($account_id);
+
+      $query = "INSERT INTO "._T_ACCOUNT_LOGGED." (account_id, cookie_token)
+                VALUES ('" . $account_id . "','" . $cookie_token . "');";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows != 1){
+
+        // Reset cookie token
+        $cookie_token = "";
+
+      }
+      
+      return $cookie_token;
+
+    }
+
+
+    /**
+     * Generate a new cookie token
+     * temporary the cookie is generated as the hash
+     * of the account id, a default "key" and current date width format wzis
+     */
+    private function generateCookieToken($account_id) {
+
+      return md5( $account_id . "startuppuccino" . date("wzis") );
+
+    }
+
 
     /**
      * Check if email already exists

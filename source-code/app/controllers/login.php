@@ -32,6 +32,13 @@
 			$_SESSION['lectures_availability'] = $cs_func->getMentorSessionAvailability($_SESSION['id']);
 	   	}
 
+	   	// Check if a persistent login has been required
+	   	if( $isPermaLogin === TRUE && 
+	   		!empty( $cookie_token = $credential_func->setPermaLogin($_SESSION['id']) ) ){
+	   		$days = 90;
+	   		setcookie("permalog", $cookie_token, time() + (86400 * $days), "/");
+	   	}
+
 	   	// Redirect to home page
     	header("Location: ../");
 
