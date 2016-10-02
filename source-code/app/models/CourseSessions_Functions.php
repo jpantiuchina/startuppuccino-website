@@ -51,24 +51,29 @@ class CourseSessions_Functions {
     /**
      * Edit mentor availability
      */
-    public function editMentorAvailability($mentor_id, $session_id, $action, $pitch = null){
+    public function editMentorAvailability($mentor_id, $session_id, $action, $pitch = null, $pitch_title = null){
 
         // action = remove -> yes is enabled and tuple is in the table
         // action = add -> no is enabled and tuple is not in the table
+
+        // Pitch title is required when applying for a pitch
+        if($pitch === "1" && $pitch_title == null){
+          return false;
+        }
 
         if ($action === "remove") {
 
             if ($pitch === "0") {
 
                 $query = "UPDATE "._T_MENTOR_AVAILABILITY." 
-                      SET pitch='0'
+                      SET pitch='0', pitch_title='', pitch_approved=NULL
                       WHERE mentor_id='".$mentor_id."' 
                       AND session_id='".$session_id."';";
 
             } else if ($pitch === "1") {
                 
                 $query = "UPDATE "._T_MENTOR_AVAILABILITY." 
-                      SET pitch='1'
+                      SET pitch='1', pitch_title='".$pitch_title."'
                       WHERE mentor_id='".$mentor_id."' 
                       AND session_id='".$session_id."';";
 
@@ -84,8 +89,8 @@ class CourseSessions_Functions {
 
             if ($pitch === "1") {
 
-                $query = "INSERT INTO "._T_MENTOR_AVAILABILITY." (mentor_id, session_id, pitch)
-                          VALUES ('".$mentor_id."', '".$session_id."',1);";            
+                $query = "INSERT INTO "._T_MENTOR_AVAILABILITY." (mentor_id, session_id, pitch, pitch_title)
+                          VALUES ('".$mentor_id."', '".$session_id."', 1, '".$pitch_title."');";            
 
             } else if($pitch === "0") {
 
@@ -154,7 +159,7 @@ class CourseSessions_Functions {
 
         $sessions = [];
 
-        $query = "SELECT ma.session_id, ma.pitch
+        $query = "SELECT ma.session_id, ma.pitch, ma.pitch_approved, ma.pitch_title
                   FROM "._T_MENTOR_AVAILABILITY." ma
                   WHERE ma.mentor_id = '".$mentor_id."';";
 
@@ -163,7 +168,19 @@ class CourseSessions_Functions {
         if($result){
 
             while ($session = $result->fetch_assoc()){
-                $sessions[$session['session_id']] = $session['pitch'];
+                
+                if ($session['pitch'] == "0"){
+                  $sessions[$session['session_id']][0] = 0;  
+                } else if ( $session['pitch'] == "1" && $session['pitch_approved'] == null ){
+                  $sessions[$session['session_id']][0] = 1;
+                } else if ( $session['pitch'] == "1" && $session['pitch_approved'] == "0" ){
+                  $sessions[$session['session_id']][0] = 2;
+                } else if ( $session['pitch'] == "1" && $session['pitch_approved'] == "1" ){
+                  $sessions[$session['session_id']][0] = 3;
+                }
+
+                $sessions[$session['session_id']][1] = $session['pitch_title'];
+
             }
 
         }

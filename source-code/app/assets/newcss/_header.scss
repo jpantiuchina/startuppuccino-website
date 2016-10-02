@@ -22,9 +22,11 @@ $menu-picture-size-percent: 0.50;
 $menu-picture-margin-top: #{($header-height / 1px * (1 - $menu-picture-size-percent))/2}px;
 $menu-picture-size: #{$header-height / 1px * $menu-picture-size-percent}px;
 
-$submenu-background: rgba(81, 58, 43, 1);
+$submenu-text-color: $logo-brown;
+$submenu-background: #fff;
 $submenu-link-height: 40px;
 $submenu-padding: 10px;
+$submenu-shadow: 0px 0px 2px #999;
 
 $menu-link-border-size: 2px;
 
@@ -178,7 +180,8 @@ header {
 		overflow: hidden;
 		background: $submenu-background;
 		padding: 0px $submenu-padding;
-		@include box-shadow($header-shadow);
+		z-index: 1;
+		@include box-shadow($submenu-shadow);
 		@include transition($header-transition-timing);
 	}
 
@@ -187,14 +190,14 @@ header {
 		height: $submenu-link-height;
 		line-height: $submenu-link-height;
 		text-align: left;
-		border-bottom: 1px solid #f7f7dd;
+		border-bottom: 1px solid $submenu-text-color;
 
 		&:last-child {
 			border-bottom: none;
 		}
 
 		> a {
-			color: #f7f7dd;
+			color: $submenu-text-color;
 			
 			&:hover {
 				color: $palette-yellow;

@@ -158,16 +158,16 @@ input[type=file] {
 /* Buttons */
     
 .st_button {
-    //border: none;
-    //padding: 7px;
-    //margin: 3px;
-    //text-decoration: none;
-    //cursor: pointer;
-    //background-color: #fff;
-    //color: $logo-brown;
-    //@include transition($transition-time);
+  border: none;
+  padding: 7px;
+  margin: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  background-color: $logo-green;
+  @include transition($transition-time);
 
-  background: #3498db;
+  /*background: #3498db;
   background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
   background-image: -moz-linear-gradient(top, #3498db, #2980b9);
   background-image: -ms-linear-gradient(top, #3498db, #2980b9);
@@ -176,19 +176,19 @@ input[type=file] {
   -webkit-border-radius: 10;
   -moz-border-radius: 10;
   border-radius: 10px;
-  color: #ffffff;
   padding: 10px 20px 10px 20px;
-  text-decoration: none;
+  text-decoration: none;*/
 
     &:hover {
-      //color: $palette-yellow !important;
+      @include bright(0.5);
+      /*color: $palette-yellow !important;
       background: #3cb0fd;
       background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
       background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
       background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
       background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
       background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
-      text-decoration: none;
+      text-decoration: none;*/
     }
 }
 

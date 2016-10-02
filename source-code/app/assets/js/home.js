@@ -54,7 +54,7 @@ StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(se
 		button.parentNode.childNodes[1].setAttribute("onclick","SpHome.mentors.setAvailability("+session_id+",this)");
 		button.parentNode.className = "button_availability action_add";
 		button.parentNode.setAttribute("data-action","add");
-		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[1].setAttribute("data-pitch", 1);
+		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[1].setAttribute("data-pitch","0");
 		button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[5].checked = false;
 		button.parentNode.parentNode.childNodes[3].childNodes[1].className = "";
 		SpHome.layout.renderGuest(session_id, true);
@@ -101,12 +101,12 @@ StartuppuccinoHome.prototype.layout.renderGuest = function(session_id, remove_me
 }
 StartuppuccinoHome.prototype.layout.setPitchButton = function(button, pitch){
 
-	if(pitch === "1"){
+	if(pitch !== 1){
 		button.setAttribute("data-pitch","0");
-		button.parentNode.className = "checked";
+		button.parentNode.className = "";
 	} else {
 		button.setAttribute("data-pitch","1");
-		button.parentNode.className = "";
+		button.parentNode.className = "checked";
 	}
 
 }
@@ -143,9 +143,10 @@ StartuppuccinoHome.prototype.mentors.setAvailability = function(session_id, butt
 StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 
 	var button = e.target || e.srcElement,
-		loader = button.parentNode.parentNode.parentNode.childNodes[5];
-		session_id = button.getAttribute("data-session");
-		pitch = button.getAttribute("data-pitch");
+		loader = button.parentNode.parentNode.parentNode.childNodes[5],
+		session_id = button.getAttribute("data-session"),
+		pitch = button.getAttribute("data-pitch"),
+		pitch_title = "",
 		action = button.parentNode
 				       .parentNode
 				       .parentNode.childNodes[1].getAttribute("data-action");
@@ -155,10 +156,48 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 	// Show loader -> try to prevent double click on button
 	SpHome.layout.showTinyloader(loader);
 
+	if( pitch === "3" ){
+		if( !confirm("Are you sure you want to withdraw your pitch proposal?") ){
+			SpHome.layout.hideTinyloader(loader);			
+			return;
+		}
+	}
+
+	if( pitch === "2" ){
+		alert("The pitch for this session has already been assigned.");
+		SpHome.layout.hideTinyloader(loader);
+		return;
+	}
+
+	// Set right pitch value
+	if( pitch === "0"){
+		pitch = 1;
+	} else {
+		pitch = 0
+	}
+
+	// When applying for the pitch, ask for pitch title
+	if( pitch === 1 ){
+
+		var pitch_title = prompt("Write here your pitch title proposal...","");
+
+		if( pitch_title == null || pitch_title.trim() === "" ){
+			alert("You need to insert a title of your pitch.");
+			SpHome.layout.hideTinyloader(loader);
+			return;
+		}
+
+		if( !confirm("Your pitch title is:\n"+pitch_title) ){
+			SpHome.layout.hideTinyloader(loader);
+			return;
+		}
+	}
+
 	data.url = "../app/controllers/mentors_availability.php";
 	data.parameters = "s_id=" + session_id + 
 	                  "&action=" + action + 
-	                  "&pitch=" + pitch ;
+	                  "&pitch=" + pitch +
+	                  "&pitch_title=" + pitch_title;
 
 	Sp.post(
 		data,

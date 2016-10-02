@@ -52,13 +52,7 @@
 				   	$config_func = new Config_Functions();
 				   	// Load ideas settings
 				   	$config_func->load();
-
-				   	// If is a mentor we load the sessions availability
-				   	if($_SESSION['role'] === "mentor"){
-				   		require_once 'CourseSessions_Functions.php';
-						$cs_func = new CourseSessions_Functions();
-						$_SESSION['lectures_availability'] = $cs_func->getMentorSessionAvailability($_SESSION['id']);
-				   	}
+				   	
 
 				   	$userLogged = isset($_SESSION['firstname']);
 

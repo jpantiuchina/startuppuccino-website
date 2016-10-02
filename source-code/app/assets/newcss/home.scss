@@ -386,12 +386,23 @@ $session-comments-editor-height: 100px;
 			margin-left: 3px;
 			background-color: $button-availabiliy-inactive-color;
 		}
+	
+		&.approved {
+			background-color: $logo-green;	
+			color: #fff;
+		}
+
+		&.checked {
+			background-color: $palette-yellow;	
+			color: #fff;
+		}
+
+		&.denied {
+			background-color: $logo-red;
+			color: #fff;
+		}
 	}
 
-	> label.checked {
-		background-color: $logo-green;	
-		color: #fff
-	}
 }
 
 
