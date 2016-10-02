@@ -54,12 +54,14 @@
             </div>
         
             <section id="login">
+                <h4>Login</h4>
                 <?php // temporary ?>
                 <?php $form_action = "./login/index.php"; $loginOk = true; ?>
                 <?php include './app/views/login_form.php'; ?>
             </section>
 
             <section id="register">
+                <h4>Register</h4>
                 <?php $form_action = "./register/index.php"; ?>
                 <?php include './app/views/register_form.php'; ?>            
             </section>

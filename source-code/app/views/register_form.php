@@ -13,6 +13,15 @@
 
 
 	<li class="form_box_item">
+		<label>Course Key</label>
+		<input class="form_pretty_general_input" type="password" name="course_key" required/>
+	</li>
+
+
+	<p class="form_separator"></p>
+
+
+	<li class="form_box_item">
 		<label>Role</label>
 		<label><input type="radio" name="role" value="student" onclick="switchInputs(0)" <?php if(isset($_POST['role']) && $_POST['role']=="student") print 'checked="checked"' ?> required/>Student (I'm here to learn)</label>
 		<label><input type="radio" name="role" value="mentor"  onclick="switchInputs(1)" <?php if(isset($_POST['role']) && $_POST['role']=="mentor") print 'checked="checked"' ?> required/>Mentor (I'm here to help)</label>

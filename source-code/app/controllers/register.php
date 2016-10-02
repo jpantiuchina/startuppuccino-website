@@ -1,5 +1,6 @@
 <?php
-	
+
+
 	require_once '../app/models/session.php';
 
 	// Set empty error_message
@@ -7,49 +8,57 @@
 
 	$isRegister = false;
 	
-	require_once '../app/models/Credential_Functions.php';
-	$credential_func = new Credential_Functions();
+	if(isset($_POST['course_key']) && $_POST['course_key']==="LS201617"){
 
-	// Validate inputs
-	// Return string with error message if validation fails
-	$inputs_validation = $credential_func->validateInputs(md5($_POST['password']),md5($_POST['password1']),$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['background'],$_POST['role'],$_POST['skills']);
+		require_once '../app/models/Credential_Functions.php';
+		$credential_func = new Credential_Functions();
 
-	// Check if email already exists
-	$email_exists = $credential_func->emailExists();
+		// Validate inputs
+		// Return string with error message if validation fails
+		$inputs_validation = $credential_func->validateInputs(md5($_POST['password']),md5($_POST['password1']),$_POST['email'],$_POST['firstname'],$_POST['lastname'],$_POST['background'],$_POST['role'],$_POST['skills']);
 
-	if($inputs_validation===true){
+		// Check if email already exists
+		$email_exists = $credential_func->emailExists();
 
-		if(!$email_exists){
+		if($inputs_validation===true){
 
-			// Execute query and evaluate result
-			if ($credential_func->register()) {
+			if(!$email_exists){
 
-				$isRegister = true;
-			    
-			    // Send "Welcome email"
-			    // ...
+				// Execute query and evaluate result
+				if ($credential_func->register()) {
 
-				// Login
-				$login_email = $_POST['email'];
-				$login_password = md5($_POST['password']);
-				include '../app/controllers/login.php';
+					$isRegister = true;
+				    
+				    // Send "Welcome email"
+				    // ...
+
+					// Login
+					$login_email = $_POST['email'];
+					$login_password = md5($_POST['password']);
+					include '../app/controllers/login.php';
+
+				} else {
+
+					// DB answered with error status
+					$error_message = "We had some problem creating your account, try again and if the problem persist <a href='mailto:info@minetoolz.com'>contact us</a>";
+
+				}
 
 			} else {
 
-				// DB answered with error status
-				$error_message = "We had some problem creating your account, try again and if the problem persist <a href='mailto:info@minetoolz.com'>contact us</a>";
+				$error_message = "Email already exists";
 
 			}
 
 		} else {
 
-			$error_message = "Email already exists";
+			$error_message = $inputs_validation;
 
 		}
 
 	} else {
 
-		$error_message = $inputs_validation;
+		$error_message = "Wrong course key";
 
 	}
 
