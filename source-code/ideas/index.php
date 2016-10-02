@@ -17,6 +17,8 @@
 	require_once '../app/models/Ideas_Functions.php';
 	$ideas_func = new Ideas_Functions($account_id);
 
+	$ideas = [];
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +39,7 @@
 		
 		<main>
 
-			<?php if (!($ideas = $ideas_func->getAllIdeas())){ ?>
+			<?php if ( !($ideas = $ideas_func->getAllIdeas()) && $_SESSION['ideas_phase'] != "1" ){ ?>
 			
 				<section><p>No ideas found...</p></section>
 			

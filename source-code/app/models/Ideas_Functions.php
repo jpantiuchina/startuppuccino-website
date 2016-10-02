@@ -37,14 +37,14 @@ class Ideas_Functions {
      */
     private function readAllMyIdeasIDs() {
 
-      $query = "SELECT idea_id FROM "._T_IDEA_ACCOUNT." WHERE account_id='".$this->account_id."';";
+      $query = "SELECT project_id FROM "._T_IDEA_ACCOUNT." WHERE account_id='".$this->account_id."';";
 
       $result = $this->conn->query($query);
 
       if($result->num_rows > 0){
 
         while ($idea = $result->fetch_assoc()){
-          $ideas[] = $idea['idea_id'];
+          $ideas[] = $idea['project_id'];
         }
 
         // Return the array
@@ -63,15 +63,16 @@ class Ideas_Functions {
      */
     private function loadUserLikes(){
 
-      $query = "SELECT idea_id FROM "._T_IDEA_LIKE." WHERE account_id='".$this->account_id."';";
+      $query = "SELECT l.project_id FROM "._T_IDEA_LIKE." AS l 
+                WHERE l.account_id='".$this->account_id."';";
 
       $result = $this->conn->query($query);
 
       $temp_arr = [];
 
-      if($result->num_rows > 0) {
+      if($result && $result->num_rows > 0) {
         while($idealike = $result->fetch_assoc()) {
-          $temp_arr[] = $idealike['idea_id'];
+          $temp_arr[] = $idealike['project_id'];
         }
       }
      
@@ -92,7 +93,9 @@ class Ideas_Functions {
      */
     public function getIdeaData() {
       
-      $query = "SELECT * FROM "._T_IDEA." WHERE id='".$this->idea_id."';";
+      $query = "SELECT id, title, owner_id, description, avatar, looking_for, is_approved
+                FROM "._T_IDEA." 
+                WHERE id='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -110,7 +113,7 @@ class Ideas_Functions {
      */
     public function getIdeaMembers(){
 
-      $query = "SELECT account_id FROM "._T_IDEA_ACCOUNT." WHERE idea_id='".$this->idea_id."';";
+      $query = "SELECT account_id FROM "._T_IDEA_ACCOUNT." WHERE project_id='".$this->idea_id."';";
       //$query = "SELECT id,skills FROM Account WHERE idea_selected='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
@@ -148,18 +151,20 @@ class Ideas_Functions {
       $query = "SELECT i.title,
                        i.description,
                        i.ideal_team_size,
-                       (SELECT COUNT(*) FROM project_participant WHERE project_id = i.id) + 1 AS current_team_size,
-                       i.date,
+                       (SELECT COUNT(*) FROM "._T_IDEA_ACCOUNT." WHERE project_id = i.id) + 1 AS current_team_size,
+                       i.created_at,
+                       i.looking_for,
                        i.avatar,
                        a.firstName, 
                        a.lastName,
                        i.id,
                        i.owner_id
-                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id WHERE NOT a.is_approved";
+                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id 
+                    WHERE NOT i.is_approved;";
 
       $result = $this->conn->query($query);
 
-      if($result->num_rows > 0){
+      if($result && $result->num_rows > 0){
 
         while ($idea = $result->fetch_assoc()){
           $ideas[] = $idea;
@@ -178,7 +183,7 @@ class Ideas_Functions {
     /**
      * Update Idea Details
      */
-    public function editIdea($title,$description,$avatar,$background_pref) {
+    public function editIdea($title, $description, $avatar, $background_pref) {
       
       // Should be better here to doublecheck if some parameters is empty (not required now)
 
@@ -199,9 +204,15 @@ class Ideas_Functions {
             
             if($team_size > 1) {
 
-              $query = "UPDATE "._T_IDEA." SET title='".$title."',owner_id='".$this->account_id."',ideal_team_size='".$team_size."',description='".$description."',
-                                         updated_at=NOW(),avatar='".$avatar."',background='".$background_pref."'
-                                         WHERE id='".$this->idea_id."';";
+              $query = "UPDATE "._T_IDEA." 
+                        SET title='".$title."',
+                            owner_id='".$this->account_id."',
+                            ideal_team_size='".$team_size."',
+                            description='".$description."',
+                            updated_at=NOW(),
+                            avatar='".$avatar."',
+                            background='".$background_pref."'
+                        WHERE id='".$this->idea_id."';";
 
               $result = $this->conn->query($query);
 
@@ -240,21 +251,13 @@ class Ideas_Functions {
      */
     public function joinIdea() {
       
-      $query = "INSERT INTO "._T_IDEA_ACCOUNT." (idea_id,account_id,date) VALUE ('".$this->idea_id."','".$this->account_id."',NOW());";
+      $query = "INSERT INTO "._T_IDEA_ACCOUNT." (project_id, account_id, joined_at) 
+                VALUE ('".$this->idea_id."', '".$this->account_id."', NOW());";
 
-      if($this->conn->query($query)){
+      if($this->conn->query($query) && $this->conn->affected_rows == 1){
 
-        $query = "UPDATE Ideas SET current_team_size = current_team_size + 1 WHERE id=".$this->idea_id.";";
+        return "ok";
 
-        if($this->conn->affected_rows == 1 && $this->conn->query($query)){
-
-            // if($this->conn->affected_rows != 1) // Error team size not updated
-            
-            return "ok";
-        }
-        
-        return "Error, please try again.";
-        
       }
       
       return "Error";
@@ -271,7 +274,9 @@ class Ideas_Functions {
         return "You are the owner! You cannot leave the idea.";
       }
 
-      $query = "DELETE FROM "._T_IDEA_ACCOUNT." WHERE idea_id='".$this->idea_id."' AND account_id='".$this->account_id."';";
+      $query = "DELETE FROM "._T_IDEA_ACCOUNT." 
+                WHERE project_id='".$this->idea_id."' 
+                AND account_id='".$this->account_id."';";
       
       if($this->conn->query($query)){
 
@@ -289,7 +294,8 @@ class Ideas_Functions {
      */
     private function ideaOwnerID() {
       
-      $query = "SELECT owner_id FROM "._T_IDEA." WHERE id='".$this->idea_id."';";
+      $query = "SELECT owner_id 
+                FROM "._T_IDEA." WHERE id='".$this->idea_id."';";
         
       $result = $this->conn->query($query);
 
@@ -308,7 +314,8 @@ class Ideas_Functions {
      */
     public function getTeamsize() {
       
-      $query = "SELECT id FROM "._T_IDEA_ACCOUNT." WHERE idea_id='".$_POST['idea_id']."'";
+      $query = "SELECT id FROM "._T_IDEA_ACCOUNT." 
+                WHERE project_id='".$_POST['idea_id']."'";
 
       $result = $this->conn->query($query);
 
@@ -327,7 +334,7 @@ class Ideas_Functions {
     /**
      * Create a new Idea
      */
-    public function newIdea($title,$description,$avatar,$background_pref) {
+    public function newIdea($title, $description, $avatar, $background_pref) {
 
       // Temp fix
       $team_size = 2;
@@ -346,8 +353,13 @@ class Ideas_Functions {
             
             if($team_size > 1) {
 
-              $query = "INSERT INTO "._T_IDEA." (title,owner_id,ideal_team_size,description,avatar,background)
-                        VALUES ('$title','$this->account_id','$team_size','".$description."','".$avatar."','".$background_pref."');";
+              $query = "INSERT INTO "._T_IDEA." (title, owner_id, ideal_team_size, description, avatar, looking_for)
+                        VALUES ('$title',
+                                '$this->account_id',
+                                '$team_size',
+                                '".$description."',
+                                '".$avatar."',
+                                '".$background_pref."');";
 
               $result = $this->conn->query($query);
 
@@ -392,14 +404,17 @@ class Ideas_Functions {
       }
 
       // Delete the idea
-      $query = "DELETE FROM "._T_IDEA." WHERE id='".$this->idea_id."' AND owner_id='".$this->account_id."';";
+      $query = "DELETE FROM "._T_IDEA." 
+                WHERE id='".$this->idea_id."' 
+                AND owner_id='".$this->account_id."';";
       $result = $this->conn->query($query);
 
       if($this->conn->affected_rows == 1){
 
         $team_size = $this->getTeamsize();
 
-        $query = "DELETE FROM "._T_IDEA_ACCOUNT." WHERE idea_id='".$this->idea_id."';";
+        $query = "DELETE FROM "._T_IDEA_ACCOUNT." 
+                  WHERE project_id='".$this->idea_id."';";
         $result = $this->conn->query($query);
 
         if($this->conn->affected_rows == $team_size){
@@ -423,7 +438,9 @@ class Ideas_Functions {
      */
     public function getComments() {
       
-      $query = "SELECT * FROM "._T_IDEA_COMMENT." WHERE idea_id='".$this->idea_id."';";
+      $query = "SELECT pp.id, pp.project_id, pp.account_id, pp.text 
+                FROM "._T_IDEA_COMMENT." AS pp 
+                WHERE project_id='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -442,7 +459,8 @@ class Ideas_Functions {
      */
     public function deleteComment($comment_id) {
       
-      $query = "DELETE FROM "._T_IDEA_COMMENT." WHERE id='".$comment_id."';";
+      $query = "DELETE FROM "._T_IDEA_COMMENT." 
+                WHERE id='".$comment_id."';";
 
       $result = $this->conn->query($query);
 
@@ -461,8 +479,8 @@ class Ideas_Functions {
      */
     public function newComment($comment) {
       
-      $query = "INSERT INTO "._T_IDEA_COMMENT." ('account_id','idea_id','text','date')
-      			VALUES ('".$this->account_id."','".$this->idea_id."','".$comment."',NOW());";
+      $query = "INSERT INTO "._T_IDEA_COMMENT." ('project_id', 'account_id', 'text', 'commented_at')
+      			    VALUES ('".$this->idea_id."', '".$this->account_id."', '".$comment."', NOW());";
 
       $result = $this->conn->query($query);
 
@@ -485,7 +503,8 @@ class Ideas_Functions {
         return "You have reached the maximum number of likes.";
       }
 
-      $query = "INSERT INTO "._T_IDEA_LIKE." (account_id,idea_id,date) VALUES ('".$this->account_id."','".$this->idea_id."',NOW());";
+      $query = "INSERT INTO "._T_IDEA_LIKE." (project_id, account_id) 
+                VALUES ('".$this->idea_id."', '".$this->account_id."');";
 
       $result = $this->conn->query($query);
 
@@ -506,7 +525,8 @@ class Ideas_Functions {
      */
     public function unlike() {
       
-      $query = "DELETE FROM "._T_IDEA_LIKE." WHERE account_id='".$this->account_id."' AND idea_id='".$this->idea_id."';";
+      $query = "DELETE FROM "._T_IDEA_LIKE." 
+                WHERE account_id='".$this->account_id."' AND project_id='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
 
@@ -532,7 +552,8 @@ class Ideas_Functions {
      */
     public function getIdeasLikes() {
     
-      $query = "SELECT account_id FROM "._T_IDEA_LIKE." WHERE idea_id='".$this->idea_id."';";
+      $query = "SELECT account_id FROM "._T_IDEA_LIKE." 
+                WHERE project_id='".$this->idea_id."';";
 
       $result = $this->conn->query($query);
 

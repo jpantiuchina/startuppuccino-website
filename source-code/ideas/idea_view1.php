@@ -55,7 +55,7 @@
 
 				<p class='idea_description' id='idea_description__".$idea['id']."'>".$idea['description'].".</p>
 
-	        	<p class='idea_background' id='idea_background__".$idea['id']."'>".$idea['background_pref']."</p>"; 
+	        	<p class='idea_background' id='idea_background__".$idea['id']."'>Looking for: ".$idea['looking_for']."</p>"; 
 
 			if ($isStudent){
 
