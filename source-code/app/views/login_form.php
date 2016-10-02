@@ -10,7 +10,9 @@
 
 -->
 
-<form class="form_custom form_login" action="" method="post">
+<?php $form_action = isset($form_action) ? $form_action : ""; ?>
+
+<form class="form_custom form_login" action="<?php echo $form_action ?>" method="post">
 
 	<?php if(!$loginOk){ ?>
 

@@ -1,4 +1,7 @@
-<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
+
+<?php $form_action = isset($form_action) ? $form_action : ""; ?>
+
+<form action="<?php echo $form_action ?>" method="post" class="form_custom" onsubmit="return checkForm();">
 
 	<?php if(isset($error_message) && $error_message != ""){ ?>
 
@@ -13,6 +16,7 @@
 		<label>Role</label>
 		<label><input type="radio" name="role" value="student" onclick="switchInputs(0)" <?php if(isset($_POST['role']) && $_POST['role']=="student") print 'checked="checked"' ?> required/>Student (I'm here to learn)</label>
 		<label><input type="radio" name="role" value="mentor"  onclick="switchInputs(1)" <?php if(isset($_POST['role']) && $_POST['role']=="mentor") print 'checked="checked"' ?> required/>Mentor (I'm here to help)</label>
+		<label><input type="radio" name="role" value="guest" <?php if(isset($_POST['role']) && $_POST['role']=="guest") print 'checked="checked"' ?> required/>Guest</label>
 	</li>
 
 
@@ -52,7 +56,7 @@
 
 
 	<li class="form_box_item">
-		<label id="background_label">Faculty(Student)/Company(Mentor)</label>
+		<label id="background_label">Company or Faculty</label>
 		<input class="form_pretty_general_input" type="text" name="background" <?php if(isset($_POST['background'])) print('value="'.$_POST['background'].'"'); ?> required/>
 	</li>
 

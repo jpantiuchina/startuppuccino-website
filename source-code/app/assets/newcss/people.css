@@ -761,4 +761,156 @@ input[type=file] {
   display: inline-block;
   margin: 0px 3px; }
 
+/* *********************** Layout card list ********************** */
+/* Filters styles */
+.filter_menu {
+  text-align: center;
+  padding: 15px;
+  background-color: #6C3D17; }
+
+.filter_menu__button {
+  display: inline-block;
+  padding: 10px;
+  font-size: 12px;
+  background-color: #FE9646;
+  color: #fff;
+  cursor: pointer; }
+
+.filter_menu__button--active {
+  background-color: #333;
+  color: #d7d7d7; }
+
+/* Cards view */
+.card {
+  display: inline-block;
+  vertical-align: middle;
+  width: 200px;
+  height: auto;
+  overflow: hidden;
+  background: #fbfbfb;
+  text-align: left;
+  margin: 10px 20px; }
+
+.card--hidden {
+  display: none; }
+
+.card a {
+  text-decoration: none !important;
+  color: #fbfbfb; }
+
+.card__details {
+  background-color: #6C3D17;
+  color: #fbfbfb;
+  padding: 5px; }
+
+.card--MENTOR .card__details {
+  background-color: #444; }
+
+.card--EDUCATOR .card__details {
+  background-color: #444; }
+
+.card__details > span {
+  display: block;
+  padding: 1px 10px;
+  line-height: 18px;
+  font-size: 14px; }
+
+.card__details > span:first-child {
+  padding-top: 7px; }
+
+.card__details_name {
+  font-weight: 900; }
+
+.card__details_role {
+  font-size: 10px !important; }
+
+.card__pic {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
+/* ******************* END Layout card list ****************** */
+.change_view_button {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #fbfbfb;
+  cursor: pointer; }
+
+#change_view_icon {
+  width: 100%;
+  height: 100%;
+  background-position: center; }
+
+/************************ Toggle layout button ************************/
+/* ******************* Vertical list layout ******************** */
+/* Cards view */
+.list_view--linear {
+  max-width: 900px;
+  margin: auto; }
+
+.list_view--linear .card {
+  display: block;
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  background: #fbfbfb;
+  text-align: left;
+  margin: 10px auto; }
+
+.list_view--linear .card--hidden {
+  display: none; }
+
+.list_view--linear .card a {
+  text-decoration: none !important;
+  color: #fbfbfb; }
+
+.list_view--linear .card__details, .list_view--linear .card__pic {
+  display: inline-block;
+  vertical-align: top; }
+
+.list_view--linear .card__details {
+  background-color: transparent;
+  color: #222;
+  padding: 0px;
+  margin: 15px; }
+
+.list_view--linear .card--MENTOR .card__details, .list_view--linear .card--EDUCATOR .card__details {
+  background-color: transparent; }
+
+.list_view--linear .card--MENTOR, .list_view--linear .card--EDUCATOR {
+  background-color: #f2f2f2; }
+
+.list_view--linear .card__details > span {
+  display: block;
+  padding: 1px 10px;
+  line-height: initial;
+  font-size: initial; }
+
+.list_view--linear .card__details > span:first-child {
+  padding-top: 7px; }
+
+.list_view--linear .card__details_name {
+  font-weight: 900;
+  font-size: 25px !important; }
+
+.list_view--linear .card__details_role {
+  font-size: 18px !important; }
+
+.list_view--linear .card__details_background {
+  font-size: 20px !important; }
+
+.list_view--linear .card__pic {
+  width: 100px;
+  height: 100px;
+  margin: 15px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat; }
+
 /*# sourceMappingURL=people.css.map */

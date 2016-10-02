@@ -23,6 +23,9 @@
         <link rel="mask-icon" href="http://thatsmy.name/startuppuccino/land/icon.svg">
 
         <link rel="stylesheet" href="./app/assets/newcss/landing.css" media="all" />
+        <!-- temp -->
+        <link rel="stylesheet" href="./app/assets/newcss/login.css" media="all" />
+        <link rel="stylesheet" href="./app/assets/newcss/register.css" media="all" />
         
     </head>
     <body>
@@ -40,15 +43,29 @@
                                 <span>Lean Startup</span>
                             </h1>
                             <div class="sublogo_links">
+                                <!--
                                 <span><a href="./login/">Login</a></span>
                                 <span><a href="./register/">Register</a></span>
+                                -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
         
+            <section id="login">
+                <?php // temporary ?>
+                <?php $form_action = "./login/index.php"; $loginOk = true; ?>
+                <?php include './app/views/login_form.php'; ?>
+            </section>
+
+            <section id="register">
+                <?php $form_action = "./register/index.php"; ?>
+                <?php include './app/views/register_form.php'; ?>            
+            </section>
+
+        </main>
+
         <footer class="landing_footer">
             Powered by <a href="./about/">Startuppuccino</a>
         </footer>

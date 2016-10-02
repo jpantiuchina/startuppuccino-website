@@ -15,10 +15,12 @@ function checkForm(){
 
 function switchInputs(s){
 
+	/*
 	if(s===0){ // Student
 		document.getElementById("background_label").innerHTML = "Faculty";
 	} else if(s===1){ // Mentor
 		document.getElementById("background_label").innerHTML = "Company";
 	}
+	*/
 
 }
