@@ -699,7 +699,7 @@ input[type=file] {
   cursor: pointer; }
 
 main {
-  min-height: calc(100% - 70px);
+  height: calc(100% - 70px);
   padding-top: 0px;
   /* Overwrite definition in header, because the header is hidden */ }
 

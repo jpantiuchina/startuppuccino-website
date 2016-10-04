@@ -8,7 +8,7 @@
 
 	$isRegister = false;
 	
-	if(isset($_POST['course_key']) && $_POST['course_key']==="LS201617"){
+	if(isset($_POST['course_key']) && $_POST['course_key']==="LS1617"){
 
 		require_once '../app/models/Credential_Functions.php';
 		$credential_func = new Credential_Functions();

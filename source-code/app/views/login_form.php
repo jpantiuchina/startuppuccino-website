@@ -32,18 +32,18 @@
 		<input class="form_pretty_general_input" type="password" name="password" <?php if(isset($_POST['password'])) print('value="'.$_POST['password'].'"'); ?> required/>
 	</li>
 
-	<li class="form_box_item">
-		<label class="form_pretty_general_input">
-			<input type="checkbox" name="permalogin" value="y" <?php if(isset($_POST['permalogin'])) echo 'checked="checked"'; ?> />stay logged in
+	<li style="list-style: none">
+		<label style="cursor: pointer;">
+			<input type="checkbox" name="permalogin" value="y" checked="checked" />stay logged in
 		</label>
 	</li>
 	
 	<li class="form_box_item">
 
 			<input class="form_pretty_button_input" type="submit" name="login" value="Login" />
-		<p>
+		<!--<p>
 			<a class="form_input--forgot_password form_pretty_button_link" href="../resetpassword/" target="_blank">Forgot Password</a>
-		</p>
+		</p>-->
 	</li>
 	
 	<li class="form_box_item form_box_item--full">

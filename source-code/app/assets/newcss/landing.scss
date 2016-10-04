@@ -4,7 +4,7 @@
 $footer-height: 70px;
 
 main {
-	min-height: calc(100% - #{$footer-height});
+	height: calc(100% - #{$footer-height});
 	padding-top: 0px; /* Overwrite definition in header, because the header is hidden */
 }
 

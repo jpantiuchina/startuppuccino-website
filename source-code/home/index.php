@@ -22,7 +22,7 @@
 	<script type="text/javascript">
 		var STARTUPPUCCINO_USER = {
 				id : "<?php echo $_SESSION['id']; ?>",
-				avatar : "<?php echo $_SESSION['avatar']; ?>"
+				avatar : "<?php echo empty(trim($_SESSION['avatar'])) ? 'people.png' : $_SESSION['avatar']; ?>"
 			};
 	</script>
 

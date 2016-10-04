@@ -298,6 +298,31 @@ StartuppuccinoHome.prototype.session.deleteComment = function(e){
 		});
 
 }
+StartuppuccinoHome.prototype.session.scrollToSection = function(e){
+
+	e.preventDefault();
+
+	var element = e.target || e.srcElement,
+		element_id,
+		element_id_ = element.getAttribute("href");
+	
+	// Patch if clicked on <a> contents
+	if(element_id_ == null){
+		element = element.parentNode;
+		element_id_ = element.getAttribute("href");
+	}
+	
+	element_id = element_id_.substr(1);
+
+	Sp.helpers.scrollTo(element_id, 200, document.getElementsByTagName("header")[0].offsetHeight);
+	// highlight selected session
+    var sessions = document.getElementsByClassName("session"),
+        sessions_length = sessions.length;
+    for (var i = 0; i < sessions_length; i++) {
+        sessions[i].className = "session";
+    }
+    document.getElementById(element_id).className = "session session--highlight";
+}
 
 
 
@@ -318,12 +343,14 @@ window.addEventListener("load", function(){
 	var comments_toggle_buttons = document.getElementsByClassName("session_comments_button");
 	var publish_comments_buttons = document.getElementsByClassName("publish_comment_button");
 	var delete_comments_buttons = document.getElementsByClassName("comment__delete");
+	var session_sidebar_links = document.getElementsByClassName("sessions_sidebar_link");
 
 	var pitch_length = pitch_toggle_buttons.length;
 	var resources_length = resources_toggle_buttons.length;
 	var comments_length = comments_toggle_buttons.length;
 	var publish_comments_length = publish_comments_buttons.length;
 	var delete_comments_length = delete_comments_buttons.length;
+	var session_sidebar_links_length = session_sidebar_links.length;
 
 	for (var i = 0; i < pitch_length; i++) {
 		pitch_toggle_buttons[i].addEventListener("click", function(e){ SpHome.mentors.setPitch(e); });
@@ -337,8 +364,11 @@ window.addEventListener("load", function(){
 	for (var i = 0; i < publish_comments_length; i++) {
 		publish_comments_buttons[i].addEventListener("click", function(e){ SpHome.session.publishComment(e); });
 	}
-	for (var i = 0; i < publish_comments_length; i++) {
+	for (var i = 0; i < delete_comments_length; i++) {
 		delete_comments_buttons[i].addEventListener("click", function(e){ SpHome.session.deleteComment(e); });
+	}
+	for (var i = 0; i < session_sidebar_links_length; i++) {
+		session_sidebar_links[i].addEventListener("click", function(e){ SpHome.session.scrollToSection(e); });
 	}
 
 });

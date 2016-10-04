@@ -43,6 +43,12 @@
 					$pitch_ = 0;
 					$pitch_title = "";
 			
+					$session_date = date("d/m/Y", strtotime($session['date']));
+
+					if ($session_date < date("d/m/Y")) {
+						continue;
+					}
+
 					if ( i_am_attending($session['id'], $lectures_availability) ){
 						$data_action = "remove";
 						$pitch_title = $lectures_availability[$session['id']][1];
@@ -68,7 +74,7 @@
 
 				<div class="list_el">
 			 		<div class="list_el__left">
-			 			<a href="#session<?php echo $session['id']; ?>">
+			 			<a href="#session<?php echo $session['id']; ?>" class="sessions_sidebar_link">
 					 		<p><?php echo $session['title']; ?></p>
 					 		<p><?php echo date("d/m/Y", strtotime($session['date'])); ?></p>
 					 	</a>

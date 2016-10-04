@@ -43,29 +43,30 @@
                                 <span>Lean Startup</span>
                             </h1>
                             <div class="sublogo_links">
-                                <!--
+                                
                                 <span><a href="./login/">Login</a></span>
                                 <span><a href="./register/">Register</a></span>
-                                -->
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         
+            <!--
             <section id="login">
                 <h4>Login</h4>
                 <?php // temporary ?>
-                <?php $form_action = "./login/index.php"; $loginOk = true; ?>
-                <?php include './app/views/login_form.php'; ?>
+                <?php // $form_action = "./login/index.php"; $loginOk = true; ?>
+                <?php //include './app/views/login_form.php'; ?>
             </section>
 
             <section id="register">
                 <h4>Register</h4>
-                <?php $form_action = "./register/index.php"; ?>
-                <?php include './app/views/register_form.php'; ?>            
+                <?php // $form_action = "./register/index.php"; ?>
+                <?php //include './app/views/register_form.php'; ?>            
             </section>
-
+            -->
         </main>
 
         <footer class="landing_footer">

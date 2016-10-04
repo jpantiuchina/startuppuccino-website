@@ -6,7 +6,7 @@ $session-width: 650px;
 $session-background-color: #fff;
 $session-border-separator: none /* 1px dotted #999 */;
 $session-box-shadow: none /* 0px 0px 1px #bbb */;
-$session-margin-top: 30px;
+$session-margin-top: $header-height;
 
 $session-comments-height: 450px;
 $session-comments-image-size: 50px;
@@ -17,12 +17,26 @@ $session-comments-editor-height: 100px;
 
 .session {
 
+	height: auto;
+	overflow: hidden;
 	width: 100%;
 	max-width: $session-width;
-	margin-top: $session-margin-top;
-	background-color: $session-background-color;
 	border-bottom: $session-border-separator;
 	@include box-shadow($session-box-shadow);
+	@include transition($transition-time);
+
+	&--highlight {
+		.head > h3 {color: $logo-brown !important}
+	}
+
+	&__contents {
+		background-color: $session-background-color;
+		margin-top: $session-margin-top;
+	}
+
+}
+
+.session__contents {
 
 	> .head,
 	> .guests,
@@ -34,6 +48,11 @@ $session-comments-editor-height: 100px;
 
 	> .head {
 		padding-top: 1px !important;
+
+		&--current {
+			background-color: $logo-green;
+			> h3, > p {color: #fff !important}
+		}
 
 		> h3 {
 			font-family: $font-title !important;
@@ -277,6 +296,10 @@ $session-comments-editor-height: 100px;
 	width: 100%;
 	background-color: $session-background-color;
 	@include box-shadow($session-box-shadow);
+
+	a {
+		cursor: pointer !important;
+	}
 }
 
 .sidebar_container {

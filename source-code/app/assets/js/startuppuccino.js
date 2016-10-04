@@ -147,7 +147,32 @@ Startuppuccino.prototype.helpers.setAttributes = function(element, attributes) {
         element.setAttribute(key, attributes[key]);
     }
 }
-
+// Smooth scroll
+Startuppuccino.prototype.helpers.scrollTo = function(id, time, extra_offset) {
+    if(typeof time === "undefined" || time == null){
+        time = 400;
+    }
+    if(typeof extra_offset === "undefined" || extra_offset == null){
+        extra_offset = 0;
+    }
+    var target = document.getElementById(id),
+        to = target.offsetTop - extra_offset;
+    this.animateScroll(document.body, "scrollTop", "", window.pageYOffset, to, time, true);
+}
+Startuppuccino.prototype.helpers.animateScroll = function(elem, style, unit, from, to, time, prop) {
+    if( !elem) return;
+    var start = new Date().getTime(),
+        timer = setInterval(function() {
+            var step = Math.min(1,(new Date().getTime()-start)/time);
+            if (prop) {
+                elem[style] = (from+step*(to-from))+unit;
+            } else {
+                elem.style[style] = (from+step*(to-from))+unit;
+            }
+            if( step == 1) clearInterval(timer);
+        },25);
+    elem.style[style] = from+unit;
+}
 
 
 
