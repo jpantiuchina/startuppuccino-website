@@ -306,10 +306,11 @@ $session-comments-editor-height: 100px;
 	> .head {
 		height: 40px;
 		line-height: 40px;
-		background-color: $logo-green;
-		color: $session-background-color;
+		background-color: $session-background-color;
+		color: $logo-brown;
 		padding: 0px 10px;
 		font-family: $font-title;
+		border-bottom: 2px solid #ddd;
 	}
 }
 
@@ -317,19 +318,19 @@ $session-comments-editor-height: 100px;
 	position: relative;
 	padding: 2px 10px;
 
-	> .list_el__left,
-	> .list_el__right {
+	&__left,
+	&__right {
 		position: relative;
 		display: inline-block;
 		vertical-align: middle;
 	}
 
-	> .list_el__left {
+	&__left {
 		width: calc( 99% - 57px );
 		
 		p {
 			margin: 3px 0px;
-			font-size: 14px;
+			font-size: 12px;
 
 			&:last-child {
 				color: #999;
@@ -344,11 +345,12 @@ $session-comments-editor-height: 100px;
 		}
 	}
 
-	> .list_el__right { 
+	&__right { 
 		width: 55px;
 		height: 55px;
 		font-size: 11px;
 	}
+
 }
 
 .button_availability {
@@ -398,10 +400,16 @@ $session-comments-editor-height: 100px;
 		display: inline-block;
 		@include transition($transition-time);
 		background-color: $button-availabiliy-inactive-color;
+		width: 55px;
 
 		> span,
 		> input {
 			vertical-align: middle;
+		}
+
+		> span {
+			display: block;
+			text-align: center;
 		}
 
 		> input {

@@ -76,6 +76,9 @@
 			 		<div class="list_el__left">
 			 			<a href="#session<?php echo $session['id']; ?>" class="sessions_sidebar_link">
 					 		<p><?php echo $session['title']; ?></p>
+					 		<?php if( $pitch_title !== "" ){ ?>
+					 		<p>Title: <?php echo $pitch_title; ?></p>
+					 		<?php } ?>
 					 		<p><?php echo date("d/m/Y", strtotime($session['date'])); ?></p>
 					 	</a>
 					</div>
@@ -99,16 +102,13 @@
 									 data-pitch="<?php echo $pitch_; ?>"></div>
 								<span>PITCH</span><!--
 								--><input type="checkbox" 
-										  style="opacity: 0"
+										  style="display: none"
 										  <?php echo ($pitch_class === "checked") ? 'checked=""' : ''; ?>" />
 							</label>
 						</div>
 						<div class="tiny_loader" style="display:none">
 							<div></div><div></div>
 						</div>
-					</div>
-					<div class="list_el__over">
-						<span><?php echo $pitch_title; ?></span>
 					</div>
 				</div>
 
