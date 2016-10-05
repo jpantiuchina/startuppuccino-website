@@ -12,10 +12,8 @@
 
 	// Check if the parameter is set
 	if( !isset($_POST['s_id']) || empty($_POST['s_id']) ||
-		(isset($_POST['delete']) && 
-		 (!isset($_POST['comment_id']) || empty($_POST['comment_id'])) ) ||
-	    (!isset($_POST['delete']) &&
-	     (!isset($_POST['comment_text']) || empty($_POST['comment_text'])) ) ){
+		(isset($_POST['delete']) && (!isset($_POST['comment_id']) || empty($_POST['comment_id'])) ) ||
+	    (isset($_POST['new']) && (!isset($_POST['comment_text']) || empty($_POST['comment_text'])) ) ){
 		exit("Some parameter is missing.");
 	}
 

@@ -241,7 +241,7 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 	SpHome.layout.showTinyloader(loader);
 
 	data.url = "../app/controllers/course_sessions_comments.php";
-	data.parameters = "s_id=" + session_id + 
+	data.parameters = "new&s_id=" + session_id + 
 	                  "&comment_text=" + text;
 
 	Sp.post(
