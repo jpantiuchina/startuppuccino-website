@@ -180,11 +180,11 @@ Startuppuccino.prototype.layout = {};
 
 // Loading screen
 Startuppuccino.prototype.layout.showLoading = function(){
-    document.getElementById("loading_screen").style = "display:block";
+    document.getElementById("loading_screen").setAttribute("style","display:block");
 }
 
 Startuppuccino.prototype.layout.hideLoading = function(){
-    document.getElementById("loading_screen").style = "display:none";
+    document.getElementById("loading_screen").setAttribute("style","display:none");
 }
 
 // Helpers to easily hide or show sections

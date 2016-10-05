@@ -27,8 +27,8 @@
                 <div class="land__separator"></div>
 
                 <div class="land__anchors">
-                    <span><a href="#why">WHY</a></span>
-                    <span><a href="#what">WHAT</a></span>
+                    <span><a href="#why" onclick="Sp.helpers.scrollTo('why', 200)">WHY</a></span>
+                    <span><a href="#what"onclick="Sp.helpers.scrollTo('what', 200)">WHAT</a></span>
                     <!--<span><a href="#contact">CONTACT</a></span>-->
                 </div>
 
@@ -105,6 +105,8 @@
         	<p>© 2016 Startuppuccino. All rights reserved<!-- — Privacy — Contacts--></p>
 
         </footer> 
+
+        <script src="../app/assets/js/startuppuccino.js"></script>
 
 	</body>
 </html>
