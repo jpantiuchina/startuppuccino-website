@@ -7,7 +7,7 @@
 
 	// Helper function -> return avatar;
 	function avatar(){
-		return empty(trim($_SESSION['avatar'])) ? 'people.png' : $_SESSION['avatar'];
+		return empty(trim($_SESSION['avatar'])) ? 'avatar.svg' : $_SESSION['avatar'];
 	}
 
     // Helper function -> print uri with the correct relative path

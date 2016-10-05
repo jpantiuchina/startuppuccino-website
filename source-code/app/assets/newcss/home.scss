@@ -113,6 +113,7 @@ $session-comments-editor-height: 100px;
 			
 			div {
 				@extend .picture;
+				background-color: $background-color;
 				height: 100%;
 			}
 		}

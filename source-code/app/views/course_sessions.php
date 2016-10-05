@@ -50,6 +50,11 @@
 				<div class="guests" id="guests__<?php echo $session['id']; ?>">
 					<?php if(isset($session['guests'])){ ?>
 					<?php foreach ($session['guests'] as $guest){ ?>
+						<?php 
+							if(!isset($guest['avatar']) || empty($guest['avatar'])){
+								$guest['avatar'] = "avatar.svg";
+							}
+						?>
 						<div class="guest" guest-id="<?php echo $guest['id']; ?>">
 							<a href="../people/?user_id=<?php echo $guest['id']; ?>">
 								<div style="background-image:url('../app/assets/pics/people/<?php echo $guest['avatar']; ?>')"></div>
