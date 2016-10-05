@@ -1,13 +1,17 @@
 <?php 
 
+	define("DATE_FORMAT", "F jS Y");
+
 	// Change the format of the date
 	// return date without time
 	function prettyDate($ugly_date){
-		return date("d/m", strtotime($ugly_date));
+		return date(DATE_FORMAT, strtotime($ugly_date));
 	}
 
 	function is_current($date){
-		if( $date >= date("d/m") && $date < date("d/m", strtotime(date("Y-m-d") . ' + 6 days')) ){
+		$format = "Y-m-d";
+		$date = date($format, strtotime($date));
+		if( $date >= date($format) && $date < date($format, strtotime(date($format) . ' + 6 days')) ){
 			return true;
 		} else {
 			return false;

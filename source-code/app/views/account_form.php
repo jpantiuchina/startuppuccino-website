@@ -154,7 +154,7 @@
 			<li class="form_box_item social" id="<?php echo $social; ?>">
 				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social; ?>.svg" alt="<?php echo $social; ?>" /></label>
 				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="Url" />
-				<label><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
+				<label style="display: none"><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
 			</li>
 
 		<?php } ?>

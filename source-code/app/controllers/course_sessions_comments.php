@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 // Receive http request from client with a new comment to post
 
 // Start session

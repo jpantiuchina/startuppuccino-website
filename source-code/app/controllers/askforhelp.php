@@ -1,4 +1,7 @@
 <?php
+	
+
+	error_reporting(0);
 
 	// Check for get paramaters
 	if(!isset($_GET['e']) || !isset($_GET['i']) || !isset($_GET['m'])){

@@ -60,6 +60,8 @@
 					// ...
 				} else if(substr($social_label, 0, 7) == 'http://' || substr($social_label, 0, 8) == 'https://'){
 					$social_data[0] = "//".$social_data[0];
+				} else {
+					$social_data[0] = "http://".$social_data[0];
 				}
 				
 				?>

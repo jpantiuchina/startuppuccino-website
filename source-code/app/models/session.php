@@ -1,5 +1,8 @@
 <?php
 	
+	// Prevent showing errors
+
+
 	// TODO -> move this to controllers and db queries on credential_functions
 
 
