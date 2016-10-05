@@ -13,7 +13,7 @@ StartuppuccinoHome.prototype.layout.showTinyloader = function(loader){
 }
 StartuppuccinoHome.prototype.layout.hideTinyloader = function(loader){
 
-	loader.setAttribute("style","display:none");	
+	loader.setAttribute("style","display:none");
 
 }
 StartuppuccinoHome.prototype.layout.toogleResources = function(e) {
@@ -21,10 +21,10 @@ StartuppuccinoHome.prototype.layout.toogleResources = function(e) {
 	var button = e.target || e.srcElement;
 	var session_id = button.parentNode.getAttribute("data-session");
 	var resources = button.parentNode.parentNode.childNodes[9];
-		comments = button.parentNode.parentNode.childNodes[11];
-	
+	comments = button.parentNode.parentNode.childNodes[11];
+
 	resources.classList.toggle("r_show");
-	comments.classList.remove("c_show");	
+	comments.classList.remove("c_show");
 
 }
 StartuppuccinoHome.prototype.layout.toogleComments = function(e) {
@@ -32,8 +32,8 @@ StartuppuccinoHome.prototype.layout.toogleComments = function(e) {
 	var button = e.target || e.srcElement;
 	var session_id = button.parentNode.getAttribute("data-session");
 	var resources = button.parentNode.parentNode.childNodes[9];
-		comments = button.parentNode.parentNode.childNodes[11];
-	
+	comments = button.parentNode.parentNode.childNodes[11];
+
 	comments.classList.toggle("c_show");
 	resources.classList.remove("r_show");
 
@@ -50,7 +50,7 @@ StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(se
 		SpHome.layout.renderGuest(session_id);
 
 	} else if (action === "remove"){
-	
+
 		button.parentNode.childNodes[1].setAttribute("onclick","SpHome.mentors.setAvailability("+session_id+",this)");
 		button.parentNode.className = "button_availability action_add";
 		button.parentNode.setAttribute("data-action","add");
@@ -67,7 +67,7 @@ StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(se
 	}
 }
 StartuppuccinoHome.prototype.layout.renderGuest = function(session_id, remove_mentor) {
-	
+
 	var id = "guests__" + session_id;
 
 	if(typeof remove_mentor !== "undefined" || remove_mentor === true){
@@ -86,7 +86,7 @@ StartuppuccinoHome.prototype.layout.renderGuest = function(session_id, remove_me
 		var guest = document.createElement("div");
 		var link = document.createElement("a");
 		var img = document.createElement("div");
-		
+
 		guest.className = "guest";
 		guest.setAttribute("guest-id",STARTUPPUCCINO_USER.id);
 		link.setAttribute("href","../people/?user_id="+STARTUPPUCCINO_USER.id);
@@ -148,8 +148,8 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 		pitch = button.getAttribute("data-pitch"),
 		pitch_title = "",
 		action = button.parentNode
-				       .parentNode
-				       .parentNode.childNodes[1].getAttribute("data-action");
+			.parentNode
+			.parentNode.childNodes[1].getAttribute("data-action");
 
 	var data = {};
 
@@ -158,7 +158,7 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 
 	if( pitch === "3" ){
 		if( !confirm("Are you sure you want to withdraw your pitch proposal?") ){
-			SpHome.layout.hideTinyloader(loader);			
+			SpHome.layout.hideTinyloader(loader);
 			return;
 		}
 	}
@@ -194,10 +194,10 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 	}
 
 	data.url = "../app/controllers/mentors_availability.php";
-	data.parameters = "s_id=" + session_id + 
-	                  "&action=" + action + 
-	                  "&pitch=" + pitch +
-	                  "&pitch_title=" + pitch_title;
+	data.parameters = "s_id=" + session_id +
+		"&action=" + action +
+		"&pitch=" + pitch +
+		"&pitch_title=" + pitch_title;
 
 	Sp.post(
 		data,
@@ -205,10 +205,10 @@ StartuppuccinoHome.prototype.mentors.setPitch = function(e){
 			if(response == "ok") {
 				if(action == "add"){
 					var availbility_button = button.parentNode
-					                               .parentNode
-					                               .parentNode
-					                               .childNodes[1]
-					                               .childNodes[3];
+						.parentNode
+						.parentNode
+						.childNodes[1]
+						.childNodes[3];
 					SpHome.layout.toggleMentorAvailabilityButton(session_id, availbility_button);
 				}
 				SpHome.layout.setPitchButton(button, pitch);
@@ -241,8 +241,9 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 	SpHome.layout.showTinyloader(loader);
 
 	data.url = "../app/controllers/course_sessions_comments.php";
-	data.parameters = "new&s_id=" + session_id + 
-	                  "&comment_text=" + text;
+	data.parameters = "s_id=" + session_id +
+		"&comment_text=" + text +
+		"&new=new";
 
 	Sp.post(
 		data,
@@ -278,8 +279,9 @@ StartuppuccinoHome.prototype.session.deleteComment = function(e){
 	Sp.layout.showLoading();
 
 	data.url = "../app/controllers/course_sessions_comments.php";
-	data.parameters = "delete&s_id=" + session_id + 
-	                  "&comment_id=" + comment_id;
+	data.parameters = "s_id=" + session_id +
+		"&comment_id=" + comment_id +
+		"&delete=delete";
 
 	Sp.post(
 		data,
@@ -305,38 +307,38 @@ StartuppuccinoHome.prototype.session.scrollToSection = function(e){
 	var element = e.target || e.srcElement,
 		element_id,
 		element_id_ = element.getAttribute("href");
-	
+
 	// Patch if clicked on <a> contents
 	if(element_id_ == null){
 		element = element.parentNode;
 		element_id_ = element.getAttribute("href");
 	}
-	
+
 	element_id = element_id_.substr(1);
 
 	Sp.helpers.scrollTo(element_id, 200, document.getElementsByTagName("header")[0].offsetHeight);
 	// highlight selected session
-    var sessions = document.getElementsByClassName("session"),
-        sessions_length = sessions.length;
-    for (var i = 0; i < sessions_length; i++) {
-        sessions[i].className = "session";
-    }
-    document.getElementById(element_id).className = "session session--highlight";
+	var sessions = document.getElementsByClassName("session"),
+		sessions_length = sessions.length;
+	for (var i = 0; i < sessions_length; i++) {
+		sessions[i].className = "session";
+	}
+	document.getElementById(element_id).className = "session session--highlight";
 }
 
 
 
 /* Initialize Startuppuccino Home */
 
-if(typeof SpHome === "undefined" || SpHome === null){ 
+if(typeof SpHome === "undefined" || SpHome === null){
 
-    var SpHome = new StartuppuccinoHome();
+	var SpHome = new StartuppuccinoHome();
 
 }
 
 /* Add event listeners */
 
-window.addEventListener("load", function(){  
+window.addEventListener("load", function(){
 
 	var pitch_toggle_buttons = document.getElementsByClassName("button_toggle_pitch");
 	var resources_toggle_buttons = document.getElementsByClassName("session_resources_button");
