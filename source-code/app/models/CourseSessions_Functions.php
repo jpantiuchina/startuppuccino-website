@@ -240,7 +240,8 @@ class CourseSessions_Functions {
                       FROM "._T_SESSION_COMMENT." AS c
                       JOIN "._T_ACCOUNT." AS a
                       ON c.author_id = a.id
-                      WHERE c.session_id = ".$sessions_array[$i]['id'].";";
+                      WHERE c.session_id = ".$sessions_array[$i]['id']."
+                      ORDER BY c.id DESC;";
                       
             $result = $this->conn->query($query);
 

@@ -168,6 +168,7 @@ $session-comments-editor-height: 100px;
 	&.c_show {
 		padding: 20px;
 		max-height: $session-comments-height;
+		padding-top: 100px;
 	}
 
 	&__wrapper {
@@ -176,13 +177,12 @@ $session-comments-editor-height: 100px;
 		padding-bottom: 20px;
 		overflow-y: scroll;
 		@extend .pretty_scrollbar;
-		margin-bottom: $session-comments-editor-height;
 	}
 
 	&__editor {
 		position: absolute;
 		left: 0px;
-		bottom: 0px;
+		top: 0px;
 		width: 100%;
 		height: $session-comments-editor-height;
 		padding-top: 15px !important;
@@ -276,7 +276,7 @@ $session-comments-editor-height: 100px;
 	&__text {
 		width: $session-comments-text-width;
 		padding-left: $session-comments-text-lateral-padding;
-		padding-right: $session-comments-text-lateral-padding;
+		padding-right: 40px;
 	}
 
 	&__footer {
@@ -284,9 +284,12 @@ $session-comments-editor-height: 100px;
 	}
 
 	&__delete {
+		position: relative;
+		top: -30px;
 		color: $logo-red;
 		text-decoration: underline;
-		padding: 2px 15px;
+		padding: 2px;
+		font-size: 13px;
 		cursor: pointer;
 		@include transition($transition-time);
 

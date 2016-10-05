@@ -833,17 +833,17 @@ textarea {
   position: relative; }
   .comments.c_show {
     padding: 20px;
-    max-height: 450px; }
+    max-height: 450px;
+    padding-top: 100px; }
   .comments__wrapper {
     height: auto;
     max-height: 335px;
     padding-bottom: 20px;
-    overflow-y: scroll;
-    margin-bottom: 100px; }
+    overflow-y: scroll; }
   .comments__editor {
     position: absolute;
     left: 0px;
-    bottom: 0px;
+    top: 0px;
     width: 100%;
     height: 100px;
     padding-top: 15px !important;
@@ -911,13 +911,16 @@ textarea {
   .comment__text {
     width: calc(100% - 50px);
     padding-left: 15px;
-    padding-right: 15px; }
+    padding-right: 40px; }
   .comment__footer {
     text-align: right; }
   .comment__delete {
+    position: relative;
+    top: -30px;
     color: #be3b43;
     text-decoration: underline;
-    padding: 2px 15px;
+    padding: 2px;
+    font-size: 13px;
     cursor: pointer;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out; }
