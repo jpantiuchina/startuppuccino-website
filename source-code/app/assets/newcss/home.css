@@ -702,6 +702,9 @@ textarea {
   outline: 1px solid #444;
   cursor: pointer; }
 
+.sessions__wrapper {
+  padding-bottom: 50px; }
+
 .session {
   height: auto;
   overflow: hidden;
@@ -732,11 +735,13 @@ textarea {
       color: #fff !important; }
   .session__contents > .head > h3 {
     font-family: "Maison", "Roboto", "Arial", san-serif !important;
-    color: #fcc124; }
+    color: #fcc124;
+    margin: 20px 0px; }
   .session__contents > .head > p {
     font-size: 14px;
     color: #777;
-    margin: 0px; }
+    margin: 0px;
+    padding-bottom: 20px; }
 .session__contents > .description pre {
   font-family: "Roboto", "Arial", sans-serif;
   font-size: 15px; }

@@ -16,7 +16,7 @@
 
 ?>
 
-<section>
+<section class="sessions__wrapper">
 
 	<?php foreach ($sessions_set as $session) { ?>
 
