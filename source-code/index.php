@@ -73,5 +73,7 @@
             Powered by <a href="./about/">Startuppuccino</a>
         </footer>
 
+        <script src="./app/assets/js/startuppuccino.js"></script>
+
 	</body>
 </html>

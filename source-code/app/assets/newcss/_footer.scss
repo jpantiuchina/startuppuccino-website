@@ -28,6 +28,7 @@ footer,
 	&__link,
 	span {
 		display: inline-block;
+	    min-width: 120px;
 		color: $logo-brown;
 	}
 

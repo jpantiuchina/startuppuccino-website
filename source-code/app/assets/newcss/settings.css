@@ -135,13 +135,79 @@ header {
       header .menu_link--sub > a:hover {
         color: #fcc124; }
 
+.mobile_menu__button {
+  display: none; }
+
 @media all and (max-width: 700px) {
   header {
     padding: 0px 15px; }
     header > .header_separator {
       width: calc(100% - 30px); }
     header > .logo img {
-      left: 1px; } }
+      left: 1px; }
+
+  .menu_list {
+    position: fixed;
+    top: 45px;
+    left: 0px;
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: #f7f7dd;
+    text-align: center;
+    -webkit-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out; }
+    .menu_list--hide {
+      -webkit-transform: translateX(200%);
+      transform: translateX(200%); }
+    .menu_list > li {
+      height: 50px !important;
+      width: 100% !important; }
+      .menu_list > li > a {
+        display: block; }
+
+  .mobile_menu__button {
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    position: relative;
+    top: 4.5px;
+    border: 2px solid #513a2b;
+    cursor: pointer; }
+    .mobile_menu__button--close {
+      text-align: center; }
+      .mobile_menu__button--close:before {
+        content: "x";
+        line-height: 33px;
+        font-size: 17px; }
+      .mobile_menu__button--close > div {
+        display: none; }
+    .mobile_menu__button > div {
+      height: 2px;
+      width: 64%;
+      margin: 7.2px auto;
+      background-color: #513a2b; }
+      .mobile_menu__button > div:first-child, .mobile_menu__button > div:last-child {
+        width: 45%; }
+
+  .submenu {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important; }
+    .submenu > .menu_link--sub {
+      text-align: center !important;
+      border: none !important; }
+      .submenu > .menu_link--sub > a {
+        display: block; }
+
+  .menu_profile_picture {
+    display: none; } }
 @media all and (max-width: 500px) {
   /* change search button into icon */
   header {
@@ -166,9 +232,9 @@ header {
       height: 50px;
       width: 100%;
       line-height: 50px; }
-    header .search_trigger_button {
+    header .search_trigger_button--------- {
       font-size: 0px; }
-      header .search_trigger_button:before {
+      header .search_trigger_button---------:before {
         display: block;
         /* @extend .menu_bubble_item;
            @extend .picture; */
@@ -218,6 +284,7 @@ footer,
   .footer__link,
   .footer span {
     display: inline-block;
+    min-width: 120px;
     color: #513a2b; }
 
 /* Small on spot loader */
@@ -358,7 +425,7 @@ footer,
   .search__header > input[type=text] {
     margin: 15px 20px;
     margin-right: 10px;
-    min-width: 280px;
+    min-width: 250px;
     width: calc(100% - 90px);
     height: 90px;
     line-height: 90px;
@@ -795,6 +862,9 @@ textarea {
   .message_alert_container a {
     color: #fff; }
 
+input[type=file] {
+  max-width: 275px; }
+
 .form_custom {
   margin-bottom: 0px !important;
   border-bottom: 2px solid #ddd;
@@ -812,6 +882,14 @@ textarea {
   height: auto;
   overflow: hidden;
   max-width: 640px; }
+  .settings__toprofile > span, .settings__menu > span {
+    display: inline-block;
+    padding: 1px;
+    position: relative;
+    height: 35px;
+    margin: 5px 0px; }
+    .settings__toprofile > span > a, .settings__menu > span > a {
+      height: 100%; }
 .settings__toprofile > span > a {
   background-color: #be3b43; }
 

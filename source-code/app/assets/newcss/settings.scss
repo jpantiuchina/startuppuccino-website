@@ -19,6 +19,11 @@ textarea {
 	}
 }
 
+input[type=file]{
+    max-width: 275px;
+}
+
+
 .form_custom {
 
 	//background-color: #fff !important;
@@ -46,8 +51,17 @@ textarea {
 		overflow: hidden;
 		max-width: 640px;
 		
-		> span > a {
-		   	@extend .st_button;
+		> span {
+			display: inline-block;
+			padding: 1px;
+			position: relative;
+			height: 35px;
+			margin: 5px 0px;
+
+			> a {
+		   		@extend .st_button;
+		   		height: 100%;
+			}
 		}
 	}
 

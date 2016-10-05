@@ -57,14 +57,13 @@
 
     <nav class="menu">
 
-    	<div id="mobile_menu__button" class="mobile_menu__button">
+    	<div id="mobile_menu__button" class="mobile_menu__button" onclick="Sp.layout.toggleMobileMenu()">
     		<div></div>
-    		<div></div>
-    		<div></div>
-    		<div></div>
+            <div></div>
+            <div></div>
     	</div>
 
-    	<ul>
+    	<ul class="menu_list menu_list--hide" id="menu_list" data-mobile="0">
 
 		<?php if ($userLogged){ ?>
 

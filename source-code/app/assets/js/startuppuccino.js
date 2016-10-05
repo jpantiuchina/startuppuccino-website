@@ -197,13 +197,21 @@ Startuppuccino.prototype.layout.hideSection = function(target){
     elem.classList.add("hidden_element");
 }
 
-Startuppuccino.prototype.layout.toggleMobileMenu = function(target){
-    /*target.classList.toggle("mobile_menu__button--active");
-    document.getElementById("main_menu").classList.toggle("main_menu--visible");
-    document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
-    document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");*/
+Startuppuccino.prototype.layout.toggleMobileMenu = function(){
+    
+    var menu_list = document.getElementById("menu_list"),
+        is_visible = menu_list.getAttribute("data-mobile"),
+        menu_button = document.getElementById("mobile_menu__button");
 
-    // ...
+    if(is_visible === "0"){
+        menu_list.className = "menu_list";
+        menu_list.setAttribute("data-mobile","1");
+        menu_button.className = "mobile_menu__button mobile_menu__button--close";
+    } else {
+        menu_list.className = "menu_list menu_list--hide";
+        menu_list.setAttribute("data-mobile","0");
+        menu_button.className = "mobile_menu__button";
+    }
 
 }
 
@@ -303,7 +311,7 @@ window.addEventListener("load", function(){
 
     });
     
-    mobile_menu_button.addEventListener("click", function(e){ Sp.layout.toggleMobileMenu(e); });    
+    //mobile_menu_button.addEventListener("click", function(e){ Sp.layout.toggleMobileMenu(e); });    
     
     //askforhelp_trigger_button.addEventListener("click", function(){ showAskForHelp(); });
 
