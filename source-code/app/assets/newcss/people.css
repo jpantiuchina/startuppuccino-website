@@ -431,7 +431,8 @@ footer,
     height: 100%;
     background-size: cover;
     background-position: center;
-    overflow: hidden; }
+    overflow: hidden;
+    background-color: #f7f7dd; }
 
 .search_result__labels {
   font-size: 22px;

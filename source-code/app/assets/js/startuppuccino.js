@@ -252,7 +252,7 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
         var n = node.cloneNode(true);
 
         if(x.avatar.trim() == "people/"){
-            x.avatar = "people/people.png";
+            x.avatar = "people/avatar.svg";
         }
 
         n.children[0].href = "../" + x.id;
