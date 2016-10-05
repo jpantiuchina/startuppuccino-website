@@ -655,7 +655,7 @@ textarea {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input {
+.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input, .settings__menu > span > a {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -676,7 +676,7 @@ textarea {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover, .settings__menu > span > a:hover {
     -webkit-filter: brightness(0.5);
     -moz-filter: brightness(0.5);
     -ms-filter: brightness(0.5);
@@ -761,6 +761,9 @@ textarea {
   width: 100% !important;
   max-width: 100%; }
 
+.settings__wrapper {
+  background-color: #fbfbfb; }
+
 .message_alert_container {
   background-color: #333;
   color: #fff; }
@@ -768,9 +771,21 @@ textarea {
     color: #fff; }
 
 .form_custom {
-  background-color: #fff !important; }
+  margin-bottom: 0px !important;
+  border-bottom: 2px solid #ddd;
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important; }
   .form_custom h4 {
     color: #fcc124;
     font-family: "Maison", "Roboto", "Arial", san-serif !important; }
+
+.settings__menu {
+  position: relative;
+  padding: 25px 0px;
+  height: auto;
+  overflow: hidden;
+  max-width: 640px; }
 
 /*# sourceMappingURL=settings.css.map */

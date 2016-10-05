@@ -305,7 +305,7 @@ window.addEventListener("load", function(){
     
     mobile_menu_button.addEventListener("click", function(e){ Sp.layout.toggleMobileMenu(e); });    
     
-    askforhelp_trigger_button.addEventListener("click", function(){ showAskForHelp(); });
+    //askforhelp_trigger_button.addEventListener("click", function(){ showAskForHelp(); });
 
     /* Download and store search data */
     Sp.downloadSearchResult();

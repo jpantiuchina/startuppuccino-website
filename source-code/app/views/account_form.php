@@ -1,13 +1,20 @@
 
 <?php if($account){ ?>
 
+	<div class="settings__menu">
+		<span><a href="#personal_info" onclick="Sp.helpers.scrollTo('personal_info', 200)">Personal Info</a></span>
+		<span><a href="#password_settings" onclick="Sp.helpers.scrollTo('password_settings', 200)">Password</a></span>
+		<span><a href="#picture_settings" onclick="Sp.helpers.scrollTo('picture_settings', 200)">Profile Picture</a></span>
+		<span><a href="#social_links" onclick="Sp.helpers.scrollTo('social_links', 200)">Social Links</a></span>
+	</div>
+
 	<?php if( !empty($general_alert) ){ ?>
 		<div class="message_alert_container">
 			<h4><?php echo $general_alert; ?></h4>
 		</div>
 	<?php } ?>
 
-	<form action="" method="post" class="form_custom" >
+	<form action="" method="post" class="form_custom" id="personal_info">
 
 		<li class="form_box_item form_box_item--full">
 			<h4>Personal Information</h4>
@@ -65,7 +72,7 @@
 
 
 
-	<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
+	<form action="" method="post" class="form_custom" onsubmit="return checkForm();" id="password_settings">
 
 		<li class="form_box_item form_box_item--full">
 			<h4>Change Password</h4>
@@ -91,7 +98,7 @@
 
 
 
-	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box">
+	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box" id="picture_settings">
         
 		<li class="form_box_item form_box_item--full">
         	<h4>Profile Picture</h4>
@@ -112,10 +119,16 @@
 
 
 
-    <form class="form_custom">
+    <form class="form_custom" id="social_links">
 
     	<script>
-    		var CURRENT_SOCIALS = <?php echo trim($account["socials"]); ?>;
+    		<?php 
+    			$account_socials = trim($account["socials"]);
+    			if($account_socials == ""){
+    				$account_socials = "{}";
+    			}
+    		?>    		
+    		var CURRENT_SOCIALS = <?php echo $account_socials;?>;
     	</script>
 	
 		<li class="form_box_item form_box_item--full">
