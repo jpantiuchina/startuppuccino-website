@@ -15,6 +15,13 @@
         echo RELATIVE_PATH . $link;
     }
 
+/*
+    $homeurl = "/";
+    if(isset($landing_page_) && $landing_page_ === true){
+        $homeurl = "/about/";
+    }
+*/
+
 ?>
 
 <?php if ($userLogged){ ?>
@@ -79,6 +86,10 @@
             </li>
 			-->
 
+            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'home') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/"); ?>">Home</a>
+            </li>
+
         	<li class="menu_link--top">
                 <a href="#" class="search_trigger_button">Search</a>
             </li>
@@ -88,14 +99,18 @@
         			<div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
         		</div> 
         		<ul class="submenu">
-                    <li class="menu_link--sub"><a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">Profile</a></li>
+                    <!--<li class="menu_link--sub"><a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">Profile</a></li>-->
                     <li class="menu_link--sub"><a href="<?php printUri("/settings/");?>">Settings</a></li>
-					<li class="menu_link--sub"><a href="<?php printUri("/logout/");?>">Logout</a></li>
-                    <li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>
+				    <li class="menu_link--sub"><a href="<?php printUri("/logout/");?>">Logout</a></li>
+                    <!--<li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>-->
 				</ul>
         	</li>
 
 		<?php } else { ?>
+
+            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'about') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/about/");?>">About</a>
+            </li>
 
 			<!-- change this into a login form (external ajax login form script -> include) -->
 			<li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'login') echo 'menu_link--active'  ?>">

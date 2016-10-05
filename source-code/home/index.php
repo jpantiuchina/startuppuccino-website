@@ -8,6 +8,8 @@
 		exit;
 	}
 
+	$currentPage = "home";
+
 ?>
 
 <!DOCTYPE html>

@@ -191,7 +191,7 @@ header {
   header .menu_link--top:hover {
     border-color: #513a2b; }
   header .submenu_trigger:hover > .submenu {
-    height: 160px; } }
+    height: 80px; } }
 footer {
   padding: 10px 40px; }
 
@@ -592,6 +592,9 @@ input[type=submit],
 input[type=button],
 input[type=file] {
   cursor: pointer; }
+
+textarea {
+  font-family: "Roboto", "Arial", sans-serif; }
 
 /* General picture */
 .picture, header .menu_profile_picture, .idea > .picture_box > div {

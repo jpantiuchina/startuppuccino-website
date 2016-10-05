@@ -1,4 +1,9 @@
-<?php require_once '../app/models/session.php'; ?> 
+<?php 
+
+    require_once '../app/models/session.php';
+    $currentPage = "about";
+
+?> 
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +29,7 @@
                 <div class="land__anchors">
                     <span><a href="#why">WHY</a></span>
                     <span><a href="#what">WHAT</a></span>
-                    <span><a href="#contact">CONTACT</a></span>
+                    <!--<span><a href="#contact">CONTACT</a></span>-->
                 </div>
 
 
@@ -33,14 +38,14 @@
             <section class="goals" id="why">
                 
                 <div class="goals__box">
-                    <h4>Educators & Mentors</h4>
                     <img src="" />
+                    <h4>Educators & Mentors</h4>
                     <p>Better visibility and tracking to startup projects</p>
                 </div><!--
 
                 --><div class="goals__box">
-                    <h4>Students</h4>
                     <img src="" />
+                    <h4>Students</h4>
                     <p>Active and interactive learning experience</p>
                 </div>
 
@@ -56,17 +61,18 @@
                         <span class="c_brown">of entrepreneurship</span><br>
                     </p>
                 </div>
-
+                <!--
                 <div class="description__longtext">
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
                 </div>
+                -->
 
             </section>
 
 
             <section class="courses">
 
-                <h4>Courses that are using startuppuccino</h4>
+                <h4>Courses using startuppuccino</h4>
 
                 <div class="courses__box">
                     <a href="../">
@@ -78,13 +84,13 @@
             </section>
 
             <section class="contacts" id="contact">
-
+<!--
                 <h4>Let's keep in contact!</h4>
 
                 <form>
                     <input type="email" placeholder="Yourfunny@email.com" required><span>SUBMIT</span>
                 </form>
-
+-->
             </section>
 
         </main>

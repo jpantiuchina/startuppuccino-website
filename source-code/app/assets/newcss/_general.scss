@@ -86,6 +86,10 @@ input[type=file] {
 	cursor: pointer;
 }
 
+textarea {
+  font-family: $font-stack;
+}
+
 /* General picture */
 .picture {
 	position: relative;
