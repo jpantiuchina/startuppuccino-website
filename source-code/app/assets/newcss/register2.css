@@ -192,8 +192,34 @@ header {
     border-color: #513a2b; }
   header .submenu_trigger:hover > .submenu {
     height: 80px; } }
-footer {
-  padding: 10px 40px; }
+footer,
+.footer {
+  padding: 5px 40px;
+  height: auto;
+  overflow: hidden; }
+  footer__separator,
+  .footer__separator {
+    height: 1px;
+    background-color: #d7d7cc; }
+  footer__links,
+  .footer__links {
+    text-align: justify;
+    margin: 0px;
+    height: auto;
+    overflow: hidden;
+    line-height: 30px; }
+    footer__links:after,
+    .footer__links:after {
+      content: "";
+      line-height: 0px;
+      width: 100%;
+      display: inline-block; }
+  footer__link,
+  footer span,
+  .footer__link,
+  .footer span {
+    display: inline-block;
+    color: #513a2b; }
 
 /* Small on spot loader */
 .tiny_loader {
@@ -578,7 +604,8 @@ body {
 
 main {
   position: relative;
-  padding: 0px 40px; }
+  padding: 0px 40px;
+  min-height: calc(100% - 40px); }
 
 @media all and (max-width: 700px) {
   main {

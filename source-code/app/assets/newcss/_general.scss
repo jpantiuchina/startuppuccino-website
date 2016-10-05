@@ -67,6 +67,7 @@ body {
 main {
 	position: relative;
 	padding: 0px $page-lateral-padding;
+  min-height: calc(100% - 40px);
 }
 
 @media all and (max-width: 700px){
