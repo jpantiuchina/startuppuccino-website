@@ -557,7 +557,8 @@ pre {
   white-space: -o-pre-wrap;
   /* Opera 7 */
   word-wrap: break-word;
-  /* Internet Explorer 5.5+ */ }
+  /* Internet Explorer 5.5+ */
+  font-family: "Roboto", "Arial", sans-serif; }
 
 html {
   -webkit-box-sizing: border-box;
@@ -655,7 +656,7 @@ textarea {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input, .settings__menu > span > a {
+.st_button, .askforhelp_form > input[type=submit], .form_pretty_button_input, .settings__toprofile > span > a, .settings__menu > span > a {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -676,7 +677,7 @@ textarea {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover, .settings__menu > span > a:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .form_pretty_button_input:hover, .settings__toprofile > span > a:hover, .settings__menu > span > a:hover {
     -webkit-filter: brightness(0.5);
     -moz-filter: brightness(0.5);
     -ms-filter: brightness(0.5);
@@ -761,9 +762,6 @@ textarea {
   width: 100% !important;
   max-width: 100%; }
 
-.settings__wrapper {
-  background-color: #fbfbfb; }
-
 .message_alert_container {
   background-color: #333;
   color: #fff; }
@@ -781,11 +779,13 @@ textarea {
     color: #fcc124;
     font-family: "Maison", "Roboto", "Arial", san-serif !important; }
 
-.settings__menu {
+.settings__toprofile, .settings__menu {
   position: relative;
   padding: 25px 0px;
   height: auto;
   overflow: hidden;
   max-width: 640px; }
+.settings__toprofile > span > a {
+  background-color: #be3b43; }
 
 /*# sourceMappingURL=settings.css.map */

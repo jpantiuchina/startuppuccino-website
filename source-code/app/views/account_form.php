@@ -1,5 +1,9 @@
 
 <?php if($account){ ?>
+	
+	<div class="settings__toprofile">
+		<span><a href="../people/?user_id=<?php echo $_SESSION['id']; ?>">Watch your public profile</a></span>
+	</div>
 
 	<div class="settings__menu">
 		<span><a href="#personal_info" onclick="Sp.helpers.scrollTo('personal_info', 200)">Personal Info</a></span>
@@ -64,7 +68,7 @@
 		<br>
 
 		<li class="form_box_item">
-			<input class="form_pretty_button_input" type="submit" name="update_account_info" value="SAVE" />
+			<input class="form_pretty_button_input" type="submit" name="update_account_info" value="Save" />
 		</li>						
 	</form>
 
@@ -89,7 +93,7 @@
 		</li>
 
 		<li class="form_box_item">
-			<input class="form_pretty_button_input" type="submit" name="update_password" value="SAVE" />
+			<input class="form_pretty_button_input" type="submit" name="update_password" value="Save" />
 		</li>
 
 	</form>
@@ -158,7 +162,7 @@
 		<br>
 
 		<li class="form_box_item">
-			<input class="form_pretty_button_input" type="button" onclick="saveSocialInputs()" value="SAVE" />
+			<input class="form_pretty_button_input" type="button" onclick="saveSocialInputs()" value="Save" />
 		</li>
 
 	</form>

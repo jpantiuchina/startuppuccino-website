@@ -558,7 +558,8 @@ pre {
   white-space: -o-pre-wrap;
   /* Opera 7 */
   word-wrap: break-word;
-  /* Internet Explorer 5.5+ */ }
+  /* Internet Explorer 5.5+ */
+  font-family: "Roboto", "Arial", sans-serif; }
 
 html {
   -webkit-box-sizing: border-box;
@@ -656,7 +657,7 @@ textarea {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit] {
+.st_button, .askforhelp_form > input[type=submit], .p_tosettings > span > a {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -677,7 +678,7 @@ textarea {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .p_tosettings > span > a:hover {
     -webkit-filter: brightness(0.5);
     -moz-filter: brightness(0.5);
     -ms-filter: brightness(0.5);
@@ -702,14 +703,20 @@ textarea {
   outline: 1px solid #444;
   cursor: pointer; }
 
-.p_wrapper > section {
-  position: relative;
-  margin-top: 30px;
-  background-color: #fff;
-  padding: 15px;
-  max-width: 650px;
-  height: auto;
-  overflow: hidden; }
+.p_tosettings {
+  padding-top: 50px; }
+  .p_tosettings > span > a {
+    background-color: #be3b43; }
+
+.p_wrapper {
+  padding: 50px 0px; }
+  .p_wrapper > section {
+    position: relative;
+    background-color: #fff;
+    padding: 15px;
+    max-width: 650px;
+    height: auto;
+    overflow: hidden; }
 
 .p_infobox {
   padding: 0px !important;
@@ -720,8 +727,6 @@ textarea {
   .p_infobox > .head {
     height: auto;
     overflow: hidden; }
-  .p_infobox > .foot {
-    background-color: #f9f9f9; }
 
 .p_info,
 .p_picturebox {
@@ -747,11 +752,12 @@ textarea {
 
 .p_name {
   font-size: 150%;
-  font-family: "Maison", "Roboto", "Arial", san-serif; }
+  font-family: "Maison", "Roboto", "Arial", san-serif;
+  margin: 10px 0px; }
 
 .p_skills > span {
   display: inline-block;
-  background-color: #fff;
+  background-color: #f2f2f2;
   color: #513a2b;
   padding: 5px;
   margin: 0px 3px; }

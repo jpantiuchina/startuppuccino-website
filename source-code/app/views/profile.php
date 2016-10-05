@@ -1,3 +1,11 @@
+<?php if($people_func->isMyProfile()) { ?>
+
+<div class="p_tosettings">
+	<span><a href='../settings/'>Edit Profile</a></span>
+</div>
+
+<?php } ?>
+
 <div class="p_wrapper">
 
 	<section class="p_infobox">
@@ -61,16 +69,5 @@
 
 		?>
 	</section>
-    					
-    <?php
-
-    	/*
-		// Check if we are looking at our profile
-	    if($people_func->isMyProfile()) {
-	    	echo "<div class='button button--big'><a href='../account/'>Edit Profile</a></div>";
-	    }
-		*/
-
-	?>
 
 </div> <!-- end profile wrapper -->

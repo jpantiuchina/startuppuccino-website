@@ -8,10 +8,6 @@ textarea {
 	max-width: 100%;
 }
 
-.settings__wrapper {
-	background-color: #fbfbfb;
-}
-
 .message_alert_container {
 	@extend form.form_custom;
 
@@ -40,15 +36,22 @@ textarea {
 
 }
 
-.settings__menu {
-	position: relative;
-	padding: ($header-height/2) 0px;
-	height: auto;
-	overflow: hidden;
-	max-width: 640px;
+.settings {
 
-    > span > a {
-    	@extend .st_button;
-    }
+	&__toprofile,
+	&__menu {
+		position: relative;
+		padding: ($header-height/2) 0px;
+		height: auto;
+		overflow: hidden;
+		max-width: 640px;
+		
+		> span > a {
+		   	@extend .st_button;
+		}
+	}
 
+	&__toprofile > span > a {
+		background-color: $logo-red;
+	}
 }

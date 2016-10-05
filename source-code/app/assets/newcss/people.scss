@@ -5,21 +5,33 @@
 $p-picture-size: 220px;
 
 
+.p_tosettings {
+	padding-top: $header-height;
 
+	> span > a {
+		@extend .st_button;
+		background-color: $logo-red;
+	}
+}
 
-.p_wrapper > section {
-	position: relative;
-	margin-top: 30px;
-	background-color: #fff;
-	padding: 15px;
-	max-width: 650px;
-	height: auto;
-	overflow: hidden;
+.p_wrapper {
+	padding: $header-height 0px;
+
+	> section {
+		position: relative;
+		background-color: #fff;
+		padding: 15px;
+		max-width: 650px;
+		height: auto;
+		overflow: hidden;
+	}
+
 }
 
 .p_infobox {
 	padding: 0px !important;
 	color: $logo-brown;
+	//border-bottom: 2px solid #ddd;
 	
 	>.head,
 	>.foot {
@@ -32,7 +44,7 @@ $p-picture-size: 220px;
 	}
 
 	>.foot {
-		background-color: #f9f9f9
+		//background-color: #f9f9f9
 	}
 
 }
@@ -64,11 +76,12 @@ $p-picture-size: 220px;
 .p_name {
 	font-size: 150%;
 	font-family: $font-title;
+	margin: 10px 0px;
 }
 
 .p_skills > span {
 	display: inline-block;
-	background-color: #fff;
+	background-color: #f2f2f2;
 	color: $logo-brown;
 	padding: 5px;
 	margin: 0px 3px;
