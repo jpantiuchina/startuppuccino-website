@@ -14,6 +14,6 @@
 	includeUri('/app/vendor/hotjar_tracking_code.php'); 
 
 	// GOOGLE ANALYTICS
-	
+	includeUri('/app/vendor/google_analytics_tracking_code.php'); 
 
 ?>
