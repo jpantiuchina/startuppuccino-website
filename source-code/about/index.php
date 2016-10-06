@@ -13,6 +13,8 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Startuppuccino | Active learning education</title>
 
+        <?php include '../app/views/extra_head_html.php'; ?>
+
 	</head>
 	<body>
 

@@ -17,6 +17,10 @@
 		<title>Startuppuccino - Login</title>
 		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/login.css">
 
+		
+        <?php include '../app/views/extra_head_html.php'; ?>
+
+
 	</head>
 	<body>
 

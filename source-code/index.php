@@ -27,6 +27,10 @@
         <link rel="stylesheet" href="./app/assets/newcss/login.css" media="all" />
         <link rel="stylesheet" href="./app/assets/newcss/register.css" media="all" />
         
+
+        <?php include './app/views/extra_head_html.php'; ?>
+
+
     </head>
     <body>
         

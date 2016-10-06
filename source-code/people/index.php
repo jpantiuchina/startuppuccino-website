@@ -23,6 +23,10 @@
 		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/people.css">
 		<title>People - Startuppuccino</title>
 
+		
+        <?php include '../app/views/extra_head_html.php'; ?>
+
+
 	</head>
 	<body>
 

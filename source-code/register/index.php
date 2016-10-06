@@ -18,6 +18,10 @@
 		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/register.css">
 		<title>Startuppuccino - Register</title>
 	
+		
+        <?php include '../app/views/extra_head_html.php'; ?>
+
+	
 	</head>
 	<body>
 

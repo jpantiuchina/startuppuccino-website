@@ -28,6 +28,10 @@
 			};
 	</script>
 
+
+    <?php include '../app/views/extra_head_html.php'; ?>
+
+
 </head>
 <body>
 
