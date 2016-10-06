@@ -1,11 +1,17 @@
 
 <?php
 
-	$dev_local_host = "http://localhost/startuppuccino-website/source-code/";
-	$absolute_host_uri = $_SERVER['HTTP_HOST'] === "localhost" ? $dev_local_host : $_SERVER['HTTP_HOST'];
+    if(!defined("RELATIVE_PATH")){
+        define("RELATIVE_PATH", "..");
+    }
+
+	// Helper function -> print uri with the correct relative path
+    function includeUri($link){
+        include RELATIVE_PATH . $link;
+    }
 
 	// HOTJAR --> HEATMAP
-	include $absolute_host_uri.'/app/vendor/hotjar_tracking_code.php'; 
+	includeUri('/app/vendor/hotjar_tracking_code.php'); 
 
 	// GOOGLE ANALYTICS
 	
