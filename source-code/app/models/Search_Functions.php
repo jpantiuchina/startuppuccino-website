@@ -20,8 +20,13 @@ class Search_Functions {
      * Return a json object with all results
      */
     public function getAll(){
+        
+        $result_set = [];
+        foreach ($this->result_set as $key => $value) {
+            $result_set[$key] = array_map("utf8_encode", $value);
+        }
 
-        return json_encode($this->result_set);
+        return json_encode($result_set);
 
     }
 
