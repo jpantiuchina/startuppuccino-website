@@ -58,7 +58,7 @@
 			<?php if($_SESSION['role']=="educator"){ ?>
 
 			<li class="menu_link--top">
-                <a href="<?php printUri("/educators/manage/ideas/");?>">Edu-area</a>
+                <a href="<?php printUri("/educators/");?>">Edu-area</a>
             </li>
 
 			<?php } ?>
