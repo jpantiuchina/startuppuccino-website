@@ -55,7 +55,7 @@
 
 		<?php if ($userLogged){ ?>
 
-			<?php if($_SESSION['role']=="educator"){ ?>
+            <?php if(false){ ?>
 
 			<li class="menu_link--top">
                 <a href="<?php printUri("/educators/");?>">Edu-area</a>
