@@ -7,8 +7,10 @@
 		<span class="tempclose" onclick="Sp.layout.toggleSearch(true)">x</span>
 
 		<div class="search_filters">
-			<span id="search_filter__people">People</span>
-			<span id="search_filter__ideas">Ideas</span>
+			<span class="search_filter__ideas" data-filter="ideas">Ideas</span>
+			<span class="search_filter__students" data-filter="students">Students</span>
+			<span class="search_filter__mentors" data-filter="mentors">Mentors</span>
+			<span class="search_filter__educators" data-filter="educators">Teachers</span>			
 		</div>
 
 	</div>
