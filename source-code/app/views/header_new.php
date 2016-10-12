@@ -67,11 +67,11 @@
 			<li class="menu_link--top">
                 <a href="../home/">Lectures</a>
             </li>
+            -->
 
-            <li class="menu_link--top">
+            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'ideas') echo 'menu_link--active'  ?>">
                 <a href="../ideas/">Ideas</a>
             </li>
-			-->
 
             <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'home') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/"); ?>">Home</a>

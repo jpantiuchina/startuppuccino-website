@@ -44,14 +44,12 @@ StartuppuccinoHome.prototype.layout.toggleMentorAvailabilityButton = function(se
 
 	if (action === "add"){
 
-		button.parentNode.childNodes[3].setAttribute("onclick","SpHome.mentors.setAvailability("+session_id+",this)");
 		button.parentNode.className = "button_availability action_remove";
 		button.parentNode.setAttribute("data-action","remove");
 		SpHome.layout.renderGuest(session_id);
 
 	} else if (action === "remove"){
 
-		button.parentNode.childNodes[1].setAttribute("onclick","SpHome.mentors.setAvailability("+session_id+",this)");
 		button.parentNode.className = "button_availability action_add";
 		button.parentNode.setAttribute("data-action","add");
 		//button.parentNode.parentNode.childNodes[3].childNodes[1].childNodes[1].setAttribute("data-pitch","0");
