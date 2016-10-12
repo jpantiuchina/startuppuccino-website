@@ -3,5 +3,5 @@ source-code/app/assets/pics/people/
 source-code/app/assets/pics/ideas/
 source-code/app/assets/newcss/*.css
 source-code/app/assets/.sass-cache/
-*.css.map
+*.map
 source-code/app/public/

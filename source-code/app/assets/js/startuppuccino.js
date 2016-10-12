@@ -70,7 +70,9 @@ function Startuppuccino(){
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                console.log(xmlhttp.responseText);
+                // Debug: print result on console
+                //console.log(xmlhttp.responseText);
+                // Execute callback function
                 callback(xmlhttp.responseText);
             }
         };
@@ -280,6 +282,7 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
             x.avatar = "people/avatar.svg";
         }
 
+        n.className += " search_result--" + x.role;
         n.children[0].href = "../" + x.id;
         n.children[0].children[0]
          .children[0].setAttribute("style","background-image:url('../app/assets/pics/" + x.avatar + "')");
