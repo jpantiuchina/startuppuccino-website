@@ -1,6 +1,6 @@
 <?php
 	
-	require_once '../app/models/session.php';
+	require_once '../models/session.php';
 	
 	if(!isset($_POST['key']) || empty($_POST['key'])){
 		// No parameter key is set so nothing happens
@@ -10,7 +10,7 @@
 	}
 
 	// Include and Initialize People Functions
-	require_once '../app/models/Ideas_Functions.php';
+	require_once '../models/Ideas_Functions.php';
 	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 	$ideas_func = new Ideas_Functions($account_id);
 

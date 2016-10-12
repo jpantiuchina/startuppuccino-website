@@ -86,26 +86,24 @@
 						<div class="button_availability action_<?php echo $data_action; ?>"
 							 data-session="<?php echo $session['id']; ?>"
 							 data-action="<?php echo $data_action; ?>">
-							<span 
-								<?php if($data_action === "add") { ?>
-								onclick="SpHome.mentors.setAvailability(<?php echo $session['id']; ?>,this)"
-								<?php } ?>>YES</span><!--
-							--><span 
-								<?php if($data_action === "remove") { ?>
-								onclick="SpHome.mentors.setAvailability(<?php echo $session['id']; ?>,this)"
-								<?php } ?>>NO</span>
+							<span>YES</span><!--
+							--><span>NO</span>
 						</div>
-						<div class="button_pitch">
-							<label class="<?php echo $pitch_class; ?>">
-								<div class="button_toggle_pitch"
-									 data-session="<?php echo $session['id']; ?>"
-									 data-pitch="<?php echo $pitch_; ?>"></div>
-								<span>PITCH</span><!--
-								--><input type="checkbox" 
-										  style="display: none"
-										  <?php echo ($pitch_class === "checked") ? 'checked=""' : ''; ?>" />
-							</label>
-						</div>
+						<?php 
+							/*
+							<div class="button_pitch">
+								<label class="<?php echo $pitch_class; ?>">
+									<div class="button_toggle_pitch"
+										 data-session="<?php echo $session['id']; ?>"
+										 data-pitch="<?php echo $pitch_; ?>"></div>
+									<span>PITCH</span><!--
+									--><input type="checkbox" 
+											  style="display: none"
+											  <?php echo ($pitch_class === "checked") ? 'checked=""' : ''; ?>" />
+								</label>
+							</div>
+							*/
+						?>
 						<div class="tiny_loader" style="display:none">
 							<div></div><div></div>
 						</div>

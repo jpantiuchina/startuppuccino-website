@@ -9,21 +9,21 @@
 	switch ($ip) {
 		case 1:
 		
-			$view = include 'idea_view1.php';			
+			$view = include '../app/views/idea_view1.php';			
 			break;
 		
 		case 2:
 		
-			$view = include 'idea_view2.php';			
+			$view = include '../app/views/idea_view2.php';			
 			break;
 		
 		case 3:
 			
-			$view = include 'idea_view3.php';			
+			$view = include '../app/views/idea_view3.php';			
 			break;
 		
 		default:
-			$view = include 'idea_view0.php';			
+			$view = include '../app/views/idea_view0.php';			
 			break;
 	}
 

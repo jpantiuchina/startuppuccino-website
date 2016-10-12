@@ -104,7 +104,7 @@
             <p><a class="about_links" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a></p>
             <p><a class="about_links" href="https://unibz.it" target="_blank">Unibz.it</a></p>
 
-        	<p>© 2016 Startuppuccino. All rights reserved<!-- — Privacy — Contacts--></p>
+        	<p>&copy; 2016 Startuppuccino. All rights reserved<!-- — Privacy — Contacts--></p>
 
         </footer> 
 

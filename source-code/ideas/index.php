@@ -50,7 +50,7 @@
 			<?php } else { ?>
 
 				<section>
-					<?php echo include 'idea_view_switch.php'; ?>
+					<?php echo include '../app/controllers/idea_view_switch.php'; ?>
 				</section>
 
 			<?php } ?>

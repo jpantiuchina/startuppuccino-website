@@ -83,7 +83,9 @@
 
         	<li class="menu_link submenu_trigger">
         		<div class="menu_profile_picture" style="background-image: url('<?php printUri("/app/assets/pics/people/".avatar());?>')" alt="Profile">
-        			<div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
+        			<a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">
+                        <div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
+                    </a>
         		</div> 
         		<ul class="submenu">
                     <!--<li class="menu_link--sub"><a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">Profile</a></li>-->
