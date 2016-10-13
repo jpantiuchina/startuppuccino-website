@@ -402,20 +402,7 @@ footer,
 /* SEARCH */
 .search {
   text-align: left;
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  background: rgba(247, 247, 221, 0.9);
-  transform: translateY(-100%);
-  -webkit-transform: translateY(-100%);
-  z-index: 999999;
-  -webkit-transition: all 300ms ease-in-out;
-  transition: all 300ms ease-in-out; }
-  .search--visible {
-    transform: translateY(0) !important;
-    -webkit-transform: translateY(0) !important; }
+  background: rgba(247, 247, 221, 0.9); }
   .search__header, .search__filters, .search__main {
     position: relative; }
   .search__header {
@@ -828,6 +815,23 @@ textarea {
   background-color: #333;
   outline: 1px solid #444;
   cursor: pointer; }
+
+/* far away - fixed section outside with */
+.faraway, .search {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  z-index: 999999;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out; }
+
+.not_faraway, .search--visible {
+  transform: translateY(0) !important;
+  -webkit-transform: translateY(0) !important; }
 
 form.form_custom, .message_alert_container {
   max-width: 640px;

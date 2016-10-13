@@ -19,6 +19,8 @@
 
 	$ideas = [];
 
+	$currentPage = "ideas";
+
 ?>
 
 <!DOCTYPE html>

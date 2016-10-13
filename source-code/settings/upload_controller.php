@@ -56,7 +56,7 @@
         // Collect errrors
         $errors = "Error: " . $_FILES["picture"]["error"];
         // Send email to notify for uploads errors
-        mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
+        //mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
         exit(set_notify($errors));
     }
     
@@ -64,7 +64,7 @@
     // Check if $dir is a directory
     if(!is_dir($dir)){
         // Send error email to devs
-        mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
+        //mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
         exit(set_notify("We are sorry, at the moment the service is not available. Please try later."));
     }
     
@@ -79,11 +79,13 @@
     $upload_func->setDir($dir);
     $upload_func->setFileName($pic["name"]);
     $upload_func->setTemporaryName($pic["tmp_name"]);
-    $upload_func->setReplace(TRUE); // Set if the new file will replace the old one
+    $upload_func->setReplace(TRUE); // Set 'true' if the new file will replace the old one
 
     if($upload_func->upload() && $account_func->saveProfilePicture($pic["name"])){
         $_SESSION["avatar"] = $pic["name"];
         exit(render_picture($pic["name"],$dir));
+    } else {
+        // TODO -> remove eventually the saved profile picture on the server
     }
 
     echo set_notify("Error while uploading..");

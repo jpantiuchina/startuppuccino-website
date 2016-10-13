@@ -21,13 +21,13 @@
 	$ideas_html = "";
 
 	// Students can create new ideas
-	if ($isStudent){
+	//if ($isStudent){
 
 		$ideas_html = "<section id='new_idea__section'>";
 		$ideas_html .= includeToVar('idea_form.php');
 		$ideas_html .= "</section>";
 			
-	}
+	//}
 
 	// Users can comments on ideas
 	if($userLogged){
@@ -64,9 +64,13 @@
 				// Edit/delete ideas -> available only for idea owener
 				if($_SESSION['id']==$idea['owner_id']){
 
-					$ideas_html .= "<input type='button' class='c_green' value='Edit' onclick='SpIdea.editIdea(\"".$idea['id']."\");'>
-									<input type='button' class='c_red' value='Delete' onclick='SpIdea.deleteIdea(\"".$idea['id']."\");'>";
-				
+					// <input type='button' class='c_green' value='Edit' onclick='SpIdea.editIdea(\"".$idea['id']."\");'>
+
+					$ideas_html .= "<input type='button' 
+					                       class='delete_idea_button' 
+					                       value='Delete' 
+					                       data-idea=\"".$idea['id']."\">";
+
 				}
 
 				// Comments functionality -> available to all students
@@ -76,7 +80,10 @@
 
 			}
 	    
-	    $ideas_html .= "</div></div>"; // info_box & idea element
+	    $ideas_html .= "</div>"; // info_box
+
+		$ideas_html .= "<div class='idea__footer'></div>";
+	    $ideas_html .= "</div>"; // & idea element
 
 	}
 

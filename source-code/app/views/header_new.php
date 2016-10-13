@@ -22,6 +22,10 @@
     }
 */
 
+    if( !isset($currentPage) ) {
+        $currentPage = "";
+    }
+
 ?>
 
 <?php if ($userLogged){ ?>
@@ -69,11 +73,11 @@
             </li>
             -->
 
-            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'ideas') echo 'menu_link--active'  ?>">
+            <li class="menu_link--top <?php if ($currentPage === 'ideas') echo 'menu_link--active'  ?>">
                 <a href="../ideas/">Ideas</a>
             </li>
 
-            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'home') echo 'menu_link--active'  ?>">
+            <li class="menu_link--top <?php if ($currentPage === 'home') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/"); ?>">Home</a>
             </li>
 
@@ -97,16 +101,16 @@
 
 		<?php } else { ?>
 
-            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'about') echo 'menu_link--active'  ?>">
+            <li class="menu_link--top <?php if ($currentPage === 'about') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/about/");?>">About</a>
             </li>
 
 			<!-- change this into a login form (external ajax login form script -> include) -->
-			<li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'login') echo 'menu_link--active'  ?>">
+			<li class="menu_link--top <?php if ($currentPage === 'login') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/login/");?>">Login</a>
             </li>
 
-            <li class="menu_link--top <?php if (isset($currentPage) && $currentPage == 'register') echo 'menu_link--active'  ?>">
+            <li class="menu_link--top <?php if ($currentPage === 'register') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/register/");?>">Register</a>
             </li>
 

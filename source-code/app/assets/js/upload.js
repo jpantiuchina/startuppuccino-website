@@ -18,7 +18,20 @@ var notify_callback = function(text){
     Sp.layout.hideLoading();
 }
 
-var render_picture_callback = function(filename,directory){
-    document.getElementById("target_picture").setAttribute("src",directory+filename+"?"+(Math.floor((Math.random()*1000000)+1)));
+var render_picture_callback = function(filename, directory, bg){
+
+    var picture = {
+            dom : document.getElementById("target_picture"),
+            path : directory+filename+"?"+(Math.floor((Math.random()*1000000)+1))
+        }
+
+    // Switch between img or div elements
+    if (bg === true){
+        picture.dom.setAttribute("style", "background-image:url('"+picture.path+"')");
+    } else {
+        picture.dom.setAttribute("src", picture.path);
+    }
+
     Sp.layout.hideLoading();
+
 }

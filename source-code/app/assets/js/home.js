@@ -240,7 +240,7 @@ StartuppuccinoHome.prototype.session.publishComment = function(e){
 	// Show loader -> try to prevent double click on button
 	SpHome.layout.showTinyloader(loader);
 
-	data.url = "../app/controllers/course_sessions_comments.php";
+	data.url = "../app/controllers/course_sessions_comments_manage.php";
 	data.parameters = "s_id=" + session_id +
 		"&comment_text=" + text +
 		"&new=new";
@@ -278,7 +278,7 @@ StartuppuccinoHome.prototype.session.deleteComment = function(e){
 	// Show loader -> try to prevent double click on button
 	Sp.layout.showLoading();
 
-	data.url = "../app/controllers/course_sessions_comments.php";
+	data.url = "../app/controllers/course_sessions_comments_manage.php";
 	data.parameters = "s_id=" + session_id +
 		"&comment_id=" + comment_id +
 		"&delete=delete";

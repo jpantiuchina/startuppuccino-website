@@ -2,7 +2,7 @@
 <div class="idea">
 
 	<div class="picture_box">
-		<div id="idea_form_picture" style="background-image:url('../app/assets/pics/default/new_picture.svg');background-size: 50%;"></div>
+		<div id="target_picture"></div>
 	</div>
 
 	<form class="info_box" id="idea_form">
@@ -17,7 +17,7 @@
 
 		<div class="info_box_footer">
 			<input type="submit" class="c_green" value="Publish" />
-			<input type="button" class="c_red" value="Cancel" onclick="SpIdea.cancelPublish()"/>
+			<!--<input type="button" class="c_red" value="Cancel" onclick="SpIdea.cancelPublish()"/>-->
 		</div>
 
 	</form>
@@ -25,22 +25,32 @@
 </div>
 
 <div class="picture_form_wrapper">
-	<form action="upload_controller.php" method="post" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
-	    
-	    <li>
-	        <label for="file_input">
-	        	<div style="background-image:url('../app/assets/pics/default/add_picture.svg')" id="target_picture"></div>
-	        </label>
-	        <input type="file" accept="image/*" name="picture" id="file_input">
-		</li>
 
-		<input id="idea_picture_title" type="hidden" name="title" required/>
+	<div class="center_column">
+		<div class="center_aligner">
 
-	    <li>
-	    	<input type="submit" value="Upload" name="picture_submit">
-	    </li>
-	
-	</form>
+			<div class="background_close" onclick="SpIdea.layout.toggleIdeaPictureForm()"></div>
+
+			<form action="upload_controller.php" method="post" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
+			    
+				<div class="ask_closer" onclick="SpIdea.layout.toggleIdeaPictureForm()">x</div>
+
+			    <li>
+			        <label for="file_input">
+			        	<div style="background-image:url('../app/assets/pics/default/add_picture.svg')" id="target_picture"></div>
+			        </label>
+			        <input type="file" accept="image/*" name="picture" id="file_input">
+				</li>
+
+			    <li>
+			    	<input type="submit" value="Upload" name="picture_submit">
+			    </li>
+			
+			</form>
+
+		</div>
+	</div>
+
 </div>
 
 <!-- Need for async uploads, and used as upload notification box -->

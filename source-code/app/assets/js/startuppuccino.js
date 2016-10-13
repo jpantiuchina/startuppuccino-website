@@ -9,17 +9,18 @@ function Startuppuccino(){
         // Download data
         this.get({url : "../app/controllers/search.php"},function(data){
             data_set = Sp.helpers.shuffle(JSON.parse(data));
+            Sp.search();
         });
     }
 
     this.search = function(text){
 
-        text = text.toLowerCase();
-
         if(typeof text === "undefined" || text == null){
             this.layout.renderSearchResult(data_set);
             return;
         }
+
+        text = text.toLowerCase();
 
         var result_set = [],
             length = data_set.length,

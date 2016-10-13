@@ -1,37 +1,62 @@
-<?php
-// Receive http request from client with a new comment to post
+<?php 
+	
+	$comments_ = $session['comments'];
 
-// Start session
-require_once '../models/session.php';
-
-// Check if the user has the rights to perform this operation
-//if(!$_SESSION['role'] === "mentor"){
-//	exit("You are not allowed to make these changes.");
-//}
-
-// Check if the parameter is set
-if( !isset($_POST['s_id']) || empty($_POST['s_id']) ||
-    (isset($_POST['delete']) && (!isset($_POST['comment_id']) || empty($_POST['comment_id'])) ) ||
-    (isset($_POST['new']) && (!isset($_POST['comment_text']) || empty($_POST['comment_text'])) ) ){
-    exit("Some parameter is missing.");
-}
-
-// Include Course sessions functions
-require_once '../models/CourseSessions_Functions.php';
-$cs_func = new CourseSessions_Functions();
-
-if(isset($_POST['delete'])){
-    // Delete comment
-    $response = $cs_func->comment($_SESSION['id'], $_POST['s_id'], null, TRUE, $_POST['comment_id']);
-} else if (isset($_POST['new'])){
-    // Save comment
-    $response = $cs_func->comment($_SESSION['id'], $_POST['s_id'], $_POST['comment_text']);
-}
-
-if ( $response ){
-    echo "ok";
-} else {
-    echo "Error while saving data, please try again.";
-}
+	include '../app/views/comments.php';
 
 ?>
+
+<?php /*
+
+<div class="comments">
+					
+					<div class="comments__wrapper">
+						<?php if(isset() && count($session['comments'])>0 ){ ?>
+						<?php foreach ($session['comments'] as $comment){ ?>
+							<div class="comment" comment-id="<?php echo $comment['id']; ?>">
+								
+								<a class="comment__author" href="../people/?user_id=<?php echo $comment['author_id']; ?>">
+									<?php $author_avatar = !empty($comment['author_avatar']) ? $comment['author_avatar'] : "people.png"; // Set the right avatar ?>
+									<div style="background-image:url('../app/assets/pics/people/<?php echo $author_avatar; ?>')"></div>
+								</a>
+								<p class="comment__text"><?php echo $comment['text'] ?></p>
+
+								<?php if($comment['author_id'] === $_SESSION['id']){ ?>
+								<div class="comment__footer">
+									<span class="comment__delete"
+										  data-session="<?php echo $session['id']; ?>">delete</span>
+								</div>
+								<?php } ?>
+
+							</div>
+						<?php }} else { ?>
+							<div class="comment">
+								<a class="comment__author">
+									<div style="background-image:url('../app/assets/pics/people/people.png');opacity:0.5"></div>
+								</a>
+								<p class="comment__text">No comments yet.</p>
+							</div>
+						<?php } ?>
+
+						<div class="comments__editor">
+							<textarea placeholder="Write a comment..."></textarea>
+							<div>
+								<input class="publish_comment_button" 
+									   data-session="<?php echo $session['id']; ?>"
+									   value="Publish"
+									   type="button">
+							</div>
+							<div class="tiny_loader" style="display:none">
+								<div></div><div></div>
+							</div>
+						</div>
+
+					</div>
+				
+				</div>
+
+
+
+*/
+
+				?>

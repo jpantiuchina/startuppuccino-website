@@ -357,9 +357,9 @@ class Ideas_Functions {
                         VALUES ('$title',
                                 '$this->account_id',
                                 '$team_size',
-                                '".$description."',
-                                '".$avatar."',
-                                '".$background_pref."');";
+                                '$description',
+                                '$avatar',
+                                '$background_pref');";
 
               $result = $this->conn->query($query);
 
@@ -574,7 +574,6 @@ class Ideas_Functions {
       return $this->user_likes;
     
     }
-
 
 }
 

@@ -1,32 +1,14 @@
 
-/* Set event listeners */
-
-var idea_form = document.getElementById("idea_form"),
-	picture_form = document.getElementById("idea_form_picture_upload");
-
-if(typeof idea_form != "undefined" && 
-   typeof picture_form != "undefined" &&
-   idea_form != null &&
-   picture_form != null){
-	document.getElementById("idea_form").onsubmit = function(){
-		return SpIdea.publishIdea(true,'');
-	}
-
-	picture_form.onsubmit = function(){
-		return SpIdea.uploadIdeaPicture();
-	}
-}
-
-
 /* Ideas class */
-
-var SpIdea = new function(){
+function StartuppuccinoIdeas(){
 
 	/* JOIN & LEAVE / LIKE & UNLIKE */
 
-	var BUTTON_SELECTED;
-	var IDEA_ID;
-	var TEAMSIZE_NODE;
+	var BUTTON_SELECTED,
+	    IDEA_ID,
+	    TEAMSIZE_NODE,
+	    CONTROLLER_DIR = "../app/controllers/",
+	    IDEA_MANAGE_CONTROLLER = CONTROLLER_DIR + "manage_ideas.php";
 
 	this.ideaHelper = function(action, idea_id, dom_element){
 		
@@ -40,7 +22,7 @@ var SpIdea = new function(){
 
 		// send data to server
 		var data = {
-			url : "./manage_ideas.php",
+			url : IDEA_MANAGE_CONTROLLER,
 			parameters : "key=" + action + "_idea&idea_id=" + idea_id
 		}
 
@@ -93,7 +75,7 @@ var SpIdea = new function(){
 					if(action !="like" && action != "unlike"){
 						// Async update team size
 						Sp.post({
-								url : "./manage_ideas.php",
+								url : IDEA_MANAGE_CONTROLLER,
 								parameters : "key=teamsize&idea_id=" + IDEA_ID
 							},function(response){
 								TEAMSIZE_NODE.innerHTML = "Team size: " + parseInt(response); // +1 is the idea owner
@@ -118,14 +100,16 @@ var SpIdea = new function(){
 
 	/* DELETE */
 
-	this.deleteIdea = function(idea_id) {
+	this.deleteIdea = function(e) {
 
-		var confirmMessage = "!!! Attention !!!\nAre you sure you want to delete this idea?";
+		var button = e.target || e.srcElement,
+		    idea_id = button.getAttribute("data-idea"),
+		    confirmMessage = "!!! Attention !!!\nAre you sure you want to delete this idea?";
 
 		if (confirm(confirmMessage)){
 			
 			Sp.post({
-					url : "./manage_ideas.php",
+					url : IDEA_MANAGE_CONTROLLER,
 					parameters : "key=delete_idea&idea_id=" + idea_id
 				},function(response){
 					if(response == "ok") {
@@ -172,32 +156,11 @@ var SpIdea = new function(){
 
 	/* PUBLISH */
 
-	// Optimize and remove this code to manage visible sections
-	this.showIdeaForm = function(){
-		document.getElementById("new_idea__section").style.display = "block";
-	}
-
-	this.hideIdeaForm = function(){
-		document.getElementById("new_idea__section").style.display = "none";
-	}
-
-	this.openNewIdeaForm = function(){
-
-		// Reset inputs
-		document.getElementById("idea_form_title").setAttribute("value","");
-		document.getElementById("idea_form_description").innerHTML = "";
-		document.getElementById("idea_form_avatar").setAttribute("value","");
-		document.getElementById("idea_form_background_pref").setAttribute("value","");
-		document.getElementById("target_picture").setAttribute("src","");
-		//document.getElementById("idea_form").setAttribute("onsubmit","return SpIdea.publishIdea(true,'');");
-
-		// Show form
-		this.showIdeaForm();
-	}
-
 	this.uploadIdeaPicture = function(){
 		// Check for picture name
-		var idea_title = document.getElementById("idea_form_title").value;
+		
+		// NOT NEEDED ANYMORE -> NOW SAVE PICTURE WITH SESSION_ID AND TIME
+		/*var idea_title = document.getElementById("idea_form_title").value;
 		if(idea_title.trim() == ""){
 			alert("Please insert an idea title first.");
 			return false;
@@ -209,17 +172,26 @@ var SpIdea = new function(){
 
 		// Set profile picture name
 		document.getElementById("idea_picture_title").setAttribute("value", idea_title);
+		*/
 
 		// Call general upload function -> upload.js
 		return upload_form_submit();
 	}
 
-	this.uploadIdeaPictureCallback = function(filename,dir){
+	this.uploadIdeaPictureCallback = function(filename, dir){
+
+		// Set picture name in the idea form
 		document.getElementById("idea_form_avatar").setAttribute("value", filename);
 		// Call general upload function -> upload.js
-		render_picture_callback(filename,dir);   
+		render_picture_callback(filename, dir, true);
+		// Hide upload picure section
+		this.layout.toggleIdeaPictureForm();
+		// fix the background size of the target-picture (temporary fix)
+		var tp = document.getElementById("target_picture"),
+			tp_style = tp.getAttribute("style");
+		tp.setAttribute("style", tp_style + ";background-size:cover;")
+	
 	}
-
 
 	var publishCallback = function(response) {
 		
@@ -263,7 +235,7 @@ var SpIdea = new function(){
 		parameters += "&avatar=" + avatar;
 		parameters += "&background_pref=" + background_pref;
 
-		var url = "./manage_ideas.php";
+		var url = IDEA_MANAGE_CONTROLLER;
 		
 		// Display loader
 		Sp.layout.showLoading();
@@ -290,7 +262,7 @@ var SpIdea = new function(){
 		}
 
 		Sp.post({
-				url : "./manage_ideas.php",
+				url : IDEA_MANAGE_CONTROLLER,
 				parameters : "key=new_comment&idea_id=" + idea_id + "&comment=" + comment
 			},function(response){
 				if(response == "ok"){
@@ -319,7 +291,7 @@ var SpIdea = new function(){
 
 		// Load comments of selected idea
 		Sp.post({
-				url : "./manage_ideas.php",
+				url : IDEA_MANAGE_CONTROLLER,
 				parameters : "key=get_comments&idea_id=" + idea_id
 			},function(comments){
 				// Load comments in the comments box
@@ -340,3 +312,55 @@ var SpIdea = new function(){
 	}
 
 }
+
+
+
+StartuppuccinoIdeas.prototype.layout = {};
+
+StartuppuccinoIdeas.prototype.layout.toggleIdeaPictureForm = function() {
+    var search = document.getElementsByClassName("picture_form_wrapper")[0];
+    search.classList.toggle("picture_form_wrapper--visible");
+}
+
+
+/* Initialize Startuppuccino Home */
+
+if(typeof SpIdea === "undefined" || SpIdea === null){
+
+	var SpIdea = new StartuppuccinoIdeas();
+
+}
+
+
+/* Add event listeners */
+
+window.addEventListener("load", function(){
+
+	var idea_form = document.getElementById("idea_form"),
+		picture_form = document.getElementById("idea_form_picture_upload"),
+		picture_form_trigger = document.getElementById("target_picture"),
+		delete_idea_buttons = document.getElementsByClassName("delete_idea_button");
+
+	var delete_idea_buttons_length = delete_idea_buttons.length;
+
+
+	// Idea form is display only in the first phase
+	if(typeof idea_form != "undefined" && 
+	   idea_form != null){
+		
+		document.getElementById("idea_form").onsubmit = function(){
+				return SpIdea.publishIdea(true,'');
+			};
+
+		picture_form.onsubmit = function(){
+				return SpIdea.uploadIdeaPicture();
+			};
+
+		picture_form_trigger.addEventListener("click", function(){ SpIdea.layout.toggleIdeaPictureForm(); });
+
+		for (var i = 0; i < delete_idea_buttons_length; i++) {
+			delete_idea_buttons[i].addEventListener("click", function(e){ SpIdea.deleteIdea(e); });
+		}
+	}
+
+});

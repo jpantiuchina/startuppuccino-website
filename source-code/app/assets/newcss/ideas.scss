@@ -17,11 +17,6 @@ $idea-footer-padding-bottom: 15px;
 
 main { padding-top: $header-height + 20px !important; }
 
-/* form */
-.picture_form_wrapper {
-	display: none;
-}
-
 .idea_title {
 	font-family: $font-stack;
 }
@@ -107,4 +102,32 @@ main { padding-top: $header-height + 20px !important; }
 		@extend .st_button;
 	}
 
+}
+
+/* form */
+.picture_form_wrapper {
+    background: $header-background;
+    @extend .faraway;
+
+    &--visible {
+    	@extend .not_faraway;
+    }
+
+    > form {
+	    width: 400px;
+	    margin: 150px auto;
+	    padding: 50px;
+	    height: auto;
+	    background: $logo-green;
+
+	    ul {
+	    	list-style: none;
+	    }
+    }
+}
+
+#target_picture {
+	cursor: pointer;
+	background-size: 50%;
+	background-image:url('../pics/default/new_picture.svg');
 }
