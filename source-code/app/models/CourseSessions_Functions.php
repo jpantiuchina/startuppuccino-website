@@ -135,6 +135,7 @@ class CourseSessions_Functions {
 
         } else {
 
+          $comment_text = str_replace("'", " ", $comment_text);
           $query = "INSERT INTO "._T_SESSION_COMMENT." (session_id, author_id, text)
                     VALUES ('".$session_id."', '".$author_id."','".$comment_text."');";            
 

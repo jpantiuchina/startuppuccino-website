@@ -1,7 +1,11 @@
 <?php
 	
 	require_once '../models/session.php';
-	
+
+	function cleanText($text){
+		return str_replace("'", " ", $text);
+	}
+
 	if(!isset($_POST['key']) || empty($_POST['key'])){
 		// No parameter key is set so nothing happens
 		exit("...");
@@ -42,11 +46,11 @@
 		
 		case 'new_idea':
 
-			exit($response = $ideas_func->newIdea($_POST['title'],
+			exit($response = $ideas_func->newIdea(cleanText($_POST['title']),
 											//$_POST['team_size'],
-											$_POST['description'],
+											cleanText($_POST['description']),
 											$_POST['avatar'],
-											$_POST['background_pref']));
+											cleanText($_POST['background_pref'])));
 			
 		case 'teamsize':
 		
@@ -67,11 +71,37 @@
 
 		case 'get_comments':
 
-			exit(implode("<br>", $ideas_func->getComments()));
+			$comments_string = "";
+			foreach ($ideas_func->getComments() as $comment) {
+
+				// Set avatar
+				$author_avatar = !empty($comment['author_avatar']) ? $comment['author_avatar'] : "avatar.svg";
+
+				$comments_string .= '<div class="comment" comment-id="'.$comment['id'].'">
+										<a class="comment__author" 
+				                        	href="../people/?user_id='.$comment['author_id'].'">
+				                        	<div style="background-image:url(\'../app/assets/pics/people/'.$author_avatar.'\');background-color:#fbfbfb"></div>
+				                    	</a>
+				                    	<p class="comment__text">
+				                    	<a href="../people/?user_id='.$comment['author_id'].'">
+				                        	<b>'.$comment['author_firstname'].' '.$comment['author_lastname'].' </b></a>
+				                        '.$comment['text'].'</p>';
+
+				// Check if is the owner of the comment
+				if($_SESSION['id'] === $comment['author_id']){
+					$comments_string .= '<div class="comment__footer">
+											<span class="comment__delete" data-idea="'.$comment['project_id'].'">delete</span>
+										</div>';
+				}
+
+				$comments_string .= '</div>';
+			}
+
+			exit($comments_string);
 
 		case 'new_comment':
 
-			exit($ideas_func->newComment($_POST['comment']));
+			exit($ideas_func->newComment(cleanText($_POST['comment'])));
 
 		case 'delete_comment':
 

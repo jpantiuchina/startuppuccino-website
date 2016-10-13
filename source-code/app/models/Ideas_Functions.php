@@ -438,18 +438,28 @@ class Ideas_Functions {
      */
     public function getComments() {
       
-      $query = "SELECT pp.id, pp.project_id, pp.account_id, pp.text 
-                FROM "._T_IDEA_COMMENT." AS pp 
-                WHERE project_id='".$this->idea_id."';";
+      $query = "SELECT ic.id, ic.project_id, ic.author_id, ic.text, a.avatar as author_avatar,
+                       a.firstName as author_firstname, a.lastName as author_lastname
+                FROM "._T_IDEA_COMMENT." AS ic, "._T_ACCOUNT." AS a
+                WHERE ic.author_id = a.id 
+                AND project_id='".$this->idea_id."'
+                ORDER BY ic.id DESC;";  
 
       $result = $this->conn->query($query);
 
       if($result->num_rows > 0) {
-        return $result->fetch_assoc();
+
+        while ($comment = $result->fetch_assoc()){
+          $comments[] = $comment;
+        }
+
+        // Return all ideas
+        return $comments;
+
       }
      
       // No comments found
-      return ["No comments found"];
+      return [["text"=>"No comments yet"]];
      
     }
 
@@ -479,7 +489,7 @@ class Ideas_Functions {
      */
     public function newComment($comment) {
       
-      $query = "INSERT INTO "._T_IDEA_COMMENT." ('project_id', 'account_id', 'text', 'commented_at')
+      $query = "INSERT INTO "._T_IDEA_COMMENT." (project_id, author_id, text, commented_at)
       			    VALUES ('".$this->idea_id."', '".$this->account_id."', '".$comment."', NOW());";
 
       $result = $this->conn->query($query);

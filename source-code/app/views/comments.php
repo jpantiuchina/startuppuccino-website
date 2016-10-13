@@ -6,7 +6,7 @@
 			<div class="comment" comment-id="<?php echo $comment['id']; ?>">
 				
 				<a class="comment__author" href="../people/?user_id=<?php echo $comment['author_id']; ?>">
-					<?php $author_avatar = !empty($comment['author_avatar']) ? $comment['author_avatar'] : "people.png"; // Set the right avatar ?>
+					<?php $author_avatar = !empty($comment['author_avatar']) ? $comment['author_avatar'] : "avatar.svg"; // Set the right avatar ?>
 					<div style="background-image:url('../app/assets/pics/people/<?php echo $author_avatar; ?>')"></div>
 				</a>
 				<p class="comment__text"><?php echo $comment['text'] ?></p>

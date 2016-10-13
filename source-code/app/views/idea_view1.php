@@ -32,7 +32,7 @@
 	// Users can comments on ideas
 	if($userLogged){
 
-		//$ideas_html .= includeToVar('comment_box_view.php');
+		$ideas_html .= includeToVar('comment_box_view.php');
 
 	}
 
@@ -74,7 +74,7 @@
 				}
 
 				// Comments functionality -> available to all students
-				//$ideas_html .= "<br><span class='idea__button idea__button--full' onclick='SpIdea.displayComments(".$idea['id'].")'>COMMENTS</span>";
+				$ideas_html .= "<span class='comment_idea_button' idea-id='".$idea['id']."'>COMMENTS</span>";
 
 			$ideas_html .= "</div>"; // info box footer
 
