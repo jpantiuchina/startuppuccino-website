@@ -771,7 +771,7 @@ textarea {
 
 /* Buttons */
 .st_button, .askforhelp_form > input[type=submit], .info_box_footer > input[type=submit],
-.info_box_footer > input[type=button] {
+.info_box_footer > input[type=button], #idea_form_picture_upload input[type=submit] {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -793,7 +793,7 @@ textarea {
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
   .st_button:hover, .askforhelp_form > input[type=submit]:hover, .info_box_footer > input[type=submit]:hover,
-  .info_box_footer > input[type=button]:hover {
+  .info_box_footer > input[type=button]:hover, #idea_form_picture_upload input[type=submit]:hover {
     -webkit-filter: brightness(0.5);
     -moz-filter: brightness(0.5);
     -ms-filter: brightness(0.5);
@@ -907,9 +907,70 @@ main {
     .picture_form_wrapper > form ul {
       list-style: none; }
 
+/* To refactor */
 #target_picture {
   cursor: pointer;
   background-size: 50%;
   background-image: url("../pics/default/new_picture.svg"); }
+
+.background_close {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent; }
+
+#idea_form_picture_upload {
+  position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  text-align: left;
+  width: 100%;
+  max-width: 550px;
+  color: #fff !important;
+  background-color: #7fb03b;
+  padding: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  z-index: 1; }
+  #idea_form_picture_upload ul, #idea_form_picture_upload li {
+    list-style: none; }
+  #idea_form_picture_upload input[type=file] {
+    display: block;
+    border: none;
+    margin: 15px 0px;
+    width: 100%;
+    padding-left: 5px; }
+  #idea_form_picture_upload input[type=submit] {
+    background-color: transparent;
+    width: 100px;
+    background-color: #444;
+    color: #fff !important;
+    box-shadow-color: #fff !important;
+    -webkit-box-shadow-color: #fff !important; }
+  #idea_form_picture_upload ._closer {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    display: block;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    color: #fff;
+    font-weight: 200;
+    text-align: center;
+    line-height: 18px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 0px 1px #fff;
+    box-shadow: 0px 0px 0px 1px #fff; }
 
 /*# sourceMappingURL=ideas.css.map */

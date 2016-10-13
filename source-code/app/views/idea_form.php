@@ -33,7 +33,7 @@
 
 			<form action="upload_controller.php" method="post" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
 			    
-				<div class="ask_closer" onclick="SpIdea.layout.toggleIdeaPictureForm()">x</div>
+				<div class="_closer" onclick="SpIdea.layout.toggleIdeaPictureForm()">x</div>
 
 			    <li>
 			        <label for="file_input">
