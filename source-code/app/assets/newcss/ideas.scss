@@ -104,6 +104,11 @@ main { padding-top: $header-height + 20px !important; }
 
 }
 
+/* Idea buttons */
+.delete_idea_button {
+	background-color: $logo-red !important;
+}
+
 /* form */
 .picture_form_wrapper {
     background: $header-background;

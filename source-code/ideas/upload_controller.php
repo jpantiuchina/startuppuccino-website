@@ -1,6 +1,4 @@
 <?php
-    
-    // TODO: add check for already existing idea title = picture name
 
     require_once '../app/models/session.php';
 
@@ -14,7 +12,7 @@
     require_once '../app/models/Upload_Functions.php';
     $upload_func = new Upload_Functions();
     require_once '../app/models/Ideas_Functions.php';
-    $account_func = new Ideas_Functions($_SESSION["id"]);
+    $ideas_func = new Ideas_Functions($_SESSION["id"]);
 
 
     $dir = "../app/assets/pics/ideas/";
@@ -29,11 +27,11 @@
     function render_picture($filename,$dir){
         return "<script>parent.SpIdea.uploadIdeaPictureCallback('$filename','$dir');</script>";
     }
-    // Function to rename a file with the hash of the user email
+    // Function to rename a file with the id of the user and the current time
     function rename_profile_pic($filename){
         $ext = pathinfo($filename, PATHINFO_EXTENSION);
-        $basename = $_POST['title'];
-        return md5($basename).".".$ext;
+        $basename = $_SESSION['id']."__".time();
+        return $basename.".".$ext;
     }
     
     
@@ -56,9 +54,9 @@
     // Check for errors
     if($pic["error"] > 0){
         // Collect errrors
-        $errors = "Error: " . $_FILES["picture"]["error"];
+        $errors = "Error: " . $pic["error"];
         // Send email to notify for uploads errors
-        mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
+        //mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
         exit(set_notify($errors));
     }
     
@@ -66,7 +64,7 @@
     // Check if $dir is a directory
     if(!is_dir($dir)){
         // Send error email to devs
-        mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
+        //mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
         exit(set_notify("We are sorry, at the moment the service is not available. Please try later."));
     }
     
@@ -81,10 +79,10 @@
     $upload_func->setDir($dir);
     $upload_func->setFileName($pic["name"]);
     $upload_func->setTemporaryName($pic["tmp_name"]);
-    $upload_func->setReplace(TRUE); // Set if the new file will replace the old one
+    $upload_func->setReplace(TRUE); // Set 'true' if the new file will replace the old one
 
-    if($upload_func->upload()){
-        exit(render_picture($pic["name"],$dir));
+    if( $upload_func->upload() ){
+        exit(render_picture($pic["name"], $dir));
     }
 
     echo set_notify("Error while uploading..");

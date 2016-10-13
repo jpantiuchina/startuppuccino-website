@@ -11,9 +11,9 @@
     }
 
 	// HOTJAR --> HEATMAP
-	includeUri('/app/vendor/hotjar_tracking_code.php'); 
+	//includeUri('/app/vendor/hotjar_tracking_code.php'); 
 
 	// GOOGLE ANALYTICS
-	includeUri('/app/vendor/google_analytics_tracking_code.php'); 
+	//includeUri('/app/vendor/google_analytics_tracking_code.php'); 
 
 ?>

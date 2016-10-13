@@ -57,7 +57,7 @@
 
 	        	<p class='idea_background' id='idea_background__".$idea['id']."'>Looking for: ".$idea['looking_for']."</p>"; 
 
-			if ($isStudent){
+			//if ($isStudent){
 
 			$ideas_html .= "<div class='info_box_footer'>";
 
@@ -78,7 +78,7 @@
 
 			$ideas_html .= "</div>"; // info box footer
 
-			}
+			//} // contraint only students
 	    
 	    $ideas_html .= "</div>"; // info_box
 

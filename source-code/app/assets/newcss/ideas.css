@@ -891,6 +891,10 @@ main {
   padding-bottom: 15px;
   border-bottom: 1px dotted #999; }
 
+/* Idea buttons */
+.delete_idea_button {
+  background-color: #be3b43 !important; }
+
 /* form */
 .picture_form_wrapper {
   background: rgba(247, 247, 221, 0.9); }
