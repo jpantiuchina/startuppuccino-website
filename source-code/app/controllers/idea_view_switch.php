@@ -4,7 +4,7 @@
 
 	// Switch between different ideas phases
 
-	$ip = isset($_SESSION['ideas_phase']) ? $_SESSION['ideas_phase'] : 0;
+	$ip = 1; // isset($_SESSION['ideas_phase']) ? $_SESSION['ideas_phase'] : 0;
 
 	switch ($ip) {
 		case 1:
