@@ -37,6 +37,7 @@ main { padding-top: $header-height + 20px !important; }
 	max-width: $idea-width;
 	height: auto;
 	margin-bottom: $idea-margin-bottom;
+	padding-top: $header-height;
 
 	>.info_box,
 	>.picture_box {

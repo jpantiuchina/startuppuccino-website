@@ -855,7 +855,8 @@ main {
   width: 100%;
   max-width: 650px;
   height: auto;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  padding-top: 50px; }
   .idea > .info_box,
   .idea > .picture_box {
     display: inline-block;
