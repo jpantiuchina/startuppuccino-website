@@ -33,7 +33,7 @@
 	   	}
 
 	   	// Redirect to home page
-    	header("Location: ../");
+    	echo "<script>window.location = '../'</script>";
 
 	} else {
 

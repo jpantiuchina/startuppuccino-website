@@ -36,7 +36,7 @@ class Config_Functions {
 
       foreach ($ideas_settings as $key => $value) {
         
-        echo $key.$value;
+        //echo $key.$value;
 
         $_SESSION["ideas_".$key] = $value;
 
