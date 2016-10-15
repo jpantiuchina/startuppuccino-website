@@ -1,11 +1,12 @@
 <?php
 
 	
-	// If is a mentor we load the sessions availability
+	// Only if is a mentor we load the sessions availability
    	if($_SESSION['role'] !== "mentor"){
    		exit("You are not a mentor");
    	}
 
+   	// TODO: all this should be in the controller
 
 	require_once '../app/models/CourseSessions_Functions.php';
 	$cs_func = new CourseSessions_Functions();
@@ -43,9 +44,9 @@
 					$pitch_ = 0;
 					$pitch_title = "";
 			
-					$session_date = date("d/m/Y", strtotime($session['date']));
+					$session_date = date("Y-m-d", strtotime($session['date']));
 
-					if ($session_date < date("d/m/Y")) {
+					if ($session_date < date("Y-m-d")) {
 						continue;
 					}
 
