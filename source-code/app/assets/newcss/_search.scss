@@ -3,7 +3,7 @@
 $search-main-margin: 20px;
 
 $search-header-height: 120px;
-$search-filters-height: 0px;
+$search-filters-height: 0px; /* 30px; */
 $search-main-height: calc(100% - #{$search-header-height + $search-filters-height + ($search-main-margin*2)});
 
 $search-result-height: 120px;
@@ -32,6 +32,7 @@ $search-result-height-mobile: 80px;
 
     &__filters {
 
+        /* TO BE FINISHED */
         display: none;
 
         height: $search-filters-height;
@@ -93,7 +94,7 @@ $search-result-height-mobile: 80px;
     > div {
         position: relative;
         display: inline-block;
-        width: 120px;
+        width: 100px;
         margin: 0px 5px;
         cursor: pointer;
         line-height: $search-filters-height;
@@ -115,16 +116,19 @@ $search-result-height-mobile: 80px;
             max-height: none;
         }
 
-        > span {
-            display: block;
-            line-height: $search-filters-height;
-            color: #fff;
-            background: $palette-yellow;
-            @include transition($transition-time);
+    }
 
-            &:hover {
-                @include bright(0.8);
-            }
+    &__item {
+
+        display: block;
+        line-height: $search-filters-height;
+        color: #fff;
+        background: $palette-yellow;
+        @include transition($transition-time);
+
+        &:hover,
+        &--selected {
+            @include bright(0.8);
         }
 
     }
@@ -137,6 +141,10 @@ $search-result-height-mobile: 80px;
     height: $search-result-height;
     font-size: 0;
     
+    &--hidden {
+        display: none;
+    }
+
     > a {
         display: block;
         position: relative;

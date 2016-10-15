@@ -5,6 +5,9 @@ function Startuppuccino(){
     // Global variable to store data for the search function
     var data_set = [];
 
+    // Search filters keys
+    var filer_keys = ["educator","mentor","student","guest","idea"];
+
     this.downloadSearchResult = function() {
         // Download data
         this.get({url : "../app/controllers/search.php"},function(data){
@@ -15,9 +18,20 @@ function Startuppuccino(){
 
     this.search = function(text){
 
-        if(typeof text === "undefined" || text == null){
+        if ( typeof text === "undefined" || text == null ){
+            
+            // Render all results
             this.layout.renderSearchResult(data_set);
             return;
+
+        } else if ( filer_keys.indexOf(text) !== -1){
+            
+            // Render all results
+            this.layout.renderSearchResult(data_set);
+            // Use layout filters functions to filter results with css
+            this.layout.filterSearch(text);
+            return;
+        
         }
 
         text = text.toLowerCase();
@@ -91,53 +105,6 @@ function Startuppuccino(){
     
     }
 
-    /*
-    function switchCallback(callback, value){
-        switch(callback){
-            case "sayhello":
-                alert("Hello " + value);
-                break;
-            case "new_idea":
-                publishIdeaCallback(value);
-                break;
-            case "leave_idea":
-                ideaHelperCallback("leave", value);
-                break;    
-            case "join_idea":
-                ideaHelperCallback("join", value);
-                break;
-            case "idea_teamsize":
-                teamsizeCallback(value);
-                break;
-            case "delete_idea":
-                deleteIdeaCallback(value);
-                break;
-            case "edit_idea":
-                editIdeaCallback(value);
-                break;
-            case "approve_idea":
-            case "disapprove_idea":
-            case "upgrade_idea":
-                generalEducatorsCallback(value);
-                break;
-            case "like_idea":
-                ideaHelperCallback("like", value);
-                break;
-            case "unlike_idea":
-                ideaHelperCallback("unlike", value);
-                break;
-            case "new_comment_idea":
-                submitCommentCallback(value);
-                break;
-            case "get_comments_idea":
-                displayCommentsCallback(value);
-                break;
-            case "askforhelp":
-                askForHelpCallback(value);
-                break;
-        }
-    }
-    */
 }
 
 
@@ -279,11 +246,15 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
         
         var n = node.cloneNode(true);
 
-        if(x.avatar.trim() == "people/"){
+        if(x.avatar.trim() === "people/"){
             x.avatar = "people/avatar.svg";
         }
 
-        n.className += " search_result--" + x.role;
+        if(x.avatar.trim() === "ideas/"){
+            n.className += " search_result--idea";
+        } else {
+            n.className += " search_result--" + x.role;            
+        }
         n.children[0].href = "../" + x.id;
         n.children[0].children[0]
          .children[0].setAttribute("style","background-image:url('../app/assets/pics/" + x.avatar + "')");
@@ -296,6 +267,25 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
     // Replace DOM with new results
     wrapper.innerHTML = "";
     wrapper.appendChild(container);
+
+}
+
+// Filert and hide (css) search results
+Startuppuccino.prototype.layout.filterSearch = function(filter_key){
+
+    var search_results = document.getElementsByClassName("search_result"),
+        targets = document.getElementsByClassName("search_result--"+filter_key),
+        hidden_class = "search_result--hidden";
+
+    // Hide all results
+    for (var i = 0, l = search_results.length; i < l; i++) {
+        search_results[i].classList.add(hidden_class);
+    }
+
+    // Display filtered results
+    for (var i = 0, l = targets.length; i < l; i++) {
+        targets[i].classList.remove(hidden_class);
+    }
 
 }
 

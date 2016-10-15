@@ -9,17 +9,22 @@
 	</div>
 
 	<div class="search__filters">
-		<div class="search__filters__people">
+		<div class="search__filters__reset" data-filter="ideas">
 			<div class="search__filters__content">
-				<span class="search__filters__all" data-filter="people">All Users</span>
-				<span class="search__filters__students" data-filter="students">Students</span>
-				<span class="search__filters__mentors" data-filter="mentors">Mentors</span>
-				<span class="search__filters__educators" data-filter="educators">Teachers</span>
+				<span class="search__filters__all search__filters__item search__filters__item--selected" data-filter="reset">All Results</span>
 			</div>
 		</div>
-		<div class="search__filter__ideas" data-filter="ideas">
+		<div class="search__filters__people">
 			<div class="search__filters__content">
-				<span class="search__filters__all" data-filter="ideas">Ideas</span>
+				<span class="search__filters__all search__filters__item" data-filter="people">All Users</span>
+				<span class="search__filters__students search__filters__item" data-filter="student">Students</span>
+				<span class="search__filters__mentors search__filters__item" data-filter="mentor">Mentors</span>
+				<span class="search__filters__educators search__filters__item" data-filter="educator">Teachers</span>
+			</div>
+		</div>
+		<div class="search__filters__ideas" data-filter="ideas">
+			<div class="search__filters__content">
+				<span class="search__filters__all search__filters__item" data-filter="idea">Ideas</span>
 			</div>
 		</div>
 	</div>
