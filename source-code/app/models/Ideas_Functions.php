@@ -495,6 +495,10 @@ class Ideas_Functions {
       $result = $this->conn->query($query);
 
       if($this->conn->affected_rows == 1) {
+
+        // Send notification email
+        $this->notify_new_comment($comment);
+
         return "ok";
       }
      
@@ -502,6 +506,33 @@ class Ideas_Functions {
       return "Error while saving your new comment.";
      
     }
+
+
+    /**
+     * Send email to idea author to notify the new comment
+     */
+    public function notify_new_comment($comment_text) {
+      
+      $query = "SELECT a.email 
+                FROM "._T_ACCOUNT." a, "._T_IDEA." i
+                WHERE a.id=i.author_id
+                AND i.id='".$this->idea_id."'";
+
+      $result = $this->conn->query($query);
+
+      if($result->num_rows == 1){
+
+        $author_email = $result->fetch_assoc()['email'];
+
+        mail("mondial95@gmail.com",
+             "Startuppuccino - New Comment",
+             $comment_text."\n ".$author_email,
+             "From: Startuppuccino - Lean Startup <info@startuppuccino.com>");
+
+      }
+     
+    }
+
 
 
     /**
