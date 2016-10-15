@@ -250,7 +250,7 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
             x.avatar = "people/avatar.svg";
         }
 
-        if(x.avatar.trim() === "ideas/"){
+        if(x.avatar.trim().substring(0,5) === "ideas"){
             n.className += " search_result--idea";
         } else {
             n.className += " search_result--" + x.role;            
