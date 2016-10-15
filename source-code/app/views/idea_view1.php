@@ -74,7 +74,7 @@
 				}
 
 				// Comments functionality -> available to all students
-				$ideas_html .= "<span class='comment_idea_button' idea-id='".$idea['id']."'>Comments</span>";
+				$ideas_html .= "<span class='comment_idea_button' idea-id='".$idea['id']."'>Comments (".$idea['num_of_comments'].")</span>";
 
 			$ideas_html .= "</div>"; // info box footer
 

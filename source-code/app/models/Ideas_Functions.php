@@ -152,6 +152,7 @@ class Ideas_Functions {
                        i.description,
                        i.ideal_team_size,
                        (SELECT COUNT(*) FROM "._T_IDEA_ACCOUNT." WHERE project_id = i.id) + 1 AS current_team_size,
+                       (SELECT COUNT(*) FROM "._T_IDEA_COMMENT." WHERE project_id = i.id) AS num_of_comments,
                        i.created_at,
                        i.looking_for,
                        i.avatar,
