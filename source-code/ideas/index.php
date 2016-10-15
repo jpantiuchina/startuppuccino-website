@@ -38,8 +38,6 @@
 
 	</head>
 	<body>
-		
-		<?php $page_title = 'Ideas'; ?>
 
 		<?php include '../app/views/header_new.php'; ?>
 		
@@ -50,6 +48,8 @@
 				<section><p>No ideas found...</p></section>
 			
 			<?php } else { ?>
+
+				<?php shuffle($ideas); ?>
 
 				<section>
 					<?php echo include '../app/controllers/idea_view_switch.php'; ?>
