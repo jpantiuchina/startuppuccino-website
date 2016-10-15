@@ -879,6 +879,8 @@ main {
   .idea > .info_box {
     width: 80%;
     font-size: 16px; }
+  .idea_background {
+    color: #979797; }
 
 .info_box > p {
   margin: 0px;
