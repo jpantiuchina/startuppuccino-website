@@ -292,7 +292,7 @@ function StartuppuccinoIdeas(){
 			comment_id = button.parentNode.parentNode.getAttribute("comment-id"),
 			comment_text = button.parentNode.parentNode.childNodes[3].innerHTML;
 
-		if( !confirm("Do you really want to delete this comment?\n\n" + comment_text) ){
+		if( !confirm("Do you really want to delete the comment?") ){
 			return;
 		}
 
