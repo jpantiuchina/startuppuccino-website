@@ -1,0 +1,45 @@
+<section id='new_idea__section'>
+	{% include 'ideas__form.twig' %}
+</section>
+
+{% for idea in ideas %}
+
+	<div class='idea' id='i{{ idea.id }}'>
+
+		<div class='picture_box'>
+			{% set avatar = defalut_avatart %}
+			<div id="idea_picture__{{ idea.id }}"
+			     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
+		</div>
+
+		<div class="info_box">
+
+			<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ idea.title }}</p>
+			<p class='idea_description' id='idea_description__{{ idea.id }}'>{{ idea.description }}</p>
+			<p class='idea_background' id='idea_background__{{ idea.id }}'>Looking for: {{ idea.looking_for }}</p>
+	
+			<div class='info_box_footer'>
+
+				{% if user_id == idea.owner_id %}
+					{# <input type='button' class='c_green' value='Edit' onclick='SpIdea.editIdea("{{ idea.id }}");'> #}
+					<input type='button'
+	                       class='delete_idea_button' 
+	                       value='Delete' 
+	                       data-idea="{{ idea.id }}">
+				{% endif %}
+
+				<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
+			</div>
+
+		</div>
+
+		<div class='idea__footer'></div>
+
+	</div>
+
+{% endfor %}
+
+{% if userLogged %}
+	{#  !TODO include comment_box_view.php #}
+{% endif %}

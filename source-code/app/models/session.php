@@ -1,7 +1,7 @@
 <?php
 	
 	// Prevent showing errors
-	error_reporting(0);
+	//error_reporting(0);
 
 
 	// TODO -> move this to controllers and db queries on credential_functions
