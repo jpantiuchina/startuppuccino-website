@@ -73,12 +73,12 @@
             </li>
             -->
 
-            <li class="menu_link--top <?php if ($currentPage === 'ideas') echo 'menu_link--active'  ?>">
-                <a href="../ideas/">Ideas</a>
-            </li>
-
             <li class="menu_link--top <?php if ($currentPage === 'home') echo 'menu_link--active'  ?>">
                 <a href="<?php printUri("/"); ?>">Home</a>
+            </li>
+            
+            <li class="menu_link--top <?php if ($currentPage === 'ideas') echo 'menu_link--active'  ?>">
+                <a href="../ideas/">Ideas</a>
             </li>
 
         	<li class="menu_link--top">
