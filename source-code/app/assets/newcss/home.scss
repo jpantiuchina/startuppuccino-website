@@ -15,6 +15,7 @@ $session-comments-text-width: calc(100% - #{$session-comments-image-size});
 $session-comments-text-lateral-padding: 15px;
 $session-comments-editor-height: 100px;
 
+$sidebar-head-height: 40px;
 
 .sessions__wrapper {
 	padding-bottom: $header-height;
@@ -301,7 +302,7 @@ $session-comments-editor-height: 100px;
 
 }
 
-/* Section only for mentors - sidebar right */
+/* Sidebar right -mentor availability */
 
 .column_right {
 	width: 100%;
@@ -314,15 +315,27 @@ $session-comments-editor-height: 100px;
 }
 
 .sidebar_container {
+
+	> .overlay_mobile__button {
+		display: none;
+	}
+
 	> .head {
-		height: 40px;
-		line-height: 40px;
+		height: $sidebar-head-height;
+		line-height: $sidebar-head-height;
 		background-color: $session-background-color;
 		color: $logo-brown;
 		padding: 0px 10px;
 		font-family: $font-title;
 		border-bottom: 2px solid #ddd;
 	}
+
+	> .main {
+		overflow-y: scroll;
+		overflow-x: hidden;
+	    max-height: 290px;
+	}
+
 }
 
 .list_el {
@@ -448,7 +461,6 @@ $session-comments-editor-height: 100px;
 }
 
 
-
 @media all and (min-width: 1040px){
 
 	.column_right {
@@ -467,13 +479,27 @@ $session-comments-editor-height: 100px;
 	}
 
 	.column_right {
-		max-height: 40px;
+		max-height: $sidebar-head-height;
 		margin-top: $session-margin-top;
 		overflow: hidden;
 		@include transition($transition-time);
 
-		&:hover {
+		&--visible {
 			max-height: 600px;
+		}
+	}
+
+
+	.sidebar_container {
+		position: relative;
+
+		> .overlay_mobile__button {
+			display: block;
+			position: absolute;
+			top: 0; left: 0;
+			height: $sidebar-head-height;
+			width: 100%;
+			text-align: right;
 		}
 	}
 

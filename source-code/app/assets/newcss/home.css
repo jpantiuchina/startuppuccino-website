@@ -1037,7 +1037,7 @@ textarea {
     .comment__delete:hover {
       color: #fcc124; }
 
-/* Section only for mentors - sidebar right */
+/* Sidebar right -mentor availability */
 .column_right {
   width: 100%;
   background-color: #fff;
@@ -1046,6 +1046,8 @@ textarea {
   .column_right a {
     cursor: pointer !important; }
 
+.sidebar_container > .overlay_mobile__button {
+  display: none; }
 .sidebar_container > .head {
   height: 40px;
   line-height: 40px;
@@ -1054,6 +1056,10 @@ textarea {
   padding: 0px 10px;
   font-family: "Maison", "Roboto", "Arial", san-serif;
   border-bottom: 2px solid #ddd; }
+.sidebar_container > .main {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 290px; }
 
 .list_el {
   position: relative;
@@ -1149,7 +1155,18 @@ textarea {
     overflow: hidden;
     -webkit-transition: all 300ms ease-in-out;
     transition: all 300ms ease-in-out; }
-    .column_right:hover {
-      max-height: 600px; } }
+    .column_right--visible {
+      max-height: 600px; }
+
+  .sidebar_container {
+    position: relative; }
+    .sidebar_container > .overlay_mobile__button {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 40px;
+      width: 100%;
+      text-align: right; } }
 
 /*# sourceMappingURL=home.css.map */

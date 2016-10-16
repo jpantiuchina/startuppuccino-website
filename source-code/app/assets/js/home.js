@@ -108,6 +108,20 @@ StartuppuccinoHome.prototype.layout.setPitchButton = function(button, pitch){
 	}
 
 }
+StartuppuccinoHome.prototype.layout.toggleSidebar = function(){
+
+	var sidebar = document.getElementById("column_right"),
+        is_visible = sidebar.getAttribute("data-sidebar");
+        
+    if(is_visible === "0"){
+        sidebar.className = "column_right column_right--visible";
+        sidebar.setAttribute("data-sidebar","1");
+    } else {
+        sidebar.className = "column_right";
+        sidebar.setAttribute("data-sidebar","0");
+    }
+
+}
 
 /* Mentors functionality */
 
@@ -325,6 +339,7 @@ StartuppuccinoHome.prototype.session.scrollToSection = function(e){
 		sessions[i].className = "session";
 	}
 	document.getElementById(element_id).className = "session session--highlight";
+
 }
 
 

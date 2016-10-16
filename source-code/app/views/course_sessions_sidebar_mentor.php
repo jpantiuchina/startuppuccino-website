@@ -24,9 +24,11 @@
 
 ?>
 
-<section class="column_right">
+<section class="column_right" id="column_right" data-sidebar="0">
 
 	<div class="sidebar_container">
+
+		<div class="overlay_mobile__button" onclick="SpHome.layout.toggleSidebar()"></div>
 
 		<div class="head">
 			<span>Will you be at the lecture?</span>
