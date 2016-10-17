@@ -14,10 +14,10 @@
 				
 				<div class="ask_closer" onclick="hideAskForHelp()">x</div>
 				
-				<input type="hidden" id="askforhelp_id" value="{{ user_id }}" required />
+				<input type="hidden" id="askforhelp_id" value="{{ sess.id }}" required />
 				
 				<label>Email</label>
-				<input type="email" id="askforhelp_email" value="{{ user_email }}" required />
+				<input type="email" id="askforhelp_email" value="{{ sess.email }}" required />
 				
 				<label>Message</label>
 				<textarea id="askforhelp_message" required></textarea>

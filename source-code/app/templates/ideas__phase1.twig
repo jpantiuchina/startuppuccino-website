@@ -1,5 +1,5 @@
 <section id='new_idea__section'>
-	{% include 'ideas__form.twig' %}
+	{% include 'ideas__form.twig' ignore missing %}
 </section>
 
 {% for idea in ideas %}
@@ -20,7 +20,7 @@
 	
 			<div class='info_box_footer'>
 
-				{% if user_id == idea.owner_id %}
+				{% if sess.id == idea.owner_id %}
 					{# <input type='button' class='c_green' value='Edit' onclick='SpIdea.editIdea("{{ idea.id }}");'> #}
 					<input type='button'
 	                       class='delete_idea_button' 
@@ -41,5 +41,5 @@
 {% endfor %}
 
 {% if userLogged %}
-	{#  !TODO include comment_box_view.php #}
+	{% include 'comment__boxview.twig' ignore missing %}
 {% endif %}

@@ -1,4 +1,4 @@
-{% for ideas as idea %}
+{% for idea in ideas %}
 
 	<div class='idea' id='i{{ idea.id }}'>
 
@@ -10,7 +10,7 @@
 
 		<div class="info_box">
 
-			<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ $idea.title }}</p>
+			<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ idea.title }}</p>
 			<p class='idea_description' id='idea_description__{{ idea.id }}'>{{ idea.description }}</p>
 		
 		</div>

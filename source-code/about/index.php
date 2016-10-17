@@ -97,18 +97,7 @@
 
         </main>
 
-        <footer>
-
-            <div class="land__separator"></div>
-
-            <p><a class="about_links" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a></p>
-            <p><a class="about_links" href="https://unibz.it" target="_blank">Unibz.it</a></p>
-
-        	<p>&copy; 2016 Startuppuccino. All rights reserved<!-- — Privacy — Contacts--></p>
-
-        </footer> 
-
-        <script src="../app/assets/js/startuppuccino.js"></script>
+        <?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

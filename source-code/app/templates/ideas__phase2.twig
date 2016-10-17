@@ -20,6 +20,7 @@
 
 				<input type="button"
 				       class="{% if idea.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
+				       value="{{ idea.vote_label }}" {# vote_label can be "like" or "unlike" #}
 				       onclick="SpIdea.ideaHelper('{{ idea.vote_label }}', '{{ idea.id }}', this)" />
 
 			</div>

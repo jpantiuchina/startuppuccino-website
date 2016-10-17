@@ -1,0 +1,11 @@
+{% if metatags %}
+
+	{% for item in metatags %}
+		{% if item.kind == "link" %}
+			<link href="{{ item.link }}" rel="{{ item.rel }}" type="{{ item.type }}" media="all">
+		{% else %}
+			<meta name="{{ item.name }}" content="{{ item.content }}">
+		{% endif %}
+	{% endfor %}
+
+{% endif %}

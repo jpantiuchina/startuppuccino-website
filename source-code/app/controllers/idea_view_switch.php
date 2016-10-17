@@ -1,32 +1,23 @@
 <?php
 	
 	require_once '../app/models/session.php';
+    require_once '../app/views/_Twig_Loader.php';
 
 	// Switch between different ideas phases
+	// Set template name and variables
+    $ideas_phase = isset($_SESSION['ideas_phase']) ? $_SESSION['ideas_phase'] : 0;
+	
+	$template_variables = [
+							'ideas' => $ideas,
+							'sess' => $_SESSION,
+							'userLogged' => $userLogged,
+							'isStudent' => $isStudent,
+							'default_avatar' => "idea_pic.png"
+						];
 
-	$ip = isset($_SESSION['ideas_phase']) ? $_SESSION['ideas_phase'] : 0;
 
-	switch ($ip) {
-		case 1:
-		
-			$view = include '../app/views/idea_view1.php';			
-			break;
-		
-		case 2:
-		
-			$view = include '../app/views/idea_view2.php';			
-			break;
-		
-		case 3:
-			
-			$view = include '../app/views/idea_view3.php';			
-			break;
-		
-		default:
-			$view = include '../app/views/idea_view0.php';			
-			break;
-	}
+	$template_file = "ideas__phase" . $ideas_phase . ".twig";
 
-	return $view;
+	return (new Twig_Loader())->render($template_file, $template_variables);
 
 ?>
