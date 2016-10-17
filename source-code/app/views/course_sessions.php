@@ -49,6 +49,7 @@
 
 				<div class="guests" id="guests__<?php echo $session['id']; ?>">
 					<?php if(isset($session['guests'])){ ?>
+					<p>Mentors coming</p>
 					<?php foreach ($session['guests'] as $guest){ ?>
 						<?php 
 							if(!isset($guest['avatar']) || empty($guest['avatar'])){

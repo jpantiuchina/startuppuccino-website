@@ -890,6 +890,8 @@ textarea {
   .session__contents > .foot > span {
     font-size: 12px; }
 
+.guests p:first-child {
+  color: #999; }
 .guests > .guest {
   display: inline-block;
   width: 40px;
@@ -1050,7 +1052,8 @@ textarea {
   display: none; }
 .sidebar_container > .head {
   height: 40px;
-  line-height: 40px;
+  line-height: 20px;
+  font-size: 14px;
   background-color: #fff;
   color: #513a2b;
   padding: 0px 10px;

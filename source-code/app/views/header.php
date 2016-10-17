@@ -1,65 +1,125 @@
 <?php
 
-	/* General header - menu used in all project pages (except for landing-page) */
+	/* General header - menu used in all project pages */
+    if(!defined("RELATIVE_PATH")){
+        define("RELATIVE_PATH", "..");
+    }
 
-?>	
+	// Helper function -> return avatar;
+	function avatar(){
+		return empty(trim($_SESSION['avatar'])) ? 'avatar.svg' : $_SESSION['avatar'];
+	}
 
-	<?php include 'search.php'; ?>
-	<?php include 'loading_screen.php'; ?>
+    // Helper function -> print uri with the correct relative path
+    function printUri($link){
+        echo RELATIVE_PATH . $link;
+    }
 
-	<header>
+/*
+    $homeurl = "/";
+    if(isset($landing_page_) && $landing_page_ === true){
+        $homeurl = "/about/";
+    }
+*/
 
-        <section class="top_header custom_padding__header">
+    if( !isset($currentPage) ) {
+        $currentPage = "";
+    }
+
+?>
+
+<?php if ($userLogged){ ?>
+    <?php include 'search.php'; ?>
+    <?php include 'loading_screen.php'; ?>
+<?php } ?>
+
+<header>
+
+	<div class="logo">
+    	<a href="<?php printUri("/");?>" title="Home - Startuppuccino">
+        	<img alt="Startuppuccino" src="<?php printUri("/app/assets/pics/logos/startuppuccino_logo.svg");?>" />
+    	</a>
+    </div>
+
+    <!--
+    <div class="page_title">
+    	<span>Lean Startup</span>
+    </div>
+    -->
+
+    <nav class="menu">
+
+    	<div id="mobile_menu__button" class="mobile_menu__button" onclick="Sp.layout.toggleMobileMenu()">
+    		<div></div>
+            <div></div>
+            <div></div>
+    	</div>
+
+    	<ul class="menu_list menu_list--hide" id="menu_list" data-mobile="0">
+
+		<?php if ($userLogged){ ?>
+
+            <?php if(false){ ?>
+
+			<li class="menu_link--top">
+                <a href="<?php printUri("/educators/");?>">Edu-area</a>
+            </li>
+
+			<?php } ?>
+
+            <!--
+			<li class="menu_link--top">
+                <a href="../home/">Lectures</a>
+            </li>
+            -->
+
+            <li class="menu_link--top <?php if ($currentPage === 'home') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/"); ?>">Home</a>
+            </li>
             
-        	<div onclick="Sp.layout.toggleMobileMenu(this)" id="mobile_menu__button" class="mobile_menu__button">
-        		<div></div>
-        		<div></div>
-        		<div></div>
-        		<div></div>
-        	</div>
+            <li class="menu_link--top <?php if ($currentPage === 'ideas') echo 'menu_link--active'  ?>">
+                <a href="../ideas/">Ideas</a>
+            </li>
 
-        	<a href="../" title="Home - Startuppuccino">
-	        	<img class="logo logo--link" alt="Startuppuccino" src="../app/assets/pics/logos/startuppuccino_logo.svg" />
-	        </a>
+        	<li class="menu_link--top">
+                <a href="#" class="search_trigger_button">Search</a>
+            </li>
 
-            <nav id="main_menu">
+        	<li class="menu_link submenu_trigger">
+        		<div class="menu_profile_picture" style="background-image: url('<?php printUri("/app/assets/pics/people/".avatar());?>')" alt="Profile">
+        			<a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">
+                        <div class="role_filter--<?php echo $_SESSION['role'];?>"></div>
+                    </a>
+        		</div> 
+        		<ul class="submenu">
+                    <!--<li class="menu_link--sub"><a href="<?php printUri("/people/?user_id=".$_SESSION['id']);?>">Profile</a></li>-->
+                    <li class="menu_link--sub"><a href="<?php printUri("/settings/");?>">Settings</a></li>
+				    <li class="menu_link--sub"><a href="<?php printUri("/logout/");?>">Logout</a></li>
+                    <!--<li class="menu_link--sub"><a href="#" id="askforhelp_trigger_button">Help</a></li>-->
+				</ul>
+        	</li>
 
-       			<?php if ($userLogged){ ?>
+		<?php } else { ?>
 
-       			<?php if($_SESSION['role']=="educator"){ ?>
+            <li class="menu_link--top <?php if ($currentPage === 'about') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/about/");?>">About</a>
+            </li>
 
-					<a class="menu_link" href="../educators/manage/ideas/">EDU-AREA</a>
+			<!-- change this into a login form (external ajax login form script -> include) -->
+			<li class="menu_link--top <?php if ($currentPage === 'login') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/login/");?>">Login</a>
+            </li>
 
-       			<?php } ?>
+            <li class="menu_link--top <?php if ($currentPage === 'register') echo 'menu_link--active'  ?>">
+                <a href="<?php printUri("/register/");?>">Register</a>
+            </li>
 
-					<a class="menu_link" href="../ideas/">IDEAS</a>
+		<?php } // endif userlogged ?>
 
-       				<a class="menu_link" href="../teams/">TEAMS</a>
-       				
-                	<a class="menu_link" href="#" onclick="Sp.layout.toggleSearch()">SEARCH</a>
+		</ul>
 
-                	<a class="menu_link" href="../account/">ACCOUNT</a>
+    </nav>
+        
+    <div class="header_separator"></div>
 
-                	<!--
-					<div class="menu_link menu_link--controller" >
-						<span class="menu_link menu_link--placeholder"><?php //print strtoupper($_SESSION['firstname']); ?></span>
-						<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
-					</div>
-					-->
-
-					<a class="menu_link" href="../logout/">LOGOUT</a>
-
-				<?php } else { ?>
-
-					<!-- change this into a login form (external ajax login form script -> include) -->
-					<a class="menu_link" href="../login/">LOGIN</a>
-
-					<a class="menu_link" href="../register/">REGISTER</a>
-
-				<?php } // endif userlogged ?>
-
-            </nav>
-            
-        </section>
-
-    </header>
+</header>

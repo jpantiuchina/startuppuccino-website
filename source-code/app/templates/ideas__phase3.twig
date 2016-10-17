@@ -1,0 +1,41 @@
+<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
+
+{% for idea in ideas %}
+
+	{% if idea.approved == "T" %}
+
+		<div class='idea' id='i{{ idea.id }}'>
+
+			<div class='picture_box'>
+				{% set avatar = defalut_avatart %}
+				<div id="idea_picture__{{ idea.id }}"
+				     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
+			</div>
+
+			<div class="info_box">
+
+				<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ idea.title }}</p>
+				<p class='idea_description' id='idea_description__{{ idea.id }}'>{{ idea.description }}</p>
+				<p class='idea_background' id='idea_background__{{ idea.id }}'>Looking for: {{ idea.looking_for }}</p>
+
+				<div class='info_box_footer'>
+
+					{# Only students can join ideas (and not idea owners) #}
+					{% if isStudent and user_id != idea.owner_id %}
+						<input type="button"
+						       class='{% if idea.i_joined=='join' %} c_green {% else %} c_red {% endif %}' 
+						       value="{{ idea.i_joined }}" {# i_joined can be "join" or "leave" #}
+						       onclick="SpIdea.ideaHelper('{{ idea.i_joined }}', '{{ idea.id }}', this)" />
+					{% endif %}
+
+				</div>
+
+			</div>
+
+			<div class='idea__footer'></div>
+
+		</div>
+
+	{% endif %}
+
+{% endfor %}

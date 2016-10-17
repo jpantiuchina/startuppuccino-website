@@ -98,6 +98,10 @@ $sidebar-head-height: 40px;
 
 .guests {
 
+	p:first-child {
+		color: #999;
+	}
+
 	> .guest {
 		display: inline-block;
 		width: 40px;
@@ -322,7 +326,8 @@ $sidebar-head-height: 40px;
 
 	> .head {
 		height: $sidebar-head-height;
-		line-height: $sidebar-head-height;
+		line-height: $sidebar-head-height/2;
+		font-size: 14px;
 		background-color: $session-background-color;
 		color: $logo-brown;
 		padding: 0px 10px;

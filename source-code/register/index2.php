@@ -23,7 +23,7 @@
 
 		<?php $page_title = "Register"; ?>
 
-		<?php include '../app/views/header_new.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<main>
 

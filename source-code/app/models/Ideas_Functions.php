@@ -159,7 +159,11 @@ class Ideas_Functions {
                        a.firstName, 
                        a.lastName,
                        i.id,
-                       i.owner_id
+                       i.owner_id,
+                       (SELECT IF (COUNT(project_id)>0, 'unlike', 'like') vote
+                        FROM "._T_IDEA_LIKE." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS vote_label,
+                       (SELECT IF (COUNT(project_id)>0, 'leave', 'join') vote
+                        FROM "._T_IDEA_ACCOUNT." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS i_joined
                     FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id 
                     WHERE NOT i.is_approved;";
 

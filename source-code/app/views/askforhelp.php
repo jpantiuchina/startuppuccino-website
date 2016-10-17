@@ -2,7 +2,7 @@
 	
 	// Set template name and variables
 	
-	$template_file = "askforhelp.twig";	
+	$template_file = "all__askforhelp.twig";	
 
 	$template_variables = [
 				'user_id' => $_SESSION['id'],
