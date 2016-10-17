@@ -21,3 +21,7 @@
 
 
 <script src="../app/assets/js/startuppuccino.js"></script>
+
+{% for src in footer_scripts %}
+	<script src="{{ src }}"></script>
+{% endfor %}
