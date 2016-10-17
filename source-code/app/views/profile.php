@@ -64,8 +64,16 @@
 					$social_data[0] = "http://".$social_data[0];
 				}
 				
+
+				// Patch to show musteus png
+				if($social_label == "musteus"){
+					$social_avatar = "musteus.png";
+				} else {
+					$social_avatar = $social_label.".svg";
+				}
+
 				?>
-					<a class="profile_role <?php echo $social_data[1];?>" target="_blank" href="<?php echo $social_data[0];?>"><img src="../app/assets/pics/icons/<?php echo $social_label; ?>.svg" width="40" /></a>
+					<a class="profile_role <?php echo $social_data[1];?>" target="_blank" href="<?php echo $social_data[0];?>"><img src="../app/assets/pics/icons/<?php echo $social_avatar; ?>" width="40" /></a>
 				<?php
 			}
 
