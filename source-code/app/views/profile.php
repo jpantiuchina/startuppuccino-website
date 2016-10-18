@@ -60,7 +60,7 @@
 				} else if($social_label == "telegram"){
 					// ...
 				} else if(substr($social_data[0], 0, 7) == 'http://'){
-					$social_data[0] = "//".substr($social_data[0], 8);
+					$social_data[0] = "//".substr($social_data[0], 6);
 				} else if(substr($social_data[0], 0, 8) == 'https://'){
 					$social_data[0] = "//".substr($social_data[0], 7);
 				} else {
