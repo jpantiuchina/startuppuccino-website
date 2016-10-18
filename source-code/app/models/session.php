@@ -8,9 +8,17 @@
 
 
 	session_start();
-	
-	$userLogged = isset($_SESSION['firstname']);
 
+	$userLogged = isset($_SESSION['firstname']);	
+
+
+	// Load Config
+   	require_once 'Config_Functions.php';
+   	$config_func = new Config_Functions();
+   	// Load ideas settings
+   	$config_func->load();
+
+   	
 	// Check if the user required to stay logged in
 	if(!$userLogged){
 
@@ -50,13 +58,6 @@
 
 					// Set session data
 					foreach ($account_data as $key => $value) { $_SESSION[$key] = $value; }
-
-					// Load Config
-				   	require_once 'Config_Functions.php';
-				   	$config_func = new Config_Functions();
-				   	// Load ideas settings
-				   	$config_func->load();
-				   	
 
 				   	$userLogged = isset($_SESSION['firstname']);
 

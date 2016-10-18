@@ -35,9 +35,7 @@ class Config_Functions {
       $ideas_settings = $this->json_data["functionalities"]["ideas"];
 
       foreach ($ideas_settings as $key => $value) {
-        
-        //echo $key.$value;
-
+      
         $_SESSION["ideas_".$key] = $value;
 
       }
