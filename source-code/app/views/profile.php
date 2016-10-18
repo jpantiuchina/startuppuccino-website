@@ -52,16 +52,19 @@
 			$socials = !empty($user["socials"]) ? json_decode(trim($user["socials"]),true) : array();
 			foreach ($socials as $social_label => $social_data ) {
 				// Fix url format
+				
 				if($social_label == "skype"){
 					$social_data[0] = "skype:".$social_data[0];
 				} else if($social_label == "whatsapp"){
 					$social_data[0] = "whatsapp://".$social_data[0];
 				} else if($social_label == "telegram"){
 					// ...
-				} else if(substr($social_label, 0, 7) == 'http://' || substr($social_label, 0, 8) == 'https://'){
-					$social_data[0] = "//".$social_data[0];
+				} else if(substr($social_data[0], 0, 7) == 'http://'){
+					$social_data[0] = "//".substr($social_data[0], 8);
+				} else if(substr($social_data[0], 0, 8) == 'https://'){
+					$social_data[0] = "//".substr($social_data[0], 7);
 				} else {
-					$social_data[0] = "http://".$social_data[0];
+					$social_data[0] = "//".$social_data[0];
 				}
 				
 
