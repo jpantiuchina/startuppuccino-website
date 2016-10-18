@@ -23,7 +23,10 @@
 				       value="{{ idea.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
 				       onclick="SpIdea.ideaHelper('{{ idea.vote_label }}', '{{ idea.id }}', this)" />
 
-				<div class="overlay_loader"></div>
+				{# <div class="overlay_loader"></div> #}
+
+				<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
 
 			</div>
 
@@ -34,3 +37,8 @@
 	</div>
 
 {% endfor %}
+
+
+{% if userLogged %}
+	{% include 'comment__boxview.twig' ignore missing %}
+{% endif %}

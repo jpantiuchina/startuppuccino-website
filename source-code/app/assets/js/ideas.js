@@ -423,9 +423,11 @@ window.addEventListener("load", function(){
 		for (var i = 0; i < delete_idea_buttons_length; i++) {
 			delete_idea_buttons[i].addEventListener("click", function(e){ SpIdea.deleteIdea(e); });
 		}
-		for (var i = 0; i < comment_idea_buttons_length; i++) {
-			comment_idea_buttons[i].addEventListener("click", function(e){ SpIdea.showCommentBox(e); });
-		}
+	}
+
+	
+	for (var i = 0; i < comment_idea_buttons_length; i++) {
+		comment_idea_buttons[i].addEventListener("click", function(e){ SpIdea.showCommentBox(e); });
 	}
 
 });

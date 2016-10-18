@@ -518,21 +518,26 @@ class Ideas_Functions {
      */
     public function notify_new_comment($comment_text) {
       
-      $query = "SELECT a.email 
-                FROM "._T_ACCOUNT." a, "._T_IDEA." i
-                WHERE a.id=i.author_id
-                AND i.id='".$this->idea_id."'";
+      $query = "SELECT email, title, i.id
+                FROM "._T_ACCOUNT." a JOIN "._T_IDEA." i
+                ON a.id=i.owner_id
+                WHERE i.id='".$this->idea_id."'";
 
       $result = $this->conn->query($query);
 
-      if($result->num_rows == 1){
+      if($result && $result->num_rows == 1) {
 
-        $author_email = $result->fetch_assoc()['email'];
+        $r = $result->fetch_assoc();
+        $author_email = $r['email'];
+        $idea_link = "http://startuppuccino.com/ideas/#i".$r['id'];
 
-        mail("mondial95@gmail.com",
-             "Startuppuccino - New Comment",
-             $comment_text."\n ".$author_email,
-             "From: Startuppuccino - Lean Startup <info@startuppuccino.com>");
+        $idea_title = $r['title'];
+
+        mail("dev@startuppuccino",
+             "New Comment on".$idea_title,
+             "Comment: ".$comment_text."\n\n".$idea_link."\n\n ".$author_email,
+             "From: Startuppuccino - Lean Startup <info@startuppuccino.com>, 
+              Bcc: dev@startuppuccino.com");
 
       }
      
