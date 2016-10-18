@@ -66,13 +66,10 @@ $askforhelp-margin: 20px;
     }
 
     >input[type=submit] {
-        background-color: transparent;
+        @extend .st_button;
         width: 100px;
-        background-color: #444;
+        background-color: #444 !important;
         color: #fff !important;
-        box-shadow-color: #fff !important;
-        -webkit-box-shadow-color: #fff !important;
-    	@extend .st_button;
     }
 
     .ask_closer {

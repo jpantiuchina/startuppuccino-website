@@ -606,12 +606,9 @@ footer,
     max-height: 120px;
     max-width: 550px; }
   .askforhelp_form > input[type=submit] {
-    background-color: transparent;
     width: 100px;
-    background-color: #444;
-    color: #fff !important;
-    box-shadow-color: #fff !important;
-    -webkit-box-shadow-color: #fff !important; }
+    background-color: #444 !important;
+    color: #fff !important; }
   .askforhelp_form .ask_closer {
     position: absolute;
     right: 20px;

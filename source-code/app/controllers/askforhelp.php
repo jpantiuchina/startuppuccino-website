@@ -15,10 +15,10 @@
 	// ...
 
 	// Send email
-	if(mail("help@startuppuccino.com","ASK FOR HELP - ".$_GET['i'],$_GET['m'],"From: ".$_GET['e'])){
+	if(mail("info@startuppuccino.com","ASK FOR HELP - ".$_GET['i'],$_GET['m'],"From: ".$_GET['e'])){
 		echo "Request successfully sent!";
 	} else {
-		echo "Error while sending the request.";
+		echo "Error while sending the request.\nPlease try again later, or contact the professor.";
 	}
 
 ?>
