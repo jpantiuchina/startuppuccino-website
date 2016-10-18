@@ -374,6 +374,13 @@ StartuppuccinoIdeas.prototype.layout.toggleIdeaPictureForm = function() {
     var search = document.getElementsByClassName("picture_form_wrapper")[0];
     search.classList.toggle("picture_form_wrapper--visible");
 }
+StartuppuccinoIdeas.prototype.layout.setFooterOverlayLoader = function(elem, flag) {
+	if(flag === true){
+		elem.className = "overlay_loader overlay_loader--block";
+	} else {
+		elem.className = "overlay_loader";
+	}
+}
 
 /* Initialize Startuppuccino Home */
 
