@@ -110,7 +110,6 @@ main { padding-top: $header-height + 20px !important; }
 	height: $idea-footer-lineheight + $idea-footer-padding-bottom;
 	line-height: $idea-footer-lineheight;
 	padding-bottom: $idea-footer-padding-bottom;
-	border-bottom: $idea-border-bottom;
 
 	>input[type=submit],
 	>input[type=button] {
@@ -138,6 +137,35 @@ main { padding-top: $header-height + 20px !important; }
 
 }
 
+
+.members {
+
+	margin-left: $picture-box-width;
+	border-bottom: $idea-border-bottom;
+
+	> .member {
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		margin: 5px 1px;
+		background-color: $logo-red;
+		cursor: pointer;
+		@include border-radius(50%);
+		overflow: hidden;
+
+		>a{
+			display: block;
+			height: 100%;
+			
+			div {
+				@extend .picture;
+				background-color: $background-color;
+				height: 100%;
+			}
+		}
+	}
+}
+
 @media all and (max-width: 700px){
 
 .idea {
@@ -153,6 +181,10 @@ main { padding-top: $header-height + 20px !important; }
 
 	>.picture_box {
 		margin-bottom: 20px
+	}
+
+	.members {
+		margin: auto
 	}
 
 }

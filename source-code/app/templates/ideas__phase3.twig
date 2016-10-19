@@ -1,7 +1,15 @@
+{% if sess.id %}
+	<script type="text/javascript">
+		var STARTUPPUCCINO_USER = {
+				id : "{{ sess.id }}",
+				avatar : "{{ sess.avatar | default('avatar.svg') }}"
+			};
+	</script>
+{% endif %}
+
 {% if isStudent and user_can_join %}
 	<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
 {% endif %}
-
 
 {% if isStudent and not user_can_join and joined_idea %}
 
@@ -35,7 +43,17 @@
 
 		</div>
 
-		<div class='idea__footer'></div>
+		<div class='idea__footer'>
+			<div class="members" id="members__{{ joined_idea.id }}">
+				{% for member in joined_idea.members %}
+					<div class="member" member-id="{{ member.id }}">
+						<a href="../people/?user_id={{ member.id }}">
+							<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
 
 	</div>
 
@@ -76,7 +94,17 @@
 
 			</div>
 
-			<div class='idea__footer'></div>
+			<div class='idea__footer'>
+				<div class="members" id="members__{{ idea.id }}">
+					{% for member in idea.members %}
+						<div class="member" member-id="{{ member.id }}">
+							<a href="../people/?user_id={{ member.id }}">
+								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
 
 		</div>
 

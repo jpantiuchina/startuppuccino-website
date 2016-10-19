@@ -128,7 +128,9 @@ class Ideas_Functions {
       $result = $this->conn->query($query);
 
       if($result->num_rows == 1) {
-        return $result->fetch_assoc();
+        $idea = $result->fetch_assoc();
+        $ideas = $this->loadIdeaMembers([$idea]);
+        return $ideas[0];
       }
      
       // No idea found
@@ -139,28 +141,35 @@ class Ideas_Functions {
     /**
      * Get all idea members
      */
-    public function getIdeaMembers(){
+    private function loadIdeaMembers($ideas_array){
 
-      $query = "SELECT account_id FROM "._T_IDEA_ACCOUNT." WHERE project_id='".$this->idea_id."';";
-      //$query = "SELECT id,skills FROM Account WHERE idea_selected='".$this->idea_id."';";
+      foreach ($ideas_array as $i => $idea_value) {
 
-      $result = $this->conn->query($query);
+          $query = "SELECT a.id, a.avatar, a.firstName, a.lastName
+                    FROM "._T_IDEA_ACCOUNT." AS ia 
+                    JOIN "._T_ACCOUNT." AS a 
+                    ON ia.account_id = a.id
+                    WHERE ia.project_id = ".$ideas_array[$i]['id'].";";
 
-      $idea_members = [];
+          $result = $this->conn->query($query);
 
-      if($result->num_rows > 0) {
+          $members = [];
 
-        // Fetch idea members into array
-        while($member = $result->fetch_assoc()) {
-          $idea_members[] = $member['account_id'];
-        }
-        
+          if($result){
+
+              while ($member = $result->fetch_assoc()){
+                  $members[] = $member;
+              }
+
+              if(count($members) > 0){
+                  $ideas_array[$i]['members'] = $members;
+              }
+
+          }
+
       }
 
-      // Add the idea owner to the idea members (not included in the IdeaAccount table)
-      $idea_members[] = $this->ideaOwnerID();
-
-      return $idea_members;
+      return $ideas_array;
 
     }
 
@@ -201,6 +210,11 @@ class Ideas_Functions {
 
         while ($idea = $result->fetch_assoc()){
           $ideas[] = $idea;
+        }
+
+        if(count($ideas) > 0){
+            // Fill with ideas members
+            $ideas = $this->loadIdeaMembers($ideas);
         }
 
         // Return all ideas

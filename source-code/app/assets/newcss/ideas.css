@@ -713,7 +713,7 @@ textarea {
   font-family: "Roboto", "Arial", sans-serif; }
 
 /* General picture */
-.picture, header .menu_profile_picture, .idea > .picture_box > div, .comment__author > div {
+.picture, header .menu_profile_picture, .idea > .picture_box > div, .members > .member > a div, .comment__author > div {
   position: relative;
   background-color: #fff;
   background-repeat: no-repeat;
@@ -902,8 +902,7 @@ main {
   text-align: right;
   height: 50px;
   line-height: 35px;
-  padding-bottom: 15px;
-  border-bottom: 1px dotted #999; }
+  padding-bottom: 15px; }
   .info_box_footer > input[type=submit].c_red,
   .info_box_footer > input[type=button].c_red {
     background-color: #be3b43 !important; }
@@ -917,6 +916,28 @@ main {
     .info_box_footer > .overlay_loader--block {
       display: block; }
 
+.members {
+  margin-left: 20%;
+  border-bottom: 1px dotted #999; }
+  .members > .member {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px 1px;
+    background-color: #be3b43;
+    cursor: pointer;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden; }
+    .members > .member > a {
+      display: block;
+      height: 100%; }
+      .members > .member > a div {
+        background-color: #f7f7dd;
+        height: 100%; }
+
 @media all and (max-width: 700px) {
   .idea > .info_box,
   .idea > .picture_box {
@@ -924,7 +945,9 @@ main {
   .idea > .info_box {
     width: 100%; }
   .idea > .picture_box {
-    margin-bottom: 20px; } }
+    margin-bottom: 20px; }
+  .idea .members {
+    margin: auto; } }
 /* Idea buttons */
 .delete_idea_button {
   background-color: #be3b43 !important; }
