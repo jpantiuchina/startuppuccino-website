@@ -25,7 +25,8 @@
 						"href" => "https://cdn.plyr.io/2.0.7/plyr.css"
 					]
 				];
-	$footer_scripts = ["https://cdn.plyr.io/2.0.7/plyr.js"];
+	$footer_scripts = ["https://cdn.plyr.io/2.0.7/plyr.js",
+					   "../app/assets/js/player.js"];
 	$media = null;
 
 	// Redirect to home if media file is not set
