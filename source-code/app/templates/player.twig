@@ -1,0 +1,49 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+	<section>
+		
+		{% if media.kind == "video" %}
+
+			<video poster="{{ media.poster|default("") }}" controls>
+			  <source src="{{ rel_path }}{{ media.path }}" type="video/{{ media.type }}">
+			  {#<source src="/path/to/video.webm" type="video/webm">#}
+			  {#<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>#}
+			</video>
+		
+		{% else if media.kind == "audio" %}
+			
+			<p>To be implemented yet..</p>
+			{# 
+			<audio controls>
+			  <source src="/path/to/audio.mp3" type="audio/mp3">
+			  <source src="/path/to/audio.ogg" type="audio/ogg">
+			</audio>
+			#}
+
+		{% else if media.kind == "youtube" %}
+
+			<p>To be implemented yet..</p>
+			{# 
+			<div data-type="youtube" data-video-id="bTqVqk7FSmY"></div>
+			#}
+
+		{% else if media.kind == "vimeo" %}
+
+			<p>To be implemented yet..</p>
+			{# 
+			<div data-type="vimeo" data-video-id="143418951"></div>
+			#}
+
+		{% else %}
+
+			<p>I couldn't understand what to do..</p>
+
+		{% endif %}
+	
+	</section>
+</main>
+
+{% endblock %}
