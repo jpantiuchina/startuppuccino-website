@@ -31,6 +31,7 @@
 				];
 	$footer_scripts = ["../app/assets/js/ideas.js"];
 	$view = null;
+	$user_can_join = count($ideas_func->user_joins) < 1;
 
 
 	if ( !($ideas = $ideas_func->getAllIdeas()) && $_SESSION['ideas_phase'] != "1" ){
@@ -60,6 +61,10 @@
 	$template_variables['metatags'] = $metatags;
 	$template_variables['footer_scripts'] = $footer_scripts;
 	$template_variables['rel_path'] = '..';
+	$template_variables['user_can_join'] = $user_can_join;
+	if($_SESSION['ideas_phase'] == "3"){
+		$template_variables['joined_idea'] = $ideas_func->getJoinedIdea();
+	}
 
     // Render the template
     require_once '../app/views/_Twig_Loader.php';

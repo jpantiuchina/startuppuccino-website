@@ -34,19 +34,32 @@ function StartuppuccinoIdeas(){
 
 						// Change style to the button
 						BUTTON_SELECTED.value = "Leave";
-						BUTTON_SELECTED.className = "c_red";
+						BUTTON_SELECTED.className = "c_red join_idea_button";
 
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('leave','" + IDEA_ID + "',this);");
+
+						// Hide all buttons except for the selected one
+						var join_idea_buttons = document.getElementsByClassName("join_idea_button");
+						for (var i = 0; i < join_idea_buttons.length; i++) {
+							join_idea_buttons[i].setAttribute("style","display:none");
+						}
+						BUTTON_SELECTED.removeAttribute("style");
 
 					} else if (action == "leave"){
 
 						// Change style to the button
 						BUTTON_SELECTED.value = "Join";
-						BUTTON_SELECTED.className = "c_green";
+						BUTTON_SELECTED.className = "c_green join_idea_button";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpIdea.ideaHelper('join','" + IDEA_ID + "',this);");
+
+						// Show all buttons
+						var join_idea_buttons = document.getElementsByClassName("join_idea_button");
+						for (var i = 0; i < join_idea_buttons.length; i++) {
+							join_idea_buttons[i].removeAttribute("style");
+						}
 				
 					} else if (action == "like"){
 
@@ -72,6 +85,7 @@ function StartuppuccinoIdeas(){
 
 					}
 
+					/*
 					if(action !="like" && action != "unlike"){
 						// Async update team size
 						Sp.post({
@@ -80,7 +94,7 @@ function StartuppuccinoIdeas(){
 							},function(response){
 								TEAMSIZE_NODE.innerHTML = "Team size: " + parseInt(response); // +1 is the idea owner
 							});
-					}
+					}*/
 
 				} else {
 

@@ -1,8 +1,51 @@
-<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
+{% if isStudent and user_can_join %}
+	<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
+{% endif %}
+
+
+{% if isStudent and not user_can_join and joined_idea %}
+
+<h3>Idea you joined</h3>
+
+	<div class='idea' id='i{{ joined_idea.id }}'>
+
+		<div class='picture_box'>
+			{% set avatar = defalut_avatart %}
+			<div id="idea_picture__{{ joined_idea.id }}"
+			     style="background-image:url('../app/assets/pics/ideas/{{ joined_idea.avatar | default(avatar) }}')"></div>
+		</div>
+
+		<div class="info_box">
+
+			<p class='idea_title' id='idea_title__{{ joined_idea.id }}'>{{ joined_idea.title }}</p>
+			<p class='idea_description' id='idea_description__{{ joined_idea.id }}'>{{ joined_idea.description }}</p>
+			<p class='idea_background' id='idea_background__{{ joined_idea.id }}'>Looking for: {{ joined_idea.looking_for }}</p>
+
+			<div class='info_box_footer'>
+
+				{# Only students can join ideas (and not idea owners) #}
+				{% if sess.id != joined_idea.owner_id %}
+					<input type="button"
+					       class='c_red join_idea_button' 
+					       value="Leave" {# i_joined can be "join" or "leave" #}
+					       onclick="SpIdea.ideaHelper('leave', '{{ joined_idea.id }}', this)" />
+				{% endif %}
+
+			</div>
+
+		</div>
+
+		<div class='idea__footer'></div>
+
+	</div>
+
+<h3>All Ideas</h3>
+
+{% endif %}
 
 {% for idea in ideas %}
 
-	{% if idea.approved == "T" %}
+	{% if joined_idea.id != idea.id and idea.is_approved == 1 %}
 
 		<div class='idea' id='i{{ idea.id }}'>
 
@@ -21,10 +64,11 @@
 				<div class='info_box_footer'>
 
 					{# Only students can join ideas (and not idea owners) #}
-					{% if isStudent and user_id != idea.owner_id %}
+					{% if isStudent and sess.id != idea.owner_id %}
 						<input type="button"
-						       class='{% if idea.i_joined=='join' %} c_green {% else %} c_red {% endif %}' 
-						       value="{{ idea.i_joined }}" {# i_joined can be "join" or "leave" #}
+							   {% if not user_can_join %}style="display:none"{% endif %}
+						       class='{% if idea.i_joined=='join' %} c_green {% else %} c_red {% endif %} join_idea_button'
+						       value="{{ idea.i_joined|capitalize }}" {# i_joined can be "join" or "leave" #}
 						       onclick="SpIdea.ideaHelper('{{ idea.i_joined }}', '{{ idea.id }}', this)" />
 					{% endif %}
 

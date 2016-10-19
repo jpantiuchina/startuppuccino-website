@@ -5,8 +5,11 @@ class Ideas_Functions {
     private $account_id;
     private $idea_id;
     private $my_ideas_id;
-    private $user_likes;
     private $LIKES_LIMIT;
+    private $JOIN_LIMIT;
+
+    public $user_likes;
+    public $user_joins;
 
     // constructor
     function __construct($account) {
@@ -17,7 +20,9 @@ class Ideas_Functions {
         $this->account_id = $account;
         $this->my_ideas_id = $this->readAllMyIdeasIDs();
         $this->user_likes = $this->loadUserLikes();
+        $this->user_joins = $this->loadUserJoins();
         $this->LIKES_LIMIT = 3;
+        $this->JOIN_LIMIT = 1;
     }
  
     // destructor
@@ -73,6 +78,29 @@ class Ideas_Functions {
       if($result && $result->num_rows > 0) {
         while($idealike = $result->fetch_assoc()) {
           $temp_arr[] = $idealike['project_id'];
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
+    /**
+     * Get the list of all ideas IDs that the current user joins
+     * (more than if the user published more ideas)
+     */
+    private function loadUserJoins(){
+
+      $query = "SELECT l.project_id FROM "._T_IDEA_ACCOUNT." AS l 
+                WHERE l.account_id='".$this->account_id."';";
+
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($ideajoin = $result->fetch_assoc()) {
+          $temp_arr[] = $ideajoin['project_id'];
         }
       }
      
@@ -160,12 +188,12 @@ class Ideas_Functions {
                        a.lastName,
                        i.id,
                        i.owner_id,
+                       i.is_approved,
                        (SELECT IF (COUNT(project_id)>0, 'unlike', 'like') vote
                         FROM "._T_IDEA_LIKE." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS vote_label,
                        (SELECT IF (COUNT(project_id)>0, 'leave', 'join') vote
                         FROM "._T_IDEA_ACCOUNT." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS i_joined
-                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id 
-                    WHERE NOT i.is_approved;";
+                FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id;";
 
       $result = $this->conn->query($query);
 
@@ -256,11 +284,17 @@ class Ideas_Functions {
      */
     public function joinIdea() {
       
+      if(count($this->user_joins) >= $this->JOIN_LIMIT){
+        return "You already joined an idea.";
+      }
+
       $query = "INSERT INTO "._T_IDEA_ACCOUNT." (project_id, account_id, joined_at) 
                 VALUE ('".$this->idea_id."', '".$this->account_id."', NOW());";
 
       if($this->conn->query($query) && $this->conn->affected_rows == 1){
 
+        // Push idea_id to user likes
+        $this->user_joins[] = $this->idea_id;
         return "ok";
 
       }
@@ -364,11 +398,14 @@ class Ideas_Functions {
                                 '$team_size',
                                 '$description',
                                 '$avatar',
-                                '$background_pref');";
+                                '$background_pref');
 
-              $result = $this->conn->query($query);
+                        INSERT INTO "._T_IDEA_ACCOUNT." (project_id, account_id, joined_at) 
+                        VALUE ((SELECT LAST_INSERT_ID()), '$this->account_id', NOW());";
 
-              if($this->conn->affected_rows == 1) return "ok";
+              if ($this->conn->multi_query($query)) {
+                  return "ok";
+              }
 
               return "Error, please try again.";
 
@@ -627,6 +664,35 @@ class Ideas_Functions {
     public function getUserLikes() {
     
       return $this->user_likes;
+    
+    }
+
+    /**
+     * Get idea data of the joined idea from the user
+     */
+    public function getJoinedIdea() {
+      
+      if( count($this->user_joins) != 1 ){
+        return false;
+      }
+
+      // Get the joined idea
+      $joined_idea_id = $this->user_joins[0];
+
+      if($joined_idea_id){
+
+        $this->setIdea($joined_idea_id);
+        $joined_idea = $this->getIdeaData();
+
+        if(count($joined_idea) > 0){
+
+          return $joined_idea;
+
+        }
+
+      }
+
+      return false;
     
     }
 
