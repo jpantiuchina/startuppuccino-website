@@ -335,15 +335,28 @@ window.addEventListener("load", function(){
 
 /* ASK FOR HELP SECTION */
 
-function showAskForHelp(){document.getElementById("askforhelp").setAttribute("style","top:0px");}
-function hideAskForHelp(){document.getElementById("askforhelp").removeAttribute("style");}
+function showAskForHelp(){
+    document.getElementById("askforhelp").setAttribute("style","top:0px");
+}
+function hideAskForHelp(){
+    document.getElementById("askforhelp").removeAttribute("style");
+}
 function askForHelp(){
     Sp.layout.showLoading();
     var i = document.getElementById("askforhelp_id").value;
     var e = document.getElementById("askforhelp_email").value;
     var m = document.getElementById("askforhelp_message").value;
     if (i==""||e==""||m==""){alert("Please fill all inputs"+i+e+m);}
-    else {Sp.get({url : "../app/controllers/askforhelp.php?i="+i+"&e="+e+"&m="+m}, function(response){alert(response);
-    Sp.layout.hideLoading();});}
+    else {
+        Sp.get({url : "../app/controllers/askforhelp.php?i="+i+"&e="+e+"&m="+m}, function(response){
+            if(response == "ok"){
+                alert("Request successfully sent!");
+                hideAskForHelp();
+            } else {
+                alert(response);
+            }
+            Sp.layout.hideLoading();
+        });
+    }
     return false;
 }
