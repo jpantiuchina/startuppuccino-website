@@ -439,12 +439,12 @@ StartuppuccinoIdeas.prototype.layout.switchIdeas = function(button){
 		ideas_yes_style, ideas_not_style;
 	
 	if(action == 0){
-		button.innerHTML = "Passed ideas";
+		button.innerHTML = "Approved ideas";
 		ideas_yes_style = "display:none";
 		ideas_not_style = "display:block";
 		button.setAttribute("data-action",1);
 	} else {
-		button.innerHTML = "Not passed ideas";
+		button.innerHTML = "Not approved ideas";
 		ideas_yes_style = "";
 		ideas_not_style = "";
 		button.setAttribute("data-action",0);
