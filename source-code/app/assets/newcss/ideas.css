@@ -947,7 +947,8 @@ main {
       background-color: #7fb03b;
       color: #fff;
       width: 120px;
-      height: 20px;
+      height: auto;
+      overflow-y: hidden;
       font-size: 14px;
       line-height: 20px;
       padding: 3px;

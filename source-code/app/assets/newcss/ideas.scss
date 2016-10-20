@@ -187,7 +187,8 @@ main { padding-top: $header-height + 20px !important; }
 			background-color: $logo-green;
 			color: #fff;
 			width: 120px;
-			height: 20px;
+			height: auto;
+			overflow-y: hidden;
 			font-size: 14px;
 			line-height: 20px;
 			padding: 3px;
