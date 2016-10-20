@@ -45,13 +45,16 @@
 
 		<div class='idea__footer'>
 			<div class="members" id="members__{{ joined_idea.id }}">
-				{% for member in joined_idea.members %}
-					<div class="member" member-id="{{ member.id }}">
-						<a href="../people/?user_id={{ member.id }}">
-							<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
-						</a>
-					</div>
-				{% endfor %}
+				{% if joined_idea.members %}
+					<span>Students who joined: </span>
+					{% for member in joined_idea.members %}
+						<div class="member" member-id="{{ member.id }}">
+							<a href="../people/?user_id={{ member.id }}">
+								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+							</a>
+						</div>
+					{% endfor %}
+				{% endif %}
 			</div>
 		</div>
 
@@ -96,13 +99,16 @@
 
 			<div class='idea__footer'>
 				<div class="members" id="members__{{ idea.id }}">
-					{% for member in idea.members %}
-						<div class="member" member-id="{{ member.id }}">
-							<a href="../people/?user_id={{ member.id }}">
-								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
-							</a>
-						</div>
-					{% endfor %}
+					{% if idea.members %}
+						<span>Students who joined: </span>
+						{% for member in idea.members %}
+							<div class="member" member-id="{{ member.id }}">
+								<a href="../people/?user_id={{ member.id }}">
+									<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+								</a>
+							</div>
+						{% endfor %}
+					{% endif %}
 				</div>
 			</div>
 

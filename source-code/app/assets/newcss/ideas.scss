@@ -143,6 +143,17 @@ main { padding-top: $header-height + 20px !important; }
 	margin-left: $picture-box-width;
 	border-bottom: $idea-border-bottom;
 
+	> span {
+		display: inline-block;
+		height: 50px;
+		width: 110px;
+		padding-top: 5px;
+		line-height: 20px;
+		overflow-y: hidden;
+		font-size: 14px;
+		color: #999
+	}
+
 	> .member {
 		display: inline-block;
 		width: 40px;
@@ -297,7 +308,7 @@ main { padding-top: $header-height + 20px !important; }
 }
 
 
-/* COmment box */
+/* Comment box */
 
 .comment_box {
 	overflow: hidden;

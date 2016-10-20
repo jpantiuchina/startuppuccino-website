@@ -919,6 +919,15 @@ main {
 .members {
   margin-left: 20%;
   border-bottom: 1px dotted #999; }
+  .members > span {
+    display: inline-block;
+    height: 50px;
+    width: 110px;
+    padding-top: 5px;
+    line-height: 20px;
+    overflow-y: hidden;
+    font-size: 14px;
+    color: #999; }
   .members > .member {
     display: inline-block;
     width: 40px;
@@ -1039,7 +1048,7 @@ main {
     -webkit-box-shadow: 0px 0px 0px 1px #fff;
     box-shadow: 0px 0px 0px 1px #fff; }
 
-/* COmment box */
+/* Comment box */
 .comment_box {
   overflow: hidden; }
   .comment_box__editor {
