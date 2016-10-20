@@ -52,6 +52,9 @@
 							<a href="../people/?user_id={{ member.id }}">
 								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
 							</a>
+							<div class="member__label">
+								<span>{{ member.firstName }} {{ member.lastName}}</span>
+							</div>
 						</div>
 					{% endfor %}
 				{% endif %}
@@ -106,6 +109,9 @@
 								<a href="../people/?user_id={{ member.id }}">
 									<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
 								</a>
+								<div class="member__label">
+									<span>{{ member.firstName }} {{ member.lastName}}</span>
+								</div>
 							</div>
 						{% endfor %}
 					{% endif %}
