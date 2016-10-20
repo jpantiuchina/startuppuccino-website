@@ -103,18 +103,45 @@ $sidebar-head-height: 40px;
 	}
 
 	> .guest {
+		position: relative;
 		display: inline-block;
 		width: 40px;
 		height: 40px;
 		margin: 5px 1px;
-		background-color: $logo-red;
 		cursor: pointer;
-		@include border-radius(50%);
-		overflow: hidden;
+
+		&:hover {
+
+			> .guest__label {
+				display: block !important;
+			}
+
+		}
+
+		> .guest__label {
+			display: none !important;
+			position: absolute;
+			top: -40px; left: 0;
+			background-color: $logo-green;
+			color: #fff;
+			width: 120px;
+			height: auto;
+			overflow-y: hidden;
+			font-size: 14px;
+			line-height: 20px;
+			padding: 3px;
+			z-index: 999;
+			display: inline-block;
+			text-align: center;
+			@include border-radius(3px);
+			@include transition(transition-time);
+		}
 
 		>a{
 			display: block;
 			height: 100%;
+			@include border-radius(50%);
+			overflow: hidden;
 			
 			div {
 				@extend .picture;

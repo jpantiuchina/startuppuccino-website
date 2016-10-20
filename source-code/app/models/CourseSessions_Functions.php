@@ -198,7 +198,7 @@ class CourseSessions_Functions {
 
         foreach ($sessions_array as $i => $session_value) {
 
-            $query = "SELECT ma.mentor_id as id, a.avatar
+            $query = "SELECT ma.mentor_id as id, a.avatar, a.firstname, a.lastname
                       FROM "._T_MENTOR_AVAILABILITY." AS ma 
                       JOIN "._T_ACCOUNT." AS a 
                       ON ma.mentor_id = a.id

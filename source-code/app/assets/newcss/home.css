@@ -890,20 +890,44 @@ textarea {
 .guests p:first-child {
   color: #999; }
 .guests > .guest {
+  position: relative;
   display: inline-block;
   width: 40px;
   height: 40px;
   margin: 5px 1px;
-  background-color: #be3b43;
-  cursor: pointer;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-  overflow: hidden; }
+  cursor: pointer; }
+  .guests > .guest:hover > .guest__label {
+    display: block !important; }
+  .guests > .guest > .guest__label {
+    display: none !important;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: #7fb03b;
+    color: #fff;
+    width: 120px;
+    height: auto;
+    overflow-y: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 3px;
+    z-index: 999;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all transition-time ease-in-out;
+    transition: all transition-time ease-in-out; }
   .guests > .guest > a {
     display: block;
-    height: 100%; }
+    height: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden; }
     .guests > .guest > a div {
       background-color: #f7f7dd;
       height: 100%; }

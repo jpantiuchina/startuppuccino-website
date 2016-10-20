@@ -60,6 +60,9 @@
 							<a href="../people/?user_id=<?php echo $guest['id']; ?>">
 								<div style="background-image:url('../app/assets/pics/people/<?php echo $guest['avatar']; ?>')"></div>
 							</a>
+							<div class="guest__label">
+								<span><?php echo $guest['firstname']." ".$guest['lastname']?></span>
+							</div>
 						</div>
 					<?php }} ?>
 				</div>
