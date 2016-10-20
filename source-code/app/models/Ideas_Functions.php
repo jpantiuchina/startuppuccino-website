@@ -86,6 +86,36 @@ class Ideas_Functions {
     }
 
     /**
+     * Ranklist of ideas likes
+     */
+    public function getIdeaRanklist(){
+      
+      $query = "SELECT i.title, a.firstName, a.lastName, COUNT(l.id) AS tot_likes
+                FROM "._T_IDEA_ACCOUNT." AS l
+                JOIN "._T_IDEA." AS i 
+                ON i.id=l.project_id
+                JOIN "._T_ACCOUNT." AS a
+                ON a.id=i.owner_id
+                GROUP BY i.title
+                ORDER BY tot_likes DESC;";
+
+      $result = $this->conn->query($query);
+      
+      $ideas = [];
+
+      if($result) {
+        
+        while ($idea = $result->fetch_assoc()){
+          $ideas[] = $idea;
+        }
+
+      }
+     
+      return $ideas;
+
+    }
+
+    /**
      * Get the list of all ideas IDs that the current user joins
      * (more than if the user published more ideas)
      */
