@@ -91,7 +91,7 @@ class Ideas_Functions {
     public function getIdeaRanklist(){
       
       $query = "SELECT i.title, a.firstName, a.lastName, COUNT(l.id) AS tot_likes
-                FROM "._T_IDEA_ACCOUNT." AS l
+                FROM "._T_IDEA_LIKE." AS l
                 JOIN "._T_IDEA." AS i 
                 ON i.id=l.project_id
                 JOIN "._T_ACCOUNT." AS a
@@ -100,7 +100,7 @@ class Ideas_Functions {
                 ORDER BY tot_likes DESC;";
 
       $result = $this->conn->query($query);
-      
+
       $ideas = [];
 
       if($result) {
