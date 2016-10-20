@@ -23,7 +23,13 @@ main { padding-top: $header-height + 20px !important; }
 }
 
 
+.idea_switcher {
 
+	&__button {
+		@extend .st_button;
+	}
+
+}
 
 
 .idea_title {
@@ -38,6 +44,10 @@ main { padding-top: $header-height + 20px !important; }
 	height: auto;
 	margin-bottom: $idea-margin-bottom;
 	padding-top: $header-height;
+
+	&__notapproved {
+		display: none;
+	}
 
 	>.info_box,
 	>.picture_box {

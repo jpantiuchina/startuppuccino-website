@@ -432,6 +432,33 @@ StartuppuccinoIdeas.prototype.layout.renderMember = function(idea_id, remove_) {
 	}
 
 }
+StartuppuccinoIdeas.prototype.layout.switchIdeas = function(button){
+	var action = button.getAttribute("data-action"),
+	    ideas_yes = document.getElementsByClassName("idea__approved"),
+		ideas_not = document.getElementsByClassName("idea__notapproved"),
+		ideas_yes_style, ideas_not_style;
+	
+	if(action == 0){
+		button.innerHTML = "Passed ideas";
+		ideas_yes_style = "display:none";
+		ideas_not_style = "display:block";
+		button.setAttribute("data-action",1);
+	} else {
+		button.innerHTML = "Not passed ideas";
+		ideas_yes_style = "";
+		ideas_not_style = "";
+		button.setAttribute("data-action",0);
+	}
+	
+	for (var i = 0; i < ideas_yes.length; i++) {
+		ideas_yes[i].setAttribute("style",ideas_yes_style);
+	}
+	for (var i = 0; i < ideas_not.length; i++) {
+		ideas_not[i].setAttribute("style",ideas_not_style);
+	}
+}
+
+
 
 /* Initialize Startuppuccino Home */
 

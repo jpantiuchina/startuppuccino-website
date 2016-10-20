@@ -8,14 +8,20 @@
 {% endif %}
 
 {% if isStudent and user_can_join %}
-	<h3>NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
+	<h3 class="idea__approved">NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
 {% endif %}
+
+<div class="idea_switcher">
+	<span class="idea_switcher__button" 
+          data-action="0"
+	      onclick="SpIdea.layout.switchIdeas(this)">Not passed ideas</span>	
+</div>
 
 {% if isStudent and not user_can_join and joined_idea %}
 
-<h3>Idea you joined</h3>
+<h3 class="idea__approved">Idea you joined</h3>
 
-	<div class='idea' id='i{{ joined_idea.id }}'>
+	<div class='idea idea__approved' id='i{{ joined_idea.id }}'>
 
 		<div class='picture_box'>
 			{% set avatar = defalut_avatart %}
@@ -53,7 +59,7 @@
 								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
 							</a>
 							<div class="member__label">
-								<span>{{ member.firstName }} {{ member.lastName}}</span>
+								<span>{{ member.firstName }} {{ member.lastName }}</span>
 							</div>
 						</div>
 					{% endfor %}
@@ -63,15 +69,16 @@
 
 	</div>
 
-<h3>All Ideas</h3>
+<h3 class="idea__approved">All Ideas</h3>
 
 {% endif %}
 
 {% for idea in ideas %}
 
-	{% if joined_idea.id != idea.id and idea.is_approved == 1 %}
+	{% if joined_idea.id != idea.id %}
 
-		<div class='idea' id='i{{ idea.id }}'>
+		<div id='i{{ idea.id }}'
+		     class="idea {% if idea.is_approved == 0 %}idea__notapproved{% else %}idea__approved{% endif %}">
 
 			<div class='picture_box'>
 				{% set avatar = defalut_avatart %}
@@ -88,7 +95,7 @@
 				<div class='info_box_footer'>
 
 					{# Only students can join ideas (and not idea owners) #}
-					{% if isStudent and sess.id != idea.owner_id %}
+					{% if isStudent and sess.id != idea.owner_id and idea.is_approved == 1 %}
 						<input type="button"
 							   {% if not user_can_join %}style="display:none"{% endif %}
 						       class='{% if idea.i_joined=='join' %} c_green {% else %} c_red {% endif %} join_idea_button'
@@ -101,21 +108,27 @@
 			</div>
 
 			<div class='idea__footer'>
-				<div class="members" id="members__{{ idea.id }}">
-					{% if idea.members %}
-						<span>Students who joined: </span>
-						{% for member in idea.members %}
-							<div class="member" member-id="{{ member.id }}">
-								<a href="../people/?user_id={{ member.id }}">
-									<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
-								</a>
-								<div class="member__label">
-									<span>{{ member.firstName }} {{ member.lastName}}</span>
+							
+				{% if idea.is_approved == 1 %}
+
+					<div class="members" id="members__{{ idea.id }}">
+						{% if idea.members %}
+							<span>Students who joined: </span>
+							{% for member in idea.members %}
+								<div class="member" member-id="{{ member.id }}">
+									<a href="../people/?user_id={{ member.id }}">
+										<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+									</a>
+									<div class="member__label">
+										<span>{{ member.firstName }} {{ member.lastName }}</span>
+									</div>
 								</div>
-							</div>
-						{% endfor %}
-					{% endif %}
-				</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+
+				{% endif %}
+
 			</div>
 
 		</div>

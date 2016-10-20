@@ -771,7 +771,7 @@ textarea {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .info_box_footer > input[type=submit],
+.st_button, .askforhelp_form > input[type=submit], .idea_switcher__button, .info_box_footer > input[type=submit],
 .info_box_footer > input[type=button], .comment_idea_button, #idea_form_picture_upload input[type=submit],
 .comment_box__content input[type=submit] {
   border: none;
@@ -794,7 +794,7 @@ textarea {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .info_box_footer > input[type=submit]:hover,
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .idea_switcher__button:hover, .info_box_footer > input[type=submit]:hover,
   .info_box_footer > input[type=button]:hover, .comment_idea_button:hover, #idea_form_picture_upload input[type=submit]:hover,
   .comment_box__content input[type=submit]:hover {
     -webkit-filter: brightness(0.5);
@@ -843,7 +843,7 @@ textarea {
 main {
   padding-top: 70px !important; }
 
-.st_button, .askforhelp_form > input[type=submit], .info_box_footer > input[type=submit],
+.st_button, .askforhelp_form > input[type=submit], .idea_switcher__button, .info_box_footer > input[type=submit],
 .info_box_footer > input[type=button], .comment_idea_button, #idea_form_picture_upload input[type=submit],
 .comment_box__content input[type=submit] {
   font-size: 12px; }
@@ -858,6 +858,8 @@ main {
   height: auto;
   margin-bottom: 20px;
   padding-top: 50px; }
+  .idea__notapproved {
+    display: none; }
   .idea > .info_box,
   .idea > .picture_box {
     display: inline-block;
