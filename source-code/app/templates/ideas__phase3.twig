@@ -113,7 +113,7 @@
 
 					<div class="members" id="members__{{ idea.id }}">
 						{% if idea.members %}
-							<span>Students who joined ({{ joined_idea.members|length }}): </span>
+							<span>Students who joined ({{ idea.members|length }}): </span>
 							{% for member in idea.members %}
 								<div class="member" member-id="{{ member.id }}">
 									<a href="../people/?user_id={{ member.id }}">
