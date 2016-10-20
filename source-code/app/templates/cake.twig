@@ -4,23 +4,23 @@
 
 <main>
 	<section>
-		
-		<h1>Ideas Ranklist</h1>
 
 		{% if ranklist %}
 
+			<h1 class="ranklist__title">Ideas Ranklist</h1>
+
 			<div class="ranklist">
 
-				<div class="ranklist__item">
+				{#<div class="ranklist__item ranklist__item--head">
 					<span class="ranklist__item_title">Idea</span>
-					<span class="ranklist__item_title">Likes</span>
-				</div>
+					<span class="ranklist__item_likes">Likes</span>
+				</div>#}
 
 				{% for item in ranklist %}
 
 					<div class="ranklist__item">
 						<span class="ranklist__item_title">{{ item.title|upper }}</span>
-						<span class="ranklist__item_title">{{ item.tot_likes }}</span>
+						{#<span class="ranklist__item_likes">{{ item.tot_likes }}</span>#}
 					</div>
 
 				{% endfor %}

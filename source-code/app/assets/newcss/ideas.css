@@ -1114,4 +1114,31 @@ main {
     .comment__delete:hover {
       color: #fcc124; }
 
+.ranklist {
+  padding: 30px 0px; }
+  .ranklist__title, .ranklist__item {
+    padding: 20px;
+    margin: 0px; }
+  .ranklist__title {
+    color: #513a2b; }
+  .ranklist__item {
+    font-size: 20px;
+    background-color: #fff;
+    margin: 7px auto; }
+    .ranklist__item--head {
+      background-color: #fff; }
+    .ranklist__item_title {
+      display: inline-block;
+      color: #7fb03b;
+      width: 70%;
+      max-width: 250px; }
+    .ranklist__item_likes {
+      border: 1px solid #513a2b;
+      padding: 7px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px;
+      background-color: #fff; }
+
 /*# sourceMappingURL=ideas.css.map */

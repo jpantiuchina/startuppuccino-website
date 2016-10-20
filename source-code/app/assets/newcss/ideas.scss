@@ -415,3 +415,48 @@ $session-comments-editor-height: 100px;
 	}
 
 }
+
+
+.ranklist {
+
+	padding: 30px 0px;
+
+	&__title,
+	&__item {
+		padding: 20px;
+		margin: 0px
+	}
+
+	&__title {
+		color: $logo-brown;
+	}
+
+	&__item {
+		font-size: 20px;
+		background-color: #fff;
+		margin: 7px auto;
+
+		&--head {
+			background-color: #fff
+		}
+
+		&_title {
+			display: inline-block;
+			color: $logo-green;
+			width: 70%;
+			max-width: 250px;
+		}
+
+		&_likes {
+			border: 1px solid $logo-brown;
+			padding: 7px;
+			@include border-radius(4px);
+			background-color: #fff
+		}
+
+
+	}
+
+
+
+}
