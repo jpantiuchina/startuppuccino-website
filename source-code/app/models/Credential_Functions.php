@@ -81,8 +81,15 @@ class Credential_Functions {
 
       $cookie_token = $this->generateCookieToken($account_id);
 
-      $query = "INSERT INTO "._T_ACCOUNT_LOGGED." (account_id, cookie_token)
-                VALUES ('" . $account_id . "','" . $cookie_token . "');";
+      // TODO -> do not use multiple queries, substitue with a transaction
+      if($this->issetPermaLogin($account_id)){
+        $query = "UPDATE "._T_ACCOUNT_LOGGED." 
+                  SET cookie_token='".$cookie_token."'
+                  WHERE account_id='".$account_id."';";
+      } else {
+        $query = "INSERT INTO "._T_ACCOUNT_LOGGED." (account_id, cookie_token)
+                  VALUES ('" . $account_id . "','" . $cookie_token . "');";
+      }
 
       $result = $this->conn->query($query);
 
@@ -94,6 +101,28 @@ class Credential_Functions {
       }
       
       return $cookie_token;
+
+    }
+
+    /**
+     * Check if user permalogin cookie is already in the db
+     * Return if the perma login is already set or not
+     */
+    public function issetPermaLogin($account_id) {
+      
+      $query = "SELECT cookie_token
+                FROM "._T_ACCOUNT_LOGGED."
+                WHERE account_id='" . $account_id . "';";
+
+      $result = $this->conn->query($query);
+
+      if($result && $result->num_rows == 1 ){
+            
+        return true;
+
+      }
+
+      return false;
 
     }
 
