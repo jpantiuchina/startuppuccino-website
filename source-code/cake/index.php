@@ -1,9 +1,16 @@
 <?php
+    
+    //exit("Do you want some cake?");
 
 	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged){
+		header("Location: ../");
+		exit;
+	}
+	
+	if($_SESSION['role']!='educator'){
 		header("Location: ../");
 		exit;
 	}
