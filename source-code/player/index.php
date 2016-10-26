@@ -7,7 +7,6 @@
 		header("Location: ../");
 		exit;
 	}
-
 	
 	$currentPage = "player";
 	$page_title = "Media Player - Startuppuccino";
@@ -34,10 +33,20 @@
 	   isset($_GET['k']) && !empty($_GET['k']) &&
 	   isset($_GET['t']) && !empty($_GET['t'])){
 
+		switch ($_GET['k']) {
+			case 'video':
+				$path_to = "app/public/media/video/";
+				break;
+			
+			default:
+				$path_to = "";
+				break;
+		}
+
 		$media = [
 					"kind" => $_GET['k'],
 					"type" => $_GET['t'],
-					"path" => $_GET['p']
+					"path" => $path_to.$_GET['p']
 				];
 
 	} else {
