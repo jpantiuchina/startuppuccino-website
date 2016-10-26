@@ -109,23 +109,34 @@ $p-picture-size: 220px;
 /* Filters styles */
 
 .filter_menu {
-	text-align: center;
-	padding: 15px; 
-	background-color: #6C3D17;
+	padding: 40px;
+	padding-left: 20px
 }
 
 .filter_menu__button {
-	display: inline-block;
+	@extend .st_button;
+	/*display: inline-block;
 	padding: 10px;
 	font-size: 12px;
 	background-color: #FE9646;
 	color: #fff;
-	cursor: pointer;
+	cursor: pointer;*/
 }
 
 .filter_menu__button--active {
 	background-color: #333;
 	color: #d7d7d7;
+}
+
+
+.change_view_button {
+	@extend .filter_menu__button;
+}
+
+#change_view_icon {
+	width: 15px;
+	height: 15px;
+	background-position: center;
 }
 
 
@@ -136,14 +147,20 @@ $p-picture-size: 220px;
 	vertical-align: middle;
 	width: 200px;
 	height: auto;
+	max-height: 600px;
+	max-width: 1000px;
 	overflow: hidden;
-	background: #fbfbfb;
+	background: #fafafa;
 	text-align: left;
 	margin: 10px 20px;
+	@include transition($transition-time);
 }
 
 .card--hidden {
-	display: none;
+	margin: 0px !important;
+	max-height: 0px !important;
+	max-width: 0px !important;
+	overflow: hidden !important;
 }
 
 .card a {
@@ -192,26 +209,8 @@ $p-picture-size: 220px;
 	background-repeat: no-repeat;
 }
 
+
 /* ******************* END Layout card list ****************** */
-
-.change_view_button {
-	position: fixed;
-	bottom: 10px;
-	right: 10px;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	background-color: #fbfbfb;
-	cursor: pointer;
-}
-
-#change_view_icon {
-	width: 100%;
-	height: 100%;
-	background-position: center;
-}
-
-/************************ Toggle layout button ************************/
 
 
 /* ******************* Vertical list layout ******************** */
@@ -220,7 +219,6 @@ $p-picture-size: 220px;
 
 .list_view--linear {
 	max-width: 900px;
-	margin: auto;
 }
 
 .list_view--linear .card {
@@ -228,13 +226,14 @@ $p-picture-size: 220px;
 	width: auto;
 	height: auto;
 	overflow: hidden;
-	background: #fbfbfb;
 	text-align: left;
+	background: transparent;
 	margin: 10px auto;
 }
 
 .list_view--linear .card--hidden {
-	display: none;
+	transform: translateX(300%);
+	-webkit-transform: translateX(300%);
 }
 
 .list_view--linear .card a {
@@ -256,10 +255,6 @@ $p-picture-size: 220px;
 
 .list_view--linear .card--MENTOR .card__details, .list_view--linear .card--EDUCATOR .card__details {
 	background-color: transparent;
-}
-
-.list_view--linear .card--MENTOR,.list_view--linear .card--EDUCATOR {
-	background-color: #f2f2f2;
 }
 
 .list_view--linear .card__details > span {
@@ -287,6 +282,8 @@ $p-picture-size: 220px;
 }
 
 .list_view--linear .card__pic {
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
 	width: 100px;
 	height: 100px;
 	margin: 15px;

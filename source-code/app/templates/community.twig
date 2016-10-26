@@ -4,17 +4,37 @@
 
 <main>
 
-	{% include 'community__filters.twig' ignore missing %}
+		{% if user %}
 
-	{% if users %}
+			{% if user == '404' %}
+				
+				<h3>User profile not found. Mmm... maybe nobody is here...</h3>
 
-		{% for user in users %}
+			{% else %}
 
-			{% include 'community__userbox.twig' ignore missing %}
+				{% include 'community__profile.twig' ignore missing %}
+			
+			{% endif %}
 
-		{% endfor %}
+		{% else %}
 
-	{% endif %}
+			{% include 'community__filters.twig' ignore missing %}
+
+			{% if users %}
+
+				<div class="list_view list_view--linear" id="people_wrapper">
+
+					{% for user in users %}
+
+						{% include 'community__userbox.twig' ignore missing %}
+
+					{% endfor %}
+
+				</div>
+
+			{% endif %}
+
+		{% endif %}
 
 </main>
 

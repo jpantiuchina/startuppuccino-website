@@ -7,11 +7,7 @@
 		header("Location: ../");
 		exit;
 	}
-
-	// Account id
-	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
-	$isStudent = (isset($_SESSION['role']) && $_SESSION['role']=="student");
-	$isMentor = (isset($_SESSION['role']) && $_SESSION['role']=="mentor");
+	
 
 	// Include and Initialize Ideas Functions
 	require_once '../app/models/Ideas_Functions.php';

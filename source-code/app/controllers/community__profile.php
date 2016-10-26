@@ -1,10 +1,11 @@
 <?php
+
+	require_once '../app/models/session.php';
+    require_once '../app/views/_Twig_Loader.php';
 	
-	// Socials array example:
-	// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
-			
+
 	$socials = !empty($user["socials"]) ? json_decode(trim($user["socials"]),true) : array();
-	for ( $socials as $social_label => $social_data ) {
+	foreach ( $socials as $social_label => $social_data ) {
 	
 		// Fix url format
 		
@@ -28,20 +29,12 @@
 	}
 
 
-	// Set template name and variables
+	// Set template variables
 	
-	$template_file = "community__profile.twig";	
-
-	$template_variables = [
-				'sess' => $_SESSION,
-				'userLogged' => $userLogged,
-				'is_my_profile' => $people_func->isMyProfile(),
-				'socials' => $socials
-          	];
-
-
-    // Render the template
-    require_once '_Twig_Loader.php';
-    echo (new Twig_Loader())->render($template_file, $template_variables);
+	$template_variables['sess'] = $_SESSION;
+	$template_variables['userLogged'] = $userLogged;
+	$template_variables['is_my_profile'] = $people_func->isMyProfile();
+	$template_variables['socials'] = $socials;
+	$template_variables['user'] = $user;
 
 ?>
