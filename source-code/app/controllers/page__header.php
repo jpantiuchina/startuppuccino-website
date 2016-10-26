@@ -24,6 +24,10 @@
                 "link" => RELATIVE_PATH."/ideas/"
             ],
             [
+                "label" => "Community",
+                "link" => RELATIVE_PATH."/people/"
+            ],
+            [
                 "label" => "Search",
                 "link" => "#",
                 "link_class" => "search_trigger_button"

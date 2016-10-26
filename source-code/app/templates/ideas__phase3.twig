@@ -24,7 +24,7 @@
 	<div class='idea idea__approved' id='i{{ joined_idea.id }}'>
 
 		<div class='picture_box'>
-			{% set avatar = defalut_avatart %}
+			{% set avatar = default_avatar %}
 			<div id="idea_picture__{{ joined_idea.id }}"
 			     style="background-image:url('../app/assets/pics/ideas/{{ joined_idea.avatar | default(avatar) }}')"></div>
 		</div>
@@ -81,7 +81,7 @@
 		     class="idea {% if idea.is_approved == 0 %}idea__notapproved{% else %}idea__approved{% endif %}">
 
 			<div class='picture_box'>
-				{% set avatar = defalut_avatart %}
+				{% set avatar = default_avatar %}
 				<div id="idea_picture__{{ idea.id }}"
 				     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
 			</div>

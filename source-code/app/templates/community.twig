@@ -1,0 +1,21 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+
+	{% include 'community__filters.twig' ignore missing %}
+
+	{% if users %}
+
+		{% for user in users %}
+
+			{% include 'community__userbox.twig' ignore missing %}
+
+		{% endfor %}
+
+	{% endif %}
+
+</main>
+
+{% endblock %}

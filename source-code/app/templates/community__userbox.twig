@@ -1,0 +1,17 @@
+
+<div class="card card--{{ user.role|upper }}">
+
+	<a href="./?user_id={{ user.id }}">
+    	
+    	{% set avatar = default_avatar %}
+    	<div class="card__pic" 
+    	     style="background-image:url('../app/assets/pics/people/{{ user.avatar | default(avatar) }}')"></div>
+    	<div class="card__details">
+			<span class="card__details_name">{{ user.firstname ~ user.lastname }}</span>
+    		<span class="card__details_role">{{ user.role }}</span>
+    		<span class="card__details_background">{{ user.background }}</span>
+    	</div>
+
+    </a>
+
+</div>

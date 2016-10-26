@@ -3,7 +3,7 @@
 	<div class='idea' id='i{{ idea.id }}'>
 
 		<div class='picture_box'>
-			{% set avatar = defalut_avatart %}
+			{% set avatar = default_avatar %}
 			<div id="idea_picture__{{ idea.id }}"
 			     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
 		</div>
