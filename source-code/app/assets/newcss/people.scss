@@ -163,6 +163,11 @@ $p-picture-size: 220px;
 	overflow: hidden !important;
 }
 
+.card--RESIDENCE_MENTOR {
+	border-left: 4px $logo-green solid;
+    background: #f3f3ca !important;
+}
+
 .card a {
 	text-decoration: none !important;
 	color: #fbfbfb;

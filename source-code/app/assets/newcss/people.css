@@ -947,6 +947,10 @@ textarea {
   max-width: 0px !important;
   overflow: hidden !important; }
 
+.card--RESIDENCE_MENTOR {
+  border-left: 4px #7fb03b solid;
+  background: #f3f3ca !important; }
+
 .card a {
   text-decoration: none !important;
   color: #fbfbfb; }
