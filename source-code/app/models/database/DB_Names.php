@@ -24,4 +24,6 @@ define("_T_SESSION_COMMENT", DB_TABLE_PREFIX."session_comment");
 define("_T_MENTOR_AVAILABILITY", DB_TABLE_PREFIX."mentor_availability");
 define("_T_ACCOUNT_LOGGED", DB_TABLE_PREFIX."account_logged");
 
+define("_T_RESIDENCE_MENTORS", DB_TABLE_PREFIX."mentor_residence");
+
 ?>

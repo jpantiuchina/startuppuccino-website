@@ -43,7 +43,7 @@ class People_Functions {
           return $result->fetch_assoc();
       
       } else {
-          // No team found
+          // No personal information found
           return NULL;
       }
 
@@ -80,6 +80,28 @@ class People_Functions {
         // No people found
         return NULL;
 
+      }
+
+    }
+
+
+    /**
+     * Get a list of residence mentors
+     */
+    public function getResidenceMentors() {
+      
+      $query = "SELECT mentor_id
+                FROM "._T_RESIDENCE_MENTORS.";";
+
+      $result = $this->conn->query($query);
+
+      if ($result) {
+
+          return $result->fetch_assoc();
+      
+      } else {
+          // No residence mentor found
+          return [];
       }
 
     }

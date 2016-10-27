@@ -1,5 +1,5 @@
 
-<div class="card card--{{ user.role|upper }}">
+<div class="card card--{{ user.role|upper }} {% if user in residence_mentors %}{{ card--RESIDENCE_MENTOR }}{% endif %}">
 
 	<a href="./?user_id={{ user.id }}">
     	
