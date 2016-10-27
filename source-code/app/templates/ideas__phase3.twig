@@ -45,6 +45,8 @@
 					       onclick="SpIdea.ideaHelper('leave', '{{ joined_idea.id }}', this)" />
 				{% endif %}
 
+				<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
 			</div>
 
 		</div>
@@ -103,6 +105,8 @@
 						       onclick="SpIdea.ideaHelper('{{ idea.i_joined }}', '{{ idea.id }}', this)" />
 					{% endif %}
 
+					<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
 				</div>
 
 			</div>
@@ -136,3 +140,8 @@
 	{% endif %}
 
 {% endfor %}
+
+
+{% if userLogged %}
+	{% include 'comment__boxview.twig' ignore missing %}
+{% endif %}
