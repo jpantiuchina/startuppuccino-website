@@ -95,14 +95,17 @@ class People_Functions {
 
       $result = $this->conn->query($query);
 
+      $mentor_ids = [];
+
       if ($result) {
 
-          return $result->fetch_assoc();
-      
-      } else {
-          // No residence mentor found
-          return [];
+          while ($mentor = $result->fetch_assoc()){
+            $mentor_ids[] = $mentor['mentor_id'];
+          }
+
       }
+
+      return $mentor_ids;
 
     }
 

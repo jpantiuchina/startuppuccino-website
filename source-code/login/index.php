@@ -7,6 +7,20 @@
 		exit;
 	}
 
+	if (isset($_POST['login'])){
+
+ 		$login_email = $_POST['email'];
+ 		$login_password = md5($_POST['password']);
+
+ 		$isPermaLogin = isset($_POST['permalogin']) && $_POST['permalogin'] === "y";
+
+ 		include '../app/controllers/login.php';
+		
+	} else {
+
+		// initialize variable to prevent to show the error message
+		$loginOk = true;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,27 +46,7 @@
 
 			<h1>Login</h1>
 
-			<?php
-
-			 	if (isset($_POST['login'])){ 
-
-			 		$login_email = $_POST['email'];
-			 		$login_password = md5($_POST['password']);
-
-			 		$isPermaLogin = isset($_POST['permalogin']) && $_POST['permalogin'] === "y";
-
-			 		include '../app/controllers/login.php';
-					
-				} else {
-
-					// initialize variable to prevent to show the error message
-					$loginOk = true;
-					
-					include '../app/views/login_form.php';
-
-				}
-			
-			?>
+			<?php include '../app/views/login_form.php'; ?>
 
 		</main>
 
@@ -60,3 +54,5 @@
 
 	</body>
 </html>
+
+<?php } ?>
