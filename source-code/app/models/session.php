@@ -23,10 +23,10 @@
 	if(!$userLogged){
 
 		// Get required_logged_id cookie
-		$cookie_token = isset($_COOKIE['permalog']) ? $_COOKIE['permalog'] : "";
+		$cookie_token = isset($_COOKIE['permalog']) ? $_COOKIE['permalog'] : null;
 
-		if( !empty($cookie_token) ){
-			
+		if( $cookie_token != null ){
+
 			// Connect to database
 			require_once 'database/DB_Connect.php';
 			$db = new Db_Connect();
@@ -39,7 +39,7 @@
 			          WHERE l.cookie_token='" . $cookie_token . "';";
 
 			if( $result = $dbconn->query($query) ){
-	        	
+	        		
 	        	$result = $result->fetch_assoc();
 
 	        	// AUTOMATIC LOG IN
@@ -50,7 +50,7 @@
 	                      WHERE id='" . $result['account_id'] . "'";
 
 	            $result = $dbconn->query($query);
-	
+
 				// query result is ok if only one match is found (one account)
 				if( $result && $result->num_rows == 1 ){
 
@@ -66,6 +66,7 @@
 			}
 
 	    }
+
 	}
 
 
