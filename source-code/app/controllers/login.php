@@ -29,7 +29,7 @@
 	   	if( $isPermaLogin === TRUE && 
 	   		!empty( $cookie_token = $credential_func->setPermaLogin($_SESSION['id']) ) ){
 	   		$days = 90;
-	   		setcookie("permalog", $cookie_token, time() + (86400 * $days), "/");
+	   		setcookie("permalog", $cookie_token, time() + (86400 * $days), "/", "startuppuccino.com");
 	   	}
 
 	   	// Redirect to home page
