@@ -9,36 +9,36 @@
 	}
 
 
-	// Include and Initialize People Functions
-	require_once '../app/models/People_Functions.php';
-	$people_func = new People_Functions($_SESSION['id']);
+	// Include and Initialize Startup Projects Functions
+	require_once '../app/models/StartupsProject_Functions.php';
+	$people_func = new StartupProject_Functions($_SESSION['id']);
 
 	$ideas = [];
 
-	$currentPage = "community";
-	$page_title = "Community - Startuppuccino";
+	$currentPage = "startups";
+	$page_title = "Startups - Startuppuccino";
 	$metatags = [
 					[
 						"kind" => "link",
 						"type" => "text/css",
 						"rel"  => "stylesheet",
-						"href" => "../app/assets/newcss/people.css"
+						"href" => "../app/assets/newcss/startups.css"
 					]
 				];
-	$footer_scripts = ["../app/assets/js/people.js"];
+	$footer_scripts = ["../app/assets/js/startups.js"];
 
 
 	/* 
-	 * If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
+	 * If isset the get parameter 'project_id' ( ../index.php?user_id=xxxx )
 	 * then the user details are diplayed instead of the list of users and mentors 
 	 */
-	$isnotset_user = false;
-	if (isset($_GET['user_id'])){
+	$isnotset_project = false;
+	if (isset($_GET['project_id'])){
 
-		// Set the account_id of the person to show
-		$people_func->setPerson($_GET['user_id']);
+		// Set the project_id of the project to show
+		$people_func->setProject($_GET['project_id']);
 
-		if ($user = $people_func->getPersonInfo()){
+		if ($user = $people_func->getProjectInfo()){
 
 			include '../app/controllers/community__profile.php';
 
@@ -73,9 +73,7 @@
 	if($isnotset_user){
 		$template_variables['user'] = '404';
 	} else {
-	    $people = $people_func->getAllPeople();
-	    shuffle($people);
-		$template_variables['users'] = $people;
+		$template_variables['users'] = $people_func->getAllPeople();
 	}
 
     // Render the template

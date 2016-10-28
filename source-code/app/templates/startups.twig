@@ -1,0 +1,42 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+
+		{% if project %}
+
+			{% if project == '404' %}
+				
+				<h3>Project not found. Mmm... maybe nobody is here...</h3>
+
+			{% else %}
+
+				<h3>Sorry guys... I still have to finish this section!</h3>
+				{# {% include 'startups__project.twig' ignore missing %} #}
+			
+			{% endif %}
+
+		{% else %}
+
+			{% include 'startups__filters.twig' ignore missing %}
+
+			{% if users %}
+
+				<div class="list_view list_view--linear" id="startups_wrapper">
+
+					{% for user in users %}
+
+						{% include 'startups__projectbox.twig' ignore missing %}
+
+					{% endfor %}
+
+				</div>
+
+			{% endif %}
+
+		{% endif %}
+
+</main>
+
+{% endblock %}
