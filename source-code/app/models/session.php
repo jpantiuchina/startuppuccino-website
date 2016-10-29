@@ -34,8 +34,6 @@
 
 	        $query = "SELECT l.account_id 
 			          FROM "._T_ACCOUNT_LOGGED." AS l 
-			          JOIN "._T_ACCOUNT."        AS a 
-			          ON l.account_id=a.id 
 			          WHERE l.cookie_token='" . $cookie_token . "';";
 
 			if( $result = $dbconn->query($query) ){
