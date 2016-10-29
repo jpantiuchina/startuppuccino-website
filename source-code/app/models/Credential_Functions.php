@@ -81,14 +81,16 @@ class Credential_Functions {
 
       $cookie_token = $this->generateCookieToken($account_id);
 
-      // TODO -> do not use multiple queries, substitue with a transaction
-      if($this->issetPermaLogin($account_id)){
-        $query = "UPDATE "._T_ACCOUNT_LOGGED." 
-                  SET cookie_token='".$cookie_token."'
-                  WHERE account_id='".$account_id."';";
+      if($this->issetPermaLogin($cookie_token)){
+
+        // Cookie is already present, maybe the user deleted the cookie on the browser
+        return $cookie_token;
+
       } else {
+
         $query = "INSERT INTO "._T_ACCOUNT_LOGGED." (account_id, cookie_token)
                   VALUES ('" . $account_id . "','" . $cookie_token . "');";
+      
       }
 
       $result = $this->conn->query($query);
@@ -108,11 +110,11 @@ class Credential_Functions {
      * Check if user permalogin cookie is already in the db
      * Return if the perma login is already set or not
      */
-    public function issetPermaLogin($account_id) {
+    public function issetPermaLogin($cookie_token) {
       
-      $query = "SELECT cookie_token
+      $query = "SELECT account_id
                 FROM "._T_ACCOUNT_LOGGED."
-                WHERE account_id='" . $account_id . "';";
+                WHERE cookie_token='" . $cookie_token . "';";
 
       $result = $this->conn->query($query);
 
@@ -130,11 +132,11 @@ class Credential_Functions {
     /**
      * Generate a new cookie token
      * temporary the cookie is generated as the hash
-     * of the account id, a default "key" and current date width format wzis
+     * of the account id, a default "key" and user_agent
      */
     private function generateCookieToken($account_id) {
 
-      return md5( $account_id . "startuppuccino" . date("wzis") );
+      return md5( $account_id . "startuppuccino" . $_SERVER['HTTP_USER_AGENT'] );
 
     }
 
