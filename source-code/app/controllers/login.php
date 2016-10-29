@@ -9,7 +9,14 @@
 	$credential_func->setPassword($login_password);
 	$account_data = $credential_func->login();
 
-	// default global variable to switch and redirect if login is successful or show error message on login_form
+
+	// Set defalut values of email
+	$login_data = ['email' => $login_email, 'password' => $login_password];
+
+
+	/* default global variable to switch and redirect if login is successful 
+	   or show error message on login_form
+	 */
 	$loginOk = (count($account_data) > 0);
 
 	if($loginOk) {
@@ -26,20 +33,17 @@
 	   	$config_func->load();
 
 	   	// Check if a persistent login has been required
-	   	if( $isPermaLogin === TRUE && 
+	   	if( isset($isPermaLogin) &&
+	   		$isPermaLogin === TRUE && 
 	   		!empty( $cookie_token = $credential_func->setPermaLogin($_SESSION['id']) ) ){
 	   		$days = 90;
 	   		setcookie("permalog", $cookie_token, time() + (86400 * $days), "/");
-	   		
-	   		//echo "<script>alert('set ... ".$cookie_token."')</script>";
 	   	}
 
 	   	// Redirect to home page
-    	echo "<script>window.location = '../'</script>";
-
-	} else {
-
-		include '../app/views/login_form.php';
+	   	header("Location: ../");
+	   	// Client redirect if header fails
+	   	echo "<script>window.location='../'</script>";
 
 	}
 
