@@ -67,6 +67,7 @@
 	$template_variables['metatags'] = $metatags;
 	$template_variables['footer_scripts'] = $footer_scripts;
 	$template_variables['rel_path'] = '..';
+	$template_variables['default_avatar'] = "avatar.svg";
 	$template_variables['residence_mentors'] = $residence_mentors;
 	
 	// Prevent to load all the users data if only one profile is required
