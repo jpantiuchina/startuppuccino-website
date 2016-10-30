@@ -34,7 +34,7 @@
 	   isset($_GET['t']) && !empty($_GET['t'])){
 
 		switch ($_GET['k']) {
-			case 'video':
+			case "video":
 				$path_to = "app/public/media/video/";
 				break;
 			
