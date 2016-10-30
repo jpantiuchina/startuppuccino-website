@@ -10,8 +10,8 @@
 
 
 	// Include and Initialize Startup Projects Functions
-	require_once '../app/models/StartupsProject_Functions.php';
-	$people_func = new StartupProject_Functions($_SESSION['id']);
+	require_once '../app/models/StartupProject_Functions.php';
+	$startups_func = new StartupProject_Functions($_SESSION['id']);
 
 	$ideas = [];
 
@@ -22,35 +22,28 @@
 						"kind" => "link",
 						"type" => "text/css",
 						"rel"  => "stylesheet",
-						"href" => "../app/assets/newcss/startups.css"
+						"href" => "../app/assets/newcss/people.css"
 					]
 				];
-	$footer_scripts = ["../app/assets/js/startups.js"];
+	$footer_scripts = ["../app/assets/js/people.js"];
 
 
 	/* 
 	 * If isset the get parameter 'project_id' ( ../index.php?user_id=xxxx )
 	 * then the user details are diplayed instead of the list of users and mentors 
 	 */
-	$isnotset_project = false;
+	$project = null;
+	$isMyTeam = false;
+	
 	if (isset($_GET['project_id'])){
 
 		// Set the project_id of the project to show
-		$people_func->setProject($_GET['project_id']);
+		$startups_func->setProject($_GET['project_id']);
 
-		if ($user = $people_func->getProjectInfo()){
-
-			include '../app/controllers/community__profile.php';
-
-		} else {
-	
-			$isnotset_user = true;
-
-		}
+		$project = $startups_func->getProjectInfo();
+		$isMyTeam = $startups_func->isMyTeam();
 
 	}
-
-	$residence_mentors = $people_func->getResidenceMentors();
 
 
 	// Include header and footer controllers
@@ -59,7 +52,7 @@
 
 	// Set template name and variables
 	
-	$template_file = "community.twig";
+	$template_file = "startups.twig";
 
 	$template_variables['sess'] = $_SESSION;
 	$template_variables['userLogged'] = $userLogged;
@@ -67,13 +60,13 @@
 	$template_variables['metatags'] = $metatags;
 	$template_variables['footer_scripts'] = $footer_scripts;
 	$template_variables['rel_path'] = '..';
-	$template_variables['residence_mentors'] = $residence_mentors;
 	
 	// Prevent to load all the users data if only one profile is required
-	if($isnotset_user){
-		$template_variables['user'] = '404';
+	if($project !== null){
+		$template_variables['project'] = $project;
+		$template_variables['is_my_team'] = $isMyTeam;
 	} else {
-		$template_variables['users'] = $people_func->getAllPeople();
+		$template_variables['projects'] = $startups_func->getAllProjects();
 	}
 
     // Render the template

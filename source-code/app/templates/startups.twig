@@ -12,8 +12,7 @@
 
 			{% else %}
 
-				<h3>Sorry guys... I still have to finish this section!</h3>
-				{# {% include 'startups__project.twig' ignore missing %} #}
+				{% include 'startups__project.twig' ignore missing %}
 			
 			{% endif %}
 
@@ -21,11 +20,11 @@
 
 			{% include 'startups__filters.twig' ignore missing %}
 
-			{% if users %}
+			{% if projects %}
 
-				<div class="list_view list_view--linear" id="startups_wrapper">
+				<div class="list_view list_view--linear" id="people_wrapper">
 
-					{% for user in users %}
+					{% for project in projects %}
 
 						{% include 'startups__projectbox.twig' ignore missing %}
 

@@ -16,6 +16,7 @@ define("_T_COMMENT", DB_TABLE_PREFIX."comment");
 //define("_T_TEAM", "teams");
 //define("_T_TEAM_ACCOUNT", "teamaccount");
 define("_T_PROJECT", DB_TABLE_PREFIX."project");
+define("_T_PROJECT_ACCOUNT", DB_TABLE_PREFIX."project_participant");
 define("_T_MILESTONE", DB_TABLE_PREFIX."milestone");
 define("_T_PROJECT_MILESTONE", DB_TABLE_PREFIX."project_milestones");
 
