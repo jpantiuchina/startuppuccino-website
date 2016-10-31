@@ -2,8 +2,11 @@
  
 class StartupProject_Functions {
  
-    var $account_id;
-    var $project_id;
+    private $account_id;
+    private $project_id;
+
+    private $MENTOR_LIMIT;
+    private $mentor_likes;
 
     // constructor
     function __construct($account) {
@@ -12,6 +15,8 @@ class StartupProject_Functions {
         require_once 'database/DB_Connect.php';
         $db = new Db_Connect();
         $this->conn = $db->connect();
+        $this->mentor_likes = $this->loadMentorLikes();
+        $this->MENTOR_LIMIT = 3; 
     }
  
     // destructor
@@ -29,12 +34,14 @@ class StartupProject_Functions {
 
     /**
      * Get the info of the specific project
+     * Only projects have their own page (not ideas)
      */
     public function getProjectInfo() {
       
-      $query = "SELECT id, title, owner_id, description, avatar, looking_for, is_approved
+      $query = "SELECT id, title, owner_id, description, avatar, looking_for
                 FROM "._T_PROJECT." 
-                WHERE id='".$this->project_id."';";
+                WHERE id='".$this->project_id."'
+                AND is_approved=1;";
 
       $result = $this->conn->query($query);
 
@@ -86,6 +93,8 @@ class StartupProject_Functions {
                        i.owner_id,
                        i.is_approved,
                        (SELECT COUNT(*) FROM "._T_IDEA_COMMENT." WHERE project_id = i.id) AS num_of_comments,
+                       (SELECT IF (COUNT(project_id)>0, 'unlike', 'like') vote
+                        FROM "._T_MENTOR_PROJECT." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS vote_label,
                        i.created_at
                 FROM "._T_PROJECT." i";
 
@@ -145,6 +154,91 @@ class StartupProject_Functions {
       }
 
       return $ideas_array;
+
+    }
+
+
+
+
+
+
+
+
+
+    
+
+    /**
+     * Like the current idea
+     */
+    public function likeMentor() {
+      
+      if(count($this->mentor_likes) >= $this->MENTOR_LIMIT){
+        return "You have reached the maximum number of project you can select.";
+      }
+
+      $query = "INSERT INTO "._T_MENTOR_PROJECT." (project_id, account_id) 
+                VALUES ('".$this->project_id."', '".$this->account_id."');";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        // Push project_id to user likes
+        $this->mentor_likes[] = $this->project_id;
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error";
+     
+    }
+
+
+    /**
+     * Unlike the current idea
+     */
+    public function unlikeMentor() {
+      
+      $query = "DELETE FROM "._T_MENTOR_PROJECT." 
+                WHERE account_id='".$this->account_id."' AND project_id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        // Pop project_id to user likes
+        $temp_mentor_likes = [];
+        foreach ($this->mentor_likes as $project_id) {
+          if($project_id != $this->project_id){
+            $temp_mentor_likes[] = $project_id;
+          }
+        }
+        $this->mentor_likes = $temp_mentor_likes;
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error";
+     
+    }
+
+    /**
+     * Get the list of all ideas IDs that the current user liked
+     */
+    private function loadMentorLikes(){
+
+      $query = "SELECT l.project_id FROM "._T_MENTOR_PROJECT." AS l 
+                WHERE l.account_id='".$this->account_id."';";
+
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($idealike = $result->fetch_assoc()) {
+          $temp_arr[] = $idealike['project_id'];
+        }
+      }
+     
+      return $temp_arr;
 
     }
 

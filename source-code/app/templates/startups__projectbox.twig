@@ -11,4 +11,11 @@
 
     </a>
 
+    {% if project.is_approved=='1' and sess.role == "mentor" %}
+    	<input type="button"
+		       class="st_button {% if project.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
+		       value="{{ project.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
+	    	   onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
+	{% endif %}
+
 </div>

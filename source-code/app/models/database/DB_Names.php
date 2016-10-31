@@ -27,4 +27,9 @@ define("_T_ACCOUNT_LOGGED", DB_TABLE_PREFIX."account_logged");
 
 define("_T_RESIDENCE_MENTORS", DB_TABLE_PREFIX."mentor_residence");
 
+
+
+define("_T_PROJECT_MENTOR", DB_TABLE_PREFIX."project_mentor");
+define("_T_MENTOR_PROJECT", DB_TABLE_PREFIX."mentor_project");
+
 ?>
