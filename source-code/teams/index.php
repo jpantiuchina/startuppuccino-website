@@ -1,32 +1,33 @@
 <?php
 
-	include '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged) {
 		header("Location: ../");
 		exit;
 	}
-
-	// Include the Team Functions
-	require_once '../assets/php/Team_Functions.php';			
-
+	
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/team.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/team.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/listview.css">
 		<title>Startuppuccino - Teams</title>
 
 	</head>
 	<body>
 		
-		<?php include '../assets/php/header.php'; ?>
+		<?php $page_title = "Teams"; ?>
+
+		<?php include '../app/views/header.php'; ?>
 
 
 		<?php
@@ -38,67 +39,18 @@
 			if(isset($_GET['team_id'])){
 
 				// Show one team details
-
-				$team_id = $_GET['team_id'];
-				require 'team.php';
+				include '../app/controllers/team.php';
 
 			} else {
 
 				// Show all teams
-
-				// Instantiate the Team Functions (without addressing any specific team)
-				$team_func = new Team_Functions($_SESSION['id'],NULL);
-
-			?>
-
-				<section class="list_view">
-
-					<?php
-
-						if ($teams = $team_func->getAllTeams()){
-
-							foreach ($teams as $team){
-							
-						        ?>
-
-						        	<div class="list_element list_element--team">
-
-						        		<div class="team__details">
-						        			
-						        			<?php 
-						        				$team_pic_src = "../assets/pics/teams/".$team['pic'];
-						        				if(!file_exists($team_pic_src)) $team_pic_src = "../assets/pics/startuppuccino_logo-white.svg";
-						        			?>
-
-							        		<img src="<?php echo $team_pic_src; ?>" class="team__details_pic" />
-						        			<h3 class="team__details_title">
-								        		<a href="./?team_id=<?php print $team['id']; ?>">
-								        			<?php echo $team['name']; ?>
-								        		</a>
-								        	</h3>
-							        	</div>
-
-						        	</div>
-
-						        <?php
-
-						    }
-
-						} else {
-						    echo "No Teams here!";
-						}
-
-					?>
-
-				</section>
-
-			<?php
+				include '../app/controllers/team_list.php';
 
 			} // endif switch all users list or single user details
 
 			?>
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

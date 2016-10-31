@@ -1,137 +1,83 @@
-<?php require './assets/php/session.php'; ?> 
+<?php 
+
+    require_once './app/models/session.php';
+
+    if($userLogged){
+        header("Location: ./home/");
+        exit;
+    }
+
+
+    /* Set the correct relative path */
+    define("RELATIVE_PATH",".");
+
+?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		
-		<link href="assets/css/general.css" rel="stylesheet" media="all" type="text/css" />
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Startuppuccino</title>
+        
+        <title>Startuppuccino</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="icon" href="http://thatsmy.name/startuppuccino/land/icon.svg" type="image/svg+xml">
+        <link rel="mask-icon" href="http://thatsmy.name/startuppuccino/land/icon.svg">
 
-		<script>
-    		function toggleMobileMenu(e){
-    			e.classList.toggle("mobile_menu__button--active");
-    			document.getElementById("main_menu").classList.toggle("main_menu--visible");
-    			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
-    			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
-    		}
-    	</script>
+        <link rel="stylesheet" href="./app/assets/newcss/landing.css" media="all" />
+        <!-- temp -->
+        <link rel="stylesheet" href="./app/assets/newcss/login.css" media="all" />
+        <link rel="stylesheet" href="./app/assets/newcss/register.css" media="all" />
+        
 
-	</head>
-	<body>
+        <?php include './app/views/extra_head_html.php'; ?>
 
-		<div id="wrapper">
-	        
-	        <header class="header--home">
 
-	            <div class="header__background"></div>
+    </head>
+    <body>
+        
+        <?php include './app/views/header.php'; ?>
 
-	            <section class="top_header custom_padding__header">
-	                
-	            	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
-	            		<div></div>
-	            		<div></div>
-	            		<div></div>
-	            		<div></div>
-	            	</div>
+        <main>
 
-                	<img class="logo" alt="Startuppuccino" src="assets/pics/startuppuccino_logo-white.svg" />
+            <div class="center_column">
+                <div class="center_aligner">
+                    <div id="landing_logo_container">
+                        <div>
+                            <h1>
+                                <a href="http://leanstartup.bz" target="_blank"><img src="./app/assets/pics/logos/leanstartup.png" ></a>
+                                <span>Lean Startup</span>
+                            </h1>
+                            <div class="sublogo_links">
+                                
+                                <span><a href="./login/">Login</a></span>
+                                <span><a href="./register/">Register</a></span>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <!--
+            <section id="login">
+                <h4>Login</h4>
+                <?php // temporary ?>
+                <?php // $form_action = "./login/index.php"; $loginOk = true; ?>
+                <?php //include './app/views/login_form.php'; ?>
+            </section>
 
-	                <nav id="main_menu">
-						
-						<a class="menu_link" href="./ideas/">IDEAS</a>
+            <section id="register">
+                <h4>Register</h4>
+                <?php // $form_action = "./register/index.php"; ?>
+                <?php //include './app/views/register_form.php'; ?>            
+            </section>
+            -->
+        </main>
 
-	           			<?php if ($userLogged){ ?>
+        <footer class="landing_footer">
+            Powered by <a href="./about/">Startuppuccino</a>
+        </footer>
 
-		       				<a class="menu_link" href="./teams/">TEAMS</a>
-
-	           				<a class="menu_link" href="./people/">PEOPLE</a>
-
-							<div class="menu_link menu_link--controller" >
-								<span class="menu_link menu_link--placeholder"><?php print strtoupper($_SESSION['firstname']); ?></span>
-								<a class="menu_link menu_link--submenu" href="./account/">ACCOUNT</a>
-							</div>
-
-							<a class="menu_link" href="./logout/">LOGOUT</a>
-
-						<?php } else { ?>
-
-							<!-- change this into a login form (external ajax login form script -> include) -->
-							<a class="menu_link" href="./login/">LOGIN</a>
-
-							<a class="menu_link" href="./signup/">SIGN UP</a>
-
-						<?php } // endif userlogged ?>
-
-	                </nav>
-	                
-	            </section>
-
-	            <section class="bottom_header split_view">
-	                
-            		<div class="box_view custom_padding">
-            			<h3></h3>
-            			<p></p>
-            		</div>
-            		<div class="box_view box_view--tagline custom_padding">
-            			
-            			<h3>Meet Startuppuccino</h3>
-		                <p>Startuppuccino is a project whose vision is to provide startups the guidance they need at their early steps</p>
-		                <span><a href="./ideas/">DISCOVER</a></span>
-
-            		</div>
-
-	            </section>
-
-	        </header>
-	        
-	        <main>
-	            
-	            <section class="split_view split_view--info">
-	                
-	                <div class="box_view custom_padding">
-	                    <h3>
-	                        <span class="span-line span-line-orange"></span>
-	                        INTRODUCTION
-	                    </h3>
-	                    <p>Startuppuccino is a project whose vision is to provide startups the guidance they may need in their early steps.</p>
-	                    <p>On the portal, startuppers and enterpreneurs can find every direct guidance through the help of our mentors team, specialized personal ready to direct people into the correct direction, as well as a selection of useful web tools they can use to improve their working experience.</p>
-	                    <p>Startuppuccino is a free service, born during the Lean Startup course and sponsored by Unibz.</p>
-	                </div>
-	                
-	                <div class="box_view custom_padding" id="vision">
-	                    <h3>
-	                        <span class="span-line span-line-black"></span>
-	                        VIDEO
-	                    </h3>
-	                    <iframe src="https://player.vimeo.com/video/151849090" width="300" height="180" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-	                </div>
-	                
-	            </section>
-	            
-	            <section class="full-view custom_padding" id="partners">
-	                
-	                <h3>
-	                    <span class="span-line span-line-white"></span>
-	                    PARTNERS
-	                </h3>
-	                <p>Startuppuccino is sponsored by different companies or associations, but is still searching an investor for year 2016.</p>
-	                <a href="http://unibz.it" target="_blank"><img src="assets/pics/unibz_logo.jpg" /></a>
-	                <a href="#"><img src="assets/pics/minetoolz.jpg" /></a>
-	            
-	            </section>
-	            
-	        </main>
-	        
-	        <footer>
-	            
-	            <!--
-	            <p>Developed with love by your <a href="http://startuppuccino.com">Startuppuccino</a></p>
-	            -->
-	            
-	        </footer>
-	        
-	    </div>
+        <script src="./app/assets/js/startuppuccino.js"></script>
 
 	</body>
 </html>

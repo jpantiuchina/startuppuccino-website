@@ -1,6 +1,6 @@
 <?php
 
-	require '../assets/php/session.php';
+	require_once '../app/models/session.php';
 
 	// Redirect to home if user is not logged
 	if(!$userLogged){
@@ -13,8 +13,8 @@
 <html>
 	<head>
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../app/assets/css/general.css">
 		<title>Startuppuccino - Edit Project</title>
 
 	</head>
@@ -28,13 +28,13 @@
 			else if (isset($_GET['project_id'])) $project_id = $_GET['project_id'];
 
 			// Include the project functions
-			require_once '../assets/php/Project_Functions.php';
+			require_once '../app/models/Project_Functions.php';
 			$project_func = new Project_Functions($_SESSION['id'],$project_id);
 
 		?>
 
 
-		<?php include '../assets/php/header.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<?php 
 
@@ -133,7 +133,7 @@
 		?>
 
 
-		<?php include '../assets/php/footer.php'; ?>
+		<?php include '../app/views/footer.php'; ?>
 
 	</body>
 </html>

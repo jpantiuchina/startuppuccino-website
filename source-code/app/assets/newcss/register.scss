@@ -1,0 +1,11 @@
+
+@import 'general';
+
+@import 'form';
+
+.form_separator {
+	width: 60%;
+	margin: 15px auto;
+	height: 0px;
+	border-bottom: 1px dotted #777;
+}

@@ -1,0 +1,538 @@
+
+@import 'general';
+
+
+$session-width: 650px;
+$session-background-color: #fff;
+$session-border-separator: none /* 1px dotted #999 */;
+$session-box-shadow: none /* 0px 0px 1px #bbb */;
+$session-margin-top: $header-height;
+
+$session-comments-height: 450px;
+$session-comments-image-size: 50px;
+$session-comments-content-padding: 5px;
+$session-comments-text-width: calc(100% - #{$session-comments-image-size});
+$session-comments-text-lateral-padding: 15px;
+$session-comments-editor-height: 100px;
+
+$sidebar-head-height: 40px;
+
+.sessions__wrapper {
+	padding-bottom: $header-height;
+}
+
+.session {
+
+	height: auto;
+	overflow: hidden;
+	width: 100%;
+	max-width: $session-width;
+	border-bottom: $session-border-separator;
+	@include box-shadow($session-box-shadow);
+	@include transition($transition-time);
+
+	&--highlight {
+		.head > h3 {color: $logo-brown !important}
+	}
+
+	&__contents {
+		background-color: $session-background-color;
+		margin-top: $session-margin-top;
+	}
+
+}
+
+.session__contents {
+
+	> .head,
+	> .guests,
+	> .description,
+	> .foot,
+	.comments__editor {
+		padding: 0px 20px;
+	}
+
+	> .head {
+		padding-top: 1px !important;
+
+		&--current {
+			background-color: $logo-green;
+			> h3, > p {color: #fff !important}
+		}
+
+		> h3 {
+			font-family: $font-title !important;
+			color: $palette-yellow;
+			margin: 20px 0px;
+		}
+
+		> p {
+			font-size: 14px;
+			color: #777;
+			margin: 0px;
+			padding-bottom: 20px;
+		}
+	}
+
+	> .description pre {
+		font-family: $font-stack;
+		font-size: 15px;
+	}
+
+	> .foot,
+	> .resources,
+	> .comments,
+	.comments_editor {
+		background-color: #fcfced;
+	}
+
+	> .foot {
+		padding: 20px;
+		> span {
+			@extend .st_button;
+			font-size: 12px;
+		}
+	}
+
+}
+
+.guests {
+
+	p:first-child {
+		color: #999;
+	}
+
+	> .guest {
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		margin: 5px 1px;
+		cursor: pointer;
+
+		&:hover {
+
+			> .guest__label {
+				display: block !important;
+			}
+
+		}
+
+		> .guest__label {
+			display: none !important;
+			position: absolute;
+			top: -40px; left: 0;
+			background-color: $logo-green;
+			color: #fff;
+			width: 120px;
+			height: auto;
+			overflow-y: hidden;
+			font-size: 14px;
+			line-height: 20px;
+			padding: 3px;
+			z-index: 999;
+			display: inline-block;
+			text-align: center;
+			@include border-radius(3px);
+			@include transition(transition-time);
+		}
+
+		>a{
+			display: block;
+			height: 100%;
+			@include border-radius(50%);
+			overflow: hidden;
+			
+			div {
+				@extend .picture;
+				background-color: $background-color;
+				height: 100%;
+			}
+		}
+	}
+}
+
+.resources,
+.comments {
+	overflow: hidden;
+	max-height: 0px;
+	@include transition($transition-time);
+}
+
+.resources {
+
+	&.r_show {
+		padding: 20px;
+		max-height: 400px;
+	}
+
+	> ul {
+		list-style: none;
+		margin: 0px;
+		padding: 0px;
+		> li {
+			background-color: $session-background-color;
+		}
+	}
+
+	a {
+		position: relative;
+		display: inline-block;
+		padding: 10px;
+		height: 100%;
+		width: 100%;
+		text-decoration: none;
+		color: $logo-brown;
+		&:hover {
+			background-color: #f9f9f9;
+		}
+		> span.icon {
+			display: inline-block;
+			height: 100%;
+		}
+	}
+
+}
+
+
+.comments {
+	position: relative;
+
+	&.c_show {
+		padding: 20px;
+		max-height: $session-comments-height;
+		padding-top: 100px;
+	}
+
+	&__wrapper {
+		height: auto;
+		max-height: $session-comments-height - $session-comments-editor-height - 15px;
+		padding-bottom: 20px;
+		overflow-y: scroll;
+		@extend .pretty_scrollbar;
+	}
+
+	&__editor {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: $session-comments-editor-height;
+		padding-top: 15px !important;
+		padding-left: $session-comments-image-size + $session-comments-text-lateral-padding;
+
+		> textarea,
+		> div {
+			display: inline-block;
+			vertical-align: bottom;
+		}
+
+		> div:not(.tiny_loader) {
+			width: 80px;
+			text-align: center;
+		}
+
+		> textarea {
+			border: none;
+			padding: 7px;
+			font-family: $font-stack;
+			font-size: 15px;
+			width: calc(100% - 90px);
+			max-width: calc(100% - 90px);
+			line-height: 30px;
+			height: 45px;
+			max-height: 45px;
+			@include transition($transition-time);
+
+			&:focus{
+				height: 70px;
+				max-height: 70px;
+			}
+		}
+		
+		input.publish_comment_button {
+			@extend .st_button;
+			font-size: 12px
+		}
+	}
+
+}
+
+.comment {
+
+	position: relative;
+	font-size: 0px;
+    margin: 10px 0px;
+
+    &:hover {
+    	&:before {
+    		content: "";
+    		position: absolute;
+    		top: $session-comments-image-size - 5px;
+    		left: 0px;
+    		display: block;
+    		height: 10px;
+    		width: 10px;
+    		@include border-radius(50%);
+    		background-color: $logo-red;
+    	}
+    }
+
+	&__author,
+	&__text,
+	&__footer {
+		font-size: 15px
+	}
+
+	&__author,
+	&__text {
+		display: inline-block;
+		vertical-align: top;
+		margin: 0px;
+		padding: $session-comments-content-padding;
+	}
+
+	&__author {
+		width: $session-comments-image-size;
+		height: $session-comments-image-size;
+
+		> div {
+			@include border-radius(50%);
+			display: block;
+			height: 100%;
+			@extend .picture;
+			background-color: #abc
+		}
+
+	}
+
+	&__text {
+		width: $session-comments-text-width;
+		padding-left: $session-comments-text-lateral-padding;
+		padding-right: 40px;
+	}
+
+	&__footer {
+		text-align: right;
+	}
+
+	&__delete {
+		position: relative;
+		top: -30px;
+		color: $logo-red;
+		text-decoration: underline;
+		padding: 2px;
+		font-size: 13px;
+		cursor: pointer;
+		@include transition($transition-time);
+
+		&:hover {
+			color: $palette-yellow;
+		}
+	}
+
+}
+
+/* Sidebar right -mentor availability */
+
+.column_right {
+	width: 100%;
+	background-color: $session-background-color;
+	@include box-shadow($session-box-shadow);
+
+	a {
+		cursor: pointer !important;
+	}
+}
+
+.sidebar_container {
+
+	> .overlay_mobile__button {
+		display: none;
+	}
+
+	> .head {
+		height: $sidebar-head-height;
+		line-height: $sidebar-head-height/2;
+		font-size: 14px;
+		background-color: $session-background-color;
+		color: $logo-brown;
+		padding: 0px 10px;
+		font-family: $font-title;
+		border-bottom: 2px solid #ddd;
+	}
+
+	> .main {
+		overflow-y: scroll;
+		overflow-x: hidden;
+	    max-height: 290px;
+	}
+
+}
+
+.list_el {
+	position: relative;
+	padding: 2px 10px;
+
+	&__left,
+	&__right {
+		position: relative;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	&__left {
+		width: calc( 99% - 57px );
+		
+		p {
+			margin: 3px 0px;
+			font-size: 12px;
+
+			&:last-child {
+				color: #999;
+			}
+		}
+
+		> a {
+			display: inline-block;
+			padding: 2px 5px;
+			text-decoration: none;
+			color: $logo-brown;
+		}
+	}
+
+	&__right { 
+		width: 55px;
+		height: 55px;
+		font-size: 11px;
+	}
+
+}
+
+.button_availability {
+	margin-top: 10px;
+
+	$button-availabiliy-inactive-color: #f2f2f2;
+
+	> span {
+		background-color: $button-availabiliy-inactive-color;
+		color: #777;
+		@include transition($transition-time);
+		padding: 2px 5px;
+		cursor: pointer;
+	}
+
+	&.action_remove {
+		> span:first-child {
+			background-color: $logo-green;
+			color: #fff;
+		}
+	}
+	&.action_add {
+		> span:last-child {
+			background-color: $logo-red;
+			color: #fff;
+		}
+	}
+
+}
+
+.button_pitch {
+	position: relative;
+    margin-top: 7px;
+
+	$button-availabiliy-inactive-color: #f2f2f2;
+
+	.button_toggle_pitch {
+		position: absolute;
+		top: 0px; left: 0px;
+		width: 100%; height: 100%;
+		cursor: pointer;
+	}
+
+	> label {
+		color: #777;
+		padding: 2px 4px;
+		display: inline-block;
+		@include transition($transition-time);
+		background-color: $button-availabiliy-inactive-color;
+		width: 55px;
+
+		> span,
+		> input {
+			vertical-align: middle;
+		}
+
+		> span {
+			display: block;
+			text-align: center;
+		}
+
+		> input {
+			margin: 0px;
+			margin-left: 3px;
+			background-color: $button-availabiliy-inactive-color;
+		}
+	
+		&.approved {
+			background-color: $logo-green;	
+			color: #fff;
+		}
+
+		&.checked {
+			background-color: $palette-yellow;	
+			color: #fff;
+		}
+
+		&.denied {
+			background-color: $logo-red;
+			color: #fff;
+		}
+	}
+
+}
+
+
+@media all and (min-width: 1040px){
+
+	.column_right {
+		position: fixed;
+		top: $header-height + $session-margin-top;
+		right: $page-lateral-padding;
+		max-width: 300px;
+	}
+
+}
+
+@media all and (max-width: 1039px){
+
+	.session {
+		max-width: 100%
+	}
+
+	.column_right {
+		max-height: $sidebar-head-height;
+		margin-top: $session-margin-top;
+		overflow: hidden;
+		@include transition($transition-time);
+
+		&--visible {
+			max-height: 600px;
+		}
+	}
+
+
+	.sidebar_container {
+		position: relative;
+
+		> .overlay_mobile__button {
+			display: block;
+			position: absolute;
+			top: 0; left: 0;
+			height: $sidebar-head-height;
+			width: 100%;
+			text-align: right;
+		}
+	}
+
+}

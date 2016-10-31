@@ -1,176 +1,70 @@
 <?php
 
-	require '../assets/php/session.php';
-	
-	// Account id
-	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
+	require_once '../app/models/session.php';
 
-	// Include and Initialize People Functions
-	require_once '../assets/php/Ideas_Functions.php';
+	// Redirect to home if user is not logged
+	if(!$userLogged){
+		header("Location: ../");
+		exit;
+	}
+	
+
+	// Include and Initialize Ideas Functions
+	require_once '../app/models/Ideas_Functions.php';
 	$ideas_func = new Ideas_Functions($account_id);
 
-?>
+	$ideas = [];
 
-<!DOCTYPE html>
-<html>
-	<head>
+	$currentPage = "ideas";
+	$page_title = "Ideas - Startuppuccino";
+	$metatags = [
+					[
+						"kind" => "link",
+						"type" => "text/css",
+						"rel"  => "stylesheet",
+						"href" => "../app/assets/newcss/ideas.css"
+					]
+				];
+	$footer_scripts = ["../app/assets/js/ideas.js"];
+	$view = null;
+	$user_can_join = count($ideas_func->user_joins) < 1;
 
-		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/ideas.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
-		<title>Ideas - Startuppuccino</title>
 
-	</head>
-	<body>
+	if ( !($ideas = $ideas_func->getAllIdeas()) && $_SESSION['ideas_phase'] != "1" ){
 		
-		<?php include '../assets/php/header.php'; ?>
-		
-		<main>
+		// Do nothing ... ideas is empty array
 
-			<?php
-			
-			// List all the ideas
+	} else {
 
-			// If user is logged, can create new ideas 
-			if ($userLogged){
+		shuffle($ideas);
+		// Include the view switch to include the right block according to idea phase
+		include '../app/controllers/ideas__view_switch.php';
 
-				// Get the current user ideas IDs
-        		$user_ideas = $ideas_func->getAllMyIdeasID();
+	}
 
-        		// Show the form to create a new Idea
-        		?>
-        			<div class="new_idea__button">
-        				<span onclick="showIdeaForm()">NEW IDEA</span>
-        		  	</div>
-        		  	<section id="new_idea__section">
-        		  		<div class="new_idea__button">
-        		  			<span  onclick="hideIdeaForm()">CANCEL</span>
-        		  		</div>
-        		  		<?php include 'idea_form.php'; ?>
-        		  	</section>
-        		<?php
 
-        	} ?>
+	// Include header and footer controllers
+	include '../app/controllers/page__header.php';
+	//include '../app/controllers/page__footer.php';
 
-			<section class="list_view">
-
-				<?php
-
-					if ($ideas = $ideas_func->getAllIdeas()){
-
-						foreach ($ideas as $idea){
-						
-							// Set the current idea
-							$ideas_func->setIdea($idea['id']);
-							// Store boolean if the user has already join the idea
-							$isMyIdea = $ideas_func->isMyIdea();
-
-					        ?>
-
-					        	<div class="list_element list_element--idea">
-
-					        		<div class="idea__details">
-
-					        			<h3 class="idea__details_title">
-					        				<?php print $idea['title']; ?>
-					        			</h3>
-
-					        			<p class="idea__details_description">
-						        			<?php print $idea['description']; ?>
-						        		</p>
-
-							        	<div class="idea__details_extra">
-
-							        		<span>
-							        			<a href="../people/?user_id=<?php print $idea['owner_id']; ?>"><?php print $idea['firstName']." ".$idea['lastName']; ?></a>
-							        		</span>
-
-							        		<span>
-							        			<?php print $idea['date']; ?>
-							        		</span>
-
-							        		<span id="team_<?php print $idea['id'];?>" maxteamsize="<?php print $idea['team_size'];?>">
-							        			Team size: <?php print $idea['current_team_size']."/".$idea['team_size']; ?>
-							        		</span>
-
-							        		<?php if (trim($idea['background_pref'])!=""){ ?>
-								        		<span>
-								        			<?php print $idea['background_pref']; ?>
-								        		</span>
-					        				<?php } ?>
-
-							        		<?php if (intval($idea['current_team_size']) < intval($idea['team_size'])){ ?>
-
-								        		<?php $teamCompleted = false; ?>
-
-							        		<?php } else { ?>
-
-							        			<span>
-							        				Team Completed. Ready to rock!
-							        			</span>
-
-							        			<?php $teamCompleted = true; ?>
-
-							        		<?php } ?>
-							        	
-						        		</div>
-
-						        	</div>
-
-					        		<?php if ($userLogged){ ?>
-
-					        			<div class="idea__footer">
-					        				
-					        				<?php // Case: Idea owner ?>
-					        				<?php if($_SESSION['id'] == $idea['owner_id']){ ?>
+	// Set template name and variables
 	
-						        				<?php // Filter to highlight user ideas or joined ideas ?>
-					        					<!-- <div class="idea__lens"></div> -->
+	$template_file = "ideas.twig";
 
-					        					<!--<span  class="idea__button idea__button--full" onclick="editIdea('<?php print $idea['id']; ?>');">EDIT IDEA</span> -->
-					        					<span  class="idea__button idea__button--delete" onclick="deleteIdea('<?php print $idea['id']; ?>');">DELETE IDEA</span>
-					        					
-					        				<?php } else { ?>
+	$template_variables['sess'] = $_SESSION;
+	$template_variables['userLogged'] = $userLogged;
+	$template_variables['page_title'] = $page_title;
+	$template_variables['metatags'] = $metatags;
+	$template_variables['footer_scripts'] = $footer_scripts;
+	$template_variables['rel_path'] = '..';
+	$template_variables['user_can_join'] = $user_can_join;
+	if($_SESSION['ideas_phase'] == "3"){
+		$template_variables['joined_idea'] = $ideas_func->getJoinedIdea();
+	}
 
-					        					<?php // Case: User not join this idea ?>
-					        					<?php if(!$isMyIdea && !$teamCompleted){ ?>
+    // Render the template
+    require_once '../app/views/_Twig_Loader.php';
+    echo (new Twig_Loader())->render($template_file, $template_variables);
 
-						        					<span class="idea__button" onclick="ideaHelper('join','<?php print $idea['id']; ?>',this)">JOIN IDEA</span>
 
-						        				<?php // Case: User not join this idea ?>
-							        			<?php } else if($isMyIdea){ ?>
-
-						        					<?php // Filter to highlight user ideas or joined ideas ?>
-					        						<!-- <div class="idea__lens"></div> -->
-							        				
-							        				<span class="idea__button" onclick="ideaHelper('leave','<?php print $idea['id']; ?>',this)">LEAVE IDEA</span>
-
-						        			<?php } } ?>
-
-					        			</div>
-
-					        		<?php } ?>
-						        
-					        	</div>
-
-					        <?php
-
-					    }
-
-					} else {
-					    echo "Nothing to list here!";
-					}
-
-				?>
-
-			</section>
-
-		</main>
-
-		<?php include '../assets/php/footer.php'; ?>
-
-		<script src="../assets/js/ideas.js"></script>
-
-	</body>
-</html>
+?>
