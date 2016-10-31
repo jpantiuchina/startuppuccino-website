@@ -4,6 +4,7 @@ $header-height-mobile: 45px;
 $header-background: rgba(247, 247, 221, 0.9);
 $header-shadow: none /*0px 0px 2px #a7a7a7 */;
 $header-transition-timing: $transition-time;
+$header-links-font-size: 14px;
 
 $page-title-width: 0px;
 
@@ -137,6 +138,7 @@ header {
 		height: $header-height;
 		line-height: $header-height;
 		text-align: center;
+		font-size: $header-links-font-size;
 		//border-bottom: $menu-link-border-size solid $header-background;
 		a:hover { text-decoration: underline }
 	}

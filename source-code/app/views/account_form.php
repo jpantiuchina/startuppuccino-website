@@ -144,16 +144,22 @@
 		// Socials array example:
 		// ["facebook"=>["https://facebook.com/user/helloworld","primary"],"twitter"=>["https://twitter.com/user/helloworld","secondary"]]
 		$socials = !empty($account["socials"]) ? json_decode(trim($account["socials"]),true) : array();
-		$default_socials = ['facebook','twitter','linkedin','instagram','skype','whatsapp','youtube','website'];
+		$default_socials = ['facebook','twitter','linkedin','instagram','skype','whatsapp','youtube','website','musteus'];
 		//$default_socials = ['facebook','twitter','linkedin','behance','googleplus','instagram','skype','telegram','vimeo','whatsapp','youtube','website'];
 
 		foreach ($default_socials as $social) {
-			
+				
+				if($social == "musteus"){
+					$social_avatar = "musteus.png";
+				} else {
+					$social_avatar = $social.".svg";
+				}
+
 			?>
 
 			<li class="form_box_item social" id="<?php echo $social; ?>">
-				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social; ?>.svg" alt="<?php echo $social; ?>" /></label>
-				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="Url" />
+				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social_avatar; ?>" alt="<?php echo $social; ?>" /></label>
+				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="<?php echo $social; ?>" />
 				<label style="display: none"><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
 			</li>
 

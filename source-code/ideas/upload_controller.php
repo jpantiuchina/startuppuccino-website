@@ -56,7 +56,7 @@
         // Collect errrors
         $errors = "Error: " . $pic["error"];
         // Send email to notify for uploads errors
-        //mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
+        mail("dev@startuppuccino.com","Upload errors",$errori); // Not active email
         exit(set_notify($errors));
     }
     
@@ -64,7 +64,7 @@
     // Check if $dir is a directory
     if(!is_dir($dir)){
         // Send error email to devs
-        //mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
+        mail("dev@startuppuccino.com","Upload Error","$dir is not a directory.");
         exit(set_notify("We are sorry, at the moment the service is not available. Please try later."));
     }
     

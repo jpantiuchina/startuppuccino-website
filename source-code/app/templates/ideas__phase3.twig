@@ -1,0 +1,147 @@
+{% if sess.id %}
+	<script type="text/javascript">
+		var STARTUPPUCCINO_USER = {
+				id : "{{ sess.id }}",
+				avatar : "{{ sess.avatar | default('avatar.svg') }}"
+			};
+	</script>
+{% endif %}
+
+{% if isStudent and user_can_join %}
+	<h3 class="idea__approved">NOW IS TIME TO JOIN IDEAS<br>REMEBER YOU CAN JOIN ONLY ONE IDEA!</h3>
+{% endif %}
+
+<div class="idea_switcher">
+	<span class="idea_switcher__button" 
+          data-action="0"
+	      onclick="SpIdea.layout.switchIdeas(this)">Not approved ideas</span>	
+</div>
+
+{% if isStudent and not user_can_join and joined_idea %}
+
+<h3 class="idea__approved">Idea you joined</h3>
+
+	<div class='idea idea__approved' id='i{{ joined_idea.id }}'>
+
+		<div class='picture_box'>
+			{% set avatar = default_avatar %}
+			<div id="idea_picture__{{ joined_idea.id }}"
+			     style="background-image:url('../app/assets/pics/ideas/{{ joined_idea.avatar | default(avatar) }}')"></div>
+		</div>
+
+		<div class="info_box">
+
+			<p class='idea_title' id='idea_title__{{ joined_idea.id }}'>{{ joined_idea.title }}</p>
+			<p class='idea_description' id='idea_description__{{ joined_idea.id }}'>{{ joined_idea.description }}</p>
+			<p class='idea_background' id='idea_background__{{ joined_idea.id }}'>Looking for: {{ joined_idea.looking_for }}</p>
+
+			<div class='info_box_footer'>
+
+				{# Only students can join ideas (and not idea owners) #}
+				{% if sess.id != joined_idea.owner_id %}
+					<input type="button"
+					       class='c_red join_idea_button' 
+					       value="Leave" {# i_joined can be "join" or "leave" #}
+					       onclick="SpIdea.ideaHelper('leave', '{{ joined_idea.id }}', this)" />
+				{% endif %}
+
+				<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
+			</div>
+
+		</div>
+
+		<div class='idea__footer'>
+			<div class="members" id="members__{{ joined_idea.id }}">
+				{% if joined_idea.members %}
+					<span>Students who joined ({{ joined_idea.members|length }}): </span>
+					{% for member in joined_idea.members %}
+						<div class="member" member-id="{{ member.id }}">
+							<a href="../people/?user_id={{ member.id }}">
+								<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+							</a>
+							<div class="member__label">
+								<span>{{ member.firstName }} {{ member.lastName }}</span>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+
+	</div>
+
+<h3 class="idea__approved">All Ideas</h3>
+
+{% endif %}
+
+{% for idea in ideas %}
+
+	{% if joined_idea.id != idea.id %}
+
+		<div id='i{{ idea.id }}'
+		     class="idea {% if idea.is_approved == 0 %}idea__notapproved{% else %}idea__approved{% endif %}">
+
+			<div class='picture_box'>
+				{% set avatar = default_avatar %}
+				<div id="idea_picture__{{ idea.id }}"
+				     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
+			</div>
+
+			<div class="info_box">
+
+				<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ idea.title }}</p>
+				<p class='idea_description' id='idea_description__{{ idea.id }}'>{{ idea.description }}</p>
+				<p class='idea_background' id='idea_background__{{ idea.id }}'>Looking for: {{ idea.looking_for }}</p>
+
+				<div class='info_box_footer'>
+
+					{# Only students can join ideas (and not idea owners) #}
+					{% if isStudent and sess.id != idea.owner_id and idea.is_approved == 1 %}
+						<input type="button"
+							   {% if not user_can_join %}style="display:none"{% endif %}
+						       class='{% if idea.i_joined=='join' %} c_green {% else %} c_red {% endif %} join_idea_button'
+						       value="{{ idea.i_joined|capitalize }}" {# i_joined can be "join" or "leave" #}
+						       onclick="SpIdea.ideaHelper('{{ idea.i_joined }}', '{{ idea.id }}', this)" />
+					{% endif %}
+
+					<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
+				</div>
+
+			</div>
+
+			<div class='idea__footer'>
+							
+				{% if idea.is_approved == 1 %}
+
+					<div class="members" id="members__{{ idea.id }}">
+						{% if idea.members %}
+							<span>Students who joined ({{ idea.members|length }}): </span>
+							{% for member in idea.members %}
+								<div class="member" member-id="{{ member.id }}">
+									<a href="../people/?user_id={{ member.id }}">
+										<div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+									</a>
+									<div class="member__label">
+										<span>{{ member.firstName }} {{ member.lastName }}</span>
+									</div>
+								</div>
+							{% endfor %}
+						{% endif %}
+					</div>
+
+				{% endif %}
+
+			</div>
+
+		</div>
+
+	{% endif %}
+
+{% endfor %}
+
+
+{% if userLogged %}
+	{% include 'comment__boxview.twig' ignore missing %}
+{% endif %}

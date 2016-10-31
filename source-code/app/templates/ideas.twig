@@ -1,0 +1,15 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+	<section>
+		{% if idea_phase_template %}
+			{% include idea_phase_template %}
+		{% else %}
+			<p>No ideas found...</p>
+		{% endif %}
+	</section>
+</main>
+
+{% endblock %}

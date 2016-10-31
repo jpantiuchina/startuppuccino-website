@@ -1,10 +1,14 @@
-<section id="loading_screen" style="display: none">
-		
-	<div id="loading_circle">
-		<div id="loading_ball1" class="loading_ball"></div>
-		<div id="loading_ball2" class="loading_ball"></div>
-		<div id="loading_ball3" class="loading_ball"></div>
-		<div id="loading_ball4" class="loading_ball"></div>
-	</div>
+<?php
+	
+	// Set template name and variables
+	
+	$template_file = "page__loading_screen.twig";	
 
-</section>
+	$template_variables = [];
+
+
+    // Render the template
+    require_once '_Twig_Loader.php';
+    echo (new Twig_Loader())->render($template_file, $template_variables);
+
+?>

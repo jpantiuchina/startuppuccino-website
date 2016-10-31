@@ -1,31 +1,17 @@
 <?php
 	
-	/* General footer user included in all pages (except for landing page) */
-
-?>
-
-
-<footer class="footer">
+	// Set template name and variables
 	
-	<div class="footer__separator"></div>
+	$template_file = "page__footer.twig";	
 
-	<p class="footer__links">
-
-	   <a class="footer__link" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a>
-	   <a class="footer__link" href="https://unibz.it" target="_blank">Unibz.it</a>
-	   <a class="footer__link" href="../about/" target="_blank">&copy; 2016 Startuppuccino. All rights reserved </a>
-	  
-	 </p>
-
-</footer>
+	$template_variables = [
+				'sess' => $_SESSION,
+				'userLogged' => $userLogged
+          	];
 
 
-
-
-<?php 
-
-	if($userLogged){ include '../app/views/askforhelp.php'; } 
+    // Render the template
+    require_once '_Twig_Loader.php';
+    echo (new Twig_Loader())->render($template_file, $template_variables);
 
 ?>
-
-<script src="../app/assets/js/startuppuccino.js"></script>

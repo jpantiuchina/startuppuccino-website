@@ -23,7 +23,13 @@ main { padding-top: $header-height + 20px !important; }
 }
 
 
+.idea_switcher {
 
+	&__button {
+		@extend .st_button;
+	}
+
+}
 
 
 .idea_title {
@@ -38,6 +44,10 @@ main { padding-top: $header-height + 20px !important; }
 	height: auto;
 	margin-bottom: $idea-margin-bottom;
 	padding-top: $header-height;
+
+	&__notapproved {
+		display: none;
+	}
 
 	>.info_box,
 	>.picture_box {
@@ -105,17 +115,103 @@ main { padding-top: $header-height + 20px !important; }
 
 .info_box_footer {
 
+	position: relative;
 	text-align: right;
 	height: $idea-footer-lineheight + $idea-footer-padding-bottom;
 	line-height: $idea-footer-lineheight;
 	padding-bottom: $idea-footer-padding-bottom;
-	border-bottom: $idea-border-bottom;
 
 	>input[type=submit],
 	>input[type=button] {
 		@extend .st_button;
+	
+		&.c_red {
+			background-color: $logo-red !important;
+		}
+
 	}
 
+
+	> .overlay_loader {
+		display: none;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+
+		&--block {
+			display: block;
+		}
+	}
+
+}
+
+
+.members {
+
+	margin-left: $picture-box-width;
+	border-bottom: $idea-border-bottom;
+
+	> span {
+		display: inline-block;
+		height: 50px;
+		width: 110px;
+		padding-top: 5px;
+		line-height: 20px;
+		overflow-y: hidden;
+		font-size: 14px;
+		color: #999
+	}
+
+	> .member {
+		position: relative;
+		display: inline-block;
+		width: 40px;
+		height: 40px;
+		margin: 5px 1px;
+		cursor: pointer;
+
+		&:hover {
+
+			> .member__label {
+				display: block !important;
+			}
+
+		}
+
+		> .member__label {
+			display: none !important;
+			position: absolute;
+			top: -40px; left: 0;
+			background-color: $logo-green;
+			color: #fff;
+			width: 120px;
+			height: auto;
+			overflow-y: hidden;
+			font-size: 14px;
+			line-height: 20px;
+			padding: 3px;
+			z-index: 999;
+			display: inline-block;
+			text-align: center;
+			@include border-radius(3px);
+			@include transition(transition-time);
+		}
+
+		>a{
+			display: block;
+			height: 100%;
+			@include border-radius(50%);
+			overflow: hidden;
+			
+			div {
+				@extend .picture;
+				background-color: $background-color;
+				height: 100%;
+			}
+		}
+	}
 }
 
 @media all and (max-width: 700px){
@@ -133,6 +229,10 @@ main { padding-top: $header-height + 20px !important; }
 
 	>.picture_box {
 		margin-bottom: 20px
+	}
+
+	.members {
+		margin: auto
 	}
 
 }
@@ -245,7 +345,7 @@ main { padding-top: $header-height + 20px !important; }
 }
 
 
-/* COmment box */
+/* Comment box */
 
 .comment_box {
 	overflow: hidden;
@@ -350,5 +450,50 @@ $session-comments-editor-height: 100px;
 			color: $palette-yellow;
 		}
 	}
+
+}
+
+
+.ranklist {
+
+	padding: 30px 0px;
+
+	&__title,
+	&__item {
+		padding: 20px;
+		margin: 0px
+	}
+
+	&__title {
+		color: $logo-brown;
+	}
+
+	&__item {
+		font-size: 20px;
+		background-color: #fff;
+		margin: 7px auto;
+
+		&--head {
+			background-color: #fff
+		}
+
+		&_title {
+			display: inline-block;
+			color: $logo-green;
+			width: 70%;
+			max-width: 250px;
+		}
+
+		&_likes {
+			border: 1px solid $logo-brown;
+			padding: 7px;
+			@include border-radius(4px);
+			background-color: #fff
+		}
+
+
+	}
+
+
 
 }

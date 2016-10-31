@@ -1,0 +1,22 @@
+{# static metatag - each page #}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta charset="UTF-8">
+
+<script async src="{{ rel_path }}/app/vendor/hotjar_analytics_tracking_code.js"></script>
+<script async src="{{ rel_path }}/app/vendor/google_analytics_tracking_code.js"></script>
+
+{# dynamic metatags - customize for each page #}
+<title>{{ page.title }}</title>
+
+{% if metatags %}
+
+	{% for item in metatags %}
+		{% if item.kind == "link" %}
+			<link href="{{ item.href }}" rel="{{ item.rel }}" type="{{ item.type }}" media="all">
+		{% else %}
+			<meta name="{{ item.name }}" content="{{ item.content }}">
+		{% endif %}
+	{% endfor %}
+
+{% endif %}
