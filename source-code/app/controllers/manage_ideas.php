@@ -26,8 +26,8 @@
 
 	// Check current ideas phase
 	$phase1 = ["new_idea","delete_idea","edit_idea","get_comments","new_comment","delete_comment"];
-	$phase2 = ["like_idea","unlike_idea"];
-	$phase3 = ["join_idea","leave_idea"];
+	$phase2 = ["like_idea","unlike_idea","new_comment","get_comments","delete_comment"];
+	$phase3 = ["join_idea","leave_idea","new_comment","get_comments","delete_comment"];
 	if(($_SESSION['ideas_phase']==1 && !in_array($key, $phase1)) ||
 	   ($_SESSION['ideas_phase']==2 && !in_array($key, $phase2)) ||
 	   ($_SESSION['ideas_phase']==3 && !in_array($key, $phase3))){

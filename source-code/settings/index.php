@@ -25,7 +25,7 @@
 	</head>
 	<body>
 		
-		<?php include '../app/views/header_new.php'; ?>
+		<?php include '../app/views/header.php'; ?>
 
 		<main>
 

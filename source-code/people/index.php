@@ -8,145 +8,80 @@
 		exit;
 	}
 
+
 	// Include and Initialize People Functions
 	require_once '../app/models/People_Functions.php';
 	$people_func = new People_Functions($_SESSION['id']);
 
-?>
+	$ideas = [];
 
-<!DOCTYPE html>
-<html>
-	<head>
+	$currentPage = "community";
+	$page_title = "Community - Startuppuccino";
+	$metatags = [
+					[
+						"kind" => "link",
+						"type" => "text/css",
+						"rel"  => "stylesheet",
+						"href" => "../app/assets/newcss/people.css"
+					]
+				];
+	$footer_scripts = ["../app/assets/js/people.js", "../app/assets/js/manage_mentor_chooser.js"];
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
-		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/people.css">
-		<title>People - Startuppuccino</title>
 
-		
-        <?php include '../app/views/extra_head_html.php'; ?>
+	/* 
+	 * If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
+	 * then the user details are diplayed instead of the list of users and mentors 
+	 */
+	$isnotset_user = false;
+	if (isset($_GET['user_id'])){
 
+		// Set the account_id of the person to show
+		$people_func->setPerson($_GET['user_id']);
 
-	</head>
-	<body>
+		if ($user = $people_func->getPersonInfo()){
 
-		<?php include '../app/views/header_new.php'; ?>
-
-		<main>
-
-		<?php
-			
-			/* If isset the get parameter 'user_id' ( ../index.php?user_id=xxxx )
-			then the user details are diplayed instead of the list of users and mentors */
-
-		if (isset($_GET['user_id'])){
-
-			// User profile details
-
-			// Set the account_id of the person to show
-			$people_func->setPerson($_GET['user_id']);
-
-			if ($user = $people_func->getPersonInfo()){
-
-				// Profile view
-				include '../app/views/profile.php';	
-
-			} else {
-
-				echo "Nobody is here";
-
-			}
-
+			include '../app/controllers/community__profile.php';
 
 		} else {
+	
+			$isnotset_user = true;
 
-			// People list
+		}
 
-			?>
+	}
 
-			<!-- Display filter for only students|mentors -->
-			<div class="filter_menu filter_menu--people">
-				<span class="filter_menu__button" id="filter_button--STUDENT" onclick="filterResults('STUDENT',this)">Students</span>
-				<span class="filter_menu__button" id="filter_button--MENTOR" onclick="filterResults('MENTOR',this)">Mentors</span>
-				<span class="filter_menu__button" id="filter_button--ALL" onclick="removeFilters()">All</span>
-			</div>
-
-			<br><br>
-
-			<div class="list_view list_view--linear" id="people_wrapper">
-
-				<?php
-
-					if ($people = $people_func->getAllPeople()){
-
-						foreach ($people as $person){
-						
-					        ?>
-
-						        <div class="card card--<?php print strtoupper($person['role']); ?>">
-
-						        	<a href="./?user_id=<?php print $person['id']; ?>">
-							        	
-							        	<!-- card content -->
-							        	<div class="card__pic" 
-
-							        		<?php
-							        			
-							        			$pic_name = "../app/assets/pics/people/".$person['avatar'];
-
-							        			if(!empty(trim($person['avatar'])) && file_exists($pic_name)){
-								        			// set the user picture
-								        			echo 'style="background-image:url(\'' . $pic_name . '\')"';
-							        			} else {
-							        				// set the default picture
-								        			echo 'style="background-image:url(\'../app/assets/pics/default/people.png\');/*background-size:190px 190px;*/opacity:0.4"';
-								        		}
-
-							        		?>
-
-							        	></div>
-							        	<div class="card__details">
-						        			<span class="card__details_name">
-							        			<?php print $person['firstname'] . " " . $person['lastname']; ?>
-							        		</span>
-							        		<span class="card__details_role">
-							        			<?php print strtoupper($person['role']); ?>
-							        		</span>
-							        		<span class="card__details_background">
-							        			<?php print $person['background']; ?>
-							        		</span>
-							        	</div>
-
-							        </a>
-
-								</div>
-
-					        <?php
-
-					    }
-
-					} else {
-					    echo "Nobody is here!";
-					}
-
-				?>
-
-			<div class="change_view_button" onclick="toggleLayout()">
-				<img src="../app/assets/pics/default/gridico.png" id="change_view_icon">
-			</div>
-
-			</div>
-
-		<?php } // endif switch all users list or single user details ?>
+	$residence_mentors = $people_func->getResidenceMentors();
 
 
-		</main>
+	// Include header and footer controllers
+	include '../app/controllers/page__header.php';
+	//include '../app/controllers/page__footer.php';
+
+	// Set template name and variables
+	
+	$template_file = "community.twig";
+
+	$template_variables['sess'] = $_SESSION;
+	$template_variables['userLogged'] = $userLogged;
+	$template_variables['page_title'] = $page_title;
+	$template_variables['metatags'] = $metatags;
+	$template_variables['footer_scripts'] = $footer_scripts;
+	$template_variables['rel_path'] = '..';
+	$template_variables['default_avatar'] = "avatar.svg";
+	$template_variables['residence_mentors'] = $residence_mentors;
+	
+	// Prevent to load all the users data if only one profile is required
+	if($isnotset_user){
+		$template_variables['user'] = '404';
+	} else {
+	    $people = $people_func->getAllPeople();
+	    shuffle($people);
+		$template_variables['users'] = $people;
+	}
+
+    // Render the template
+    require_once '../app/views/_Twig_Loader.php';
+    echo (new Twig_Loader())->render($template_file, $template_variables);
 
 
-		<?php include '../app/views/footer.php'; ?>
-
-
-		<script src="../app/assets/js/people.js"></script>
-
-	</body>
-</html>
+?>

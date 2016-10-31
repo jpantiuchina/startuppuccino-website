@@ -1,0 +1,54 @@
+
+{% if is_my_profile %}
+
+	<div class="p_tosettings">
+		<span><a href='../settings/'>Edit Profile</a></span>
+	</div>
+
+{% endif %}
+
+
+<div class="p_wrapper">
+
+	<section class="p_infobox">
+		<div class="head">
+			<div class="p_info">
+				<h3 class="p_name">{{ user.firstname ~ " " ~ user.lastname }}</h3>
+				<p class="p_role c_{{ user.role }}">{{ user.role }}</p>
+				<p class="p_background">{{ user.background }}</p>	
+				<p class="p_email">
+					<a href="mailto:{{ user.email }}">
+						<span style="background-image:url('../app/assets/pics/default/mail.svg')"></span>
+						{{ user.email }}
+					</a>
+				</p>
+			</div>
+			<div class="p_picturebox">
+				<div class="p_picture" style="background-image:url('../app/assets/pics/people/{{ user.avatar }}')"></div>
+			</div>
+		</div>
+		<div class="foot">
+			<div class="p_skills">
+				{% for skill in user.skills|split(',') %}
+					<span>{{ skill }}</span>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<section class="p_about">	
+		<pre>{{ user.about }}</pre>	
+	</section>
+
+	<section class="p_socials">
+		{% for social_label,social_data in socials %}
+			{# Patch to show musteus png #}
+			{% set social_avatar = social_label ~ '.svg' %}
+			{% if social_label == 'musteus' %}
+				{% set social_avatar = 'musteus.png' %}
+			{% endif %}
+			<a class="profile_role {{ social_data[1] }}" target="_blank" href="{{ social_data[0] }}"><img src="../app/assets/pics/icons/{{ social_avatar }}" width="40" /></a>
+		{% endfor %}
+	</section>
+
+</div>

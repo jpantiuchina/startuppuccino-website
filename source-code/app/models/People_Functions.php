@@ -2,8 +2,14 @@
  
 class People_Functions {
  
-    var $account_id;
-    var $person_id;
+    private $account_id;
+    private $person_id;
+
+
+    private $MENTOR_LIMIT;
+    private $mentor_likes;
+    private $project_id;
+    private $mentor_id;
 
     // constructor
     function __construct($account) {
@@ -12,6 +18,9 @@ class People_Functions {
         require_once 'database/DB_Connect.php';
         $db = new Db_Connect();
         $this->conn = $db->connect();
+        $this->project_id = $this->getMyProject();
+        $this->mentor_likes = $this->loadMentorLikes();
+        $this->MENTOR_LIMIT = 3; 
     }
  
     // destructor
@@ -43,7 +52,7 @@ class People_Functions {
           return $result->fetch_assoc();
       
       } else {
-          // No team found
+          // No personal information found
           return NULL;
       }
 
@@ -61,11 +70,14 @@ class People_Functions {
      */
     public function getAllPeople() {
 
-      $query = "SELECT id, firstname, lastname, avatar, background, role FROM "._T_ACCOUNT.";";
+      $query = "SELECT a.id, a.firstname, a.lastname, a.avatar, a.background, a.role,
+                       (SELECT IF (COUNT(*)>0, 'unlike', 'like') vote
+                        FROM "._T_PROJECT_MENTOR." WHERE account_id=a.id AND project_id='".$this->project_id."') AS vote_label 
+                FROM "._T_ACCOUNT." a;";
 
       $result = $this->conn->query($query);
 
-      if($result->num_rows > 0){
+      if($result && $result->num_rows > 0){
 
         // Store all teams in an array
         while ($person = $result->fetch_assoc()){
@@ -78,11 +90,144 @@ class People_Functions {
       } else {
 
         // No people found
-        return NULL;
+        return [];
 
       }
 
     }
+
+
+    /**
+     * Get a list of residence mentors
+     */
+    public function getResidenceMentors() {
+      
+      $query = "SELECT mentor_id
+                FROM "._T_RESIDENCE_MENTORS.";";
+
+      $result = $this->conn->query($query);
+
+      $mentor_ids = [];
+
+      if ($result) {
+
+          while ($mentor = $result->fetch_assoc()){
+            $mentor_ids[] = $mentor['mentor_id'];
+          }
+
+      }
+
+      return $mentor_ids;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public function setMentorId($id) {
+      $this->mentor_id = $id;
+    }
+
+    public function getMyProject() {
+
+      $query = "SELECT l.project_id FROM "._T_PROJECT_ACCOUNT." AS l 
+                WHERE l.account_id='".$this->account_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($result && $result->num_rows == 1) {
+        
+        return $result->fetch_assoc()['project_id'];
+
+      }
+     
+      return null;
+
+    }
+
+    /**
+     * Like the current idea
+     */
+    public function likeMentor() {
+      
+      if(count($this->mentor_likes) >= $this->MENTOR_LIMIT){
+        return "You have reached the maximum number of mentors you can select.";
+      }
+
+      $query = "INSERT INTO "._T_PROJECT_MENTOR." (project_id, account_id) 
+                VALUES ('".$this->project_id."', '".$this->mentor_id."');";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        // Push project_id to user likes
+        $this->mentor_likes[] = $this->project_id;
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error";
+     
+    }
+
+
+    /**
+     * Unlike the current idea
+     */
+    public function unlikeMentor() {
+      
+      $query = "DELETE FROM "._T_PROJECT_MENTOR." 
+                WHERE account_id='".$this->mentor_id."' AND project_id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+        // Pop project_id to user likes
+        $temp_mentor_likes = [];
+        foreach ($this->mentor_likes as $project_id) {
+          if($project_id != $this->project_id){
+            $temp_mentor_likes[] = $project_id;
+          }
+        }
+        $this->mentor_likes = $temp_mentor_likes;
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error";
+     
+    }
+
+    /**
+     * Get the list of all ideas IDs that the current user liked
+     */
+    private function loadMentorLikes(){
+
+      $query = "SELECT l.account_id FROM "._T_PROJECT_MENTOR." AS l 
+                WHERE l.project_id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($idealike = $result->fetch_assoc()) {
+          $temp_arr[] = $idealike['project_id'];
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
 
 }
 

@@ -1,0 +1,21 @@
+<div class="card card--{% if project.is_approved=='1' %}PROJECT{% else %}IDEA card--hidden{% endif %}">
+
+	<a href="./?project_id={{ project.id }}">
+    	
+    	{% set avatar = default_avatar %}
+    	<div class="card__pic" 
+    	     style="background-image:url('../app/assets/pics/ideas/{{ project.avatar | default(avatar) }}')"></div>
+    	<div class="card__details">
+			<span class="card__details_name">{{ project.title }}</span>
+    	</div>
+
+    </a>
+
+    {% if project.is_approved=='1' and sess.role == "mentor" %}
+    	<input type="button"
+		       class="st_button {% if project.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
+		       value="{{ project.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
+	    	   onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
+	{% endif %}
+
+</div>

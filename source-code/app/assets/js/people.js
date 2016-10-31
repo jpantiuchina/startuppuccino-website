@@ -9,25 +9,25 @@ function filterResults(target, button){
 	button.classList.toggle("filter_menu__button--active");
 
 
-		if(!old_target || (old_target == target && view_all)){
+	if(!old_target || (old_target == target && view_all)){
 
-			renderUserCards(target);
+		renderUserCards(target);
 
-		} else if (old_target != target) {
+	} else if (old_target != target) {
 
-			// toggle the other filter button
-			other_filter = document.getElementById("filter_button--"+old_target);
+		// toggle the other filter button
+		other_filter = document.getElementById("filter_button--"+old_target);
 
-			if(other_filter.classList.contains("filter_menu__button--active"))
-				other_filter.classList.toggle("filter_menu__button--active");
+		if(other_filter.classList.contains("filter_menu__button--active"))
+			other_filter.classList.toggle("filter_menu__button--active");
 
-			renderUserCards(target);
+		renderUserCards(target);
 
-		} else {
+	} else {
 
-			renderAllUserCards();
+		renderAllUserCards();
 
-		}
+	}
 
 	// store new filter target
 	if(old_target != target)

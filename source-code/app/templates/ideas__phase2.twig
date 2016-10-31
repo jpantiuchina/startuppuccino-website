@@ -1,0 +1,44 @@
+<h3>NOW IT IS TIME TO VOTE!<br>REMEMBER YOU CAN LIKE MAXIMUM 3 IDEAS</h3>
+
+{% for idea in ideas %}
+
+	<div class='idea' id='i{{ idea.id }}'>
+
+		<div class='picture_box'>
+			{% set avatar = default_avatar %}
+			<div id="idea_picture__{{ idea.id }}"
+			     style="background-image:url('../app/assets/pics/ideas/{{ idea.avatar | default(avatar) }}')"></div>
+		</div>
+
+		<div class="info_box">
+
+			<p class='idea_title' id='idea_title__{{ idea.id }}'>{{ idea.title }}</p>
+			<p class='idea_description' id='idea_description__{{ idea.id }}'>{{ idea.description }}</p>
+			<p class='idea_background' id='idea_background__{{ idea.id }}'>Looking for: {{ idea.looking_for }}</p>
+
+			<div class='info_box_footer'>
+
+				<input type="button"
+				       class="{% if idea.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
+				       value="{{ idea.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
+				       onclick="SpIdea.ideaHelper('{{ idea.vote_label }}', '{{ idea.id }}', this)" />
+
+				{# <div class="overlay_loader"></div> #}
+
+				<span class='comment_idea_button' idea-id='{{ idea.id }}'>Comments ({{ idea.num_of_comments }})</span>
+
+
+			</div>
+
+		</div>
+
+		<div class='idea__footer'></div>
+
+	</div>
+
+{% endfor %}
+
+
+{% if userLogged %}
+	{% include 'comment__boxview.twig' ignore missing %}
+{% endif %}

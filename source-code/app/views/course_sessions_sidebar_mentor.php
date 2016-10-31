@@ -31,7 +31,7 @@
 		<div class="overlay_mobile__button" onclick="SpHome.layout.toggleSidebar()"></div>
 
 		<div class="head">
-			<span>Will you be at the lecture?</span>
+			<span>Will you come to mentor the session in the afternoon?</span>
 		</div>
 
 		<div class="main">

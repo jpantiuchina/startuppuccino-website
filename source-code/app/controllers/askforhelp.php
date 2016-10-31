@@ -1,7 +1,7 @@
 <?php
 	
-
-	error_reporting(0);
+	
+	include '../models/session.php';
 
 	// Check for get paramaters
 	if(!isset($_GET['e']) || !isset($_GET['i']) || !isset($_GET['m'])){
@@ -14,11 +14,21 @@
 	// Check if the user_id is a correct registered user
 	// ...
 
-	// Send email
-	if(mail("help@startuppuccino.com","ASK FOR HELP - ".$_GET['i'],$_GET['m'],"From: ".$_GET['e'])){
-		echo "Request successfully sent!";
+	if($userLogged){
+
+		$object = "ASK FOR HELP - ".$_SESSION['firstname']." ".$_SESSION['lastname']." - ".$_GET['i'];
+
+		// Send email
+		if(mail("info@startuppuccino.com", $object, $_GET['m'], "From: ".$_GET['e'])){
+			echo "ok";
+		} else {
+			echo "Error while sending the request.\nPlease try again later, or contact the professor.";
+		}
+
 	} else {
-		echo "Error while sending the request.";
+
+		echo "Error, you are not logged";
+
 	}
 
 ?>

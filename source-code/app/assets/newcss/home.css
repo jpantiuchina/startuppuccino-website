@@ -83,7 +83,8 @@ header {
   header .menu_link--top {
     height: 50px;
     line-height: 50px;
-    text-align: center; }
+    text-align: center;
+    font-size: 14px; }
     header .menu_link--top a:hover {
       text-decoration: underline; }
   header .menu_link--active {
@@ -320,7 +321,7 @@ footer,
   width: 100%;
   height: 100%;
   padding-top: 100px;
-  background: rgba(20, 20, 20, 0.7);
+  /*background: $header-background;*/
   text-align: center;
   z-index: 9999999999; }
 
@@ -606,12 +607,9 @@ footer,
     max-height: 120px;
     max-width: 550px; }
   .askforhelp_form > input[type=submit] {
-    background-color: transparent;
     width: 100px;
-    background-color: #444;
-    color: #fff !important;
-    box-shadow-color: #fff !important;
-    -webkit-box-shadow-color: #fff !important; }
+    background-color: #444 !important;
+    color: #fff !important; }
   .askforhelp_form .ask_closer {
     position: absolute;
     right: 20px;
@@ -890,21 +888,47 @@ textarea {
   .session__contents > .foot > span {
     font-size: 12px; }
 
+.guests p:first-child {
+  color: #999; }
 .guests > .guest {
+  position: relative;
   display: inline-block;
   width: 40px;
   height: 40px;
   margin: 5px 1px;
-  background-color: #be3b43;
-  cursor: pointer;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-  overflow: hidden; }
+  cursor: pointer; }
+  .guests > .guest:hover > .guest__label {
+    display: block !important; }
+  .guests > .guest > .guest__label {
+    display: none !important;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: #7fb03b;
+    color: #fff;
+    width: 120px;
+    height: auto;
+    overflow-y: hidden;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 3px;
+    z-index: 999;
+    display: inline-block;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all transition-time ease-in-out;
+    transition: all transition-time ease-in-out; }
   .guests > .guest > a {
     display: block;
-    height: 100%; }
+    height: 100%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden; }
     .guests > .guest > a div {
       background-color: #f7f7dd;
       height: 100%; }
@@ -1050,7 +1074,8 @@ textarea {
   display: none; }
 .sidebar_container > .head {
   height: 40px;
-  line-height: 40px;
+  line-height: 20px;
+  font-size: 14px;
   background-color: #fff;
   color: #513a2b;
   padding: 0px 10px;

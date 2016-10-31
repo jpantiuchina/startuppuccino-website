@@ -1,0 +1,25 @@
+{% if is_my_team %}
+	<p>
+		<a class="st_button c_red" href="./?settings">PROJECT SETTINGS</a>
+	</p>	
+{% endif %}
+
+<div class="p_wrapper">
+
+	<section class="p_infobox">
+		<div class="head">
+			<div class="p_info">
+				<h3 class="p_name">{{ project.title }}</h3>
+				<p class="p_role">{{ project.looking_for }}</p>
+			</div>
+			<div class="p_picturebox">
+				<div class="p_picture" style="background-image:url('../app/assets/pics/people/{{ project.avatar }}')"></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="p_about">	
+		<pre>{{ project.description }}</pre>	
+	</section>
+
+</div>

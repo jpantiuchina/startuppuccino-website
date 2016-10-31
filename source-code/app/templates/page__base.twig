@@ -1,0 +1,36 @@
+{% set currentPage = currentPage ?: "" %}
+{% set rel_path = rel_path ?: ".." %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>{{ page_title }}</title>
+
+	{% block metatag %}
+		{% include 'page__metatags.twig' %}
+	{% endblock %}
+
+</head>
+<body>
+
+
+	{% block header %}
+		{% include 'page__header.twig' %}
+	{% endblock %}
+
+
+	{% block main %}
+		<main>
+			{# include 404 page as default #}
+		</main>
+	{% endblock %}
+
+
+	{% block footer %}
+		{% include 'page__footer.twig' %}
+	{% endblock %}
+
+
+</body>
+</html>

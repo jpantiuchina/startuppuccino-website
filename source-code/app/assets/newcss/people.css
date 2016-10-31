@@ -84,7 +84,8 @@ header {
   header .menu_link--top {
     height: 50px;
     line-height: 50px;
-    text-align: center; }
+    text-align: center;
+    font-size: 14px; }
     header .menu_link--top a:hover {
       text-decoration: underline; }
   header .menu_link--active {
@@ -321,7 +322,7 @@ footer,
   width: 100%;
   height: 100%;
   padding-top: 100px;
-  background: rgba(20, 20, 20, 0.7);
+  /*background: $header-background;*/
   text-align: center;
   z-index: 9999999999; }
 
@@ -607,12 +608,9 @@ footer,
     max-height: 120px;
     max-width: 550px; }
   .askforhelp_form > input[type=submit] {
-    background-color: transparent;
     width: 100px;
-    background-color: #444;
-    color: #fff !important;
-    box-shadow-color: #fff !important;
-    -webkit-box-shadow-color: #fff !important; }
+    background-color: #444 !important;
+    color: #fff !important; }
   .askforhelp_form .ask_closer {
     position: absolute;
     right: 20px;
@@ -775,7 +773,7 @@ textarea {
   background-color: #513a2b; }
 
 /* Buttons */
-.st_button, .askforhelp_form > input[type=submit], .p_tosettings > span > a {
+.st_button, .askforhelp_form > input[type=submit], .p_tosettings > span > a, .filter_menu__button, .change_view_button {
   border: none;
   padding: 7px;
   margin: 3px;
@@ -796,7 +794,7 @@ textarea {
   border-radius: 10px;
   padding: 10px 20px 10px 20px;
   text-decoration: none;*/ }
-  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .p_tosettings > span > a:hover {
+  .st_button:hover, .askforhelp_form > input[type=submit]:hover, .p_tosettings > span > a:hover, .filter_menu__button:hover, .change_view_button:hover {
     -webkit-filter: brightness(0.5);
     -moz-filter: brightness(0.5);
     -ms-filter: brightness(0.5);
@@ -908,21 +906,25 @@ textarea {
 /* *********************** Layout card list ********************** */
 /* Filters styles */
 .filter_menu {
-  text-align: center;
-  padding: 15px;
-  background-color: #6C3D17; }
+  padding: 40px;
+  padding-left: 20px; }
 
-.filter_menu__button {
-  display: inline-block;
+.filter_menu__button, .change_view_button {
+  /*display: inline-block;
   padding: 10px;
   font-size: 12px;
   background-color: #FE9646;
   color: #fff;
-  cursor: pointer; }
+  cursor: pointer;*/ }
 
 .filter_menu__button--active {
   background-color: #333;
   color: #d7d7d7; }
+
+#change_view_icon {
+  width: 15px;
+  height: 15px;
+  background-position: center; }
 
 /* Cards view */
 .card {
@@ -930,13 +932,24 @@ textarea {
   vertical-align: middle;
   width: 200px;
   height: auto;
+  max-height: 600px;
+  max-width: 1000px;
   overflow: hidden;
-  background: #fbfbfb;
+  background: #fafafa;
   text-align: left;
-  margin: 10px 20px; }
+  margin: 10px 20px;
+  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out; }
 
 .card--hidden {
-  display: none; }
+  margin: 0px !important;
+  max-height: 0px !important;
+  max-width: 0px !important;
+  overflow: hidden !important; }
+
+.card--RESIDENCE_MENTOR {
+  border-left: 4px #7fb03b solid;
+  background: #f3f3ca !important; }
 
 .card a {
   text-decoration: none !important;
@@ -976,39 +989,23 @@ textarea {
   background-repeat: no-repeat; }
 
 /* ******************* END Layout card list ****************** */
-.change_view_button {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  background-color: #fbfbfb;
-  cursor: pointer; }
-
-#change_view_icon {
-  width: 100%;
-  height: 100%;
-  background-position: center; }
-
-/************************ Toggle layout button ************************/
 /* ******************* Vertical list layout ******************** */
 /* Cards view */
 .list_view--linear {
-  max-width: 900px;
-  margin: auto; }
+  max-width: 900px; }
 
 .list_view--linear .card {
   display: block;
   width: auto;
   height: auto;
   overflow: hidden;
-  background: #fbfbfb;
   text-align: left;
+  background: transparent;
   margin: 10px auto; }
 
 .list_view--linear .card--hidden {
-  display: none; }
+  transform: translateX(300%);
+  -webkit-transform: translateX(300%); }
 
 .list_view--linear .card a {
   text-decoration: none !important;
@@ -1026,9 +1023,6 @@ textarea {
 
 .list_view--linear .card--MENTOR .card__details, .list_view--linear .card--EDUCATOR .card__details {
   background-color: transparent; }
-
-.list_view--linear .card--MENTOR, .list_view--linear .card--EDUCATOR {
-  background-color: #f2f2f2; }
 
 .list_view--linear .card__details > span {
   display: block;
@@ -1050,6 +1044,8 @@ textarea {
   font-size: 20px !important; }
 
 .list_view--linear .card__pic {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
   width: 100px;
   height: 100px;
   margin: 15px;

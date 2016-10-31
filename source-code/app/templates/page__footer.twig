@@ -1,0 +1,27 @@
+{# General footer user included in all pages (except for landing page) #}
+
+<footer class="footer">
+	
+	<div class="footer__separator"></div>
+
+	<p class="footer__links">
+
+	   <a class="footer__link" href="http://leanstartup.bz" target="_blank">Leanstartup.bz</a>
+	   <a class="footer__link" href="https://unibz.it" target="_blank">Unibz.it</a>
+	   <a class="footer__link" href="../about/" target="_blank">&copy; 2016 Startuppuccino. All rights reserved </a>
+	  
+	 </p>
+
+</footer>
+
+
+{% if userLogged %}
+	{% include 'page__askforhelp.twig' ignore missing %}
+{% endif %}
+
+
+<script src="../app/assets/js/startuppuccino.js"></script>
+
+{% for src in footer_scripts %}
+	<script src="{{ src }}"></script>
+{% endfor %}

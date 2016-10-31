@@ -1,0 +1,35 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+	<section>
+
+		{% if ranklist %}
+
+			<h1 class="ranklist__title">Ideas Ranklist</h1>
+
+			<div class="ranklist">
+
+				{#<div class="ranklist__item ranklist__item--head">
+					<span class="ranklist__item_title">Idea</span>
+					<span class="ranklist__item_likes">Likes</span>
+				</div>#}
+
+				{% for item in ranklist %}
+
+					<div class="ranklist__item">
+						<span class="ranklist__item_title">{{ item.title|upper }}</span>
+						{#<span class="ranklist__item_likes">{{ item.tot_likes }}</span>#}
+					</div>
+
+				{% endfor %}
+
+			</div>
+
+		{% endif %}
+
+	</section>
+</main>
+
+{% endblock %}

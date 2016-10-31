@@ -7,11 +7,7 @@
 		header("Location: ../");
 		exit;
 	}
-
-	// Account id
-	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
-	$isStudent = (isset($_SESSION['role']) && $_SESSION['role']=="student");
-	$isMentor = (isset($_SESSION['role']) && $_SESSION['role']=="mentor");
+	
 
 	// Include and Initialize Ideas Functions
 	require_once '../app/models/Ideas_Functions.php';
@@ -20,48 +16,55 @@
 	$ideas = [];
 
 	$currentPage = "ideas";
+	$page_title = "Ideas - Startuppuccino";
+	$metatags = [
+					[
+						"kind" => "link",
+						"type" => "text/css",
+						"rel"  => "stylesheet",
+						"href" => "../app/assets/newcss/ideas.css"
+					]
+				];
+	$footer_scripts = ["../app/assets/js/ideas.js"];
+	$view = null;
+	$user_can_join = count($ideas_func->user_joins) < 1;
+
+
+	if ( !($ideas = $ideas_func->getAllIdeas()) && $_SESSION['ideas_phase'] != "1" ){
+		
+		// Do nothing ... ideas is empty array
+
+	} else {
+
+		shuffle($ideas);
+		// Include the view switch to include the right block according to idea phase
+		include '../app/controllers/ideas__view_switch.php';
+
+	}
+
+
+	// Include header and footer controllers
+	include '../app/controllers/page__header.php';
+	//include '../app/controllers/page__footer.php';
+
+	// Set template name and variables
+	
+	$template_file = "ideas.twig";
+
+	$template_variables['sess'] = $_SESSION;
+	$template_variables['userLogged'] = $userLogged;
+	$template_variables['page_title'] = $page_title;
+	$template_variables['metatags'] = $metatags;
+	$template_variables['footer_scripts'] = $footer_scripts;
+	$template_variables['rel_path'] = '..';
+	$template_variables['user_can_join'] = $user_can_join;
+	if($_SESSION['ideas_phase'] == "3"){
+		$template_variables['joined_idea'] = $ideas_func->getJoinedIdea();
+	}
+
+    // Render the template
+    require_once '../app/views/_Twig_Loader.php';
+    echo (new Twig_Loader())->render($template_file, $template_variables);
+
 
 ?>
-
-<!DOCTYPE html>
-<html>
-	<head>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-		<link rel="stylesheet" type="text/css" href="../app/assets/newcss/ideas.css">
-		<title>Ideas - Startuppuccino</title>
-
-		
-        <?php include '../app/views/extra_head_html.php'; ?>
-
-
-	</head>
-	<body>
-
-		<?php include '../app/views/header_new.php'; ?>
-		
-		<main>
-
-			<?php if ( !($ideas = $ideas_func->getAllIdeas()) && $_SESSION['ideas_phase'] != "1" ){ ?>
-			
-				<section><p>No ideas found...</p></section>
-			
-			<?php } else { ?>
-
-				<?php shuffle($ideas); ?>
-
-				<section>
-					<?php echo include '../app/controllers/idea_view_switch.php'; ?>
-				</section>
-
-			<?php } ?>
-
-		</main>
-
-		<?php include '../app/views/footer.php'; ?>
-
-		<script src="../app/assets/js/ideas.js"></script>
-
-	</body>
-</html>

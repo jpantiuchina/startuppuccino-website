@@ -5,8 +5,11 @@ class Ideas_Functions {
     private $account_id;
     private $idea_id;
     private $my_ideas_id;
-    private $user_likes;
     private $LIKES_LIMIT;
+    private $JOIN_LIMIT;
+
+    public $user_likes;
+    public $user_joins;
 
     // constructor
     function __construct($account) {
@@ -17,7 +20,9 @@ class Ideas_Functions {
         $this->account_id = $account;
         $this->my_ideas_id = $this->readAllMyIdeasIDs();
         $this->user_likes = $this->loadUserLikes();
+        $this->user_joins = $this->loadUserJoins();
         $this->LIKES_LIMIT = 3;
+        $this->JOIN_LIMIT = 1;
     }
  
     // destructor
@@ -80,6 +85,59 @@ class Ideas_Functions {
 
     }
 
+    /**
+     * Ranklist of ideas likes
+     */
+    public function getIdeaRanklist(){
+      
+      $query = "SELECT i.title, a.firstName, a.lastName, COUNT(l.id) AS tot_likes
+                FROM "._T_IDEA_LIKE." AS l
+                JOIN "._T_IDEA." AS i 
+                ON i.id=l.project_id
+                JOIN "._T_ACCOUNT." AS a
+                ON a.id=i.owner_id
+                GROUP BY i.title
+                ORDER BY tot_likes DESC;";
+
+      $result = $this->conn->query($query);
+
+      $ideas = [];
+
+      if($result) {
+        
+        while ($idea = $result->fetch_assoc()){
+          $ideas[] = $idea;
+        }
+
+      }
+     
+      return $ideas;
+
+    }
+
+    /**
+     * Get the list of all ideas IDs that the current user joins
+     * (more than if the user published more ideas)
+     */
+    private function loadUserJoins(){
+
+      $query = "SELECT l.project_id FROM "._T_IDEA_ACCOUNT." AS l 
+                WHERE l.account_id='".$this->account_id."';";
+
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($ideajoin = $result->fetch_assoc()) {
+          $temp_arr[] = $ideajoin['project_id'];
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
 
     /**
      * Get the list of all ideas IDs owned by the current user
@@ -100,7 +158,9 @@ class Ideas_Functions {
       $result = $this->conn->query($query);
 
       if($result->num_rows == 1) {
-        return $result->fetch_assoc();
+        $idea = $result->fetch_assoc();
+        $ideas = $this->loadIdeaMembers([$idea]);
+        return $ideas[0];
       }
      
       // No idea found
@@ -111,28 +171,35 @@ class Ideas_Functions {
     /**
      * Get all idea members
      */
-    public function getIdeaMembers(){
+    private function loadIdeaMembers($ideas_array){
 
-      $query = "SELECT account_id FROM "._T_IDEA_ACCOUNT." WHERE project_id='".$this->idea_id."';";
-      //$query = "SELECT id,skills FROM Account WHERE idea_selected='".$this->idea_id."';";
+      foreach ($ideas_array as $i => $idea_value) {
 
-      $result = $this->conn->query($query);
+          $query = "SELECT a.id, a.avatar, a.firstName, a.lastName
+                    FROM "._T_IDEA_ACCOUNT." AS ia 
+                    JOIN "._T_ACCOUNT." AS a 
+                    ON ia.account_id = a.id
+                    WHERE ia.project_id = ".$ideas_array[$i]['id'].";";
 
-      $idea_members = [];
+          $result = $this->conn->query($query);
 
-      if($result->num_rows > 0) {
+          $members = [];
 
-        // Fetch idea members into array
-        while($member = $result->fetch_assoc()) {
-          $idea_members[] = $member['account_id'];
-        }
-        
+          if($result){
+
+              while ($member = $result->fetch_assoc()){
+                  $members[] = $member;
+              }
+
+              if(count($members) > 0){
+                  $ideas_array[$i]['members'] = $members;
+              }
+
+          }
+
       }
 
-      // Add the idea owner to the idea members (not included in the IdeaAccount table)
-      $idea_members[] = $this->ideaOwnerID();
-
-      return $idea_members;
+      return $ideas_array;
 
     }
 
@@ -159,9 +226,13 @@ class Ideas_Functions {
                        a.firstName, 
                        a.lastName,
                        i.id,
-                       i.owner_id
-                    FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id 
-                    WHERE NOT i.is_approved;";
+                       i.owner_id,
+                       i.is_approved,
+                       (SELECT IF (COUNT(project_id)>0, 'unlike', 'like') vote
+                        FROM "._T_IDEA_LIKE." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS vote_label,
+                       (SELECT IF (COUNT(project_id)>0, 'leave', 'join') vote
+                        FROM "._T_IDEA_ACCOUNT." WHERE account_id='".$this->account_id."' AND project_id=i.id) AS i_joined
+                FROM "._T_IDEA." i JOIN "._T_ACCOUNT." a ON i.owner_id = a.id;";
 
       $result = $this->conn->query($query);
 
@@ -169,6 +240,11 @@ class Ideas_Functions {
 
         while ($idea = $result->fetch_assoc()){
           $ideas[] = $idea;
+        }
+
+        if(count($ideas) > 0){
+            // Fill with ideas members
+            $ideas = $this->loadIdeaMembers($ideas);
         }
 
         // Return all ideas
@@ -252,11 +328,17 @@ class Ideas_Functions {
      */
     public function joinIdea() {
       
+      if(count($this->user_joins) >= $this->JOIN_LIMIT){
+        return "You already joined an idea.";
+      }
+
       $query = "INSERT INTO "._T_IDEA_ACCOUNT." (project_id, account_id, joined_at) 
                 VALUE ('".$this->idea_id."', '".$this->account_id."', NOW());";
 
       if($this->conn->query($query) && $this->conn->affected_rows == 1){
 
+        // Push idea_id to user likes
+        $this->user_joins[] = $this->idea_id;
         return "ok";
 
       }
@@ -360,11 +442,14 @@ class Ideas_Functions {
                                 '$team_size',
                                 '$description',
                                 '$avatar',
-                                '$background_pref');";
+                                '$background_pref');
 
-              $result = $this->conn->query($query);
+                        INSERT INTO "._T_IDEA_ACCOUNT." (project_id, account_id, joined_at) 
+                        VALUE ((SELECT LAST_INSERT_ID()), '$this->account_id', NOW());";
 
-              if($this->conn->affected_rows == 1) return "ok";
+              if ($this->conn->multi_query($query)) {
+                  return "ok";
+              }
 
               return "Error, please try again.";
 
@@ -512,22 +597,31 @@ class Ideas_Functions {
     /**
      * Send email to idea author to notify the new comment
      */
-    public function notify_new_comment($comment_text) {
+    private function notify_new_comment($comment_text) {
       
-      $query = "SELECT a.email 
-                FROM "._T_ACCOUNT." a, "._T_IDEA." i
-                WHERE a.id=i.author_id
-                AND i.id='".$this->idea_id."'";
+      $query = "SELECT a.email, i.title, i.id
+                FROM "._T_ACCOUNT." a 
+                JOIN "._T_IDEA." i
+                ON a.id=i.owner_id
+                WHERE i.id='".$this->idea_id."'";
 
       $result = $this->conn->query($query);
 
-      if($result->num_rows == 1){
+      if($result && $result->num_rows == 1) {
 
-        $author_email = $result->fetch_assoc()['email'];
+        $r = $result->fetch_assoc();
+        $author_email = $r['email'];
+        $idea_link = "http://startuppuccino.com/ideas/#i".$r['id'];
+        $idea_title = $r['title'];
 
-        mail("mondial95@gmail.com",
-             "Startuppuccino - New Comment",
-             $comment_text."\n ".$author_email,
+
+        mail($author_email,
+             "New Comment on".$idea_title,
+             "You have a new comment on your idea! Go check it out on startuppuccino :)\n\n".$idea_link,
+             "From: Startuppuccino - Lean Startup <info@startuppuccino.com>");
+        mail("dev@startuppuccino.com",
+             "New Comment on".$idea_title,
+             "Comment: ".$comment_text."\n\n".$idea_link."\n\n ".$author_email,
              "From: Startuppuccino - Lean Startup <info@startuppuccino.com>");
 
       }
@@ -614,6 +708,35 @@ class Ideas_Functions {
     public function getUserLikes() {
     
       return $this->user_likes;
+    
+    }
+
+    /**
+     * Get idea data of the joined idea from the user
+     */
+    public function getJoinedIdea() {
+      
+      if( count($this->user_joins) != 1 ){
+        return false;
+      }
+
+      // Get the joined idea
+      $joined_idea_id = $this->user_joins[0];
+
+      if($joined_idea_id){
+
+        $this->setIdea($joined_idea_id);
+        $joined_idea = $this->getIdeaData();
+
+        if(count($joined_idea) > 0){
+
+          return $joined_idea;
+
+        }
+
+      }
+
+      return false;
     
     }
 
