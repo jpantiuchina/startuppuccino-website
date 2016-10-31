@@ -17,8 +17,9 @@
 
     {% if user.id in residence_mentors and sess.role == "student" %}
         <input type="button"
-               class="st_button {% if user.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
-               value="{{ user.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
+               class="st_button {% if user.vote_label == 'like' %} c_green {% else %} c_red {% endif %}"
+               {% if user.vote_label == "unlike" %}style="background-color: #f00"{% endif %}
+               value="{% if user.vote_label == "like" %}Choose{% else %}Un-choose{% endif %}" {# vote_label can be "like" or "unlike" #}
                onclick="SpMentorChooser.ideaHelper('{{ user.vote_label }}', '{{ user.id }}', this)" />
     {% endif %}
 

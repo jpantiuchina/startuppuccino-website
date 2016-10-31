@@ -16,7 +16,6 @@ function StartuppuccinoProjectChooser(){
 		// save temporary the button and idea selected
 		BUTTON_SELECTED = dom_element;
 		PROJECT_ID = project_id;
-		TEAMSIZE_NODE = document.getElementById("team_" + project_id);
 
 		// send data to server
 		var data = {
@@ -31,8 +30,9 @@ function StartuppuccinoProjectChooser(){
 					if (action == "like"){
 
 						// Change style to the button
-						BUTTON_SELECTED.value = "Unlike";
+						BUTTON_SELECTED.value = "Un-choose";
 						BUTTON_SELECTED.className = "c_red st_button";
+						BUTTON_SELECTED.style = "background-color: #f00";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpProjectChooser.ideaHelper('unlike','" + PROJECT_ID + "',this);");
@@ -40,8 +40,9 @@ function StartuppuccinoProjectChooser(){
 					} else if (action == "unlike"){
 
 						// Change style to the button
-						BUTTON_SELECTED.value = "Like";
+						BUTTON_SELECTED.value = "Choose";
 						BUTTON_SELECTED.className = "c_green st_button";
+						BUTTON_SELECTED.style = "";
 						
 						// Update click listener from the button
 						BUTTON_SELECTED.setAttribute("onclick", "SpProjectChooser.ideaHelper('like','" + PROJECT_ID + "',this);");

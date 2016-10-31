@@ -220,7 +220,7 @@ class People_Functions {
 
       if($result && $result->num_rows > 0) {
         while($idealike = $result->fetch_assoc()) {
-          $temp_arr[] = $idealike['project_id'];
+          $temp_arr[] = $idealike['account_id'];
         }
       }
      
