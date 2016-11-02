@@ -25,6 +25,10 @@
                onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
 	{% endif %}
 
+
+    <span class='comment_idea_button' idea-id='{{ project.id }}'>Comments ({{ project.num_of_comments }})</span>
+
+
     <div class="members" id="members__{{ project.id }}">
         {% if project.members %}
             <span>Team Members ({{ project.members|length }}): </span>

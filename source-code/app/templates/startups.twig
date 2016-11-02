@@ -40,6 +40,10 @@
 
 				</div>
 
+				{% if userLogged %}
+					{% include 'comment__boxview.twig' ignore missing %}
+				{% endif %}
+
 			{% endif %}
 
 		{% endif %}
