@@ -28,7 +28,7 @@
 
 			if($save){
 				// TODO -> force delete of all users logged in
-				//...
+				//... NOT NEEDED ANYMORE
 			}
 
 		}
