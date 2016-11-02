@@ -4,9 +4,19 @@
 
 <main>
 	
-	<h1>Login</h1>
+	{% if reset_password %}
+		
+		<h1>Reset Password</h1>
 
-	{% include 'login__form.twig' ignore missing %}
+		{% include 'login__reset_password.twig' ignore missing %}
+
+	{% else %}
+
+		<h1>Login</h1>
+
+		{% include 'login__form.twig' ignore missing %}
+		
+	{% endif %}
 
 </main>
 

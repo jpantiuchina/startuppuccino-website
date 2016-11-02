@@ -30,10 +30,21 @@
 
  		include '../app/controllers/login.php';
 		
+		$resetOk = true;
+
+	} else if (isset($_POST['reset_password'])){
+
+ 		$login_email = $_POST['email'];
+
+		include '../app/controllers/reset_password.php';
+
+		$loginOk = true;
+
 	} else {
 
 		// initialize variable to prevent to show the error message
 		$loginOk = true;
+		$resetOk = true;
 		
 	}
 
@@ -52,6 +63,9 @@
 	$template_variables['metatags'] = $metatags;
 	$template_variables['rel_path'] = '..';
 
+	$template_variables['reset_password'] = isset($_GET['reset']);
+	$template_variables['reset_password_success'] = isset($_GET['reset_done']);
+	$template_variables['resetOk'] = $resetOk;
 	$template_variables['loginOk'] = $loginOk;
 	$template_variables['login_data'] = $login_data;
 

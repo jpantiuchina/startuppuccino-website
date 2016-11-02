@@ -242,6 +242,45 @@ class Credential_Functions {
     
     }
 
+
+    /**
+     * Reset Password
+     */
+    public function reset_password(){
+    
+      if(!$this->emailExists()){
+        return false;
+      }
+
+      $new_password = $this->generateNewPassword();
+
+      $query = "UPDATE "._T_ACCOUNT." 
+                SET password='".$new_password."'
+                WHERE email='".$this->email."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+
+        mail($this->email,
+             "New Password - Startuppuccino",
+             "We have successfully reset the password please\n\n".$idea_link,
+             "From: Startuppuccino - Lean Startup <info@startuppuccino.com>");
+
+        return true;
+      }
+
+      return false;
+
+    }   
+
+    /**
+      * Generate a temporary new password
+      */ 
+    public function generateNewPassword(){
+      return md5("startuppuccino");
+    }
+
 }
 
 ?>
