@@ -25,7 +25,8 @@
 						"href" => "../app/assets/newcss/people.css"
 					]
 				];
-	$footer_scripts = ["../app/assets/js/people.js", "../app/assets/js/manage_mentor_chooser.js"];
+	$footer_scripts = ["../app/assets/js/people.js", 
+	                   "../app/assets/js/manage_mentor_chooser.js"];
 
 
 	/* 

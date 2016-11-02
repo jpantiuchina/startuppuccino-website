@@ -41,8 +41,15 @@ class People_Functions {
      */
     public function getPersonInfo() {
       
-      $query = "SELECT about, avatar, background, skills, socials, email, firstname, lastname, role
-                FROM "._T_ACCOUNT." WHERE id='".$this->person_id."';";
+      $query = "SELECT a.about, a.avatar, a.background, a.skills, a.id,
+                       a.socials, a.email, a.firstname, a.lastname, a.role,
+                       p.id as project_id, p.avatar as project_avatar, p.title as project_title
+                FROM "._T_ACCOUNT." AS a
+                LEFT JOIN "._T_PROJECT_ACCOUNT." AS pa
+                ON pa.account_id = a.id
+                LEFT JOIN "._T_PROJECT." AS p 
+                ON pa.project_id = p.id 
+                WHERE a.id='".$this->person_id."';";
 
       $result = $this->conn->query($query);
 

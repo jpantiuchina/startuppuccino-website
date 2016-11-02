@@ -22,6 +22,11 @@
 						{{ user.email }}
 					</a>
 				</p>
+				<p class="p_project">
+					{% if user.project_id %}
+						<span>Project: <a href="../startups/?project_id={{ user.project_id }}">{{ user.project_title }}</span>
+					{% endif %}
+				</p>
 			</div>
 			<div class="p_picturebox">
 				<div class="p_picture" style="background-image:url('../app/assets/pics/people/{{ user.avatar }}')"></div>
