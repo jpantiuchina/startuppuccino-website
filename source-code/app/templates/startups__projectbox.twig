@@ -12,10 +12,11 @@
     </a>
 
     {% if project.is_approved=='1' and sess.role == "mentor" %}
-    	<input type="button"
-		       class="st_button {% if project.vote_label=='like' %} c_green {% else %} c_red {% endif %}"
-		       value="{{ project.vote_label|capitalize }}" {# vote_label can be "like" or "unlike" #}
-	    	   onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
+        <input type="button"
+               class="st_button {% if project.vote_label == 'like' %} c_green {% else %} c_red {% endif %}"
+               {% if project.vote_label == "unlike" %}style="background-color: #f00"{% endif %}
+               value="{% if project.vote_label == "like" %}Choose{% else %}Un-choose{% endif %}" {# vote_label can be "like" or "unlike" #}
+               onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
 	{% endif %}
 
     <div class="members" id="members__{{ project.id }}">

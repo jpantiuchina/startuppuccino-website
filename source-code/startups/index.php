@@ -75,7 +75,9 @@
 			$template_variables['settings_mode'] = true;
 		}
 	} else {
-		$template_variables['projects'] = $startups_func->getAllProjects();
+		$projects = $startups_func->getAllProjects();
+		shuffle($projects);
+		$template_variables['projects'] = $projects;
 	}
 
     // Render the template
