@@ -20,8 +20,8 @@
                 "link" => RELATIVE_PATH."/"
             ],
             [
-                "label" => "Ideas",
-                "link" => RELATIVE_PATH."/ideas/"
+                "label" => "Startups",
+                "link" => RELATIVE_PATH."/startups/"
             ],
             [
                 "label" => "Community",
