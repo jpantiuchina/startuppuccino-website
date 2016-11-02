@@ -26,7 +26,7 @@
 		<pre>{{ project.description }}</pre>	
 	</section>
 
-    <section class="members" id="members__{{ project.id }}">
+    <section class="members" style="margin-left:0px !important;overflow:visible !important" id="members__{{ project.id }}">
         {% if project.members %}
             <span>Team Members ({{ project.members|length }}): </span>
             {% for member in project.members %}
@@ -43,6 +43,7 @@
     </section>
 
     <section class="p_video_pitch">
+    	<h5>First Pitch Video</h5>
     	{% if project.id == 3 %}
 	    	<div data-type="youtube" data-video-id="9pGoAdUeBdQ"></div>
 	    {% else %}   

@@ -1,4 +1,4 @@
-<div class="card card--{% if project.is_approved=='1' %}PROJECT{% else %}IDEA card--hidden{% endif %}">
+<div style="max-width:620px;margin: 20px 0px;" class="card card--{% if project.is_approved=='1' %}PROJECT{% else %}IDEA card--hidden{% endif %}">
 
     {% if project.is_approved == '1' %}
         {% set link = "./?project_id=" ~ project.id %}
@@ -7,10 +7,13 @@
     {% endif %}
 
 	<a href="{{ link }}">
-    	
-    	{% set avatar = default_avatar %}
+    	{% if project.avatar|trim == "" %}
+            {% set avatar = "people/avatar.svg" %}            
+        {% else %}
+            {% set avatar = "ideas/" ~ project.avatar %}
+        {% endif %}
     	<div class="card__pic" 
-    	     style="background-image:url('../app/assets/pics/ideas/{{ project.avatar | default(avatar) }}')"></div>
+    	     style="background-image:url('../app/assets/pics/{{ avatar }}')"></div>
     	<div class="card__details">
 			<span class="card__details_name">{{ project.title }}</span>
     	</div>
@@ -25,11 +28,11 @@
                onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
 	{% endif %}
 
+    <div style="text-align:right;padding: 5px 0px">
+        <span class='comment_idea_button' idea-id='{{ project.id }}'>Comments ({{ project.num_of_comments }})</span>
+    </div>
 
-    <span class='comment_idea_button' idea-id='{{ project.id }}'>Comments ({{ project.num_of_comments }})</span>
-
-
-    <div class="members" id="members__{{ project.id }}">
+    <div class="members" style="margin-left:0px;overflow: visible" id="members__{{ project.id }}">
         {% if project.members %}
             <span>Team Members ({{ project.members|length }}): </span>
             {% for member in project.members %}
