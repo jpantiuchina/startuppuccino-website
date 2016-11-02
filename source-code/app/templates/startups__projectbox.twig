@@ -1,6 +1,12 @@
 <div class="card card--{% if project.is_approved=='1' %}PROJECT{% else %}IDEA card--hidden{% endif %}">
 
-	<a href="./?project_id={{ project.id }}">
+    {% if project.is_approved == '1' %}
+        {% set link = "./?project_id=" ~ project.id %}
+    {% else %}
+        {% set link = "#" %}
+    {% endif %}
+
+	<a href="{{ link }}">
     	
     	{% set avatar = default_avatar %}
     	<div class="card__pic" 
