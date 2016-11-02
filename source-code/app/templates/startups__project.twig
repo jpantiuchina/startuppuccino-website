@@ -42,4 +42,17 @@
         {% endif %}
     </section>
 
+    <section class="p_video_pitch">
+    	{% if project.id == 3 %}
+	    	<div data-type="youtube" data-video-id="9pGoAdUeBdQ"></div>
+	    {% else %}   
+	    	<video controls>
+			  	<source src="../app/public/media/video/team_pitch1__{{ project.title|trim }}.mp4" type="video/mp4">
+			  	{#<source src="/path/to/video.webm" type="video/webm">#}
+			  	{#<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>#}
+			</video>
+	    {% endif %}
+    </section>
+
+
 </div>

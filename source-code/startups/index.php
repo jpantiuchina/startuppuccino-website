@@ -29,9 +29,18 @@
 						"type" => "text/css",
 						"rel"  => "stylesheet",
 						"href" => "../app/assets/newcss/ideas.css"
+					],
+					[
+						"kind" => "link",
+						"type" => "text/css",
+						"rel"  => "stylesheet",
+						"href" => "https://cdn.plyr.io/2.0.7/plyr.css"
 					]
 				];
-	$footer_scripts = ["../app/assets/js/people.js", "../app/assets/js/manage_project_chooser.js"];
+	$footer_scripts = ["../app/assets/js/people.js", 
+	                   "../app/assets/js/manage_project_chooser.js",
+	                   "https://cdn.plyr.io/2.0.7/plyr.js",
+	                   "../app/assets/js/player.js"];
 
 
 	/* 
