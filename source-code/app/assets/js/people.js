@@ -1,7 +1,12 @@
 /* Filters functions */
 
-var old_target;
-var view_all = true;
+if(typeof old_target == "undefined"){
+	old_target = null;
+}
+
+if(typeof view_all == "undefined"){
+    view_all = true;
+}
 
 function filterResults(target, button){
 
