@@ -23,6 +23,12 @@
 						"type" => "text/css",
 						"rel"  => "stylesheet",
 						"href" => "../app/assets/newcss/people.css"
+					],
+					[
+						"kind" => "link",
+						"type" => "text/css",
+						"rel"  => "stylesheet",
+						"href" => "../app/assets/newcss/ideas.css"
 					]
 				];
 	$footer_scripts = ["../app/assets/js/people.js", "../app/assets/js/manage_project_chooser.js"];
@@ -65,6 +71,9 @@
 	if($project !== null){
 		$template_variables['project'] = $project;
 		$template_variables['is_my_team'] = $isMyTeam;
+		if(isset($_GET['settings'])){
+			$template_variables['settings_mode'] = true;
+		}
 	} else {
 		$template_variables['projects'] = $startups_func->getAllProjects();
 	}

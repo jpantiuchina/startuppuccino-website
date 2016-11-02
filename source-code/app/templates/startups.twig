@@ -12,8 +12,16 @@
 
 			{% else %}
 
-				{% include 'startups__project.twig' ignore missing %}
-			
+				{% if settings_mode %}
+					
+					{% include 'startups__project_settings.twig' ignore missing %}
+
+				{% else %}
+
+					{% include 'startups__project.twig' ignore missing %}	
+
+				{% endif %}
+				
 			{% endif %}
 
 		{% else %}

@@ -38,7 +38,7 @@ class StartupProject_Functions {
      */
     public function getProjectInfo() {
       
-      $query = "SELECT id, title, owner_id, description, avatar, looking_for
+      $query = "SELECT id, title, owner_id, description, avatar, vision
                 FROM "._T_PROJECT." 
                 WHERE id='".$this->project_id."'
                 AND is_approved=1;";
@@ -48,7 +48,9 @@ class StartupProject_Functions {
       // There must be only one row result
       if ($result->num_rows == 1) {
 
-          return $result->fetch_assoc();
+          $project = $result->fetch_assoc();
+          $project = $this->loadIdeaMembers([$project])[0];
+          return $project;
       
       } else {
           // No project found

@@ -18,4 +18,20 @@
 	    	   onclick="SpProjectChooser.ideaHelper('{{ project.vote_label }}', '{{ project.id }}', this)" />
 	{% endif %}
 
+    <div class="members" id="members__{{ project.id }}">
+        {% if project.members %}
+            <span>Team Members ({{ project.members|length }}): </span>
+            {% for member in project.members %}
+                <div class="member" member-id="{{ member.id }}">
+                    <a href="../people/?user_id={{ member.id }}">
+                        <div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+                    </a>
+                    <div class="member__label">
+                        <span>{{ member.firstName }} {{ member.lastName }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
 </div>

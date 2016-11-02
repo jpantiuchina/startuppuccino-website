@@ -1,6 +1,6 @@
 {% if is_my_team %}
 	<p>
-		<a class="st_button c_red" href="./?settings">PROJECT SETTINGS</a>
+		<a class="st_button c_red" href="./?project_id={{ project.id }}&settings">PROJECT SETTINGS</a>
 	</p>	
 {% endif %}
 
@@ -8,12 +8,12 @@
 
 	<section class="p_infobox">
 		<div class="head">
+			<!--<div class="p_picturebox">
+				<div class="p_picture" style="background-image:url('../app/assets/pics/ideas/{{ project.avatar }}')"></div>
+			</<div></div>>-->
 			<div class="p_info">
 				<h3 class="p_name">{{ project.title }}</h3>
-				<p class="p_role">{{ project.looking_for }}</p>
-			</div>
-			<div class="p_picturebox">
-				<div class="p_picture" style="background-image:url('../app/assets/pics/people/{{ project.avatar }}')"></div>
+				<p class="p_vision">{{ project.vision }}</p>
 			</div>
 		</div>
 	</section>
@@ -21,5 +21,21 @@
 	<section class="p_about">	
 		<pre>{{ project.description }}</pre>	
 	</section>
+
+    <section class="members" id="members__{{ project.id }}">
+        {% if project.members %}
+            <span>Team Members ({{ project.members|length }}): </span>
+            {% for member in project.members %}
+                <div class="member" member-id="{{ member.id }}">
+                    <a href="../people/?user_id={{ member.id }}">
+                        <div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+                    </a>
+                    <div class="member__label">
+                        <span>{{ member.firstName }} {{ member.lastName }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </section>
 
 </div>
