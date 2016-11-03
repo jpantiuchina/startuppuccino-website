@@ -21,7 +21,7 @@
     </a>
 
     <div style="text-align:right;padding: 5px 0px">
-        {% if project.is_approved=='1' and sess.role == "mentor" %}
+        {% if project.is_approved=='1' and sess.role == "mentor" and sess.id in residence_mentors %}
             <input type="button"
                    class="st_button {% if project.vote_label == 'like' %} c_green {% else %} c_red {% endif %}"
                    {% if project.vote_label == "unlike" %}style="background-color: #f00"{% endif %}

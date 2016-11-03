@@ -61,6 +61,12 @@
 	}
 
 
+
+	require_once '../app/models/People_Functions.php';
+	$people_func = new People_Functions($_SESSION['id']);
+	$residence_mentors = $people_func->getResidenceMentors();
+
+
 	// Include header and footer controllers
 	include '../app/controllers/page__header.php';
 	//include '../app/controllers/page__footer.php';
@@ -75,6 +81,7 @@
 	$template_variables['metatags'] = $metatags;
 	$template_variables['footer_scripts'] = $footer_scripts;
 	$template_variables['rel_path'] = '..';
+	$template_variables['residence_mentors'] = $residence_mentors;
 	
 	// Prevent to load all the users data if only one profile is required
 	if($project !== null){
