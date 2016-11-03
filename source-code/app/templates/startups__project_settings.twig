@@ -2,6 +2,10 @@
 
 {% if is_my_team %}
 
+<script type="text/javascript">
+var PROJECT_ID = {{ project.id }};
+</script>
+
 <p>
 	<a class="st_button" href="./?project_id={{ project.id }}">PUBLIC VIEW</a>
 </p>
@@ -12,11 +16,12 @@
 		{{ settings.input('title', 'project_input__title', project.title|trim ) }}
 	</section>
 
+	{#
 	<!--
 	<section class="p_vision">
 		{{ settings.input('vision', 'project_input__vision', project.vision|trim) }}
 	</section>
-	-->
+	--> #}
 
 	<section class="p_description">
 		{{ settings.textarea('description', 'project_input__description', project.description|trim) }}

@@ -40,7 +40,8 @@
 	$footer_scripts = ["../app/assets/js/people.js", 
 	                   "../app/assets/js/manage_project_chooser.js",
 	                   "https://cdn.plyr.io/2.0.7/plyr.js",
-	                   "../app/assets/js/player.js"];
+	                   "../app/assets/js/player.js",
+	                   "../app/assets/js/project_settings.js"];
 
 
 	/* 

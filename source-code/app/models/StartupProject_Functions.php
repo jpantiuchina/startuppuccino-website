@@ -167,6 +167,75 @@ class StartupProject_Functions {
 
 
 
+    /**
+     * Set a new project title
+     */
+    public function setTitle($value){
+
+      $query = "UPDATE "._T_PROJECT_."
+                SET title='".$value."'
+                WHERE id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+        return "ok";
+      }
+
+      return "Error, please try again.";
+
+    }
+
+    /**
+     * Set a new project description
+     */
+    public function setDescription($value){
+
+      $query = "UPDATE "._T_PROJECT_."
+                SET description='".$value."'
+                WHERE id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+        return "ok";
+      }
+
+      return "Error, please try again.";
+
+    }
+
+    /**
+     * Set a new project milestone 2
+     */
+    public function setMilestone2($value){
+
+      $query = "UPDATE "._T_PROJECT_."
+                SET milestone_2='".$value."'
+                WHERE id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+        return "ok";
+      }
+
+      return "Error, please try again.";
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     /**
