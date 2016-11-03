@@ -55,5 +55,11 @@
 	    {% endif %}
     </section>
 
+    {% if project.milestone_2 and not project.milestone_2|trim == "" %}
+    	<section class="milestone milestone__problem_validation">
+    		<h5>Problem Validation</h5>
+    		<p>{{ project.milestone_2|trim }}</p>
+   		</section>
+    {% endif %}
 
 </div>

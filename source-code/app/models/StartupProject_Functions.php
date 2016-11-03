@@ -38,7 +38,7 @@ class StartupProject_Functions {
      */
     public function getProjectInfo() {
       
-      $query = "SELECT id, title, owner_id, description, avatar, vision
+      $query = "SELECT id, title, owner_id, description, avatar, vision, milestone_2
                 FROM "._T_PROJECT." 
                 WHERE id='".$this->project_id."'
                 AND is_approved=1;";
