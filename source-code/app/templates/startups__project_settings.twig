@@ -1,5 +1,6 @@
 {% import "components/settings__input.twig" as settings %}
 
+{% if is_my_team %}
 
 <p>
 	<a class="st_button" href="./?project_id={{ project.id }}">PUBLIC VIEW</a>
@@ -21,4 +22,16 @@
 		{{ settings.textarea('description', 'project_input__description', project.description|trim) }}
 	</section>
 
+	<section class="p_milestone_2">
+		{{ settings.textarea('milestone_2', 'project_input__milestone_2', project.milestone_2|trim) }}
+	</section>
+
 </div>
+
+{% else %}
+	
+<p>
+	<span>It seems that is not your team...</span>
+</p>
+
+{% endif %}
