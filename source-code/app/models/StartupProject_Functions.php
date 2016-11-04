@@ -313,6 +313,37 @@ class StartupProject_Functions {
 
     }
 
+
+
+
+    /**
+     * Only for educators
+     */
+    public function getMentorProjectChoices(){
+      
+      $query = "SELECT a.firstName, a.lastName, p.title 
+                FROM "._T_PROJECT." AS p
+                JOIN "._T_MENTOR_PROJECT." AS mp
+                ON mp.project_id=p.id
+                JOIN "._T_ACCOUNT." a
+                ON mp.account_id=a.id
+                ORDER BY `a`.`firstName` ASC";
+      
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($item = $result->fetch_assoc()) {
+          $temp_arr[] = $item;
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
+
 }
 
 ?>

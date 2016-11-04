@@ -1,0 +1,59 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+	<section>
+
+		<style type="text/css">
+			table,td,tr{border:1px solid #f9f9f9;}
+			td>span{padding: 7px;}
+		</style>
+
+		{% if mentor_choices %}
+
+			<h1 class="ranklist__title">Mentor Choices</h1>
+
+			<div class="ranklist">
+
+				{% for item in mentor_choices %}
+
+					<table style="border-collapse:collapse;background-color:#fbfbfb">
+						<tr>
+							<td><span>{{ item.firstName }}{{ item.lastName }}</span></td>
+							<td style="background-color:#f2f2f2"><span>{{ item.title }}</span></td>
+						</tr>
+					</table>
+
+				{% endfor %}
+
+			</div>
+
+		{% endif %}
+
+
+		{% if project_choices %}
+
+			<h1 class="ranklist__title">Project Choices</h1>
+
+			<div class="ranklist">
+
+				{% for item in project_choices %}
+
+					<table style="border-collapse:collapse;background-color:#fbfbfb">
+						<tr>
+							<td><span>{{ item.title }}</span></td>
+							<td style="background-color:#f2f2f2"><span>{{ item.firstName }}{{ item.lastName }}</span></td>
+						</tr>
+					</table>
+
+				{% endfor %}
+
+			</div>
+
+		{% endif %}
+
+	</section>
+</main>
+
+{% endblock %}

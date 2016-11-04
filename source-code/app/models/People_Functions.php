@@ -236,6 +236,36 @@ class People_Functions {
     }
 
 
+
+
+    /**
+     * Only for educators
+     */
+    public function getProjectMentorChoices(){
+      
+      $query = "SELECT p.title, a.firstName, a.lastName 
+                FROM "._T_PROJECT." AS p
+                JOIN "._T_PROJECT_MENTOR." AS mp
+                ON mp.project_id=p.id
+                JOIN "._T_ACCOUNT." a
+                ON mp.account_id=a.id
+                ORDER BY `p`.`title` ASC";
+      
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($item = $result->fetch_assoc()) {
+          $temp_arr[] = $item;
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
+
 }
 
 ?>

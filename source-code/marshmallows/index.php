@@ -14,13 +14,16 @@
 	$account_id = isset($_SESSION['id']) ? $_SESSION['id'] : null;
 
 	
-	// Include and Initialize Ideas Functions
-	require_once '../app/models/Ideas_Functions.php';
-	$ideas_func = new Ideas_Functions($account_id);
+	// Include and Initialize StartupProject Functions
+	require_once '../app/models/StartupProjec_Functions.php';
+	$project_func = new StartupProject_Functions($account_id);
+	// Include and Initialize People Functions
+	require_once '../app/models/People_Functions.php';
+	$community_func = new People_Functions($account_id);
 
 	
-	$currentPage = "cake";
-	$page_title = "Cake - Startuppuccino";
+	$currentPage = "marshmallows";
+	$page_title = "Marshmallows - Startuppuccino";
 	$metatags = [
 					[
 						"kind" => "link",
@@ -30,7 +33,6 @@
 					]
 				];
 
-	$ranklist = $ideas_func->getIdeaRanklist();
 
 	// Include header and footer controllers
 	include '../app/controllers/page__header.php';
@@ -38,14 +40,16 @@
 
 	// Set template name and variables
 	
-	$template_file = "cake.twig";
+	$template_file = "marshmallows.twig";
 
 	$template_variables['sess'] = $_SESSION;
 	$template_variables['userLogged'] = $userLogged;
 	$template_variables['page_title'] = $page_title;
 	$template_variables['metatags'] = $metatags;
 	$template_variables['rel_path'] = '..';
-	$template_variables['ranklist'] = $ranklist;
+
+	$template_variables['mentor_choices'] = $project_func->getMentorProjectChoices();
+	$template_variables['project_choices'] = $community_func->getProjectMentorChoices();
 
     // Render the template
     require_once '../app/views/_Twig_Loader.php';
