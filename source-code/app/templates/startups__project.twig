@@ -1,16 +1,32 @@
-{% if is_my_team %}
+{# {% if is_my_team %}
 	<p>
 		<a class="st_button c_red" href="./?project_id={{ project.id }}&settings">PROJECT SETTINGS</a>
 	</p>	
-{% endif %}
+{% endif %} #}
 
-<div class="p_wrapper">
+<style>
+	.project_column {
+		display: inline-block;
+	    width: 49%;
+	    vertical-align: top;
+	    min-width: 440px;
+	}
+	@media all and (max-width: 1001px){
+		.project_column {
+			display: block;
+			width: auto;
+			min-width: 0px;
+		}
+	}
+</style>
+
+<div class="p_wrapper project_column">
 
 	<section class="p_infobox">
 		<div class="head">
-			<!--<div class="p_picturebox">
+			<div class="p_picturebox">
 				<div class="p_picture" style="background-image:url('../app/assets/pics/ideas/{{ project.avatar }}')"></div>
-			</<div></div>>-->
+			</div>
 			<div class="p_info">
 				<h3 class="p_name">{{ project.title }}</h3>
 				<p class="p_vision">{{ project.vision }}</p>
@@ -22,7 +38,7 @@
 		<pre>{{ project.description }}</pre>	
 	</section>
 
-    <section class="members" style="margin-left:0px !important;overflow:visible !important" id="members__{{ project.id }}">
+    <section class="members" style="margin-left:0px !important;border:none;overflow:visible !important" id="members__{{ project.id }}">
         {% if project.members %}
             <span>Team Members ({{ project.members|length }}): </span>
             {% for member in project.members %}
@@ -37,6 +53,10 @@
             {% endfor %}
         {% endif %}
     </section>
+
+</div>
+
+<div class="p_wrapper project_column">
 
     <section class="p_video_pitch">
     	<h5>First Pitch Video</h5>
