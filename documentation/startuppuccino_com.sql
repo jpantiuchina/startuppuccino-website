@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: startuppuccino.com.mysql:3306
--- Generation Time: Nov 03, 2016 at 01:56 PM
--- Server version: 5.5.50-MariaDB-1~wheezy
+-- Generation Time: Nov 09, 2016 at 03:01 PM
+-- Server version: 5.5.53-MariaDB-1~wheezy
 -- PHP Version: 5.4.45-0+deb7u5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__account` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `account_email` (`email`),
   UNIQUE KEY `linkedin_id_UNIQUE` (`linkedin_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=105 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=107 ;
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__account_logged` (
   `cookie_token` varchar(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cookie_token_UNIQUE` (`cookie_token`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=508 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=552 ;
 
 -- --------------------------------------------------------
 
@@ -77,6 +77,38 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__assignments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `startuppuccino__learningstage`
+--
+
+CREATE TABLE IF NOT EXISTS `startuppuccino__learningstage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(63) NOT NULL,
+  `description` varchar(45) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `startuppuccino__learningstage_mood`
+--
+
+CREATE TABLE IF NOT EXISTS `startuppuccino__learningstage_mood` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `learningstage_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mood_key` (`project_id`,`account_id`,`learningstage_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `startuppuccino__mentor_availability`
 --
 
@@ -91,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__mentor_availability` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `available_id` (`mentor_id`,`session_id`),
   KEY `fk_session_id_idx` (`session_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=30 ;
 
 -- --------------------------------------------------------
 
@@ -106,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__mentor_project` (
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mentor_id` (`project_id`,`account_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=73 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=97 ;
 
 -- --------------------------------------------------------
 
@@ -117,25 +149,10 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__mentor_project` (
 CREATE TABLE IF NOT EXISTS `startuppuccino__mentor_residence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mentor_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk2_mentor_id` (`mentor_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=203 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `startuppuccino__milestone`
---
-
-CREATE TABLE IF NOT EXISTS `startuppuccino__milestone` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(63) NOT NULL,
-  `description` varchar(45) NOT NULL,
-  `deadline` datetime DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -159,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__project` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
   KEY `fk_project_author_idx` (`owner_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=50 ;
 
 -- --------------------------------------------------------
 
@@ -176,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__project_comment` (
   PRIMARY KEY (`id`),
   KEY `comment_project` (`project_id`),
   KEY `comment_author` (`author_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=70 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=72 ;
 
 -- --------------------------------------------------------
 
@@ -207,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__project_mentor` (
   `joined_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `mentor_id` (`project_id`,`account_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=122 ;
 
 -- --------------------------------------------------------
 
@@ -239,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `startuppuccino__project_participant` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idea_id` (`project_id`,`account_id`),
   KEY `fk_account_id_idx` (`account_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=64 ;
 
 -- --------------------------------------------------------
 
