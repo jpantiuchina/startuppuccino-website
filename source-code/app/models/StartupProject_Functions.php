@@ -344,6 +344,34 @@ class StartupProject_Functions {
     }
 
 
+    /**
+     * Get all mathces
+     */
+    public function getProjectMentorMatches(){
+      
+      $query = "SELECT a.firstName, a.lastName, p.title 
+                FROM "._T_PROJECT." AS p
+                JOIN "._T_RESIDENCE_MENTORS." AS mr
+                ON mr.project_id=p.id
+                JOIN "._T_ACCOUNT." a
+                ON mr.mentor_id=a.id
+                ORDER BY `a`.`firstName` ASC";
+    
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($item = $result->fetch_assoc()) {
+          $temp_arr[] = $item;
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
+
 }
 
 ?>

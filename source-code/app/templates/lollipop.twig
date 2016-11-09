@@ -1,0 +1,45 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+	<section>
+
+		<style type="text/css">
+
+			table {font-size: 22px; line-height: 45px; position: relative;}
+			tr, td, th, table {padding: 15px}
+			tr {min-width: 120px}
+
+		</style>
+
+		{% if project_mentor_matches %}
+
+			<div class="ranklist">
+
+				<table style="border-collapse:collapse;background-color:#fbfbfb">
+					
+					<tr style="text-align: left">
+						<th><span>Mentor</span></th>
+						<th><span>Team</span></th>
+					</tr>
+
+					{% for item in project_mentor_matches %}
+
+							<tr>
+								<td><span>{{ item.firstName|capitalize }} {{ item.lastName|capitalize }}</span></td>
+								<td style="background-color:#f2f2f2"><span>{{ item.title|lower|capitalize }}</span></td>
+							</tr>
+					
+					{% endfor %}
+
+				</table>
+
+			</div>
+
+		{% endif %}
+
+	</section>
+</main>
+
+{% endblock %}
