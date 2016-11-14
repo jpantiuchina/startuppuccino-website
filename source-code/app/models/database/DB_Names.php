@@ -32,4 +32,8 @@ define("_T_RESIDENCE_MENTORS", DB_TABLE_PREFIX."mentor_residence");
 define("_T_PROJECT_MENTOR", DB_TABLE_PREFIX."project_mentor");
 define("_T_MENTOR_PROJECT", DB_TABLE_PREFIX."mentor_project");
 
+
+define("_T_LEARNINGSTAGE", DB_TABLE_PREFIX."learningstage");
+define("_T_LEARNINGSTAGE_MOOD", DB_TABLE_PREFIX."learningstage_mood");
+
 ?>

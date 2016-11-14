@@ -56,6 +56,9 @@
 				$this->setVar($template_variables);
 			}
 
+			// By default add $_SESSION data
+			$this->template_variables['sess'] = $_SESSION;
+
 			return $this->twig->render($template_file, $this->template_variables);	
 		
 		}

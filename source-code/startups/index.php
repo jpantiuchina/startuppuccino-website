@@ -58,6 +58,7 @@
 
 		$project = $startups_func->getProjectInfo();
 		$isMyTeam = $startups_func->isMyTeam();
+		$learning_stages = $startups_func->getLearningStages();
 
 	}
 
@@ -76,7 +77,6 @@
 	
 	$template_file = "startups.twig";
 
-	$template_variables['sess'] = $_SESSION;
 	$template_variables['userLogged'] = $userLogged;
 	$template_variables['page_title'] = $page_title;
 	$template_variables['metatags'] = $metatags;
@@ -91,6 +91,7 @@
 		if(isset($_GET['settings'])){
 			$template_variables['settings_mode'] = true;
 		}
+		$template_variables['learning_stages'] = $learning_stages;
 	} else {
 		$projects = $startups_func->getAllProjects();
 		shuffle($projects);

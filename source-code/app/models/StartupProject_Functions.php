@@ -372,6 +372,110 @@ class StartupProject_Functions {
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Get all learning stages of selected project
+     */
+    public function getLearningStages(){
+
+      $query = "SELECT ls.id, ls.title, ls.description, ls.approved, mr.mentor_id
+                FROM "._T_LEARNINGSTAGE." AS ls
+                JOIN "._T_RESIDENCE_MENTORS." AS mr
+                ON mr.project_id = ls.project_id
+                WHERE ls.project_id='".$this->project_id."'";
+    
+      $result = $this->conn->query($query);
+
+      $temp_arr = [];
+
+      if($result && $result->num_rows > 0) {
+        while($item = $result->fetch_assoc()) {
+          $temp_arr[] = $item;
+        }
+      }
+     
+      return $temp_arr;
+
+    }
+
+
+    /**
+     * Set a new learning stage
+     */
+    public function newLearningStage($title, $description, $mood){
+
+      $query = "INSERT INTO "._T_LEARNINGSTAGE." (project_id, title, description) 
+                VALUES ('".$this->project_id."', '".$title."', '".$description."');";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1) {
+
+        // TODO --> HANDLE MOOD ##########################################################################à
+
+        return "ok";
+      }
+     
+      // Error in the query
+      return "Error";
+
+    }
+
+    /**
+     * Set the status (approve/unapprove) learning stages 
+     */
+    public function setLearningstageStatus( $status, $stage_id ) {
+      
+      $query = "UPDATE "._T_LEARNINGSTAGE."
+                SET approved='".$status."'
+                WHERE id='".$stage_id."';";
+
+      $result = $this->conn->query($query);
+
+      if($this->conn->affected_rows == 1){
+        return "ok";
+      }
+
+      return "Error, please try again.";
+
+    }
+
+    /**
+     * Check user rights to be the mentor of the current project
+     */
+    public function isTheMentor(){
+      $query = "SELECT id
+                FROM "._T_RESIDENCE_MENTORS."
+                WHERE mentor_id='".$this->account_id."'
+                AND project_id='".$this->project_id."';";
+
+      $result = $this->conn->query($query);
+
+      if ($result && $result->num_rows == 1) {
+
+          return true;
+      
+      }
+
+      return false;
+    }
+
+
+
+
+
 }
 
 ?>

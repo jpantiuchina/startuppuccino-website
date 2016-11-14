@@ -1,0 +1,69 @@
+<div class="project_chart_settings comment_box">
+
+	<div class="center_column">
+		<div class="center_aligner">
+
+		<div class="background_close" onclick="SpProjectChart.hideSettings()"></div>
+
+			<div class="chart_settings__content comment_box__content">
+
+				<div class="_closer" onclick="SpProjectChart.hideSettings()">x</div>
+
+				<div class="chart_settings__editor">
+					
+					<style>
+						#comment_box_form > label {
+							padding: 5px;
+							color: #222
+						}
+					</style>
+
+					<form action="#" method="post" id="comment_box_form" 
+					      onsubmit="return SpProjectChart.submitLearningStage()">
+					
+						<h3>Project Progress</h3>
+
+						<label>What is the title of this point?</label>
+
+						<br>
+
+						<input type="text" name="title" id="learning_stage__title" style="width:100%"
+						       placeholder="Problem validation, business model, solution validation..." 
+						       required>
+
+						<br>
+
+						<label>What did you learn? What have you done?</label>
+
+						<br>
+
+						<textarea  id="learning_stage__description" style="width:100%" placeholder="E.g. We interviewed 30 students and we found out that we were addressing the wrong market..." required></textarea>
+						
+						<br>
+
+						<label>What is your mood? (It's anonimous, only educators will see it)</label>
+
+						<br>
+
+						<select name="mood" id="learning_stage__mood" required>
+							<option value="" active="active">Select your mood</option>
+							<option value="1">Sad</option>
+							<option value="2">Happy</option>
+							<option value="3">Angry</option>
+							<option value="4">Exited</option>
+							<option value="5">Optimistic</option>
+						</select>
+
+						<br>
+
+						<input type="submit" name="submit" value="Publish" />
+					
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>

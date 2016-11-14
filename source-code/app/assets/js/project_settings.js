@@ -44,6 +44,104 @@ StartuppuccinoProjectSettings.prototype.layout.showTinyLoader = function(id) {
 }
 
 
+
+
+
+function StartuppuccinoProjectChart () {}
+
+StartuppuccinoProjectChart.prototype.showSettings = function() {
+
+	var comment_box = document.getElementsByClassName("project_chart_settings")[0];
+	comment_box.className = "project_chart_settings comment_box comment_box--visible";
+
+}
+StartuppuccinoProjectChart.prototype.hideSettings = function() {
+
+	var comment_box = document.getElementsByClassName("project_chart_settings")[0];
+	comment_box.className = "project_chart_settings comment_box";
+
+}
+StartuppuccinoProjectChart.prototype.loadLearningStages = function() {
+
+	Sp.post({
+			url : "../app/controllers/manage_project_progress.php",
+			parameters : "key=get_learningstages&project_id=" + PROJECT_ID
+		}, function(stages){
+			document.getElementById("stages_container").innerHTML = stages;
+	});
+
+}
+StartuppuccinoProjectChart.prototype.submitLearningStage = function(){
+
+	Sp.layout.showLoading();
+
+	var title = document.getElementById("learning_stage__title").value,
+		description = document.getElementById("learning_stage__description").value,
+		mood = document.getElementById("learning_stage__mood").value;
+
+	if ( title == "" ||
+		 description == "" ||
+		 mood == "" ) {
+		alert("Please fill all the form");
+		Sp.layout.hideLoading();
+		return false;
+	}
+
+	Sp.post({
+			url : "../app/controllers/manage_project_progress.php",
+			parameters : "key=new_learningstage&project_id=" + PROJECT_ID + 
+			             "&title=" + title +
+			             "&description=" + description +
+			             "&mood=" + mood
+		},function(response){
+			if(response == "ok"){
+				SpProjectChart.loadLearningStages();
+				SpProjectChart.hideSettings();
+				// Empty textarea
+				document.getElementById("learning_stage__title").value = "";
+				document.getElementById("learning_stage__description").value = "";
+			} else {
+				alert(response);
+			}
+			// Hide loader
+			Sp.layout.hideLoading();
+		});
+
+	return false;
+}
+StartuppuccinoProjectChart.prototype.mentor = {};
+StartuppuccinoProjectChart.prototype.mentor.setLearningstageStatus = function(button, status) {
+
+	var stage_id = button.getAttribute("stage-id");
+
+	Sp.layout.showLoading();
+
+	Sp.post({
+		url : "../app/controllers/manage_project_progress.php",
+		parameters : "key=set_learningstage_status&project_id=" + PROJECT_ID +
+					 "&status=" + status + "&stage_id=" + stage_id
+	},function(response){
+		if ( response == "ok" ) {
+			SpProjectChart.loadLearningStages();
+		} else {
+			alert(response);
+		}
+		Sp.layout.hideLoading();
+	});
+
+}
+
+
+/* Initialize Startuppuccino Project Chart */
+
+if(typeof SpProjectChart === "undefined" || SpProjectChart === null){
+
+	var SpProjectChart = new StartuppuccinoProjectChart();
+
+}
+
+
+
 /* Initialize Startuppuccino Project Settings */
 
 if(typeof SpProjectSettings === "undefined" || SpProjectSettings === null){

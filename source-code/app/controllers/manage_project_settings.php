@@ -1,5 +1,11 @@
 <?php
 	
+
+	exit("Not implemented yet");
+	
+
+
+
 	require_once '../models/session.php';
 
 	function cleanText($text){
