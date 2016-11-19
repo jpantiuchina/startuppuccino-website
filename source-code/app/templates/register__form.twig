@@ -1,0 +1,106 @@
+<form action="{{ form_action|default('') }}" method="post" class="form_custom" onsubmit="return checkForm();">
+
+	{% if error_message and error_message != "" %}
+
+		<li class="form_box_item form_box_item--full">
+			<p>{{ error_message }}</p>
+		</li>
+
+	{% endif %}
+	
+
+	<li class="form_box_item">
+		<label>Course Key</label>
+		<input class="form_pretty_general_input" type="password" name="course_key" required/>
+	</li>
+
+
+	<p class="form_separator"></p>
+
+
+	<li class="form_box_item">
+		<label>Role</label>
+		<label><input type="radio" name="role" value="student" onclick="switchInputs(0)"  {% if role == "student" %}checked="checked"{% endif %} required/>Student (I'm here to learn)</label>
+		<label><input type="radio" name="role" value="mentor"  onclick="switchInputs(1)"  {% if role == "mentor" %}checked="checked"{% endif %} required/>Mentor (I'm here to help)</label>
+		<label><input type="radio" name="role" value="guest" {% if role == "guest" %}checked="checked"{% endif %} required/>Guest</label>
+	</li>
+
+
+	<p class="form_separator"></p>
+
+
+	<li class="form_box_item">
+		<label>Email</label>
+		<input class="form_pretty_general_input" type="email" name="email" placeholder="hello@startuppucino.com" value="{{ email }}" required/>
+	</li>
+
+	<br>
+
+	<li class="form_box_item">
+		<label>Password</label>
+		<input class="form_pretty_general_input" type="password" id="password_input_1" name="password" value="{{ password }}" required/>
+	</li>
+
+	<li class="form_box_item">
+		<label>Repeat Password</label>
+		<input class="form_pretty_general_input" id="password_input_2" type="password" name="password1" required/>
+	</li>
+
+	
+	<p class="form_separator"></p>
+
+
+	<li class="form_box_item">
+		<label>Firstname</label>
+		<input class="form_pretty_general_input" type="text" name="firstname" value="{{ firstname }}" required/>
+	</li>
+
+	<li class="form_box_item">
+		<label>Lastname</label>
+		<input class="form_pretty_general_input" type="text" name="lastname" value="{{ lastname }}" required/>
+	</li>
+
+
+	<li class="form_box_item">
+		<label id="background_label">Company or Faculty</label>
+		<input class="form_pretty_general_input" type="text" name="background" value="{{ background }}" required/>
+	</li>
+
+	
+	<p class="form_separator"></p>
+
+
+	<li class="form_box_item">
+		<label>Skills (Separated by a comma - Minimum 1 skill)</label>
+		<input class="form_pretty_general_input" type="text" name="skills" placeholder="e.g. IT, design, law, economics, management" value="{{ skills }}" required/>
+	</li>
+
+
+	<p class="form_separator"></p>
+
+
+	{#
+
+	<li class="form_box_item">
+		<label>About me (optional)</label>
+		<textarea class="form_pretty_general_input" rows="3" name="about" placeholder="More info about me, about my startup idea, etc."><?php //if(isset($_POST['about'])) print($_POST['about']); ?></textarea>
+	</li>
+
+	#}
+
+	{#
+		// I suggest not to let user upload the picture here 
+		// but only once already signed up from their account page.
+	#}
+
+	<li class="form_box_item">
+		<input class="form_pretty_button_input" type="submit" value="Register" name="submit">
+	</li>
+
+	<li class="form_box_item form_box_item--full">
+        <p>Do you already have an Account? <a class="form_pretty_button_link" href="login/">Login</a></p>
+    </li>
+
+</form>
+
+<script type="text/javascript" src="app/assets/js/signup.js"></script>

@@ -1,5 +1,11 @@
 <?php 
 
+	
+    $VIEWS_DIR = __DIR__;
+    $APP_DIR = dirname( $VIEWS_DIR );
+    
+
+
 	define("DATE_FORMAT", "F jS Y");
 
 	// Change the format of the date
@@ -97,7 +103,7 @@
 
 				<?php
 					// Include the comment_system
-					include '../app/controllers/course_sessions_comments.php';
+					include $APP_DIR . '/controllers/course_sessions_comments.php';
 				?>
 
 			</div>

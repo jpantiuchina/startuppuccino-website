@@ -1,7 +1,6 @@
 <?php
 	
-	require_once '../app/models/session.php';
-    require_once '../app/views/_Twig_Loader.php';
+	require_once __DIR__ . '/session.php';
 
 	// Switch between different ideas phases
 	// Set template name and variables

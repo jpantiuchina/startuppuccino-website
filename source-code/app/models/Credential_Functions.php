@@ -1,6 +1,6 @@
 <?php
 
-require_once '../app/models/session.php';
+require_once dirname( __DIR__ ) . '/controllers/session.php';
 
 class Credential_Functions {
  

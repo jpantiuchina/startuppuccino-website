@@ -1,6 +1,11 @@
 <?php
 
 	
+    $VIEWS_DIR = __DIR__;
+    $APP_DIR = dirname( $VIEWS_DIR );
+    
+
+	
 	// Only if is a mentor we load the sessions availability
    	if($_SESSION['role'] !== "mentor"){
    		exit("You are not a mentor");
@@ -8,7 +13,7 @@
 
    	// TODO: all this should be in the controller
 
-	require_once '../app/models/CourseSessions_Functions.php';
+	require_once $APP_DIR . '/models/CourseSessions_Functions.php';
 	$cs_func = new CourseSessions_Functions();
 	$lectures_availability = $cs_func->getMentorSessionAvailability($_SESSION['id']);
 

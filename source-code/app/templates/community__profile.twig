@@ -2,7 +2,7 @@
 {% if is_my_profile %}
 
 	<div class="p_tosettings">
-		<span><a href='../settings/'>Edit Profile</a></span>
+		<span><a href='settings/'>Edit Profile</a></span>
 	</div>
 
 {% endif %}
@@ -18,18 +18,18 @@
 				<p class="p_background">{{ user.background }}</p>	
 				<p class="p_email">
 					<a href="mailto:{{ user.email }}">
-						<span style="background-image:url('../app/assets/pics/default/mail.svg')"></span>
+						<span style="background-image:url('app/assets/pics/default/mail.svg')"></span>
 						{{ user.email }}
 					</a>
 				</p>
 				<p class="p_project">
 					{% if user.project_id %}
-						<span>Project: <a href="../startups/?project_id={{ user.project_id }}">{{ user.project_title }}</a></span>
+						<span>Project: <a href="startups/?project_id={{ user.project_id }}">{{ user.project_title }}</a></span>
 					{% endif %}
 				</p>
 			</div>
 			<div class="p_picturebox">
-				<div class="p_picture" style="background-image:url('../app/assets/pics/people/{{ user.avatar }}')"></div>
+				<div class="p_picture" style="background-image:url('app/assets/pics/people/{{ user.avatar }}')"></div>
 			</div>
 		</div>
 		<div class="foot">
@@ -52,7 +52,7 @@
 			{% if social_label == 'musteus' %}
 				{% set social_avatar = 'musteus.png' %}
 			{% endif %}
-			<a class="profile_role {{ social_data[1] }}" target="_blank" href="{{ social_data[0] }}"><img src="../app/assets/pics/icons/{{ social_avatar }}" width="40" /></a>
+			<a class="profile_role {{ social_data[1] }}" target="_blank" href="{{ social_data[0] }}"><img src="app/assets/pics/icons/{{ social_avatar }}" width="40" /></a>
 		{% endfor %}
 	</section>
 

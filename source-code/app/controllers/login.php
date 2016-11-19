@@ -1,8 +1,12 @@
 <?php
 	
-	require_once '../app/models/session.php';
+	$CONTROLLER_DIR = __DIR__;
+	$APP_DIR = dirname( $CONTROLLER_DIR );
 
-	require_once '../app/models/Credential_Functions.php';
+
+	require_once $CONTROLLER_DIR . '/session.php';
+
+	require_once $APP_DIR . '/models/Credential_Functions.php';
 	$credential_func = new Credential_Functions();
 
 	$credential_func->setEmail($login_email);
@@ -27,7 +31,7 @@
 		}
 
 		// Load Config
-	   	require_once '../app/models/Config_Functions.php';
+	   	require_once $APP_DIR . '/models/Config_Functions.php';
 	   	$config_func = new Config_Functions();
 	   	// Load ideas settings
 	   	$config_func->load();

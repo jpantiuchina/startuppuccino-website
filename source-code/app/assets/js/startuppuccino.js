@@ -10,7 +10,7 @@ function Startuppuccino(){
 
     this.downloadSearchResult = function() {
         // Download data
-        this.get({url : "../app/controllers/search.php"},function(data){
+        this.get({url : "app/controllers/search.php"},function(data){
             data_set = Sp.helpers.shuffle(JSON.parse(data));
             Sp.search();
         });
@@ -53,7 +53,7 @@ function Startuppuccino(){
 
     // Redirect to logout page
     this.logout = function() {
-        window.location = "../logout/";
+        window.location = "logout/";
     }
 
     // http get request to server with callback
@@ -255,9 +255,9 @@ Startuppuccino.prototype.layout.renderSearchResult = function(result_set) {
         } else {
             n.className += " search_result--" + x.role;            
         }
-        n.children[0].href = "../" + x.id;
+        n.children[0].href = x.id;
         n.children[0].children[0]
-         .children[0].setAttribute("style","background-image:url('../app/assets/pics/" + x.avatar + "')");
+         .children[0].setAttribute("style","background-image:url('app/assets/pics/" + x.avatar + "')");
         n.children[0].children[1].children[0].innerHTML = x.name;
         n.children[0].children[1].children[1].innerHTML = x.role;
         
@@ -306,7 +306,8 @@ window.addEventListener("load", function(){
     var search_triggers = document.getElementsByClassName("search_trigger_button"),
         search_input = document.getElementById("search_input"),
         mobile_menu_button = document.getElementById("mobile_menu__button"),
-        askforhelp_trigger_button = document.getElementById("askforhelp_trigger_button");
+        askforhelp_trigger_button = document.getElementById("askforhelp_trigger_button"),
+        anchors = document.getElementsByTagName("a");
 
     var search_triggers_length = search_triggers.length;
 
@@ -321,6 +322,16 @@ window.addEventListener("load", function(){
         Sp.search(text);
 
     });
+
+    for (var i = 0; i < anchors.length; i++) {
+        var link = anchors[i].getAttribute("href");
+        if ( link.charAt(0) == "#" ) {
+            anchors[i].addEventListener("click", function(e){
+                e.preventDefault();
+                window.location.hash = link;
+            });
+        }
+    }
     
     //mobile_menu_button.addEventListener("click", function(e){ Sp.layout.toggleMobileMenu(e); });    
     

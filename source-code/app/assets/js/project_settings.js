@@ -88,7 +88,7 @@ StartuppuccinoProjectChart.prototype.submitLearningStage = function(){
 	}
 
 	Sp.post({
-			url : "../app/controllers/manage_project_progress.php",
+			url : "app/controllers/manage_project_progress.php",
 			parameters : "key=new_learningstage&project_id=" + PROJECT_ID + 
 			             "&title=" + title +
 			             "&description=" + description +

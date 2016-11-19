@@ -1,7 +1,7 @@
 <div style="max-width:620px;margin: 20px 0px;" class="card card--{% if project.is_approved=='1' %}PROJECT{% else %}IDEA card--hidden{% endif %}">
 
     {% if project.is_approved == '1' %}
-        {% set link = "./?project_id=" ~ project.id %}
+        {% set link = "startups/?project_id=" ~ project.id %}
     {% else %}
         {% set link = "#" %}
     {% endif %}
@@ -13,7 +13,7 @@
             {% set avatar = "ideas/" ~ project.avatar %}
         {% endif %}
     	<div class="card__pic" 
-    	     style="background-image:url('../app/assets/pics/{{ avatar }}')"></div>
+    	     style="background-image:url('app/assets/pics/{{ avatar }}')"></div>
     	<div class="card__details">
 			<span class="card__details_name">{{ project.title }}</span>
     	</div>
@@ -36,8 +36,8 @@
             <span>Team Members ({{ project.members|length }}): </span>
             {% for member in project.members %}
                 <div class="member" member-id="{{ member.id }}">
-                    <a href="../people/?user_id={{ member.id }}">
-                        <div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+                    <a href="people/?user_id={{ member.id }}">
+                        <div style="background-image:url('app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
                     </a>
                     <div class="member__label">
                         <span>{{ member.firstName }} {{ member.lastName }}</span>

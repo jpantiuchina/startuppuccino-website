@@ -1,7 +1,10 @@
 <?php
 
-	require_once '../app/models/session.php';
-    require_once '../app/views/_Twig_Loader.php';
+    $CONTROLLERS_DIR = __DIR__;
+    $APP_DIR = dirname( $CONTROLLERS_DIR );
+
+
+	require_once $CONTROLLERS_DIR . '/session.php';
 	
 
 	$socials = !empty($user["socials"]) ? json_decode(trim($user["socials"]),true) : array();
