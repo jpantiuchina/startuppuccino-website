@@ -1,0 +1,133 @@
+
+@import 'general';
+@import 'form';
+
+
+$input-ball-size: 80px;
+$input-ball-size-big: 120px;
+
+
+
+.form_section_wrapper {
+	position: relative;
+	height: 300px;
+	overflow: hidden;
+
+	>.form_section_slides {
+		width: 400%;
+		font-size: 0px;
+	}
+
+}
+
+.form_section_slides {
+	@include transition(300ms);
+
+	>.form_section{
+		font-size: 16px;
+		position: relative;
+		display: inline-block;
+		height: 100%;
+		width: 25%;
+	}
+
+}
+
+#prevStep {
+	float: left;
+}
+
+#nextStep {
+	float: right;
+}
+
+#prevStep,
+#nextStep {
+	width: auto !important;
+	cursor: pointer;
+}
+
+.form_section_index {
+
+	text-align: center;
+
+	$form-balls-wrapper-size: 20px;
+	$form-balls-size: 15px;
+	cursor: default;
+
+	>div {
+		display: inline-block;
+		vertical-align: middle;
+		width: $form-balls-wrapper-size;
+		height: $form-balls-wrapper-size;
+		line-height: $form-balls-wrapper-size
+	}
+
+	span {
+		display: inline-block;
+		vertical-align: middle;
+		cursor: pointer;
+		width: $form-balls-size;
+		height: $form-balls-size;
+		background-color: #fff;
+		@include border-radius(50%);
+		@include transition(100ms);
+		
+		&:hover {
+			@include scale(1.8);
+		}
+
+		&.focus {
+			background-color: $logo-brown;
+		}
+	}
+
+}
+
+.role_selection {
+
+	width: 100%;
+	font-size: 0px;
+
+	input {
+		display: none !important;
+	}
+
+	>label {
+
+		display: inline-block;
+		width: 50%;
+		font-size: 16px;
+		text-align: center;
+		cursor: pointer;
+
+		&:after {
+			display: block;
+			width: $input-ball-size;
+			height: $input-ball-size;
+			line-height: $input-ball-size;
+			@include border-radius(50%);
+			color: #fff;
+			text-align: center;
+			margin: 20px auto;
+			@include transition(200ms);
+		}
+
+		&.student_role:after {
+			background-color: $logo-green;
+			content: "Student";
+		}
+		&.mentor_role:after {
+			background-color: $logo-red;
+			content: "Mentor";
+		}
+	}
+
+	>label:hover {
+		&:after{
+			width: $input-ball-size-big;
+			height: $input-ball-size-big;
+			line-height: $input-ball-size-big;
+		}
+	}
+}

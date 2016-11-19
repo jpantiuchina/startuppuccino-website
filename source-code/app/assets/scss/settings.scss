@@ -1,0 +1,71 @@
+
+@import 'general';
+
+@import 'form';
+
+textarea {
+	width: 100% !important;
+	max-width: 100%;
+}
+
+.message_alert_container {
+	@extend form.form_custom;
+
+	background-color: #333;
+	color: #fff;
+
+	a {
+		color: #fff;
+	}
+}
+
+input[type=file]{
+    max-width: 275px;
+}
+
+
+.form_custom {
+
+	//background-color: #fff !important;
+	
+	margin-bottom: 0px !important;
+	border-bottom: 2px solid #ddd;
+	padding-top: $header-height !important;
+	padding-bottom: $header-height !important;
+	@include box-shadow(none !important);
+
+	h4 {
+		color: $palette-yellow;
+		font-family: $font-title !important;
+	}
+
+}
+
+.settings {
+
+	&__toprofile,
+	&__menu {
+		position: relative;
+		padding: ($header-height/2) 0px;
+		height: auto;
+		overflow: hidden;
+		max-width: 640px;
+		
+		> span {
+			display: inline-block;
+			padding: 1px;
+			position: relative;
+			height: 35px;
+			margin: 5px 0px;
+
+			> a {
+		   		@extend .st_button;
+		   		height: 100%;
+			}
+		}
+	}
+
+	&__toprofile > span > a {
+		background-color: $logo-red;
+	}
+}

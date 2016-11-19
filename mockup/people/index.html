@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/people.css">
+		<title>People - Startuppuccino</title>
+
+	</head>
+	<body>
+		
+			
+
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+		<!--
+        <div class="header__background"></div>
+		-->
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="../educators/manage/manage_ideas.html">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../teams/">TEAMS</a>
+   				
+            	<a class="menu_link" href="../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller">
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
+				</div>
+
+            </nav>
+            
+        </section>
+
+    </header>
+
+	<main>
+		<!-- Display filter for only students|mentors -->
+		<div class="filter_menu filter_menu--people">
+			<span class="filter_menu__button" id="filter_button--STUDENT" onclick="filterResults('STUDENT',this)">Students</span>
+			<span class="filter_menu__button" id="filter_button--MENTOR" onclick="filterResults('MENTOR',this)">Mentors</span>
+			<span class="filter_menu__button" id="filter_button--ALL" onclick="removeFilters()">All</span>
+		</div>
+
+		<br><br>
+
+		<div class="list_view list_view--linear" id="people_wrapper">
+
+			
+	        <div class="card card--STUDENT">
+
+	        	<!-- card content -->
+	        	<div class="card__pic" style="background-image:url('../assets/pics/default/people.png');/*background-size:190px 190px;*/opacity:0.4"></div>
+	        	<div class="card__details">
+        			<span class="card__details_name">Laura</span>
+	        		<span class="card__details_role">STUDENT</span>
+	        		<span class="card__details_background">Design</span>
+	        	</div>
+
+			</div>
+
+        
+	        <div class="card card--STUDENT">
+	
+	        	<!-- card content -->
+	        	<div class="card__pic" style="background-image:url('../assets/pics/default/people.png');/*background-size:190px 190px;*/opacity:0.4"></div>
+	        	<div class="card__details">
+        			<span class="card__details_name">Chiara</span>
+	        		<span class="card__details_role">STUDENT</span>
+	        		<span class="card__details_background">Economics</span>
+	        	</div>
+
+			</div>
+
+        
+	        <div class="card card--MENTOR">
+
+	        	<!-- card content -->
+	        	<div class="card__pic" style="background-image:url('../assets/pics/default/people.png');/*background-size:190px 190px;*/opacity:0.4"></div>
+	        	<div class="card__details">
+        			<span class="card__details_name">Patrick</span>
+	        		<span class="card__details_role">MENTOR</span>
+	        		<span class="card__details_background">Economics</span>
+	        	</div>
+
+			</div>
+
+        
+	        <div class="card card--STUDENT">
+				
+				<!-- card content -->
+	        	<div class="card__pic" style="background-image:url('../assets/pics/default/people.png');/*background-size:190px 190px;*/opacity:0.4"></div>
+	        	<div class="card__details">
+        			<span class="card__details_name">Karlis</span>
+	        		<span class="card__details_role">STUDENT</span>
+	        		<span class="card__details_background">IT</span>
+	        	</div>
+
+			</div>
+
+        
+	        <div class="card card--EDUCATOR">
+
+        		<!-- card content -->
+	        	<div class="card__pic" style="background-image:url('../assets/pics/default/people.png');/*background-size:190px 190px;*/opacity:0.4"></div>
+	        	<div class="card__details">
+        			<span class="card__details_name">Xiaofeng</span>
+	        		<span class="card__details_role">EDUCATOR</span>
+	        		<span class="card__details_background">IT</span>
+	        	</div>
+
+			</div>
+
+				        
+			<div class="change_view_button" onclick="toggleLayout()">
+				<img src="../assets/pics/default/gridico.png" id="change_view_icon">
+			</div>
+
+		</div>
+
+	</main>		
+		
+	<script src="../assets/js/general.js"></script>
+
+	<script src="../assets/js/people.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Teams Rank list</title>
+
+	<style type="text/css">
+*,body {height: 100%;}
+body {background-color: #00002d}
+
+
+
+
+	</style>
+	<script type="text/javascript">
+		
+	team_list = [
+		["Wibble",4],
+		["Makermash",5],
+		["JYM",3],
+		["Origine",3]
+	];
+
+	TeamListConsole = function (team_list){
+
+		var this.teamList = team_list;
+
+		this.setTeamList = function(new_team_list){
+			this.teamList = new_team_list;
+		}
+
+		this.renderList = function(){
+
+			for (var i = this.teamList.length - 1; i >= 0; i--) {
+				team = this.teamList[i][0];
+				milestones = this.teamList[i][1];
+
+			}
+
+
+		}
+
+		function sortTeamList(sortCriteria,reverseMode){
+
+			// Select the search criteria
+			switch(sortCriteria){
+			 	case "later":
+
+			}
+
+			// Check if reverse mode required
+
+
+
+		}
+
+		function createTeamBox(team,milestones){
+			node = document.createElement("DIV");
+
+
+		}
+
+
+	}
+
+	x = new TeamListConsole(team_list);
+	x.renderList();
+
+	</script>
+</head>
+<body>
+
+<div id="filters">
+	
+</div>
+
+<div id="teamList">
+
+</div>
+
+
+
+</body>
+</html>

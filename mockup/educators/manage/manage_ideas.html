@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="../../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../../assets/css/listview.css">
+		<title>Ideas Manager - Startuppuccino</title>
+
+	</head>
+	<body>
+	
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="#">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../../teams/">TEAMS</a>
+
+   				<a class="menu_link" href="../../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller" >
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../../account/">ACCOUNT</a>
+				</div>
+				
+            </nav>
+            
+        </section>
+
+    </header>
+
+	<main>
+
+		<style type="text/css">
+			.line_element--tempstyle {padding: 10px}
+		</style>
+
+		<div class="listview" style="margin-top: 40px">
+
+			<div class="line_element line_element--header line_element--tempstyle">
+				<span class="line_element__cell">Owner</span>
+				<span class="line_element__cell">Title</span>
+				<span class="line_element__cell">N^ Members</span>
+			</div>
+
+			
+			<div class="line_element line_element--tempstyle">
+				<span class="line_element__cell">John</span>
+				<span class="line_element__cell">DO!T</span>
+				<span class="line_element__cell">3/7</span>
+
+				<span class="line_element__cell line_element__cell--button" onclick="upgradeIdea('2')">Upgrade</span>
+
+			</div>
+
+			
+			<div class="line_element line_element--tempstyle">
+				<span class="line_element__cell">Alexandra</span>
+				<span class="line_element__cell">JYM</span>
+				<span class="line_element__cell">1/4</span>
+
+				<span class="line_element__cell line_element__cell--button" onclick="upgradeIdea('6')">Upgrade</span>
+
+			</div>
+
+		</div> <!-- Listview -->
+
+	</main>
+
+	<script src="../../assets/js/general.js"></script>
+	<script src="../../assets/js/educators.js"></script>
+
+	
+</body>
+</html>

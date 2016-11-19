@@ -1,0 +1,27 @@
+<div class="card card--{{ user.role|upper }} {% if user.id in residence_mentors %}card--RESIDENCE_MENTOR{% endif %}">
+
+	<a href="people/?user_id={{ user.id }}">
+    	{% if user.avatar|trim == "" %}
+            {% set avatar = default_avatar %}            
+        {% else %}
+            {% set avatar = user.avatar %}
+        {% endif %}
+    	<div class="card__pic" 
+    	     style="background-image:url('app/assets/pics/people/{{ avatar }}')"></div>
+    	<div class="card__details">
+			<span class="card__details_name">{{ user.firstname ~ " " ~ user.lastname }}</span>
+    		<span class="card__details_role">{% if user.id in residence_mentors %}residence {% endif %}{{ user.role }}</span>
+    		<span class="card__details_background">{{ user.background }}</span>
+    	</div>
+    </a>
+
+    {#
+    {% if user.id in residence_mentors and sess.role == "student" %}
+        <input type="button"
+               class="st_button {% if user.vote_label == 'like' %} c_green {% else %} c_red {% endif %}"
+               {% if user.vote_label == "unlike" %}style="background-color: #f00"{% endif %}
+               value="{% if user.vote_label == "like" %}Choose{% else %}Un-choose{% endif %}" {# vote_label can be "like" or "unlike" #}
+             {#  onclick="SpMentorChooser.ideaHelper('{{ user.vote_label }}', '{{ user.id }}', this)" />
+    {% endif %} #}
+
+</div>

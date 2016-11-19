@@ -1,0 +1,63 @@
+{# 
+ # Settings inputs
+ # for an async architecture
+ # -> each input has a save button
+ #}
+
+
+{% macro saver(id) %}
+	
+	<div class="settings__input__saver">
+		<input type="button"
+		       class="settings__input__save_button"
+	 	       data-for="{{ id }}"
+		       value="Save">
+		<div class="tiny_loader" id="{{ id }}_loader">
+			<div></div><div></div>
+		</div>
+	</div>
+
+{% endmacro %}
+
+
+
+{% macro input(name, id, value, type) %}
+
+	{% import _self as helpers %}
+
+	<div class="settings__input">
+
+		<label for="{{ id }}">{{ name }}:</label>
+
+		<input type="{{ type|default('text') }}" 
+		       class="settings__input__content" 
+		       id="{{ id }}"
+		       name="{{ name }}"
+		       value="{{ value }}"
+		       placeholder="{{ value }}" />
+
+		{{ helpers.saver(id) }}
+
+	</div>
+
+{% endmacro %}
+
+
+{% macro textarea(name, id, value) %}
+
+	{% import _self as helpers %}
+
+	<div class="settings__input">
+
+		<label for="{{ id }}">{{ name }}:</label>
+
+		<textarea class="settings__input__content"
+				  name="{{ name }}"
+		          id="{{ id }}">{{ value }}</textarea>
+		
+		{{ helpers.saver(id) }}
+
+	</div>
+
+{% endmacro %}
+

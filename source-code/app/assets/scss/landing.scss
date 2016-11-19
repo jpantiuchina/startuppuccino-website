@@ -1,0 +1,81 @@
+
+@import 'general';
+
+$footer-height: 70px;
+
+main {
+	height: calc(100% - #{$footer-height});
+	padding-top: 0px; /* Overwrite definition in header, because the header is hidden */
+}
+
+.menu {
+	float: right;
+
+	ul {
+		margin: 0px !important;
+	}
+}
+
+
+#landing_logo_container {
+	    width: 90%;
+    max-width: 900px;
+	-webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+
+    > div {
+    	height: auto;
+    	overflow: hidden;
+
+    	> h1 {
+    		text-align: center;
+    		margin: 0px;
+    		font-size: 82px;
+    		font-weight: 400;
+    		color: $logo-brown
+    	}
+
+    	a, span {
+    		display: inline-block;
+    		vertical-align: middle;
+    	}
+
+    }
+
+    img {
+    	max-height: 100%;
+    	@include transition($transition-time);
+
+    	&:hover {
+    		opacity: 0.7;
+    	}
+    }
+
+    .sublogo_links {
+    	text-align: center;
+    	> span a {
+    		@extend .st_button;
+            //background-color: #fff;
+            color: #fff;
+            margin: 20px 10px;
+    	}
+    }
+
+}
+
+.landing_footer {
+
+	text-align: center;
+	margin: 0px $page-lateral-padding;
+	line-height: $footer-height;
+	color: $logo-brown;
+
+	> a {
+
+		text-decoration: none;
+		color: $logo-brown;
+
+	}
+}

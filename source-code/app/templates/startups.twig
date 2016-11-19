@@ -1,0 +1,53 @@
+{% extends 'page__base.twig' %}
+
+{% block main %}
+
+<main>
+
+		{% if project %}
+
+			{% if project == '404' %}
+				
+				<h3>Project not found. Mmm... maybe nobody is here...</h3>
+
+			{% else %}
+
+				{% if settings_mode %}
+					
+					{% include 'startups__project_settings.twig' ignore missing %}
+
+				{% else %}
+
+					{% include 'startups__project.twig' ignore missing %}	
+
+				{% endif %}
+				
+			{% endif %}
+
+		{% else %}
+
+			{% include 'startups__filters.twig' ignore missing %}
+
+			{% if projects %}
+
+				<div class="list_view list_view--linear" id="people_wrapper">
+
+					{% for project in projects %}
+
+						{% include 'startups__projectbox.twig' ignore missing %}
+
+					{% endfor %}
+
+				</div>
+
+				{% if userLogged %}
+					{% include 'comment__boxview.twig' ignore missing %}
+				{% endif %}
+
+			{% endif %}
+
+		{% endif %}
+
+</main>
+
+{% endblock %}

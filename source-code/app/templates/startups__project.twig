@@ -1,0 +1,83 @@
+{# {% if is_my_team %}
+	<p>
+		<a class="st_button c_red" href="./?project_id={{ project.id }}&settings">PROJECT SETTINGS</a>
+	</p>	
+{% endif %} #}
+
+<style>
+	.project_column {
+		display: inline-block;
+	    width: 49%;
+	    vertical-align: top;
+	    min-width: 440px;
+	}
+	@media all and (max-width: 1001px){
+		.project_column {
+			display: block;
+			width: auto;
+			min-width: 0px;
+		}
+	}
+</style>
+
+<div class="p_wrapper project_column">
+
+	<section class="p_infobox">
+		<div class="head">
+			<div class="p_picturebox">
+				<div class="p_picture" style="background-image:url('app/assets/pics/ideas/{{ project.avatar }}')"></div>
+			</div>
+			<div class="p_info">
+				<h3 class="p_name">{{ project.title }}</h3>
+				<p class="p_vision">{{ project.vision }}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="p_about">	
+		<pre>{{ project.description }}</pre>	
+	</section>
+
+    <section class="members" style="margin-left:0px !important;border:none;overflow:visible !important" id="members__{{ project.id }}">
+        {% if project.members %}
+            <span>Team Members ({{ project.members|length }}): </span>
+            {% for member in project.members %}
+                <div class="member" member-id="{{ member.id }}">
+                    <a href="../people/?user_id={{ member.id }}">
+                        <div style="background-image:url('app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+                    </a>
+                    <div class="member__label">
+                        <span>{{ member.firstName }} {{ member.lastName }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </section>
+
+	{% include 'startups__project_chart.twig' ignore missing %}
+
+</div>
+
+<div class="p_wrapper project_column">
+
+    <section class="p_video_pitch">
+    	<h5>First Pitch Video</h5>
+    	{% if project.id == 3 %}
+	    	<div data-type="youtube" data-video-id="9pGoAdUeBdQ"></div>
+	    {% else %}   
+	    	<video controls>
+			  	<source src="app/public/media/video/team_pitch1__{{ project.title|trim }}.mp4" type="video/mp4">
+			  	{#<source src="/path/to/video.webm" type="video/webm">#}
+			  	{#<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>#}
+			</video>
+	    {% endif %}
+    </section>
+
+    {% if project.milestone_2 and not project.milestone_2|trim == "" %}
+    	<section class="milestone milestone__problem_validation">
+    		<h5>Problem Validation</h5>
+    		<p>{{ project.milestone_2|trim }}</p>
+   		</section>
+    {% endif %}
+
+</div>

@@ -1,0 +1,6 @@
+Renamed tables
+"like" to "project_like" and
+"comment" to "project_comment"
+
+because of reserved names conflict
+http://stackoverflow.com/questions/23446377/syntax-error-due-to-using-a-reserved-word-as-a-table-or-column-name-in-mysql

@@ -1,0 +1,84 @@
+<?php
+	
+    define( "_CONTROLLERS_DIR_", __DIR__ );
+    define( "_APP_DIR_", dirname( _CONTROLLERS_DIR_ ) );
+    
+
+
+	require_once _CONTROLLERS_DIR_ . '/session.php';
+
+	// Set empty error_message
+	$error_message = "";
+
+	$isRegister = false;
+	
+	if( isset( $_POST['course_key'] ) && $_POST['course_key'] === "LS1617" ){
+
+		require_once _APP_DIR_ . '/models/Credential_Functions.php';
+		$credential_func = new Credential_Functions();
+
+		// Validate inputs
+		// Return string with error message if validation fails
+		$inputs_validation = $credential_func->validateInputs( md5($_POST['password']),
+			                                                   md5($_POST['password1']),
+			                                                   $_POST['email'],
+			                                                   $_POST['firstname'],
+			                                                   $_POST['lastname'],
+			                                                   $_POST['background'],
+			                                                   $_POST['role'],
+			                                                   $_POST['skills']);
+
+		// Check if email already exists
+		$email_exists = $credential_func->emailExists();
+
+		if( $inputs_validation === true ){
+
+			if( !$email_exists ){
+
+				// Execute query and evaluate result
+				if ( $credential_func->register() ) {
+
+					$isRegister = true;
+				    
+				    // Send "Welcome email"
+				    // ...
+
+					// Login automatically
+					$login_email = $_POST['email'];
+					$login_password = md5($_POST['password']);
+					include _CONTROLLERS_DIR_ . '/login.php';
+
+				} else {
+
+					// DB answered with error status
+					$error_message = "We had some problem creating your account, try again and if the problem persist <a href='mailto:info@startuppuccino.com'>contact us</a>";
+
+				}
+
+			} else {
+
+				$error_message = "Email already exists";
+
+			}
+
+		} else {
+
+			$error_message = $inputs_validation;
+
+		}
+
+	} else {
+
+		$error_message = "Wrong course key";
+
+	}
+
+	/*
+
+	if(!$isRegister){
+		include  dirname( _CONTROLLERS_DIR_ ) . '/views/register_form.php';
+	}
+
+	*/
+
+?>

@@ -1,0 +1,35 @@
+
+footer,
+.footer {
+	padding: 5px $page-lateral-padding;
+	height: auto;
+	overflow: hidden;
+
+	&__separator {
+		height: 1px;
+		background-color: #d7d7cc;
+	}
+
+	&__links {
+		text-align: justify;
+		margin: 0px;
+		height: auto;
+		overflow: hidden;
+		line-height: 30px;
+
+		&:after{
+		  content: "";
+		  width: 100%;
+		  display: inline-block;
+		}
+
+	}
+
+	&__link,
+	span {
+		display: inline-block;
+	    min-width: 120px;
+		color: $logo-brown;
+	}
+
+}

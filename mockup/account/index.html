@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html><head>
+
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<title>Account - Startuppuccino</title>
+	
+	</head>
+	<body>
+		
+			
+
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+		<!--
+        <div class="header__background"></div>
+		-->
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="../educators/manage/manage_ideas.html">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../teams/">TEAMS</a>
+
+   				<a class="menu_link" href="../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller" >
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
+				</div>
+				
+            </nav>
+            
+        </section>
+
+    </header>
+
+	<main>
+
+		<form action="" method="post" class="form_custom">
+
+			<li class="form_box_item">
+				<label>Email</label>
+				<input class="form_pretty_general_input" name="email" type="email">
+			</li>
+
+			<li class="form_box_item">
+				<label>Firstname</label>
+				<input class="form_pretty_general_input" name="firstname" type="text">
+			</li>
+
+			<li class="form_box_item">
+				<label>Lastname</label>
+				<input class="form_pretty_general_input" name="lastname" type="text">
+			</li>
+
+			<li class="form_box_item">
+				<label>Background</label>
+				<input class="form_pretty_general_input" name="background" placeholder="e.g. IT, design, law, economics, management" type="text">
+			</li>
+
+			<li class="form_box_item">
+				<label>About me (optional)</label>
+				<textarea class="form_pretty_general_input" name="about" placeholder="More info about me, about my startup idea, etc."></textarea>
+			</li>
+
+			<li class="form_box_item">
+				<label>Role</label>			
+				<label>
+					<input name="role" value="student" checked="checked" required="" type="radio">Student (I'm here to learn)
+				</label>
+				<label>
+					<input name="role" value="mentor" required="" type="radio">Mentor (I'm here to help)
+				</label>
+			</li>
+
+			<li class="form_box_item">
+				<input class="form_pretty_button_input" name="update_account_info" value="SAVE" type="submit">
+			</li>						
+		</form>
+
+		<form action="" method="post" class="form_custom" onsubmit="return checkForm();">
+
+			<h4>Change Password</h4>
+			
+			<li class="form_box_item">
+				<label>Old Password</label>
+				<input class="form_pretty_general_input" name="old_password" id="password_input_1" required="" type="password">
+			</li>
+
+			<li class="form_box_item">
+				<label>New Password</label>
+				<input class="form_pretty_general_input" name="new_password" id="password_input_2" required="" type="password">
+			</li>
+
+			<li class="form_box_item">
+				<input class="form_pretty_button_input" name="update_password" value="SAVE" type="submit">
+			</li>
+
+		</form>
+
+	</main>
+
+	<script type="text/javascript">
+		function checkForm(){
+			// Add here some client checks to prevent bad ux
+			// If you want to block -> return false;
+			// If you want to proceed with post submitting -> return true;
+
+			// Check if old and new password match
+			if(document.getElementById('password_input_1').value != document.getElementById('password_input_2').value)
+				return true;
+			else
+				alert("Old and new password are the same!");
+				// reset new password input
+				document.getElementById('password_input_2').value = "";
+				return false;
+		}
+	</script>
+	
+	<script src="../assets/js/general.js"></script>
+	
+</body>
+</html>

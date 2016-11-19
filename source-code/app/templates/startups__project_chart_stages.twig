@@ -1,0 +1,54 @@
+{% for flower in learning_stages %}
+
+	{% set i_am_the_mentor = ( sess.role == "mentor" and sess.id == flower.mentor_id ) %}
+	{% set stage_class = "p_chart__stage" %}
+
+	{# set the right stage style #}
+	{% if flower.approved == "0" %}
+		{% set stage_class = "p_chart__stage--pending" %}
+	{% elseif flower.approved == "-1" %}
+		{% set stage_class = "p_chart__stage--discard" %}
+	{% endif %}
+
+	{% if flower.approved == "1" or is_my_team or i_am_the_mentor %}
+		
+		<div class="{{ stage_class }}" 
+		     id="stage{{ flower.id }}">
+
+			<div class="p_chart__stage__center">
+				<span>{{ flower.title }}</span>
+			</div>
+
+			<div class="p_chart__stage__petals">
+				
+				<div class="stage__petal--topright">
+					<span class="stage__petal__icon"></span>
+					<div class="stage__petal__content">
+						<p>{{ flower.description }}</p>
+					</div>
+				</div>
+
+				{# if the user is the team mentor and the stage have to be approved #}
+				{% if i_am_the_mentor and flower.approved == "0" %}
+
+					<div class="stage__petal--bottomleft">
+						<span class="stage__petal__icon--approve st_button"
+						      stage-id="{{ flower.id }}"
+						      onclick="SpProjectChart.mentor.setLearningstageStatus(this, 1)"></span>
+					</div>
+
+					<div class="stage__petal--bottomright">
+						<span class="stage__petal__icon--discard st_button"
+						      stage-id="{{ flower.id }}"
+						      onclick="SpProjectChart.mentor.setLearningstageStatus(this, -1)"></span>
+					</div>
+				
+				{% endif %}
+
+			</div>
+
+		</div>
+
+	{% endif %}
+
+{% endfor %}

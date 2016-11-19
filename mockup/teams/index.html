@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="../assets/css/form.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/team.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/general.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/listview.css">
+		<title>Startuppuccino - Teams</title>
+
+	</head>
+	<body>
+		
+			
+
+	<section id="loading_screen" style="display: none">
+		
+		<div id="loading_circle">
+			<div id="loading_ball1" class="loading_ball"></div>
+			<div id="loading_ball2" class="loading_ball"></div>
+			<div id="loading_ball3" class="loading_ball"></div>
+			<div id="loading_ball4" class="loading_ball"></div>
+		</div>
+
+	</section>
+
+	<script>
+		// Javascript script to manage the mobile menu view
+		function toggleMobileMenu(e){
+			e.classList.toggle("mobile_menu__button--active");
+			document.getElementById("main_menu").classList.toggle("main_menu--visible");
+			document.getElementsByTagName("main")[0].classList.toggle("force--hidden");
+			document.getElementsByClassName("bottom_header")[0].classList.toggle("force--hidden");
+		}
+	</script>
+
+	<header>
+
+		<!--
+        <div class="header__background"></div>
+		-->
+
+        <section class="top_header custom_padding__header">
+            
+        	<div onclick="toggleMobileMenu(this)" class="mobile_menu__button">
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        		<div></div>
+        	</div>
+
+        	<a href="../" title="Home - Startuppuccino">
+	        	<img class="logo logo--link" alt="Startuppuccino" src="../assets/pics/startuppuccino_logo-white.svg">
+	        </a>
+
+            <nav id="main_menu">
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/team_chooser.html">TEAM CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/mentor_chooser.html">MENTOR CHOOSER</a>
+
+				<a class="menu_link menu_link--dubleline" href="../mockup/project_chart.html">PROJECT CHART</a>
+
+				<a class="menu_link menu_link--dubleline" href="../educators/manage/manage_ideas.html">IDEAS MANAGER</a>
+
+   				<a class="menu_link" href="../ideas/">IDEAS</a>
+
+   				<a class="menu_link" href="../teams/">TEAMS</a>
+
+   				<a class="menu_link" href="../people/">PEOPLE</a>
+
+				<div class="menu_link menu_link--controller" >
+					<span class="menu_link menu_link--placeholder">SETTINGS</span>
+					<a class="menu_link menu_link--submenu" href="../account/">ACCOUNT</a>
+				</div>
+				
+            </nav>
+            
+        </section>
+
+    </header>
+
+    <main>
+
+		<section class="list_view">
+
+				<div class="list_element list_element--team">
+
+	        		<div class="team__details">
+	        			
+	        			
+		        		<img src="./kidsonboard.jpg" class="team__details_pic">
+	        			<h3 class="team__details_title">
+			        		<a href="./kids_on_board.html">Kids on Board</a>
+			        	</h3>
+		        	</div>
+
+	        	</div>
+
+	    </section>
+
+	</main>	
+		
+	<script src="../assets/js/general.js"></script>
+	
+</body>
+</html>

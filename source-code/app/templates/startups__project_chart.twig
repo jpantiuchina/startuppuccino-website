@@ -1,0 +1,45 @@
+<script type="text/javascript">
+var PROJECT_ID = {{ project.id }};
+</script>
+
+
+<style>
+.p_chart__stage {background-color: green}
+.p_chart__stage--pending {background-color: yellow}
+.p_chart__stage--discard {background-color: red}
+.stage__petal__icon--approve:after { content:"Approve" }
+.stage__petal__icon--discard:after { content:"Discard" }
+</style>
+
+
+<section class="p_chart" id="p_chart">
+
+	<div class="p_chart__list" id="stages_container">
+		
+		{% include 'startups__project_chart_stages.twig' ignore missing %}
+
+	</div>
+
+	<div class="p_chart__new">
+		{% if is_my_team %}
+			
+			<div class="p_chart__stage" id="new_learningstage" onclick="SpProjectChart.showSettings()">
+
+				<div class="p_chart__stage__center">
+					<span class="st_button">New</span>
+				</div>
+
+				<div class="p_chart__stage__petals"></div>
+
+			</div>
+
+		{% endif %}
+	</div>
+
+</section>
+
+<section class="p_chart__settings">
+
+	{% include 'startups__project_chart_settings.twig' ignore missing %}
+
+</section>
