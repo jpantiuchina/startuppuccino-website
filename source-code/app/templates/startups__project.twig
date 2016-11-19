@@ -25,7 +25,7 @@
 	<section class="p_infobox">
 		<div class="head">
 			<div class="p_picturebox">
-				<div class="p_picture" style="background-image:url('../app/assets/pics/ideas/{{ project.avatar }}')"></div>
+				<div class="p_picture" style="background-image:url('app/assets/pics/ideas/{{ project.avatar }}')"></div>
 			</div>
 			<div class="p_info">
 				<h3 class="p_name">{{ project.title }}</h3>
@@ -44,7 +44,7 @@
             {% for member in project.members %}
                 <div class="member" member-id="{{ member.id }}">
                     <a href="../people/?user_id={{ member.id }}">
-                        <div style="background-image:url('../app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
+                        <div style="background-image:url('app/assets/pics/people/{{ member.avatar | default("avatar.svg") }}')"></div>
                     </a>
                     <div class="member__label">
                         <span>{{ member.firstName }} {{ member.lastName }}</span>
@@ -66,7 +66,7 @@
 	    	<div data-type="youtube" data-video-id="9pGoAdUeBdQ"></div>
 	    {% else %}   
 	    	<video controls>
-			  	<source src="../app/public/media/video/team_pitch1__{{ project.title|trim }}.mp4" type="video/mp4">
+			  	<source src="app/public/media/video/team_pitch1__{{ project.title|trim }}.mp4" type="video/mp4">
 			  	{#<source src="/path/to/video.webm" type="video/webm">#}
 			  	{#<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>#}
 			</video>

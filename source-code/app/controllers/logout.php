@@ -1,10 +1,14 @@
 <?php
 
+	$CONTROLLER_DIR = __DIR__;
+	$APP_DIR = dirname( $CONTROLLER_DIR );
+
+
 	// Delete Permalogin
 	if( isset($_COOKIE['permalog']) ) {
 		
 		// Delete account record from db
-		require_once '../app/models/database/DB_Connect.php';
+		require_once $APP_DIR . '/models/database/DB_Connect.php';
 		$db = new Db_Connect();
 		$db->connect()->query("DELETE FROM "._T_ACCOUNT_LOGGED." WHERE account_id='".$_SESSION['id']."';");	
 

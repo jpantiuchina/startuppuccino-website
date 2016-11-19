@@ -2,7 +2,7 @@
 <?php if($account){ ?>
 	
 	<div class="settings__toprofile">
-		<span><a href="../people/?user_id=<?php echo $_SESSION['id']; ?>">Watch your public profile</a></span>
+		<span><a href="people/?user_id=<?php echo $_SESSION['id']; ?>">Watch your public profile</a></span>
 	</div>
 
 	<div class="settings__menu">
@@ -102,13 +102,13 @@
 
 
 
-	<form action="upload_controller.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box" id="picture_settings">
+	<form action="app/controllers/upload_controller__settings.php" method="post" class="form_custom" enctype="multipart/form-data" onsubmit="return upload_form_submit();" target="notification_box" id="picture_settings">
         
 		<li class="form_box_item form_box_item--full">
         	<h4>Profile Picture</h4>
         </li>
         <li class="form_box_item">
-	        <label for="file_input" style="cursor:pointer"><img src="../app/assets/pics/people/<?php echo trim($account['avatar']);?>" id="target_picture" style="max-height:200px;max-width:200px" alt="Upload Your Profile Picture" /></label>
+	        <label for="file_input" style="cursor:pointer"><img src="app/assets/pics/people/<?php echo trim($account['avatar']);?>" id="target_picture" style="max-height:200px;max-width:200px" alt="Upload Your Profile Picture" /></label>
 	        <input class="form_pretty_button_input" style="cursor:pointer"  type="file" accept="image/*" name="picture" id="file_input">
     	</li>
     	<br>
@@ -158,7 +158,7 @@
 			?>
 
 			<li class="form_box_item social" id="<?php echo $social; ?>">
-				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="../app/assets/pics/icons/<?php echo $social_avatar; ?>" alt="<?php echo $social; ?>" /></label>
+				<label for="<?php echo $social; ?>_link"><img style="width:50px" src="app/assets/pics/icons/<?php echo $social_avatar; ?>" alt="<?php echo $social; ?>" /></label>
 				<input type="link" class="form_pretty_general_input" id="<?php echo $social; ?>_link" value="<?php if(isset($socials[$social]))echo $socials[$social][0];?>" placeholder="<?php echo $social; ?>" />
 				<label style="display: none"><input type="checkbox" id="<?php echo $social; ?>_priority" <?php if(isset($socials[$social]) && $socials[$social][1]=="primary"){echo "checked='checked'";}?> />Favorite</label>
 			</li>
@@ -177,8 +177,8 @@
 
 
 
-	<script type="text/javascript" src="../app/assets/js/account.js"></script>
-	<script type="text/javascript" src="../app/assets/js/upload.js"></script>
+	<script type="text/javascript" src="app/assets/js/account.js"></script>
+	<script type="text/javascript" src="app/assets/js/upload.js"></script>
 
 <?php } else { ?>
 

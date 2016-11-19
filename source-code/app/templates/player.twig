@@ -7,8 +7,12 @@
 
 		{% if media.kind == "video" %}
 
+			<style type="text/css">
+			video { display: block; width: 80% !important; margin: 50px auto; }
+			</style>
+
 			<video poster="{{ media.poster|default("") }}" controls>
-			  <source src="{{ rel_path }}/{{ media.path }}" type="video/{{ media.type }}">
+			  <source src="{{ media.path }}" type="video/{{ media.type }}">
 			  {#<source src="/path/to/video.webm" type="video/webm">#}
 			  {#<track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default>#}
 			</video>

@@ -29,7 +29,7 @@
 
 			<div class="background_close" onclick="SpIdea.layout.toggleIdeaPictureForm()"></div>
 
-			<form action="upload_controller.php" method="post" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
+			<form action="app/controllers/upload_controller__ideas.php" method="post" enctype="multipart/form-data" id="idea_form_picture_upload" target="notification_box">
 			    
 				<div class="_closer" onclick="SpIdea.layout.toggleIdeaPictureForm()">x</div>
 
@@ -54,4 +54,4 @@
 <!-- Need for async uploads, and used as upload notification box -->
 <iframe id="notification_box" name="notification_box" style="display:none" src=""></iframe>
 
-<script src="../app/assets/js/upload.js"></script>
+<script src="app/assets/js/upload.js"></script>

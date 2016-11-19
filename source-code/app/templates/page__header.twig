@@ -1,5 +1,4 @@
 {% set currentPage = currentPage ?: "" %}
-{% set rel_path = rel_path ?: ".." %}
 
 {% if userLogged %}
     {% include 'page__search.twig' ignore missing %}
@@ -9,8 +8,8 @@
 <header>
 
 	<div class="logo">
-    	<a href="{{ rel_path }}/" title="Home - Startuppuccino">
-        	<img alt="Startuppuccino" src="{{ rel_path }}/app/assets/pics/logos/startuppuccino_logo.svg" />
+    	<a href="" title="Home - Startuppuccino">
+        	<img alt="Startuppuccino" src="app/assets/pics/logos/startuppuccino_logo.svg" />
     	</a>
     </div>
 
@@ -41,8 +40,8 @@
                 <li class="menu_link submenu_trigger">
                     {% set avatar = sess.avatar ?: "avatar.svg" %}
             		<div class="menu_profile_picture" 
-                         style="background-image: url('{{ rel_path }}/app/assets/pics/people/{{ avatar }}')">
-            			<a href="{{ rel_path }}/people/?user_id={{ sess.id }}">
+                         style="background-image: url('app/assets/pics/people/{{ avatar }}')">
+            			<a href="people/?user_id={{ sess.id }}">
                             <div class="role_filter--{{ sess.role }}"></div>
                         </a>
             		</div> 

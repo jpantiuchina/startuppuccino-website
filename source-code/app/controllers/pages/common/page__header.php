@@ -75,20 +75,17 @@
         }
     }
 
-    // Set template name and variables
-    
-    $template_file = "page__header.twig";
 
-    $template_variables = [
-                'sess' => $_SESSION,
-                'userLogged' => $userLogged,
-                'menu' => $menu,
-                'submenu' => $submenu
-            ];
+    // Add variables to template
+    $template_variables['sess'] = $_SESSION;
+    $template_variables['userLogged'] = $userLogged;
+    $template_variables['menu'] = $menu;
+    $template_variables['submenu'] = $submenu;
 
-
-    // Render the template
-    require_once '_Twig_Loader.php';
-    echo (new Twig_Loader())->render($template_file, $template_variables);
+    if ( $_SERVER['HTTP_HOST'] === "localhost" ) {
+        $template_variables['website_url'] = "http://localhost/startuppuccino-website/source-code/";
+    } else {
+        $template_variables['website_url'] = "http://startuppuccino.com/";
+    }
 
 ?>

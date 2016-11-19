@@ -1,9 +1,13 @@
 <?php 
 
-	require_once '../app/models/session.php';
+
+    $CONTROLLERS_DIR = __DIR__;
+    $APP_DIR = dirname( $CONTROLLERS_DIR );
+
+	require_once $CONTROLLERS_DIR . '/session.php';
 
 	// Include and Initialize Account Functions
-	require_once '../app/models/Account_Functions.php';
+	require_once $APP_DIR . '/models/Account_Functions.php';
 	$account_func = new Account_Functions($_SESSION['id']);
 
 	
@@ -92,7 +96,7 @@
     if ($account = $account_func->readAccountData()) {
 
     	// Print out the account form
-    	require '../app/views/account_form.php';
+    	require $APP_DIR . '/views/account_form.php';
 
 	} else {
 

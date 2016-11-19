@@ -1,8 +1,12 @@
 <?php 
 	
-	$comments_ = $session['comments'];
+	$CONTROLLERS_DIR = __DIR__ ;
+	$APP_DIR = dirname( $CONTROLLERS_DIR );
 
-	include '../app/views/comments.php';
+
+	$comments_ = isset($session['comments']) ? $session['comments'] : [] ;
+
+	include $APP_DIR . '/views/comments.php';
 
 ?>
 
